@@ -1,0 +1,17 @@
+.vhod-wrap{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,#EAF6EF,#E9F3FA)}
+.vhod-card{width:100%;max-width:400px;background:#fff;border-radius:24px;padding:44px 38px;box-shadow:0 30px 70px -30px rgba(20,90,70,.4);text-align:center}
+.vhod-logo{width:70px;height:70px;margin:0 auto 20px;border-radius:50%;overflow:hidden;box-shadow:0 8px 20px -8px rgba(18,140,100,.5)}
+.vhod-logo img{width:100%;height:100%;object-fit:cover}
+.vhod-card h1{font-family:var(--serif,Georgia);font-size:26px;font-weight:600;color:#22312B;margin-bottom:6px}
+.vhod-sub{font-size:14px;color:#93A099;margin-bottom:30px}
+.vhod-form{display:flex;flex-direction:column;gap:16px;text-align:left}
+.vhod-form label{display:flex;flex-direction:column;gap:6px}
+.vhod-form label span{font-size:12.5px;font-weight:600;color:#5C6B63;letter-spacing:.02em}
+.vhod-form input{padding:13px 16px;font-size:15px;border:1px solid #E4E9E2;border-radius:12px;outline:none;transition:border-color .25s,box-shadow .25s;font-family:inherit}
+.vhod-form input:focus{border-color:#22B37A;box-shadow:0 0 0 4px rgba(34,179,122,.13)}
+.vhod-error{background:#FDECEC;color:#C0392B;font-size:13.5px;padding:11px 14px;border-radius:10px;text-align:center}
+.vhod-btn{margin-top:6px;padding:14px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(135deg,#22B37A,#0E8A61);border:none;border-radius:12px;cursor:pointer;transition:transform .25s,box-shadow .25s,opacity .25s;box-shadow:0 12px 26px -10px rgba(18,138,94,.6)}
+.vhod-btn:hover:not(:disabled){transform:translateY(-2px)}
+.vhod-btn:disabled{opacity:.6;cursor:not-allowed}
+.vhod-back{display:inline-block;margin-top:24px;font-size:13.5px;color:#93A099;text-decoration:none;transition:color .2s}
+.vhod-back:hover{color:#22B37A}

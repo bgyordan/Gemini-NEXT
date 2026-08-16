@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createSupabaseBrowser } from '../../lib/supabaseClient';
+import NewsManager from './NewsManager';
 
 type DocRow = {
   id: string;
@@ -13,7 +14,8 @@ type DocRow = {
   sort_order: number;
 };
 
-export default function AdminClient({ userName }: { userName: string }) {
+export default function AdminClient({ userName, profileId }: { userName: string; profileId: string }) {
+  const [tab, setTab] = useState<'docs' | 'news'>('docs');
   const router = useRouter();
   const supabase = createSupabaseBrowser();
 
@@ -124,6 +126,16 @@ export default function AdminClient({ userName }: { userName: string }) {
         <button onClick={logout} className="admin-logout">Изход</button>
       </header>
 
+      <div className="admin-tabs">
+        <button className={tab === 'docs' ? 'on' : ''} onClick={() => setTab('docs')}>Документи</button>
+        <button className={tab === 'news' ? 'on' : ''} onClick={() => setTab('news')}>Новини</button>
+      </div>
+
+      {tab === 'news' ? (
+        <div className="admin-body single">
+          <NewsManager authorId={profileId} />
+        </div>
+      ) : (
       <div className="admin-body">
         <section className="admin-panel">
           <h2>Качване на документ</h2>
@@ -183,6 +195,7 @@ export default function AdminClient({ userName }: { userName: string }) {
           )}
         </section>
       </div>
+      )}
     </div>
   );
 }

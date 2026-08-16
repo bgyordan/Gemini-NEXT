@@ -1,0 +1,56 @@
+.team-page{padding:70px 0 40px}
+.team-section{margin-bottom:20px}
+.team-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.team-label{font-size:13px;font-weight:600;letter-spacing:.13em;color:var(--em-d)}
+.team-head::before{content:'';width:34px;height:2px;background:linear-gradient(90deg,#16B37E,#1668A3);border-radius:2px;flex-shrink:0}
+.team-count{margin-left:auto;font-size:12px;font-weight:600;color:var(--ink-3);background:#fff;border:1px solid var(--line);border-radius:999px;min-width:30px;height:26px;display:inline-flex;align-items:center;justify-content:center;padding:0 10px}
+
+.team-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.team-grid.compact{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+
+.member{display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 20px;background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:18px;transition:transform .4s cubic-bezier(.2,.7,.3,1),box-shadow .4s,background .4s}
+.member:hover{transform:translateY(-8px);background:#fff;box-shadow:0 24px 50px -26px rgba(20,90,70,.4)}
+.team-grid.compact .member{padding:20px 14px}
+
+.avatar{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:1.4rem;color:#fff;margin-bottom:16px;box-shadow:0 8px 20px -8px rgba(20,60,50,.3);transition:transform .4s}
+.member:hover .avatar{transform:scale(1.09) rotate(-4deg)}
+.team-grid.compact .avatar{width:62px;height:62px;font-size:1.15rem;margin-bottom:12px}
+
+/* tone schemes — B palette family */
+.t-dir{background:linear-gradient(135deg,#F5A623,#E8801E)}
+.t-admin{background:linear-gradient(135deg,#3DA5E0,#1668A3)}
+.t-psy{background:linear-gradient(135deg,#9B6BD6,#6B3FA0)}
+.t-logo{background:linear-gradient(135deg,#22B37A,#0E8A61)}
+.t-ergo{background:linear-gradient(135deg,#4FC79E,#2A9E7A)}
+.t-rehab{background:linear-gradient(135deg,#F0895A,#C0622A)}
+.t-teacher{background:#fff;color:#1668A3;border:2px solid #D2E6F5}
+
+.m-name{font-family:var(--serif);font-weight:600;font-size:1.12rem;color:var(--ink);line-height:1.25;margin-bottom:4px}
+.team-grid.compact .m-name{font-size:1rem}
+.m-role{font-size:.86rem;color:var(--ink-3);line-height:1.4}
+
+.team-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(20,120,90,.16),transparent);margin:44px 0}
+
+@media(max-width:600px){
+  .team-grid,.team-grid.compact{grid-template-columns:1fr 1fr;gap:12px}
+  .avatar{width:64px;height:64px;font-size:1.15rem}
+}
+
+/* CONTROLS — search + tabs */
+.team-controls{margin-bottom:44px}
+.team-search{position:relative;max-width:440px;margin:0 auto 22px}
+.team-search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:var(--ink-3);pointer-events:none}
+.team-search input{width:100%;padding:15px 46px 15px 48px;font-size:15px;font-family:var(--sans);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;outline:none;transition:border-color .25s,box-shadow .25s}
+.team-search input:focus{border-color:#3DA5E0;box-shadow:0 0 0 4px rgba(61,165,224,.14)}
+.team-search .clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border:none;background:var(--sand-2);border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink-2)}
+.team-search .clear svg{position:static;transform:none;width:15px;height:15px}
+.team-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.team-tab{padding:9px 18px;font-size:13px;font-weight:500;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;cursor:pointer;transition:all .25s}
+.team-tab:hover{border-color:#3DA5E0;color:var(--ink)}
+.team-tab.active{background:linear-gradient(135deg,#3DA5E0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.6)}
+.team-empty{text-align:center;padding:60px 20px;color:var(--ink-3);font-size:16px}
+
+@media(max-width:600px){
+  .team-tabs{gap:6px}
+  .team-tab{padding:8px 14px;font-size:12px}
+}

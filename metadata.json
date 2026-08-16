@@ -1,0 +1,6 @@
+{
+  "name": "ЦСОП Варна",
+  "description": "Център за специална образователна подкрепа – Варна. Обучение, специализирана подкрепа и рехабилитация.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

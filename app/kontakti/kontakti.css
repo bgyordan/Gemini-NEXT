@@ -1,0 +1,50 @@
+.lead-kicker{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.13em;color:#1668A3;margin-bottom:12px}
+.contacts{padding:70px 0 40px}
+.contacts-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;margin-bottom:60px;align-items:start}
+.col-head{margin-bottom:26px}
+.col-head h2{font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);font-weight:600;letter-spacing:-.4px;color:var(--ink)}
+
+/* phones */
+.phone-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.phone-card{display:flex;align-items:center;gap:16px;padding:22px;background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:18px;transition:transform .35s,box-shadow .35s,border-color .35s}
+.phone-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px -24px rgba(20,90,70,.4);border-color:transparent}
+.phone-ic{width:52px;height:52px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(150deg,#E4F0FA,#D2E6F5);color:#1668A3;transition:background .35s,color .35s,transform .35s}
+.phone-ic svg{width:24px;height:24px}
+.phone-card:hover .phone-ic{background:linear-gradient(150deg,#3DA5E0,#1668A3);color:#fff;transform:scale(1.06) rotate(-4deg)}
+.phone-info{min-width:0}
+.p-role{font-size:10.5px;font-weight:600;letter-spacing:.09em;color:var(--ink-3);display:block;margin-bottom:3px}
+.p-name{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--ink);display:block;line-height:1.2;margin-bottom:5px}
+.p-num{font-size:.95rem;font-weight:600;color:#0E8A61;transition:color .2s}
+.p-num:hover{color:#1668A3}
+
+/* hours */
+.hours{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.hour{display:flex;align-items:center;gap:15px;padding:18px 20px;background:#fff;border-radius:16px;border-left:4px solid #3DA5E0;box-shadow:0 8px 20px -14px rgba(20,90,70,.25)}
+.hour:nth-child(even){border-left-color:#22B37A}
+.hour-ic{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(150deg,#E9F3FA,#EAF6EF);color:#1668A3}
+.hour-ic svg{width:22px;height:22px}
+.hour b{font-size:14.5px;color:var(--ink);display:block;line-height:1.3}
+.hour span{font-size:13px;color:var(--ink-2);font-weight:500}
+
+/* email */
+.email-card a{display:flex;align-items:center;gap:15px;padding:20px;border-radius:16px;background:linear-gradient(135deg,#16B37E,#0E8A61);color:#fff;transition:transform .3s,box-shadow .3s;box-shadow:0 14px 30px -14px rgba(18,138,94,.6)}
+.email-card a:hover{transform:translateY(-3px);box-shadow:0 22px 40px -16px rgba(18,138,94,.7)}
+.email-ic{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;background:rgba(255,255,255,.2)}
+.email-ic svg{width:22px;height:22px}
+.email-label{font-size:10.5px;font-weight:600;letter-spacing:.1em;opacity:.85;display:block;margin-bottom:2px}
+.email-card b{font-size:14.5px;font-weight:600;word-break:break-all}
+
+/* map */
+.map-wrap{margin-top:10px}
+.map-head{text-align:center;margin-bottom:26px}
+.map-head h2{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--ink);letter-spacing:-.3px}
+.map-frame{border-radius:24px;overflow:hidden;height:460px;box-shadow:0 30px 70px -30px rgba(20,90,70,.45);border:1px solid var(--line)}
+.map-frame iframe{display:block}
+
+@media(max-width:900px){
+  .contacts-grid{grid-template-columns:1fr;gap:44px}
+}
+@media(max-width:560px){
+  .phone-cards{grid-template-columns:1fr}
+  .map-frame{height:360px}
+}

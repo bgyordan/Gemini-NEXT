@@ -1,0 +1,16 @@
+footer{background:var(--ink);color:#D8CBBC;padding:72px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px}
+.foot-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.foot-logo{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#fff;padding:2px}
+.foot-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.foot-brand .brand-txt b{color:var(--sand);font-size:15px;letter-spacing:.03em;display:block}
+.foot-brand .brand-txt span{color:#B4A796;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.foot-brand>p{font-size:14px;margin:0 0 18px;max-width:280px;color:#B4A796;line-height:1.6}
+.foot-brand .addr{display:flex;align-items:center;gap:9px;font-size:14px}
+.foot-brand .addr svg{width:17px;height:17px;color:#16B37E}
+.foot-col h4{font-size:12px;letter-spacing:.1em;color:var(--sand);margin-bottom:18px;font-weight:600}
+.foot-col a{display:block;font-size:14px;padding:6px 0;color:#B4A796;transition:color .25s,padding .25s}
+.foot-col a:hover{color:#16B37E;padding-left:5px}
+.foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#8F8272}
+@media(max-width:940px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.foot-grid{grid-template-columns:1fr}}

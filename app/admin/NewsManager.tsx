@@ -146,7 +146,7 @@ export default function NewsManager({ authorId }: { authorId: string | null }) {
           </label>
           <label>
             <span>Съдържание (пълен текст)</span>
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={14} placeholder="Текстът на статията. Нов ред = нов абзац." />
+            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={11} placeholder="Текстът на статията. Нов ред = нов абзац." />
           </label>
           <label>
             <span>Снимка {existingCover && !file ? '(вече има — качете нова за смяна)' : ''}</span>

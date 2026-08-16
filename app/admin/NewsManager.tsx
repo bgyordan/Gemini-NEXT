@@ -142,11 +142,11 @@ export default function NewsManager({ authorId }: { authorId: string | null }) {
           </label>
           <label>
             <span>Кратко резюме (за картата)</span>
-            <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={2} placeholder="Едно-две изречения…" />
+            <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} placeholder="Едно-две изречения…" />
           </label>
           <label>
             <span>Съдържание (пълен текст)</span>
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={7} placeholder="Текстът на статията. Нов ред = нов абзац." />
+            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={14} placeholder="Текстът на статията. Нов ред = нов абзац." />
           </label>
           <label>
             <span>Снимка {existingCover && !file ? '(вече има — качете нова за смяна)' : ''}</span>

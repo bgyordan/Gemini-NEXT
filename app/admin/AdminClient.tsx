@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createSupabaseBrowser } from '../../lib/supabaseClient';
 import NewsManager from './NewsManager';
+import GalleryManager from './GalleryManager';
 
 type DocRow = {
   id: string;
@@ -15,7 +16,7 @@ type DocRow = {
 };
 
 export default function AdminClient({ userName, profileId }: { userName: string; profileId: string }) {
-  const [tab, setTab] = useState<'docs' | 'news'>('docs');
+  const [tab, setTab] = useState<'docs' | 'news' | 'gallery'>('docs');
   const router = useRouter();
   const supabase = createSupabaseBrowser();
 
@@ -129,9 +130,14 @@ export default function AdminClient({ userName, profileId }: { userName: string;
       <div className="admin-tabs">
         <button className={tab === 'docs' ? 'on' : ''} onClick={() => setTab('docs')}>Документи</button>
         <button className={tab === 'news' ? 'on' : ''} onClick={() => setTab('news')}>Новини</button>
+        <button className={tab === 'gallery' ? 'on' : ''} onClick={() => setTab('gallery')}>Галерия</button>
       </div>
 
-      {tab === 'news' ? (
+      {tab === 'gallery' ? (
+        <div className="admin-body single">
+          <GalleryManager />
+        </div>
+      ) : tab === 'news' ? (
         <div className="admin-body single">
           <NewsManager authorId={profileId} />
         </div>

@@ -13,7 +13,7 @@ export default async function AdminPage() {
   // Проверка дали е редактор
   const { data: profile } = await supabase
     .from('staff_profiles')
-    .select('first_name, last_name, role')
+    .select('id, first_name, last_name, role')
     .eq('user_id', user.id)
     .single();
 
@@ -32,5 +32,5 @@ export default async function AdminPage() {
 
   const name = `${profile.first_name} ${profile.last_name}`;
 
-  return <AdminClient userName={name} />;
+  return <AdminClient userName={name} profileId={profile.id} />;
 }

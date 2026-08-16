@@ -24,6 +24,11 @@ export default function AdminClient({ userName }: { userName: string }) {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
 
+  // редактиране
+  const [editId, setEditId] = useState<string | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editYear, setEditYear] = useState('');
+
   const load = async () => {
     const { data } = await supabase
       .from('site_documents')
@@ -54,12 +59,9 @@ export default function AdminClient({ userName }: { userName: string }) {
     setBusy(true);
     setMsg('');
 
-    // 1) Качване на файла в bucket public-docs
     const ext = file.name.split('.').pop();
     const path = `internal/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const { error: upErr } = await supabase.storage
-      .from('public-docs')
-      .upload(path, file);
+    const { error: upErr } = await supabase.storage.from('public-docs').upload(path, file);
 
     if (upErr) {
       setBusy(false);
@@ -67,10 +69,8 @@ export default function AdminClient({ userName }: { userName: string }) {
       return;
     }
 
-    // 2) Взимане на публичния линк
     const { data: pub } = supabase.storage.from('public-docs').getPublicUrl(path);
 
-    // 3) Запис в таблицата
     const { error: insErr } = await supabase.from('site_documents').insert({
       name: name.trim(),
       file_url: pub.publicUrl,
@@ -98,6 +98,22 @@ export default function AdminClient({ userName }: { userName: string }) {
     load();
   };
 
+  const startEdit = (d: DocRow) => {
+    setEditId(d.id);
+    setEditName(d.name);
+    setEditYear(d.academic_year ?? '');
+  };
+
+  const saveEdit = async (id: string) => {
+    if (!editName.trim()) return;
+    await supabase
+      .from('site_documents')
+      .update({ name: editName.trim(), academic_year: editYear.trim() })
+      .eq('id', id);
+    setEditId(null);
+    load();
+  };
+
   return (
     <div className="admin">
       <header className="admin-top">
@@ -114,30 +130,15 @@ export default function AdminClient({ userName }: { userName: string }) {
           <form onSubmit={upload} className="admin-form">
             <label>
               <span>Име на документа</span>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="напр. Дневен режим"
-              />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="напр. Дневен режим" />
             </label>
             <label>
               <span>Учебна година</span>
-              <input
-                type="text"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                placeholder="2025/2026"
-              />
+              <input type="text" value={year} onChange={(e) => setYear(e.target.value)} placeholder="2025/2026" />
             </label>
             <label>
               <span>PDF файл</span>
-              <input
-                id="file-input"
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-              />
+              <input id="file-input" type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
             </label>
             {msg && <div className="admin-msg">{msg}</div>}
             <button type="submit" disabled={busy} className="admin-btn">
@@ -154,14 +155,28 @@ export default function AdminClient({ userName }: { userName: string }) {
             <div className="admin-docs">
               {docs.map((d) => (
                 <div key={d.id} className="admin-doc">
-                  <div className="admin-doc-info">
-                    <b>{d.name}</b>
-                    <span>{d.academic_year}</span>
-                  </div>
-                  <div className="admin-doc-actions">
-                    <a href={d.file_url} target="_blank" rel="noopener noreferrer">Виж</a>
-                    <button onClick={() => remove(d.id)}>Изтрий</button>
-                  </div>
+                  {editId === d.id ? (
+                    <div className="admin-doc-edit">
+                      <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Име" />
+                      <input type="text" value={editYear} onChange={(e) => setEditYear(e.target.value)} placeholder="Година" />
+                      <div className="admin-doc-actions">
+                        <button className="act-save" onClick={() => saveEdit(d.id)}>Запази</button>
+                        <button className="act-cancel" onClick={() => setEditId(null)}>Отказ</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="admin-doc-info">
+                        <b>{d.name}</b>
+                        <span>{d.academic_year}</span>
+                      </div>
+                      <div className="admin-doc-actions">
+                        <a href={d.file_url} target="_blank" rel="noopener noreferrer">Виж</a>
+                        <button className="act-edit" onClick={() => startEdit(d)}>Редактирай</button>
+                        <button className="act-del" onClick={() => remove(d.id)}>Изтрий</button>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
             </div>

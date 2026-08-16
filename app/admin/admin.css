@@ -36,3 +36,12 @@
 .admin-denied a{color:#22B37A;font-weight:600;text-decoration:none}
 
 @media(max-width:800px){.admin-body{grid-template-columns:1fr}}
+
+/* Редактиране на документ */
+.admin-doc-edit{display:flex;flex-wrap:wrap;gap:8px;width:100%;align-items:center}
+.admin-doc-edit input{flex:1;min-width:120px;padding:9px 12px;font-size:13px;border:1px solid #E4E9E2;border-radius:8px;outline:none}
+.admin-doc-edit input:focus{border-color:#22B37A}
+.act-edit{color:#0E8A61;background:#EAF6EF}
+.act-del{color:#C0392B;background:#FDECEC}
+.act-save{color:#fff;background:#22B37A}
+.act-cancel{color:#5C6B63;background:#EEF3EE}

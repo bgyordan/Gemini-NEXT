@@ -98,3 +98,32 @@
   .news-mgr{grid-template-columns:1fr}
   .news-mgr .admin-list{position:static;max-height:none}
 }
+
+/* === Галериен мениджър === */
+.gal-mgr{display:grid;grid-template-columns:1fr 1.4fr;gap:26px;align-items:start;max-width:1100px;margin:0 auto}
+.gal-mgr .gm-open{grid-column:1 / -1}
+@media(max-width:800px){.gal-mgr{grid-template-columns:1fr}}
+
+.gm-albums{display:flex;flex-direction:column;gap:10px}
+.gm-album{display:flex;align-items:center;gap:14px;padding:12px;background:#FAFCFA;border:1px solid #EEF3EE;border-radius:12px}
+.gm-album-thumb{width:60px;height:60px;border-radius:10px;overflow:hidden;flex-shrink:0;cursor:pointer}
+.gm-album-thumb img{width:100%;height:100%;object-fit:cover}
+.gm-album-info{flex:1;min-width:0}
+.gm-album-info b{display:block;font-size:14px;color:#22312B}
+.gm-album-info span{font-size:12px;color:#93A099}
+
+.gm-upload{display:block;margin:18px 0;padding:20px;border:2px dashed #C4D2CB;border-radius:14px;text-align:center;cursor:pointer;background:#FAFCFA;transition:border-color .25s,background .25s}
+.gm-upload:hover{border-color:#22B37A;background:#F2FBF6}
+.gm-upload input{display:none}
+.gm-upload span{font-size:14px;font-weight:600;color:#0E8A61}
+
+.gm-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:14px}
+.gm-photo{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:2px solid transparent}
+.gm-photo.is-cover{border-color:#22B37A}
+.gm-photo img{width:100%;height:100%;object-fit:cover}
+.gm-photo-acts{position:absolute;top:6px;right:6px;display:flex;gap:5px;opacity:0;transition:opacity .25s}
+.gm-photo:hover .gm-photo-acts{opacity:1}
+.gm-photo-acts button{width:28px;height:28px;border:none;border-radius:8px;cursor:pointer;font-size:13px;display:grid;place-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);color:#22312B;transition:background .2s}
+.gm-photo-acts button:first-child:hover{background:#22B37A;color:#fff}
+.gm-photo-acts button:last-child:hover{background:#C0392B;color:#fff}
+.gm-cover-badge{position:absolute;bottom:6px;left:6px;font-size:10px;font-weight:600;color:#fff;background:rgba(34,179,122,.92);padding:3px 9px;border-radius:999px}

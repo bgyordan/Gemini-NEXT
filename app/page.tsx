@@ -121,51 +121,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* INTERACTIVE THERAPY SHOWCASE */}
-      <TherapyInteractive />
-
-      {/* FACILITIES */}
-      <section id="baza" style={{ paddingTop: 60, paddingBottom: 60 }}>
-        <div className="wrap">
-          <Reveal className="sec-head">
-            <span className="kicker">Материална база</span>
-            <h2>Специализирана среда на ул. „Петко Стайнов“ №7</h2>
-            <p>
-              Девет учебни кабинета, ерготерапевтична сензорна Снуузелен зала, оборудвана кулинарна кухня и озеленен училищен двор — всяко кътче е създадено с грижа и любов към децата.
-            </p>
-          </Reveal>
-          <div className="cards">
-            <Reveal className="fac">
-              <div className="fac-media">
-                <ParallaxImage src="/images/classroom.jpg" alt="Учебни кабинети" speed={8} scale={1.12} />
-              </div>
-              <div className="lbl"><b>Учебни кабинети</b><span>Светли, спокойни и адаптирани</span></div>
-            </Reveal>
-            <Reveal className="fac" delay={1}>
-              <div className="fac-media">
-                <ParallaxImage src="/images/sensory.jpg" alt="Терапевтични зали и сензорна стая" speed={8} scale={1.12} />
-              </div>
-              <div className="lbl"><b>Сензорна Снуузелен зала</b><span>Мултисензорна стимулация и успокоение</span></div>
-            </Reveal>
-            <Reveal className="fac" delay={2}>
-              <div className="fac-media">
-                <ParallaxImage src="/images/kitchen.jpg" alt="Кабинет по готварство" speed={8} scale={1.12} />
-              </div>
-              <div className="lbl"><b>Кулинарен кабинет</b><span>Практика по готварство и сладкарство</span></div>
-            </Reveal>
-            <Reveal className="fac" delay={3}>
-              <div className="fac-media">
-                <ParallaxImage src="/images/garden.jpg" alt="Училищен двор и зелена градина" speed={8} scale={1.12} />
-              </div>
-              <div className="lbl"><b>Зелен училищен двор</b><span>Градинарство, спорт и игри на открито</span></div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* VOCATIONAL TRAINING SECTION */}
-      <VocationalPrograms />
-
       {/* NEWS / BLOG - 3 CARDS */}
       <section id="novini" className="news-sec">
         <div className="wrap">
@@ -220,6 +175,52 @@ export default async function Home() {
           )}
         </div>
       </section>
+
+      {/* INTERACTIVE THERAPY SHOWCASE */}
+      <TherapyInteractive />
+
+      {/* FACILITIES */}
+      <section id="baza" style={{ paddingTop: 60, paddingBottom: 60 }}>
+        <div className="wrap">
+          <Reveal className="sec-head">
+            <span className="kicker">Материална база</span>
+            <h2>Специализирана среда на ул. „Петко Стайнов“ №7</h2>
+            <p>
+              Девет учебни кабинета, ерготерапевтична сензорна Снуузелен зала, оборудвана кулинарна кухня и озеленен училищен двор — всяко кътче е създадено с грижа и любов към децата.
+            </p>
+          </Reveal>
+          <div className="cards">
+            <Reveal className="fac">
+              <div className="fac-media">
+                <ParallaxImage src="/images/classroom.jpg" alt="Учебни кабинети" speed={8} scale={1.12} />
+              </div>
+              <div className="lbl"><b>Учебни кабинети</b><span>Светли, спокойни и адаптирани</span></div>
+            </Reveal>
+            <Reveal className="fac" delay={1}>
+              <div className="fac-media">
+                <ParallaxImage src="/images/sensory.jpg" alt="Терапевтични зали и сензорна стая" speed={8} scale={1.12} />
+              </div>
+              <div className="lbl"><b>Сензорна Снуузелен зала</b><span>Мултисензорна стимулация и успокоение</span></div>
+            </Reveal>
+            <Reveal className="fac" delay={2}>
+              <div className="fac-media">
+                <ParallaxImage src="/images/kitchen.jpg" alt="Кабинет по готварство" speed={8} scale={1.12} />
+              </div>
+              <div className="lbl"><b>Кулинарен кабинет</b><span>Практика по готварство и сладкарство</span></div>
+            </Reveal>
+            <Reveal className="fac" delay={3}>
+              <div className="fac-media">
+                <ParallaxImage src="/images/garden.jpg" alt="Училищен двор и зелена градина" speed={8} scale={1.12} />
+              </div>
+              <div className="lbl"><b>Зелен училищен двор</b><span>Градинарство, спорт и игри на открито</span></div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* VOCATIONAL TRAINING SECTION */}
+      <VocationalPrograms />
+
 
       <Resources />
 

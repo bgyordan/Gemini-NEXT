@@ -9,12 +9,40 @@ import ParallaxImage from './components/ParallaxImage';
 import ParallaxElement from './components/ParallaxElement';
 import TherapyInteractive from './components/TherapyInteractive';
 import VocationalPrograms from './components/VocationalPrograms';
-import { getLatestNews } from './novini/newsData';
+import type { NewsCard } from './novini/page';
 import './components/hero.css';
 import './components/sections.css';
 
-export default function Home() {
-  const latestNews = getLatestNews(3);
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+async function getLatest(): Promise<NewsCard[]> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return [];
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(url, key);
+    const { data } = await supabase
+      .from('site_news')
+      .select('id, title, excerpt, cover_url, category, published_at')
+      .eq('status', 'published')
+      .order('published_at', { ascending: false })
+      .limit(3);
+    return (data ?? []).map((n) => ({ ...n, slug: n.id }));
+  } catch {
+    return [];
+  }
+}
+
+function fmtDate(iso: string | null): string {
+  if (!iso) return '';
+  try { return new Date(iso).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' }); }
+  catch { return ''; }
+}
+
+export default async function Home() {
+  const latestNews = await getLatest();
 
   return (
     <>
@@ -155,35 +183,41 @@ export default function Home() {
               </Link>
             </Reveal>
           </div>
-          <div className="news-grid">
-            {latestNews.map((post, idx) => (
-              <Reveal as="article" key={post.id} className="post" delay={((idx % 3) + 1) as 1 | 2 | 3}>
-                <Link href={`/novini/${post.slug}`} style={{ display: 'contents' }}>
-                  <div className="post-img">
-                    <ParallaxImage src={post.image} alt={post.title} speed={7} scale={1.1} />
-                    <span className="post-category-tag">{post.category}</span>
-                  </div>
-                  <div className="post-body">
-                    <div className="post-meta">
-                      <span className="post-date">{post.date}</span>
-                      <span>{post.readTime}</span>
+          {latestNews.length === 0 ? (
+            <Reveal className="news-soon">Очаквайте първите новини съвсем скоро.</Reveal>
+          ) : (
+            <div className="news-grid">
+              {latestNews.map((post, idx) => (
+                <Reveal as="article" key={post.id} className="post" delay={((idx % 3) + 1) as 1 | 2 | 3}>
+                  <Link href={`/novini/${post.slug}`} style={{ display: 'contents' }}>
+                    <div className="post-img">
+                      {post.cover_url ? (
+                        <ParallaxImage src={post.cover_url} alt={post.title} speed={7} scale={1.1} />
+                      ) : (
+                        <div className="post-noimg"><span>ЦСОП</span></div>
+                      )}
+                      <span className="post-category-tag">{post.category}</span>
                     </div>
-                    <h3>{post.title}</h3>
-                    <p>{post.excerpt}</p>
-                    <div className="post-footer">
-                      <span style={{ fontSize: '13px', color: 'var(--ink-3)' }}>{post.author.name}</span>
-                      <span className="read">
-                        Прочетете{' '}
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                      </span>
+                    <div className="post-body">
+                      <div className="post-meta">
+                        <span className="post-date">{fmtDate(post.published_at)}</span>
+                      </div>
+                      <h3>{post.title}</h3>
+                      <p>{post.excerpt}</p>
+                      <div className="post-footer">
+                        <span className="read">
+                          Прочетете{' '}
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -1,137 +1,161 @@
-.admin{min-height:100vh;background:#F2F6F1}
-.admin-top{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;background:#fff;border-bottom:1px solid #E4E9E2;box-shadow:0 4px 20px -16px rgba(20,90,70,.4)}
-.admin-top h1{font-family:var(--serif,Georgia);font-size:22px;font-weight:600;color:#22312B}
-.admin-top span{font-size:13px;color:#93A099}
-.admin-logout{padding:9px 18px;font-size:13px;font-weight:600;color:#C0392B;background:#FDECEC;border:none;border-radius:10px;cursor:pointer;transition:background .2s}
-.admin-logout:hover{background:#f9dcdc}
+/* ============ АДМИН — красив layout със sidebar ============ */
+.admin{display:grid;grid-template-columns:280px 1fr;min-height:100vh;background:#F4F8F5;font-family:var(--sans,'Golos Text',sans-serif)}
 
-.admin-body{max-width:1000px;margin:0 auto;padding:32px;display:grid;grid-template-columns:1fr 1.3fr;gap:28px;align-items:start}
-.admin-panel,.admin-list{background:#fff;border-radius:18px;padding:26px;box-shadow:0 12px 34px -22px rgba(20,90,70,.3)}
-.admin-panel h2,.admin-list h2{font-size:17px;font-weight:600;color:#22312B;margin-bottom:20px}
+/* Sidebar */
+.admin-side{background:linear-gradient(175deg,#0E8A61,#0B6E4E);display:flex;flex-direction:column;padding:28px 20px;position:sticky;top:0;height:100vh}
+.admin-brand{display:flex;align-items:center;gap:13px;padding:0 8px 26px;border-bottom:1px solid rgba(255,255,255,.15)}
+.admin-logo{width:48px;height:48px;border-radius:14px;overflow:hidden;flex-shrink:0;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
+.admin-logo img{width:100%;height:100%;object-fit:cover}
+.admin-brand h1{font-family:var(--serif,Georgia);font-size:19px;font-weight:600;color:#fff;line-height:1.1}
+.admin-brand span{font-size:12px;color:rgba(255,255,255,.7)}
 
-.admin-form{display:flex;flex-direction:column;gap:15px}
-.admin-form label{display:flex;flex-direction:column;gap:6px}
-.admin-form label span{font-size:12.5px;font-weight:600;color:#5C6B63}
-.admin-form input[type=text]{padding:12px 14px;font-size:14px;border:1px solid #E4E9E2;border-radius:10px;outline:none;transition:border-color .2s}
-.admin-form input[type=text]:focus{border-color:#22B37A}
-.admin-form input[type=file]{font-size:13px;padding:10px;border:1px dashed #C4D2CB;border-radius:10px;cursor:pointer;background:#FAFCFA}
-.admin-msg{font-size:13.5px;padding:11px 14px;border-radius:10px;background:#EAF6EF;color:#0E8A61;text-align:center}
-.admin-btn{padding:13px;font-size:14.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#22B37A,#0E8A61);border:none;border-radius:11px;cursor:pointer;transition:transform .2s,opacity .2s}
-.admin-btn:hover:not(:disabled){transform:translateY(-2px)}
-.admin-btn:disabled{opacity:.6;cursor:not-allowed}
+.admin-nav{display:flex;flex-direction:column;gap:6px;margin-top:26px;flex:1}
+.admin-nav-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;font-size:14.5px;font-weight:500;font-family:inherit;color:rgba(255,255,255,.82);background:none;border:none;border-radius:12px;cursor:pointer;text-align:left;transition:background .22s,color .22s}
+.admin-nav-btn svg{width:20px;height:20px;flex-shrink:0}
+.admin-nav-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.admin-nav-btn.on{background:#fff;color:#0B6E4E;font-weight:600;box-shadow:0 8px 20px -8px rgba(0,0,0,.3)}
 
-.admin-empty{font-size:14px;color:#93A099;text-align:center;padding:30px}
-.admin-docs{display:flex;flex-direction:column;gap:10px}
-.admin-doc{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#FAFCFA;border:1px solid #EEF3EE;border-radius:12px}
-.admin-doc-info b{display:block;font-size:14px;color:#22312B}
-.admin-doc-info span{font-size:12px;color:#93A099}
-.admin-doc-actions{display:flex;gap:8px}
-.admin-doc-actions a,.admin-doc-actions button{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer;border:none;text-decoration:none}
-.admin-doc-actions a{color:#1668A3;background:#E9F3FA}
-.admin-doc-actions button{color:#C0392B;background:#FDECEC}
+.admin-user{display:flex;align-items:center;gap:12px;padding:14px 12px;background:rgba(255,255,255,.1);border-radius:14px;margin-top:16px}
+.admin-avatar{width:42px;height:42px;border-radius:50%;background:#fff;color:#0B6E4E;display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.admin-user-info{min-width:0}
+.admin-user-info b{display:block;font-size:13.5px;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-user-info button{font-size:12.5px;color:rgba(255,255,255,.7);background:none;border:none;cursor:pointer;padding:2px 0;transition:color .2s}
+.admin-user-info button:hover{color:#fff}
 
-.admin-denied{max-width:440px;margin:100px auto;text-align:center;padding:40px}
-.admin-denied h1{font-size:24px;color:#22312B;margin-bottom:10px}
-.admin-denied p{color:#93A099;margin-bottom:20px}
-.admin-denied a{color:#22B37A;font-weight:600;text-decoration:none}
+/* Main */
+.admin-main{padding:40px}
+.admin-content{max-width:1080px;margin:0 auto;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-@media(max-width:800px){.admin-body{grid-template-columns:1fr}}
+/* Панели — общи */
+.admin-panel,.admin-list{background:#fff;border-radius:20px;padding:30px;box-shadow:0 4px 30px -18px rgba(20,90,70,.35)}
+.admin-panel h2,.admin-list h2{font-family:var(--serif,Georgia);font-size:20px;font-weight:600;color:#22312B;margin-bottom:24px}
 
-/* Редактиране на документ */
-.admin-doc-edit{display:flex;flex-wrap:wrap;gap:8px;width:100%;align-items:center}
-.admin-doc-edit input{flex:1;min-width:120px;padding:9px 12px;font-size:13px;border:1px solid #E4E9E2;border-radius:8px;outline:none}
-.admin-doc-edit input:focus{border-color:#22B37A}
-.act-edit{color:#0E8A61;background:#EAF6EF}
-.act-del{color:#C0392B;background:#FDECEC}
-.act-save{color:#fff;background:#22B37A}
-.act-cancel{color:#5C6B63;background:#EEF3EE}
+/* Форми */
+.admin-form{display:flex;flex-direction:column;gap:18px}
+.admin-form label{display:flex;flex-direction:column;gap:7px}
+.admin-form label span{font-size:13px;font-weight:600;color:#4A5D53}
+.admin-form input[type=text],.admin-form input[type=date],.admin-select,.admin-form textarea{padding:13px 16px;font-size:14.5px;border:1.5px solid #E4EDE7;border-radius:12px;outline:none;font-family:inherit;transition:border-color .22s,box-shadow .22s;background:#fff;width:100%}
+.admin-form input:focus,.admin-select:focus,.admin-form textarea:focus{border-color:#22B37A;box-shadow:0 0 0 4px rgba(34,179,122,.1)}
+.admin-form input[type=file]{font-size:13px;padding:14px;border:2px dashed #C4D8CC;border-radius:12px;cursor:pointer;background:#FAFDFB;transition:border-color .22s,background .22s}
+.admin-form input[type=file]:hover{border-color:#22B37A;background:#F2FBF6}
+.admin-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A5D53' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+.admin-form textarea{line-height:1.7;resize:vertical}
 
-/* Табове */
-.admin-tabs{max-width:1000px;margin:0 auto;padding:24px 32px 0;display:flex;gap:8px}
-.admin-tabs button{padding:11px 24px;font-size:14px;font-weight:600;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid #E4E9E2;border-radius:12px;cursor:pointer;transition:all .25s}
-.admin-tabs button:hover{border-color:#22B37A;color:var(--ink)}
-.admin-tabs button.on{background:linear-gradient(135deg,#22B37A,#0E8A61);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(18,138,94,.5)}
-.admin-body.single{grid-template-columns:1fr;max-width:1100px;padding:32px}
-
-/* Форма — select и textarea */
-.admin-select{padding:12px 14px;font-size:14px;border:1px solid #E4E9E2;border-radius:10px;outline:none;font-family:inherit;background:#fff;cursor:pointer}
-.admin-select:focus{border-color:#22B37A}
-.admin-form textarea{padding:12px 14px;font-size:14px;border:1px solid #E4E9E2;border-radius:10px;outline:none;font-family:inherit;resize:vertical;line-height:1.6}
-.admin-form textarea:focus{border-color:#22B37A}
-.news-cover-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid #EEF3EE}
-
-.news-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.admin-btn.ghost{background:#fff;color:#0E8A61;border:1px solid #C4E4D5;box-shadow:none}
+.admin-msg{font-size:13.5px;padding:12px 16px;border-radius:11px;background:#EAF6EF;color:#0B6E4E;text-align:center;font-weight:500}
+.admin-btn{padding:14px 24px;font-size:14.5px;font-weight:600;font-family:inherit;color:#fff;background:linear-gradient(135deg,#22B37A,#0E8A61);border:none;border-radius:12px;cursor:pointer;transition:transform .2s,box-shadow .2s,opacity .2s;box-shadow:0 12px 26px -12px rgba(18,138,94,.6)}
+.admin-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 16px 32px -14px rgba(18,138,94,.7)}
+.admin-btn:disabled{opacity:.55;cursor:not-allowed}
+.admin-btn.ghost{background:#fff;color:#0E8A61;border:1.5px solid #C4E4D5;box-shadow:none}
 .admin-btn.cancel{background:#EEF3EE;color:#5C6B63;box-shadow:none}
 
-.news-mgr{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-@media(max-width:800px){.news-mgr{grid-template-columns:1fr}}
+.admin-empty{font-size:14.5px;color:#9AAaa0;text-align:center;padding:40px 20px;background:#FAFCFA;border:1px dashed #DDE7E0;border-radius:14px}
 
-/* Новинарски ред в списъка */
-.admin-news-row{display:flex;align-items:center;gap:14px;padding:12px;background:#FAFCFA;border:1px solid #EEF3EE;border-radius:12px}
-.anr-thumb{width:56px;height:56px;border-radius:10px;overflow:hidden;flex-shrink:0}
+/* Документи — подраздели */
+.docs-mgr{}
+.docs-sections{display:inline-flex;gap:4px;margin-bottom:26px;background:#EAF1EC;padding:5px;border-radius:14px}
+.docs-sec-btn{padding:10px 20px;font-size:13.5px;font-weight:600;font-family:inherit;color:#5C6B63;background:none;border:none;border-radius:10px;cursor:pointer;transition:all .22s}
+.docs-sec-btn:hover{color:#22312B}
+.docs-sec-btn.on{background:#fff;color:#0B6E4E;box-shadow:0 4px 12px -6px rgba(20,90,70,.3)}
+
+.docs-mgr .admin-body,.news-mgr,.gal-mgr{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:start}
+@media(max-width:900px){.docs-mgr .admin-body,.news-mgr,.gal-mgr{grid-template-columns:1fr}}
+
+/* Списък документи */
+.admin-docs{display:flex;flex-direction:column;gap:8px}
+.admin-doc{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:#FAFCFB;border:1px solid #EEF3F0;border-radius:13px;transition:background .2s}
+.admin-doc:hover{background:#F2F9F5}
+.admin-doc-info b{display:block;font-size:14px;color:#22312B;line-height:1.35}
+.admin-doc-info span{font-size:12px;color:#9AAAA0}
+.admin-doc-actions{display:flex;gap:7px;flex-shrink:0}
+.admin-doc-actions a,.admin-doc-actions button{font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:9px;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.admin-doc-actions a{color:#1668A3;background:#E9F3FA}
+.admin-doc-actions a:hover{background:#d8ebf7}
+.act-edit{color:#0E8A61;background:#EAF6EF}
+.act-edit:hover{background:#dcf0e6}
+.act-del{color:#C0392B;background:#FDECEC}
+.act-del:hover{background:#f9dcdc}
+.act-save{color:#fff;background:#22B37A}
+.act-cancel{color:#5C6B63;background:#EEF3EE}
+.admin-doc-edit{display:flex;flex-wrap:wrap;gap:8px;width:100%;align-items:center}
+.admin-doc-edit input{flex:1;min-width:120px;padding:10px 13px;font-size:13px;border:1.5px solid #E4EDE7;border-radius:9px;outline:none}
+.admin-doc-edit input:focus{border-color:#22B37A}
+
+/* Новини — списък */
+.news-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.news-cover-preview{width:100%;max-height:180px;object-fit:cover;border-radius:12px;border:1px solid #EEF3EE}
+.admin-news-row{display:flex;align-items:center;gap:14px;padding:12px;background:#FAFCFB;border:1px solid #EEF3F0;border-radius:13px}
+.anr-thumb{width:58px;height:58px;border-radius:11px;overflow:hidden;flex-shrink:0}
 .anr-thumb img{width:100%;height:100%;object-fit:cover}
 .anr-noimg{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(150deg,#D3EBDD,#E9F3FA);font-size:11px;font-weight:600;color:#8FBBA8}
 .anr-info{flex:1;min-width:0}
 .anr-info b{display:block;font-size:14px;color:#22312B;line-height:1.3;margin-bottom:5px}
 .anr-meta{display:flex;gap:8px;align-items:center}
-.anr-status{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px}
+.anr-status{font-size:10.5px;font-weight:600;padding:3px 10px;border-radius:999px}
 .anr-status.published{background:#EAF6EF;color:#0E8A61}
 .anr-status.draft{background:#FDF3E4;color:#B87514}
-.anr-cat{font-size:11px;color:#93A099}
+.anr-cat{font-size:11px;color:#9AAAA0}
 
-/* === Новини: форма отляво, публикувани отдясно === */
-.news-mgr{grid-template-columns:1.35fr 1fr;max-width:1100px;margin:0 auto;gap:26px;align-items:start}
-.news-mgr .admin-panel,.news-mgr .admin-list{padding:28px}
-.news-mgr .admin-form{gap:18px}
-.news-mgr .admin-form label span{font-size:13px;margin-bottom:2px}
-.news-mgr .admin-form input[type=text],
-.news-mgr .admin-select,
-.news-mgr .admin-form textarea{padding:13px 15px;font-size:14.5px;width:100%}
-.news-mgr .admin-form textarea{line-height:1.7;min-height:60px}
-.news-mgr .admin-panel h2,.news-mgr .admin-list h2{font-size:18px;margin-bottom:22px}
-.news-btns{margin-top:6px;gap:10px}
-.news-btns .admin-btn{padding:13px 22px;font-size:14.5px}
-/* списъкът вдясно да е "лепкав" — стои видим докато пишеш */
-.news-mgr .admin-list{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto}
-@media(max-width:900px){
-  .news-mgr{grid-template-columns:1fr}
-  .news-mgr .admin-list{position:static;max-height:none}
-}
-
-/* === Галериен мениджър === */
-.gal-mgr{display:grid;grid-template-columns:1fr 1.4fr;gap:26px;align-items:start;max-width:1100px;margin:0 auto}
-.gal-mgr .gm-open{grid-column:1 / -1}
-@media(max-width:800px){.gal-mgr{grid-template-columns:1fr}}
-
+/* Галерия мениджър */
 .gm-albums{display:flex;flex-direction:column;gap:10px}
-.gm-album{display:flex;align-items:center;gap:14px;padding:12px;background:#FAFCFA;border:1px solid #EEF3EE;border-radius:12px}
-.gm-album-thumb{width:60px;height:60px;border-radius:10px;overflow:hidden;flex-shrink:0;cursor:pointer}
+.gm-album{display:flex;align-items:center;gap:14px;padding:12px;background:#FAFCFB;border:1px solid #EEF3F0;border-radius:13px}
+.gm-album-thumb{width:62px;height:62px;border-radius:11px;overflow:hidden;flex-shrink:0;cursor:pointer}
 .gm-album-thumb img{width:100%;height:100%;object-fit:cover}
 .gm-album-info{flex:1;min-width:0}
 .gm-album-info b{display:block;font-size:14px;color:#22312B}
-.gm-album-info span{font-size:12px;color:#93A099}
-
-.gm-upload{display:block;margin:18px 0;padding:20px;border:2px dashed #C4D2CB;border-radius:14px;text-align:center;cursor:pointer;background:#FAFCFA;transition:border-color .25s,background .25s}
+.gm-album-info span{font-size:12px;color:#9AAAA0}
+.gm-open{grid-column:1 / -1}
+.gm-upload{display:block;margin:18px 0;padding:22px;border:2px dashed #C4D8CC;border-radius:14px;text-align:center;cursor:pointer;background:#FAFDFB;transition:border-color .22s,background .22s}
 .gm-upload:hover{border-color:#22B37A;background:#F2FBF6}
 .gm-upload input{display:none}
 .gm-upload span{font-size:14px;font-weight:600;color:#0E8A61}
-
 .gm-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:14px}
-.gm-photo{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:2px solid transparent}
+.gm-photo{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:2.5px solid transparent}
 .gm-photo.is-cover{border-color:#22B37A}
 .gm-photo img{width:100%;height:100%;object-fit:cover}
 .gm-photo-acts{position:absolute;top:6px;right:6px;display:flex;gap:5px;opacity:0;transition:opacity .25s}
 .gm-photo:hover .gm-photo-acts{opacity:1}
-.gm-photo-acts button{width:28px;height:28px;border:none;border-radius:8px;cursor:pointer;font-size:13px;display:grid;place-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(4px);color:#22312B;transition:background .2s}
+.gm-photo-acts button{width:28px;height:28px;border:none;border-radius:8px;cursor:pointer;font-size:13px;display:grid;place-items:center;background:rgba(255,255,255,.94);color:#22312B;transition:background .2s}
 .gm-photo-acts button:first-child:hover{background:#22B37A;color:#fff}
 .gm-photo-acts button:last-child:hover{background:#C0392B;color:#fff}
 .gm-cover-badge{position:absolute;bottom:6px;left:6px;font-size:10px;font-weight:600;color:#fff;background:rgba(34,179,122,.92);padding:3px 9px;border-radius:999px}
+.gal-back{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#5C6B63;background:none;border:none;cursor:pointer;padding:6px 0;margin-bottom:16px;font-family:inherit;transition:color .22s}
+.gal-back:hover{color:#0E8A61}
+.gal-back svg{width:18px;height:18px}
 
-/* === Подраздели на документите === */
-.docs-mgr{max-width:1100px;margin:0 auto}
-.docs-sections{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.docs-sec-btn{padding:10px 18px;font-size:13px;font-weight:600;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid #E4E9E2;border-radius:10px;cursor:pointer;transition:all .25s}
-.docs-sec-btn:hover{border-color:#22B37A;color:var(--ink)}
-.docs-sec-btn.on{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.5)}
-.docs-mgr .admin-body{padding:0;max-width:100%}
+/* HERO мениджър — избор на снимки за мозайката */
+.hero-mgr{background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 30px -18px rgba(20,90,70,.35)}
+.hm-intro{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #EEF3F0}
+.hm-intro h2{font-family:var(--serif,Georgia);font-size:21px;font-weight:600;color:#22312B;margin-bottom:8px}
+.hm-intro p{font-size:14px;color:#5C6B63;line-height:1.6;max-width:640px}
+.hm-count{margin-top:14px;font-size:13.5px;color:#0E8A61}
+.hm-count b{font-size:16px}
+.hm-album{margin-bottom:28px}
+.hm-album h3{font-size:15px;font-weight:600;color:#4A5D53;margin-bottom:14px}
+.hm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.hm-tile{position:relative;aspect-ratio:1;border-radius:13px;overflow:hidden;border:3px solid transparent;cursor:pointer;padding:0;background:none;transition:transform .2s}
+.hm-tile:hover{transform:scale(1.03)}
+.hm-tile img{width:100%;height:100%;object-fit:cover;transition:opacity .2s}
+.hm-tile .hm-check{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.85);display:grid;place-items:center;opacity:0;transform:scale(.8);transition:all .2s;color:#0E8A61}
+.hm-tile .hm-check svg{width:15px;height:15px}
+.hm-tile.on{border-color:#22B37A}
+.hm-tile.on img{opacity:.85}
+.hm-tile.on .hm-check{opacity:1;transform:scale(1);background:#22B37A;color:#fff}
+.hm-save-bar{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:20px;padding-top:24px;border-top:1px solid #EEF3F0}
+.hm-msg{font-size:13.5px;color:#0E8A61;font-weight:500}
+
+.admin-denied{max-width:440px;margin:100px auto;text-align:center;padding:40px}
+.admin-denied h1{font-size:24px;color:#22312B;margin-bottom:10px}
+.admin-denied p{color:#9AAAA0;margin-bottom:20px}
+.admin-denied a{color:#22B37A;font-weight:600;text-decoration:none}
+
+/* Responsive — sidebar става горна лента */
+@media(max-width:768px){
+  .admin{grid-template-columns:1fr}
+  .admin-side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:16px}
+  .admin-brand{border-bottom:none;padding:0;flex:1}
+  .admin-nav{flex-direction:row;flex-wrap:wrap;margin-top:0;flex:none;width:100%;order:3}
+  .admin-nav-btn{padding:10px 14px;font-size:13px}
+  .admin-user{margin-top:0}
+  .admin-main{padding:20px}
+}

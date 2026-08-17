@@ -18,3 +18,9 @@
   .report-row{flex-wrap:wrap}
   .report-dl{margin-left:54px}
 }
+
+/* Филтър по година */
+.budget-years{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.budget-year{padding:9px 20px;font-size:14px;font-weight:600;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;cursor:pointer;transition:all .25s}
+.budget-year:hover{border-color:#1E7FC0;color:var(--ink)}
+.budget-year.on{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.5)}

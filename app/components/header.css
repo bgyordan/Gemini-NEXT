@@ -582,3 +582,9 @@ header.solid .bar {
     animation: none !important;
   }
 }
+
+/* ГЛАВНИ БУКВИ (CAPS) навсякъде в менюто */
+.nav-link{text-transform:uppercase;letter-spacing:.08em}
+.item-label{text-transform:uppercase;letter-spacing:.05em}
+.mobile-parent{text-transform:uppercase;letter-spacing:.06em}
+.mobile-sub-label{text-transform:uppercase;letter-spacing:.05em}

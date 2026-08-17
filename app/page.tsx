@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import GalleryStrip from './components/GalleryStrip';
 import Header from './components/Header';
 import Hero3D from './components/Hero3D';
 import Reveal from './components/Reveal';
@@ -221,6 +222,9 @@ export default async function Home() {
       {/* VOCATIONAL TRAINING SECTION */}
       <VocationalPrograms />
 
+
+      {/* GALLERY STRIP */}
+      <GalleryStrip />
 
       <Resources />
 

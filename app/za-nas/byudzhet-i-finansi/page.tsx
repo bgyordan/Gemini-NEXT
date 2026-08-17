@@ -1,6 +1,7 @@
 import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
 import Footer from '../../components/Footer';
+import BudgetBrowser from './BudgetBrowser';
 import './budget.css';
 
 export const metadata = {
@@ -35,14 +36,6 @@ async function getBudget(): Promise<Doc[]> {
 export default async function BudgetPage() {
   const docs = await getBudget();
 
-  // Групиране по година
-  const groups: Record<string, Doc[]> = {};
-  docs.forEach((d) => {
-    const y = d.academic_year || 'Без година';
-    (groups[y] ||= []).push(d);
-  });
-  const years = Object.keys(groups).sort().reverse();
-
   return (
     <>
       <Header />
@@ -54,36 +47,7 @@ export default async function BudgetPage() {
       />
       <div className="budget-page">
         <div className="wrap narrow">
-          {years.length === 0 ? (
-            <div className="budget-empty">Все още няма публикувани финансови отчети.</div>
-          ) : (
-            years.map((year) => (
-              <div key={year} className="year-group">
-                <div className="year-header">
-                  <span className="year-badge">{year}</span>
-                  <span className="year-label">Финансови отчети</span>
-                </div>
-                <div className="report-list">
-                  {groups[year].map((d) => (
-                    <a key={d.id} href={d.file_url} target="_blank" rel="noopener noreferrer" className="report-row">
-                      <span className="report-ic">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M6 2h8l4 4v16H6z" /><path d="M14 2v4h4M9 13h6M9 17h4" />
-                        </svg>
-                      </span>
-                      <span className="report-name">{d.name}</span>
-                      <span className="report-dl">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-                        </svg>
-                        Изтегли
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))
-          )}
+          <BudgetBrowser docs={docs} />
         </div>
       </div>
       <Footer />

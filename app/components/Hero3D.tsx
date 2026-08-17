@@ -4,19 +4,51 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { TILE_STORIES } from './tileStories';
 
+// Снимки по подразбиране, ако няма избрани в админа
+const DEFAULT_HERO_PHOTOS = ['/hero.jpg'];
+
 export default function Hero3D() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ready, setReady] = useState(false);
   const [story, setStory] = useState<number | null>(null);
+  const [heroPhotos, setHeroPhotos] = useState<string[]>(DEFAULT_HERO_PHOTOS);
+
+  // Зареждаме избраните снимки за мозайката от базата
+  useEffect(() => {
+    (async () => {
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+      if (!url || !key) return;
+      try {
+        const res = await fetch(`${url}/rest/v1/site_settings?key=eq.hero_photos&select=value`, {
+          headers: { apikey: key, Authorization: `Bearer ${key}` },
+        });
+        const rows = await res.json();
+        const photos = rows?.[0]?.value;
+        if (Array.isArray(photos) && photos.length > 0) {
+          setHeroPhotos(photos);
+        }
+      } catch {
+        // остава default
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Избираме случайна снимка от избраните
+    const chosenPhoto = heroPhotos[Math.floor(Math.random() * heroPhotos.length)];
+
+    const isDarkMode = () =>
+      document.documentElement.getAttribute('data-theme') === 'dark' ||
+      document.documentElement.classList.contains('dark');
+
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xfbf7f0, 18, 42);
+    scene.fog = new THREE.Fog(isDarkMode() ? 0x121614 : 0xfbf7f0, 18, 44);
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0, 13.5);
+    camera.position.set(0, 0, 15.5);
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -25,19 +57,19 @@ export default function Hero3D() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.92));
-    const key = new THREE.DirectionalLight(0xffffff, 1.0);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.95));
+    const key = new THREE.DirectionalLight(0xffffff, 1.05);
     key.position.set(-6, 9, 10);
     key.castShadow = true;
     key.shadow.mapSize.set(1024, 1024);
     Object.assign(key.shadow.camera, { near: 1, far: 40, left: -16, right: 16, top: 16, bottom: -16 });
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0x9fe1cb, 0.26);
+    const fill = new THREE.DirectionalLight(0x9fe1cb, 0.3);
     fill.position.set(8, -4, 6);
     scene.add(fill);
 
     const colors = [0x22b37a, 0x3da5e0, 0x4fc79e, 0x1e7fc0, 0x8fe0c0, 0x2fa8d8, 0x128a5e, 0x5dcaa5];
-    const COLS = 8, ROWS = 5, GAP = 0.04, SIZE = 1.35;
+    const COLS = 8, ROWS = 5, GAP = 0.015, SIZE = 1.7;
     const geo = new THREE.BoxGeometry(SIZE, SIZE, 0.2);
     const totalW = COLS * (SIZE + GAP) - GAP;
     const totalH = ROWS * (SIZE + GAP) - GAP;
@@ -47,7 +79,7 @@ export default function Hero3D() {
       home: THREE.Vector3;
       col: number;
       row: number;
-      phase: number;   // wave phase offset — makes the crest diagonal & curved
+      phase: number;
       story: number;
     }
     type Tile = THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial> & { userData: TD };
@@ -71,13 +103,17 @@ export default function Hero3D() {
         -(r * (SIZE + GAP) - totalH / 2 + SIZE / 2),
         0
       );
-      // phase makes the wave crest slanted and wavy instead of a straight vertical line:
-      // top rows lead, middle bulges, bottom trails — plus a gentle sine ripple
-      const rowNorm = r / (ROWS - 1);           // 0 top .. 1 bottom
-      const slant = rowNorm * 1.4;              // diagonal: lower rows lag behind
-      const bulge = Math.sin(rowNorm * Math.PI) * 0.9; // middle rows push ahead
+      const rowNorm = r / (ROWS - 1);
+      const slant = rowNorm * 1.4;
+      const bulge = Math.sin(rowNorm * Math.PI) * 0.9;
       const phase = c - bulge + slant;
-      m.userData = { home: home.clone(), col: c, row: r, phase, story: i % TILE_STORIES.length };
+      m.userData = {
+        home: home.clone(),
+        col: c,
+        row: r,
+        phase,
+        story: i % TILE_STORIES.length,
+      };
       // start scattered, assemble once
       m.position.set(rand(-14, 14), rand(-9, 9), rand(-16, -6));
       m.rotation.set(rand(-Math.PI, Math.PI), rand(-Math.PI, Math.PI), rand(-Math.PI, Math.PI));
@@ -86,11 +122,15 @@ export default function Hero3D() {
       tiles.push(m);
     }
 
+    // Load the randomly chosen CSOP photo and map it evenly across the 8x5 tiles
     const loader = new THREE.TextureLoader();
+    let activeTexture: THREE.Texture | null = null;
+
     loader.load(
-      '/hero.jpg',
+      chosenPhoto,
       (tex) => {
         tex.colorSpace = THREE.SRGBColorSpace;
+        activeTexture = tex;
         tiles.forEach((m, i) => {
           const c = i % COLS;
           const r = Math.floor(i / COLS);
@@ -105,14 +145,29 @@ export default function Hero3D() {
         });
       },
       undefined,
-      () => {}
+      (err) => {
+        console.warn('Failed to load hero image:', chosenPhoto, err);
+      }
     );
 
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.09 });
+    const groundMat = new THREE.ShadowMaterial({ opacity: isDarkMode() ? 0.25 : 0.09 });
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 40), groundMat);
     ground.position.z = -1.3;
     ground.receiveShadow = true;
     scene.add(ground);
+
+    // Watch for theme changes to update fog and shadow
+    const themeObserver = new MutationObserver(() => {
+      const dark = isDarkMode();
+      if (scene.fog) {
+        scene.fog.color.set(dark ? 0x121614 : 0xfbf7f0);
+      }
+      groundMat.opacity = dark ? 0.25 : 0.09;
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'class'],
+    });
 
     let mx = 0, my = 0, tmx = 0, tmy = 0;
     const mouseWorld = new THREE.Vector3(999, 999, 0);
@@ -150,13 +205,12 @@ export default function Hero3D() {
 
     setTimeout(() => { assembled = true; }, 1400);
 
-    // Mexican-wave: a moving band of columns lifts in sequence, left→right
-    const WAVE_SPEED = 2.4;   // phase units per second
-    const WAVE_WIDTH = 2.2;   // width of the crest (in phase units) — wider = softer
-    const WAVE_LIFT = 1.0;    // how far a tile pops toward the viewer (Z)
-    const WAVE_GAP = 2.4;     // seconds of rest between waves
-    const HOVER_RADIUS = 2.6; // how far the mouse influence reaches
-    const HOVER_LIFT = 1.3;   // how much tiles rise toward the cursor
+    const WAVE_SPEED = 2.4;
+    const WAVE_WIDTH = 2.2;
+    const WAVE_LIFT = 1.0;
+    const WAVE_GAP = 2.4;
+    const HOVER_RADIUS = 2.6;
+    const HOVER_LIFT = 1.3;
 
     function animate() {
       raf = requestAnimationFrame(animate);
@@ -168,8 +222,7 @@ export default function Hero3D() {
       group.rotation.y += (mx * 0.2 - group.rotation.y) * 0.05;
       group.rotation.x += (my * 0.14 - group.rotation.x) * 0.05;
 
-      // wave head sweeps across the phase range, then rests
-      const phaseSpan = COLS + 2.4; // covers slant+bulge range
+      const phaseSpan = COLS + 2.4;
       const period = phaseSpan / WAVE_SPEED + WAVE_GAP;
       const tt = elapsed % period;
       const head = tt * WAVE_SPEED - 1.2;
@@ -184,13 +237,13 @@ export default function Hero3D() {
           m.rotation.z += (0 - m.rotation.z) * 0.08;
           return;
         }
-        // travelling wave — uses phase (diagonal + curved crest, not a vertical line)
+
         const d = u.phase - head;
         let pop = 0;
         if (d <= 0 && d > -WAVE_WIDTH) {
           pop = Math.sin((-d / WAVE_WIDTH) * Math.PI) * WAVE_LIFT;
         }
-        // hover — tiles near the cursor rise toward the viewer
+
         const dx = m.userData.home.x - mouseWorld.x;
         const dy = m.userData.home.y - mouseWorld.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -198,10 +251,13 @@ export default function Hero3D() {
         if (dist < HOVER_RADIUS) {
           hover = Math.cos((dist / HOVER_RADIUS) * (Math.PI / 2)) * HOVER_LIFT;
         }
+
         const targetZ = u.home.z + Math.max(pop, hover);
+
         m.position.x += (u.home.x - m.position.x) * 0.2;
         m.position.y += (u.home.y - m.position.y) * 0.2;
         m.position.z += (targetZ - m.position.z) * 0.18;
+
         m.rotation.x += (0 - m.rotation.x) * 0.15;
         m.rotation.y += (0 - m.rotation.y) * 0.15;
         m.rotation.z += (0 - m.rotation.z) * 0.15;
@@ -221,15 +277,21 @@ export default function Hero3D() {
 
     return () => {
       cancelAnimationFrame(raf);
+      themeObserver.disconnect();
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerout', onLeave);
       window.removeEventListener('resize', onResize);
       canvas.removeEventListener('click', onClick);
       geo.dispose();
-      tiles.forEach((m) => { if (m.material.map) m.material.map.dispose(); m.material.dispose(); });
+      tiles.forEach((m) => {
+        if (m.material.map) m.material.map.dispose();
+        m.material.dispose();
+      });
+      if (activeTexture) (activeTexture as THREE.Texture).dispose();
       renderer.dispose();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [heroPhotos]);
 
   const s = story !== null ? TILE_STORIES[story] : null;
 
@@ -264,6 +326,14 @@ export default function Hero3D() {
         </div>
       </div>
 
+      <div className="hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+        <span>Докоснете плочка за история · Разгледайте 3D мозайката</span>
+      </div>
+
       {s && (
         <div className="story-overlay" onClick={() => setStory(null)}>
           <div className="story-modal" onClick={(e) => e.stopPropagation()}>
@@ -277,7 +347,7 @@ export default function Hero3D() {
               <span className="story-cat">{s.category.toUpperCase()}</span>
               <h3>{s.title}</h3>
               <p className="story-msg">{s.message}</p>
-              <blockquote>„{s.quote}"</blockquote>
+              <blockquote>„{s.quote}“</blockquote>
             </div>
           </div>
         </div>

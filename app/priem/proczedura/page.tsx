@@ -3,6 +3,7 @@ import PageHero from '../../components/PageHero';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import AdmissionWizard from '../AdmissionWizard';
+import AdmissionDocs from './AdmissionDocs';
 
 export const metadata = {
   title: 'Процедура и документи за прием — ЦСОП Варна',
@@ -24,6 +25,8 @@ export default function ProcedurePage() {
       <main style={{ padding: '70px 0 100px' }}>
         <div className="wrap">
           <AdmissionWizard />
+
+          <AdmissionDocs />
 
           <div style={{ marginTop: '50px', textAlign: 'center' }}>
             <a href="/priem/poseshtenie" className="btn btn-warm">

@@ -5,6 +5,9 @@ import Footer from '../../components/Footer';
 import AdmissionWizard from '../AdmissionWizard';
 import AdmissionDocs from './AdmissionDocs';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = {
   title: 'Процедура и документи за прием — ЦСОП Варна',
   description:

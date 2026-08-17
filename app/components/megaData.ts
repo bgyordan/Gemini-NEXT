@@ -74,6 +74,7 @@ export const MEGA: Mega[] = [
     },
     subs: [
       { label: 'Новини и блог', desc: 'Актуално от живота в центъра', href: '/novini', icon: 'news' },
+      { label: 'Галерия', desc: 'Снимки от събития и моменти', href: '/galeriya', icon: 'camera' },
       { label: 'Събития и празници', desc: 'Предстоящи и минали инициативи', href: '/novini?cat=Събития', icon: 'calendar' },
       { label: 'Ателиета и терапия', desc: 'Кадри и истории от практиката', href: '/novini?cat=Ателиета', icon: 'camera' },
       { label: 'Документи и съобщения', desc: 'Официални съобщения и протоколи', href: '/za-nas/vatreshni-dokumenti', icon: 'file' },

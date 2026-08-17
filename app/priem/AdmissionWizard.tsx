@@ -338,15 +338,6 @@ export default function AdmissionWizard() {
           </div>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <a
-              href="https://csop-varna.bg/wp-content/uploads/2026/03/gdneven-rezhim-25.26.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-ghost"
-              style={{ fontSize: '13.5px' }}
-            >
-              Свали дневен режим (PDF)
-            </a>
-            <a
               href="/kontakti"
               className="btn btn-warm"
               style={{ fontSize: '13.5px' }}

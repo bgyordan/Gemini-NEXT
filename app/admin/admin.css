@@ -127,3 +127,11 @@
 .gm-photo-acts button:first-child:hover{background:#22B37A;color:#fff}
 .gm-photo-acts button:last-child:hover{background:#C0392B;color:#fff}
 .gm-cover-badge{position:absolute;bottom:6px;left:6px;font-size:10px;font-weight:600;color:#fff;background:rgba(34,179,122,.92);padding:3px 9px;border-radius:999px}
+
+/* === Подраздели на документите === */
+.docs-mgr{max-width:1100px;margin:0 auto}
+.docs-sections{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.docs-sec-btn{padding:10px 18px;font-size:13px;font-weight:600;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid #E4E9E2;border-radius:10px;cursor:pointer;transition:all .25s}
+.docs-sec-btn:hover{border-color:#22B37A;color:var(--ink)}
+.docs-sec-btn.on{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.5)}
+.docs-mgr .admin-body{padding:0;max-width:100%}

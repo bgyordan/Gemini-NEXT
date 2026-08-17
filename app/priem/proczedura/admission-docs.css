@@ -1,0 +1,13 @@
+.adm-docs{max-width:720px;margin:60px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px;box-shadow:0 16px 40px -28px rgba(20,90,70,.35)}
+.adm-docs-head{text-align:center;margin-bottom:26px}
+.adm-docs-head h2{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.adm-docs-head p{font-size:14.5px;color:var(--ink-2)}
+.adm-docs-list{display:flex;flex-direction:column;gap:10px}
+.adm-doc{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:14px;border:1px solid #EEF3F8;background:#FAFCFE;transition:border-color .25s,background .25s,transform .25s}
+.adm-doc:hover{border-color:#C6E4F4;background:#F2F9FE;transform:translateX(4px)}
+.adm-doc-ic{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;background:#fff;border:1px solid #E4E9E2;color:#1668A3}
+.adm-doc-ic svg{width:22px;height:22px}
+.adm-doc-name{flex:1;font-weight:600;font-size:.98rem;color:var(--ink);line-height:1.35}
+.adm-doc-dl{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;transition:transform .25s}
+.adm-doc:hover .adm-doc-dl{transform:translateY(2px)}
+.adm-doc-dl svg{width:19px;height:19px}

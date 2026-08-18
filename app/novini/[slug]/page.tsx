@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import ShareButton from './ShareButton';
 import '../novini.css';
 import './article.css';
 
@@ -121,6 +122,8 @@ export default async function ArticlePage({ params }: Props) {
               ))}
             </div>
           )}
+
+          <ShareButton title={post.title} />
 
           <div className="article-foot">
             <Link href="/novini" className="article-back-btn">← Обратно към новините</Link>

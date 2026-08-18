@@ -38,14 +38,9 @@ export default function NewsClient({ initialPosts }: { initialPosts: NewsCard[] 
     });
   }, [initialPosts, cat, q]);
 
-  // featured = първата новина, само когато няма филтър/търсене
-  const featured =
-    cat === 'Всички' && q.trim() === '' && filtered.length > 0 ? filtered[0] : null;
-  const rest = featured ? filtered.slice(1) : filtered;
-
-  const totalPages = Math.max(1, Math.ceil(rest.length / PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const current = Math.min(page, totalPages);
-  const shown = rest.slice((current - 1) * PER_PAGE, current * PER_PAGE);
+  const shown = filtered.slice((current - 1) * PER_PAGE, current * PER_PAGE);
 
   const reset = (fn: () => void) => {
     fn();
@@ -92,30 +87,6 @@ export default function NewsClient({ initialPosts }: { initialPosts: NewsCard[] 
           <div className="news-empty">Няма новини по този критерий.</div>
         ) : (
           <>
-            {/* Featured */}
-            {featured && (
-              <Reveal>
-                <Link href={`/novini/${featured.slug}`} className="news-feat">
-                  <div className="news-feat-img">
-                    {featured.cover_url ? (
-                      <img src={featured.cover_url} alt={featured.title} />
-                    ) : (
-                      <div className="news-noimg"><span>ЦСОП</span></div>
-                    )}
-                  </div>
-                  <div className="news-feat-body">
-                    <span className="news-badge">{featured.category}</span>
-                    <h2>{featured.title}</h2>
-                    {featured.excerpt && <p>{featured.excerpt}</p>}
-                    <div className="news-feat-foot">
-                      <span className="news-date">{formatDate(featured.published_at)}</span>
-                      <span className="news-more">Прочети повече →</span>
-                    </div>
-                  </div>
-                </Link>
-              </Reveal>
-            )}
-
             {/* Мрежа 3 колони */}
             <div className="news-grid">
               {shown.map((p, i) => (

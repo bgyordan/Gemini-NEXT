@@ -14,3 +14,11 @@
 .article-foot{padding-top:24px;border-top:1px solid var(--line)}
 .article-back-btn{display:inline-block;font-size:14px;font-weight:600;color:#0E8A61;padding:12px 22px;border-radius:999px;background:rgba(34,179,122,.1);transition:background .25s}
 .article-back-btn:hover{background:rgba(34,179,122,.18)}
+
+/* Галерия в статията */
+.article-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 34px}
+.ag-item{border-radius:14px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 10px 26px -16px rgba(20,90,70,.4);transition:transform .4s,box-shadow .4s}
+.ag-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.ag-item:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(20,90,70,.5)}
+.ag-item:hover img{transform:scale(1.06)}
+@media(max-width:600px){.article-gallery{grid-template-columns:1fr 1fr;gap:8px}}

@@ -14,3 +14,10 @@ footer{background:var(--ink);color:#D8CBBC;padding:72px 0 32px}
 .foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#8F8272}
 @media(max-width:940px){.foot-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.foot-grid{grid-template-columns:1fr}}
+
+/* Social media във футъра */
+.foot-social{margin-top:20px}
+.foot-social-label{display:block;font-size:12.5px;color:rgba(255,255,255,.6);margin-bottom:10px;letter-spacing:.03em}
+.foot-social-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.1);color:#fff;transition:background .25s,transform .25s}
+.foot-social-btn:hover{background:#1877F2;transform:translateY(-3px)}
+.foot-social-btn svg{width:21px;height:21px}

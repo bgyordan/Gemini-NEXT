@@ -18,6 +18,7 @@ type Article = {
   excerpt: string | null;
   content: string | null;
   cover_url: string | null;
+  gallery_images: string[];
   category: string;
   published_at: string | null;
   author_name: string | null;
@@ -32,7 +33,7 @@ async function getArticle(id: string): Promise<Article | null> {
     const supabase = createClient(url, key);
     const { data, error } = await supabase
       .from('site_news')
-      .select('id, title, excerpt, content, cover_url, category, published_at, status, staff_profiles(first_name, last_name)')
+      .select('id, title, excerpt, content, cover_url, gallery_images, category, published_at, status, staff_profiles(first_name, last_name)')
       .eq('id', id)
       .single();
     if (error || !data || data.status !== 'published') return null;
@@ -43,6 +44,7 @@ async function getArticle(id: string): Promise<Article | null> {
       excerpt: data.excerpt,
       content: data.content,
       cover_url: data.cover_url,
+      gallery_images: Array.isArray(data.gallery_images) ? data.gallery_images : [],
       category: data.category,
       published_at: data.published_at,
       author_name: author ? `${author.first_name} ${author.last_name}` : null,
@@ -109,6 +111,16 @@ export default async function ArticlePage({ params }: Props) {
               <p key={i}>{p}</p>
             ))}
           </div>
+
+          {post.gallery_images.length > 0 && (
+            <div className="article-gallery">
+              {post.gallery_images.map((src, i) => (
+                <a key={i} href={src} target="_blank" rel="noopener noreferrer" className="ag-item">
+                  <img src={src} alt={`${post.title} — снимка ${i + 1}`} loading="lazy" />
+                </a>
+              ))}
+            </div>
+          )}
 
           <div className="article-foot">
             <Link href="/novini" className="article-back-btn">← Обратно към новините</Link>

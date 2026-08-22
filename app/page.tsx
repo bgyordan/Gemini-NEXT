@@ -193,28 +193,33 @@ export default async function Home() {
           <div className="cards">
             <Reveal className="fac">
               <div className="fac-media">
-                <ParallaxImage src="/images/classroom.jpg" alt="Учебни кабинети" speed={8} scale={1.12} />
+                <ParallaxImage src="/nachalna/kabineti.jpg" alt="Учебни кабинети" speed={8} scale={1.12} />
               </div>
               <div className="lbl"><b>Учебни кабинети</b><span>Светли, спокойни и адаптирани</span></div>
             </Reveal>
             <Reveal className="fac" delay={1}>
               <div className="fac-media">
-                <ParallaxImage src="/images/sensory.jpg" alt="Терапевтични зали и сензорна стая" speed={8} scale={1.12} />
+                <ParallaxImage src="/nachalna/sensory.jpg" alt="Терапевтични зали и сензорна стая" speed={8} scale={1.12} />
               </div>
               <div className="lbl"><b>Сензорна Снуузелен зала</b><span>Мултисензорна стимулация и успокоение</span></div>
             </Reveal>
             <Reveal className="fac" delay={2}>
               <div className="fac-media">
-                <ParallaxImage src="/images/kitchen.jpg" alt="Кабинет по готварство" speed={8} scale={1.12} />
+                <ParallaxImage src="/nachalna/gotvarstvo.jpg" alt="Кабинет по готварство" speed={8} scale={1.12} />
               </div>
               <div className="lbl"><b>Кулинарен кабинет</b><span>Практика по готварство и сладкарство</span></div>
             </Reveal>
             <Reveal className="fac" delay={3}>
               <div className="fac-media">
-                <ParallaxImage src="/images/garden.jpg" alt="Училищен двор и зелена градина" speed={8} scale={1.12} />
+                <ParallaxImage src="/nachalna/dvor.jpg" alt="Училищен двор и зелена градина" speed={8} scale={1.12} />
               </div>
               <div className="lbl"><b>Зелен училищен двор</b><span>Градинарство, спорт и игри на открито</span></div>
             </Reveal>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link href="/za-nas/materialna-baza" className="btn btn-ghost">
+              Разгледайте материалната база
+            </Link>
           </div>
         </div>
       </section>

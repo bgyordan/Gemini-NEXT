@@ -21,6 +21,7 @@ export const MEGA: Mega[] = [
       { label: 'История', desc: 'Пътят на центъра през годините', href: '/za-nas/istoriya', icon: 'history' },
       { label: 'Проекти', desc: 'Инициативи и програми', href: '/za-nas/proekti', icon: 'bulb' },
       { label: 'Екип', desc: 'Специалистите зад грижата', href: '/za-nas/ekip', icon: 'users' },
+      { label: 'Материална база', desc: 'Кабинети, зали и двор', href: '/za-nas/materialna-baza', icon: 'building' },
       { label: 'Вътрешни документи', desc: 'Правилници и политики', href: '/za-nas/vatreshni-dokumenti', icon: 'file' },
       { label: 'Бюджет и финанси', desc: 'Прозрачност в числата', href: '/za-nas/byudzhet-i-finansi', icon: 'chart' },
       { label: 'Кариери', desc: 'Свободни позиции при нас', href: '/za-nas/karieri', icon: 'briefcase' },

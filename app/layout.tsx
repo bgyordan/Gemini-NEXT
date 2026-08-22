@@ -2,13 +2,29 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://web.csop-varna.bg"),
   title: "Център за специална образователна подкрепа – Варна",
   description:
     "Центърът предоставя обучение, специализирана подкрепа и услуги за рехабилитация, за да могат децата и семействата да изживеят пълноценно своя личен и социален живот.",
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+    shortcut: "/logo.jpg",
+  },
   openGraph: {
     title: "Център за специална образователна подкрепа – Варна",
     description:
       "Обучение, специализирана подкрепа и рехабилитация за деца и семейства.",
+    url: "https://web.csop-varna.bg",
+    siteName: "ЦСОП – Варна",
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 512,
+        height: 512,
+        alt: "Логото на ЦСОП – Варна",
+      },
+    ],
     locale: "bg_BG",
     type: "website",
   },

@@ -572,11 +572,15 @@ body {
   background-attachment: fixed;
 }
 
-/* Декоративни "капки" във фона — статични, зад съдържанието */
-.backdrop-blobs{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  width:100%;height:100%;overflow:hidden;
-}
-.backdrop-blobs svg{width:100%;height:100%;display:block}
-/* Съдържанието над капките */
+
+
+
+/* Декоративни органични петна — CSS, надеждни */
+.backdrop-blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 body > *:not(.backdrop-blobs){position:relative;z-index:1}
+.blob{position:absolute;border-radius:50% 40% 55% 45% / 45% 55% 40% 55%;filter:blur(60px);opacity:.5}
+.blob-1{width:420px;height:360px;top:-60px;right:-40px;background:#4A7C59}
+.blob-2{width:380px;height:440px;top:22%;left:-120px;background:#1E7FC0}
+.blob-3{width:360px;height:380px;top:52%;right:-100px;background:#C6683E}
+.blob-4{width:440px;height:360px;top:78%;left:-80px;background:#E0A94F}
+.blob-5{width:420px;height:320px;top:95%;left:40%;background:#4A7C59}

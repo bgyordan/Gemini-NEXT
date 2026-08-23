@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-
+import './homeboard.css'
 type EventItem = { id: string; title: string; event_date: string; event_time: string | null; location: string | null };
 type Activity = { kind: 'news' | 'doc' | 'gallery'; label: string; title: string; href: string; date: string };
 

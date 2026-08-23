@@ -53,3 +53,11 @@
 .hb-link-pill svg{width:13px;height:13px;opacity:.5;transition:opacity .25s,transform .25s}
 .hb-link-pill:hover{border-color:#22B37A;color:var(--ink);transform:translateY(-2px);box-shadow:0 8px 20px -10px rgba(18,138,94,.4)}
 .hb-link-pill:hover svg{opacity:1;transform:translate(2px,-2px)}
+
+/* ФИКС — заковаваме размерите на всички икони в таблото */
+.hboard svg{max-width:100%;height:auto}
+.hb-head .hb-spark{width:auto;font-size:16px}
+.hb-ic svg{width:20px!important;height:20px!important}
+.hb-act-list a svg,.hb-events-list svg{width:20px;height:20px}
+.hb-link-pill svg{width:13px!important;height:13px!important;flex-shrink:0}
+.hb-ic{width:42px!important;height:42px!important;flex-shrink:0}

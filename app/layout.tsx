@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import BackdropBlobs from "./components/BackdropBlobs";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://web.csop-varna.bg"),
@@ -46,7 +45,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Golos+Text:wght@400;500;600&display=swap"
+          href="/noop.css"
           rel="stylesheet"
         />
         <script
@@ -69,7 +68,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body><BackdropBlobs />{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

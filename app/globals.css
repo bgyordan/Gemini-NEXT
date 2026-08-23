@@ -505,3 +505,68 @@ h2 {
     padding: 72px 0;
   }
 }
+
+/* ═══════════════════════════════════════════
+   ЕЛЕГАНТЕН СЛОЙ — вдъхновен от Gallery 33
+   нежност, въздух, фини подчертавания
+   ═══════════════════════════════════════════ */
+
+/* Повече въздух между секциите — размах */
+section { position: relative; }
+#za-nas, .news-sec, #baza, .donate-sec { padding-top: 90px; padding-bottom: 90px; }
+
+/* Фино подчертаване под заглавията — тънка линия, като Gallery 33 */
+.sec-head h2, .news-head h2 { position: relative; }
+.elegant-underline h2::after,
+.sec-head h2::after {
+  content: '';
+  display: block;
+  width: 54px;
+  height: 2px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  border-radius: 2px;
+}
+
+/* По-изящен kicker — по-фин, по-разреден */
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+  opacity: 0.9;
+}
+.kicker::before {
+  width: 32px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--green), transparent);
+}
+
+/* По-нежна типография на заглавията */
+h2 { font-weight: 500; letter-spacing: -0.4px; }
+
+/* Изящни секционни разделители — тънка фина линия между блокове */
+.soft-divider {
+  height: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+}
+
+/* Меко повдигане на всички карти при hover — единен език */
+.card, .news-card, .prog-card {
+  transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s cubic-bezier(.22,1,.36,1);
+}
+
+/* Плавно подчертаване на линкове при hover — като Gallery 33 */
+.nav-link, .foot-col a {
+  position: relative;
+}
+
+/* Фина текстура/топлина във фона — много лек градиент, не плосък */
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -5%, rgba(74,124,89,.05), transparent 60%),
+    radial-gradient(1000px 500px at 0% 30%, rgba(30,127,192,.035), transparent 55%),
+    var(--sand);
+  background-attachment: fixed;
+}

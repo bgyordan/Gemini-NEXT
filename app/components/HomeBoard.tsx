@@ -20,6 +20,7 @@ const LINKS = [
 
 export default function HomeBoard() {
   const [events, setEvents] = useState<EventItem[]>([]);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -29,7 +30,9 @@ export default function HomeBoard() {
       const today = new Date().toISOString().slice(0, 10);
       try {
         const r = await fetch(`${url}/rest/v1/site_events?event_date=gte.${today}&order=event_date.asc&limit=4&select=*`,
-          { headers: { apikey: key, Authorization: `Bearer ${key}` } });
+          { headers: { apikey: key, Authorization: `Bearer ${key}`, Prefer: 'count=exact' } });
+        const cr = r.headers.get('content-range'); // формат: 0-3/12
+        if (cr && cr.includes('/')) setTotal(parseInt(cr.split('/')[1]) || 0);
         setEvents(await r.json());
       } catch {}
     })();
@@ -70,7 +73,7 @@ export default function HomeBoard() {
                 ))}
               </ul>
             )}
-            <Link href="/sabitiya" className="hb-link">Всички събития →</Link>
+            <Link href="/sabitiya" className="hb-link">{total > events.length ? `Виж всички събития (${total}) →` : 'Всички събития →'}</Link>
           </motion.div>
 
           {/* ДЕСЕН ОВАЛ — Полезни връзки */}

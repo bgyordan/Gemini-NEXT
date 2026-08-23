@@ -7,12 +7,14 @@ import DocsManager from './DocsManager';
 import NewsManager from './NewsManager';
 import GalleryManager from './GalleryManager';
 import HeroManager from './HeroManager';
+import EventsManager from './EventsManager';
 
 const TABS = [
   { id: 'docs', label: 'Документи', icon: 'M6 2h8l4 4v16H6z M14 2v4h4' },
   { id: 'news', label: 'Новини', icon: 'M4 4h16v16H4z M8 8h8 M8 12h8 M8 16h5' },
   { id: 'gallery', label: 'Галерия', icon: 'M3 3h18v18H3z M3 15l5-5 4 4 3-3 6 6' },
   { id: 'hero', label: 'Начална мозайка', icon: 'M3 3h8v8H3z M13 3h8v8h-8z M3 13h8v8H3z M13 13h8v8h-8z' },
+  { id: 'events', label: 'Събития', icon: 'M8 2v4 M16 2v4 M3 10h18 M5 4h14v16H5z' },
 ];
 
 export default function AdminClient({ userName, profileId }: { userName: string; profileId: string }) {
@@ -65,6 +67,7 @@ export default function AdminClient({ userName, profileId }: { userName: string;
           {tab === 'news' && <NewsManager authorId={profileId} />}
           {tab === 'gallery' && <GalleryManager />}
           {tab === 'hero' && <HeroManager />}
+          {tab === 'events' && <EventsManager />}
         </div>
       </main>
     </div>

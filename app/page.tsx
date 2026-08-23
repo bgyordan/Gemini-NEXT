@@ -6,7 +6,6 @@ import Hero3D from './components/Hero3D';
 import Reveal from './components/Reveal';
 import CountUp from './components/CountUp';
 import Footer from './components/Footer';
-import Resources from './components/Resources';
 import ParallaxImage from './components/ParallaxImage';
 import ParallaxElement from './components/ParallaxElement';
 import TherapyInteractive from './components/TherapyInteractive';
@@ -213,7 +212,6 @@ export default async function Home() {
       {/* GALLERY STRIP */}
       <GalleryStrip />
 
-      <Resources />
 
       {/* DONATE */}
       <section id="donate" className="donate-sec">

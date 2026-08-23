@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HomeBoard from './components/HomeBoard';
 import GalleryStrip from './components/GalleryStrip';
 import Header from './components/Header';
 import Hero3D from './components/Hero3D';
@@ -50,27 +51,8 @@ export default async function Home() {
       <Header />
       <Hero3D />
 
-      {/* STATS */}
-      <section className="stats" style={{ padding: '56px 0' }}>
-        <div className="wrap">
-          <Reveal className="stat">
-            <CountUp to={150} suffix="+" />
-            <span>деца и младежи</span>
-          </Reveal>
-          <Reveal className="stat" delay={1}>
-            <CountUp to={9} />
-            <span>модерни кабинета</span>
-          </Reveal>
-          <Reveal className="stat" delay={2}>
-            <CountUp to={40} suffix="+" />
-            <span>специалисти и учители</span>
-          </Reveal>
-          <Reveal className="stat" delay={3}>
-            <CountUp to={75} suffix=" г." />
-            <span>традиция и опит (от 1949 г.)</span>
-          </Reveal>
-        </div>
-      </section>
+      {/* ТАБЛО — Събития + Последно добавено */}
+      <HomeBoard />
 
       {/* ABOUT */}
       <section id="za-nas">

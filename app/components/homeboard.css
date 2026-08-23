@@ -1,0 +1,55 @@
+.hboard{padding:44px 0 20px}
+.hboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+.hb-card{background:var(--card-bg,#fff);border:1px solid var(--line);border-radius:26px;padding:30px 32px;box-shadow:0 18px 44px -30px rgba(20,90,70,.4);position:relative;overflow:hidden}
+.hb-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.hb-events::before{background:linear-gradient(90deg,#22B37A,#0E8A61)}
+.hb-activity::before{background:linear-gradient(90deg,#1E7FC0,#1668A3)}
+
+.hb-head{display:flex;align-items:center;gap:11px;margin-bottom:22px}
+.hb-head h3{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink)}
+
+/* Пулсираща точка за събития */
+.hb-pulse{width:12px;height:12px;border-radius:50%;background:#22B37A;position:relative;flex-shrink:0}
+.hb-pulse::after{content:'';position:absolute;inset:0;border-radius:50%;background:#22B37A;animation:hbPulse 2s ease-out infinite}
+@keyframes hbPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+.hb-spark{color:#1E7FC0;font-size:16px}
+
+/* Събития */
+.hb-events-list{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:12px}
+.hb-events-list li{display:flex;align-items:center;gap:16px;padding:12px 14px;border-radius:16px;background:#F6FBF8;border:1px solid #E6F2EC;transition:transform .3s cubic-bezier(.25,.46,.45,.94),box-shadow .3s}
+.hb-events-list li:hover{transform:translateX(5px);box-shadow:0 10px 24px -14px rgba(18,138,94,.5)}
+.hb-date{flex-shrink:0;width:56px;height:56px;border-radius:14px;background:linear-gradient(150deg,#22B37A,#0E8A61);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;box-shadow:0 8px 18px -8px rgba(18,138,94,.6)}
+.hb-date b{font-size:22px;font-weight:700}
+.hb-date span{font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-top:2px;opacity:.9}
+.hb-ev-info{min-width:0}
+.hb-ev-info b{display:block;font-size:15px;color:var(--ink);line-height:1.3;margin-bottom:3px}
+.hb-ev-info span{font-size:12.5px;color:var(--ink-3)}
+
+/* Последно добавено */
+.hb-act-list{list-style:none;padding:0;margin:0}
+.hb-act-list li{margin-bottom:8px}
+.hb-act-list a{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:16px;background:#F5FAFE;border:1px solid #E4EFF8;transition:transform .3s cubic-bezier(.25,.46,.45,.94),box-shadow .3s}
+.hb-act-list a:hover{transform:translateX(5px);box-shadow:0 10px 24px -14px rgba(30,127,192,.45)}
+.hb-ic{flex-shrink:0;width:42px;height:42px;border-radius:12px;display:grid;place-items:center}
+.hb-ic svg{width:20px;height:20px}
+.hb-ic-news{background:#E9F3FA;color:#1668A3}
+.hb-ic-doc{background:#EAF6EF;color:#0E8A61}
+.hb-ic-gallery{background:#FBF0E8;color:#C67A2E}
+.hb-act-info{flex:1;min-width:0}
+.hb-act-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3)}
+.hb-act-info b{display:block;font-size:14px;color:var(--ink);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb-act-date{flex-shrink:0;font-size:12px;font-weight:600;color:var(--ink-3);white-space:nowrap}
+
+.hb-empty{font-size:14px;color:var(--ink-3);padding:20px 0;text-align:center}
+.hb-link{display:inline-block;font-size:13.5px;font-weight:600;color:#0E8A61;transition:opacity .2s}
+.hb-link:hover{opacity:.7}
+
+@media(max-width:800px){.hboard-grid{grid-template-columns:1fr}}
+
+/* Лента с важни връзки */
+.hb-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px}
+.hb-link-pill{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;font-size:13px;font-weight:600;color:var(--ink-2);background:var(--card-bg,#fff);border:1px solid var(--line);border-radius:999px;transition:all .28s cubic-bezier(.25,.46,.45,.94)}
+.hb-link-pill svg{width:13px;height:13px;opacity:.5;transition:opacity .25s,transform .25s}
+.hb-link-pill:hover{border-color:#22B37A;color:var(--ink);transform:translateY(-2px);box-shadow:0 8px 20px -10px rgba(18,138,94,.4)}
+.hb-link-pill:hover svg{opacity:1;transform:translate(2px,-2px)}

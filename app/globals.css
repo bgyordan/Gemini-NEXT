@@ -574,7 +574,9 @@ body {
 
 /* Декоративни "капки" във фона — статични, зад съдържанието */
 .backdrop-blobs{
-  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  position:fixed;inset:0;z-index:0;pointer-events:none;
   width:100%;height:100%;overflow:hidden;
 }
 .backdrop-blobs svg{width:100%;height:100%;display:block}
+/* Съдържанието над капките */
+body > *:not(.backdrop-blobs){position:relative;z-index:1}

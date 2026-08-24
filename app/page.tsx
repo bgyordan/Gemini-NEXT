@@ -53,55 +53,6 @@ export default async function Home() {
       {/* ТАБЛО — Събития + Последно добавено */}
       <HomeBoard />
 
-      {/* ABOUT */}
-      <section id="za-nas">
-        <div className="wrap split">
-          <Reveal className="split-art">
-            <ParallaxImage
-              src="/images/art_therapy.jpg"
-              alt="Арт терапия и грижа в ЦСОП Варна"
-              speed={10}
-              scale={1.12}
-            />
-            <ParallaxElement className="split-badge" speed={-20}>
-              <b>150+</b>
-              <span>деца и семейства</span>
-            </ParallaxElement>
-          </Reveal>
-          <Reveal delay={1}>
-            <span className="kicker">За нас</span>
-            <h2>Място, където всяко дете получава своя ритъм.</h2>
-            <p className="sec-head" style={{ marginBottom: 0 }}>
-              Центърът за специална образователна подкрепа – Варна (преобразуван от ПУ „Братя Миладинови“, основано през 1949 г.) съчетава десетилетни традиции с най-модерните световни асистивни технологии и терапевтични подходи.
-            </p>
-            <div className="feat">
-              <span className="feat-ico" style={{ background: 'var(--clay-soft)', color: 'var(--clay-deep)' }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
-                </svg>
-              </span>
-              <div>
-                <b>Индивидуален план за развитие</b>
-                <p>Екип от психолог, логопед, кинезитерапевт и специален педагог изгражда персонална програма за всеки ученик.</p>
-              </div>
-            </div>
-            <div className="feat">
-              <span className="feat-ico" style={{ background: 'var(--green-soft)', color: 'var(--green-deep)' }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </span>
-              <div>
-                <b>Асистивни технологии и контрол с поглед</b>
-                <p>Използваме Tobii Dynavox и Communicator 5 за свободна комуникация и изразяване на невербални деца.</p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* NEWS / BLOG - 3 CARDS */}
       <section id="novini" className="news-sec">

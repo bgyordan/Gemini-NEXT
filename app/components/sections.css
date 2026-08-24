@@ -113,3 +113,38 @@ footer{background:#0F1411;color:#D8CBBC;padding:72px 0 32px;border-top:1px solid
 .post .post-meta,.post .post-date{color:rgba(255,255,255,.85)}
 .post .read{color:#fff}
 .post .post-footer{margin-top:4px}
+
+/* Красиви табове за материалната база */
+.baza-tab{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--card-bg);
+  color:var(--ink);font-weight:600;font-size:13.5px;font-family:var(--sans);
+  cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 4px 14px -8px rgba(43,33,24,.15);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .3s,color .3s;
+}
+.baza-tab-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--line-strong,#D5C5AF);
+  transition:background .3s,transform .3s,box-shadow .3s;flex-shrink:0;
+}
+.baza-tab:hover{
+  transform:translateY(-3px);
+  border-color:var(--green);
+  box-shadow:0 12px 24px -12px rgba(74,124,89,.4);
+}
+.baza-tab:hover .baza-tab-dot{background:var(--green);transform:scale(1.3)}
+
+/* Активен — градиент, повдигнат, светеща точка */
+.baza-tab.on{
+  background:linear-gradient(135deg,#2BC488,#0E8A61);
+  color:#fff;border-color:transparent;
+  box-shadow:0 14px 28px -10px rgba(18,138,94,.55);
+  transform:translateY(-2px);
+}
+.baza-tab.on .baza-tab-dot{
+  background:#fff;transform:scale(1.2);
+  box-shadow:0 0 0 4px rgba(255,255,255,.3);
+}

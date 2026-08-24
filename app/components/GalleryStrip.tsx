@@ -27,7 +27,7 @@ export default async function GalleryStrip() {
 
   return (
     <section className="gstrip-sec">
-      <div className="wrap">
+      <div className="wrap-wide">
         <div className="gstrip-head">
           <div>
             <span className="kicker">Галерия</span>

@@ -78,7 +78,7 @@ export default function TherapyInteractive() {
 
   return (
     <section className="therapy-sec" style={{ padding: '80px 0', background: 'var(--sand-2)' }}>
-      <div className="wrap">
+      <div className="wrap-wide">
         <Reveal className="sec-head center" style={{ maxWidth: '760px', margin: '0 auto 48px', textAlign: 'center' }}>
           <span className="kicker">Материална база</span>
           <h2 style={{ fontSize: '34px', margin: '8px 0 16px' }}>

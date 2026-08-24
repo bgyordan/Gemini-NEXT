@@ -593,3 +593,12 @@ header.solid .bar {
 .item-label{text-transform:uppercase;letter-spacing:.05em}
 .mobile-parent{text-transform:uppercase;letter-spacing:.06em}
 .mobile-sub-label{text-transform:uppercase;letter-spacing:.05em}
+
+/* Мобилно — хедърът да се събира в екрана */
+@media (max-width: 640px) {
+  .bar { height: 62px; }
+  .brand-tag { display: none; }
+  .brand-name { font-size: 15px; }
+  .logo-wrap img { width: 38px; height: 38px; }
+  .mobile-actions { flex-shrink: 0; }
+}

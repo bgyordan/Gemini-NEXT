@@ -49,7 +49,7 @@ export default function NewsClient({ initialPosts }: { initialPosts: NewsCard[] 
 
   return (
     <div className="news-wrap">
-      <div className="wrap">
+      <div className="wrap-wide">
         {/* Контроли */}
         <div className="news-controls">
           <div className="news-search">

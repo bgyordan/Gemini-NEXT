@@ -584,3 +584,8 @@ body {
     linear-gradient(180deg, #FDFAF4 0%, var(--sand) 45%, #F3EADB 100%);
   background-attachment: fixed;
 }
+
+/* Мобилен fix — по-малък padding, за да не се бута съдържанието навън */
+@media (max-width: 640px) {
+  .wrap, .wrap-wide { padding: 0 16px; }
+}

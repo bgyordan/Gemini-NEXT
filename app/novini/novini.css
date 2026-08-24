@@ -30,6 +30,7 @@
 
 /* Мрежа 3 колони */
 .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+@media(min-width:1400px){.news-grid{grid-template-columns:repeat(4,1fr)}}
 
 /* Премиум карта — цялата е снимка, текстът изплува при посочване (Gallery 33 стил) */
 .news-card{

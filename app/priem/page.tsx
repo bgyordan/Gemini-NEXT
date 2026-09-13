@@ -11,88 +11,19 @@ export const metadata = {
 };
 
 export default function AdmissionPage() {
-  const steps = [
-    {
-      num: '01',
-      title: 'Консултация и оценка (РЦПППО)',
-      text: 'Насочване от Регионалния център за подкрепа на процеса на приобщаващото образование (РЦПППО) гр. Варна или оценка от ЕПЛР.',
-    },
-    {
-      num: '02',
-      title: 'Подаване на заявление и документи',
-      text: 'Родителят (настойникът) подава писмено заявление по образец на ЦСОП, придружено от медицинска експертиза и удостоверение за раждане.',
-    },
-    {
-      num: '03',
-      title: 'Диагностична среща и запознаване',
-      text: 'Екипът от психолог, логопед и специален педагог провежда опознавателна среща с детето и семейството в спокойна, приятелска среда.',
-    },
-    {
-      num: '04',
-      title: 'Изготвяне на индивидуален план',
-      text: 'Съставя се индивидуален учебен и терапевтичен план, определя се дневен или почасов режим на обучение и рехабилитация.',
-    },
-  ];
-
   return (
     <>
       <Header />
       <PageHero
-        kicker="Прием · 2026/2027"
+        kicker="Прием"
         title="Стъпки за прием и записване в центъра"
-        intro="Приемът в ЦСОП – Варна се осъществява целогодишно за деца и младежи със специални образователни потребности на основание становище от ЕПЛР и РЦПППО."
+        intro="Приемът в ЦСОП – Варна се осъществява за деца и младежи със специални образователни потребности на основание становище от ЕПЛР и РЦПППО – Варна."
         tone="bl"
       />
 
       <main style={{ padding: '70px 0 100px' }}>
         <div className="wrap">
-          <Reveal className="sec-head">
-            <span className="kicker">Процедура</span>
-            <h2>Как протича процесът на кандидатстване</h2>
-            <p>
-              Нашият екип е на разположение на всяка стъпка, за да улесни семейството и да осигури плавен преход за детето.
-            </p>
-          </Reveal>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '24px',
-              marginBottom: '60px',
-            }}
-          >
-            {steps.map((step, idx) => (
-              <Reveal
-                key={step.num}
-                style={{
-                  background: '#fff',
-                  border: '1px solid var(--line)',
-                  borderRadius: '20px',
-                  padding: '30px 24px',
-                  boxShadow: 'var(--shadow-sm)',
-                }}
-                delay={((idx % 4) + 1) as 1 | 2 | 3 | 4}
-              >
-                <span
-                  style={{
-                    fontFamily: 'var(--serif)',
-                    fontSize: '28px',
-                    fontWeight: 700,
-                    color: 'var(--clay)',
-                    display: 'block',
-                    marginBottom: '12px',
-                  }}
-                >
-                  {step.num}
-                </span>
-                <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '10px' }}>{step.title}</h3>
-                <p style={{ fontSize: '14px', color: 'var(--ink-2)', lineHeight: '1.6' }}>{step.text}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* INTERACTIVE ADMISSION WIZARD */}
+          {/* РЕАЛНА ПРОЦЕДУРА (3 етапа) */}
           <AdmissionWizard />
 
           <div
@@ -114,13 +45,14 @@ export default function AdmissionPage() {
               <h3 style={{ fontFamily: 'var(--serif)', fontSize: '22px', marginBottom: '16px' }}>
                 Контакти за съдействие при прием
               </h3>
-              <p style={{ color: 'var(--ink-2)', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>
-                Деловодството на ЦСОП – Варна приема документи всеки работен ден от <b>08:00 до 16:30 ч.</b> на ул. „Петко Стайнов“ №7.
+              <p style={{ color: 'var(--ink-2)', fontSize: '15px', lineHeight: '1.7', marginBottom: '24px' }}>
+                Деловодството на ЦСОП – Варна приема документи в работни дни на адрес
+                ул. „Петко Стайнов“ №7, гр. Варна. Телефони и работно време ще намерите в контактите.
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14.5px', color: 'var(--ink)' }}>
-                <div>📞 <b>Централа / Деловодство:</b> <a href="tel:+359888490771" style={{ color: 'var(--green-deep)', fontWeight: 600 }}>+359 888 490 771</a></div>
-                <div>📞 <b>Директор (Светлана Иванова):</b> <a href="tel:+359878521823" style={{ color: 'var(--green-deep)', fontWeight: 600 }}>+359 878 521 823</a></div>
-                <div>✉️ <b>Имейл:</b> <a href="mailto:office@csop-varna.bg" style={{ color: 'var(--green-deep)' }}>office@csop-varna.bg</a></div>
+              <div>
+                <a href="/kontakti" className="btn btn-warm">
+                  Вижте контакти
+                </a>
               </div>
             </Reveal>
 
@@ -140,11 +72,12 @@ export default function AdmissionPage() {
                 Искате ли да разгледате центъра?
               </h3>
               <p style={{ color: 'var(--ink-2)', fontSize: '15px', marginBottom: '24px', lineHeight: '1.6' }}>
-                Заповядайте на индивидуална опознавателна среща и обиколка на кабинетите, сензорната зала, кулинарната работилница и зеления двор.
+                Заповядайте на индивидуална опознавателна среща и обиколка на кабинетите,
+                терапевтичните зали, сензорната зала, кабинета по готварство и училищния двор.
               </p>
               <div>
-                <a href="/kontakti" className="btn btn-primary">
-                  Заявете посещение
+                <a href="/priem/poseshtenie" className="btn btn-primary">
+                  Планирайте посещение
                 </a>
               </div>
             </Reveal>

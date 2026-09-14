@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import ParallaxImage from './components/ParallaxImage';
 import ParallaxElement from './components/ParallaxElement';
 import TherapyInteractive from './components/TherapyInteractive';
-import VocationalPrograms from './components/VocationalPrograms';
 import type { NewsCard } from './novini/page';
 import './components/hero.css';
 import './components/sections.css';
@@ -111,10 +110,6 @@ export default async function Home() {
 
       {/* INTERACTIVE THERAPY SHOWCASE */}
       <TherapyInteractive />
-
-
-      {/* VOCATIONAL TRAINING SECTION */}
-      <VocationalPrograms />
 
 
       {/* GALLERY STRIP */}

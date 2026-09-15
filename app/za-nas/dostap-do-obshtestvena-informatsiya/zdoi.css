@@ -1,0 +1,97 @@
+.zzld-page {
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
+  background: var(--sand);
+}
+
+.zzld-block {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.zzld-block h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  color: var(--ink);
+  margin: 0 0 0.9rem;
+}
+
+.zzld-block p {
+  font-family: var(--sans);
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+
+.zzld-block p a {
+  color: var(--em-d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ДЛЗД контакт */
+.zzld-dpo-card {
+  background: var(--green-soft);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.1rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.zzld-dpo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+}
+
+.zzld-dpo-row span {
+  flex: 0 0 90px;
+  color: var(--ink-3);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.zzld-dpo-row b { color: var(--ink); }
+.zzld-dpo-row a { color: var(--green-deep); text-decoration: none; }
+.zzld-dpo-row a:hover { text-decoration: underline; }
+
+/* Права */
+.zzld-rights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.9rem;
+}
+
+.zzld-right {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.zzld-right b {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.zzld-right span {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.zzld-docs-sub {
+  color: var(--ink-3) !important;
+  font-size: 0.95rem !important;
+}

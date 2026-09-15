@@ -16,6 +16,8 @@ const SECTIONS = [
   { id: 'internal', label: 'Вътрешни документи' },
   { id: 'budget', label: 'Бюджет и финанси' },
   { id: 'admission', label: 'Декларации за прием' },
+  { id: 'zdoi', label: 'Достъп до информация (ЗДОИ)' },
+  { id: 'privacy', label: 'Лични данни (ЗЗЛД)' },
 ];
 
 export default function DocsManager() {

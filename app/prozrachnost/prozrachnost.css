@@ -1,0 +1,77 @@
+.prz-page {
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
+  background: var(--sand);
+}
+
+.prz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.prz-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 1.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.prz-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--line-strong);
+}
+
+.prz-card-icon {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--blue-soft);
+  color: var(--blue-accent);
+}
+
+.prz-card-icon svg { width: 25px; height: 25px; }
+
+.prz-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.prz-card-title {
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.prz-card-desc {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.prz-card-arrow {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: var(--ink-3);
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.prz-card:hover .prz-card-arrow {
+  transform: translateX(4px);
+  color: var(--blue-accent);
+}

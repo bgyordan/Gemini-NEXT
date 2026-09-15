@@ -49,6 +49,9 @@ export default function Header() {
 
         {/* DESKTOP REFINED NAVIGATION */}
         <nav className="main-nav" aria-label="Основна навигация">
+          <a href="/" className="nav-link single" onMouseEnter={() => setOpenId(null)}>
+            <span>Начало</span>
+          </a>
           {MEGA.map((m) => {
             const isOpen = openId === m.href;
             const isWide = m.subs.length > 4;

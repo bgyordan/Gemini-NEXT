@@ -29,6 +29,7 @@ export default function AdminClient({ userName, profileId }: { userName: string;
   };
 
   const initials = userName.split(' ').map((n) => n[0]).slice(0, 2).join('');
+  const activeLabel = TABS.find((t) => t.id === tab)?.label ?? '';
 
   return (
     <div className="admin">
@@ -62,6 +63,19 @@ export default function AdminClient({ userName, profileId }: { userName: string;
       </aside>
 
       <main className="admin-main">
+        <div className="admin-top">
+          <div className="admin-top-title">
+            <span className="admin-top-kicker">Управление на съдържанието</span>
+            <h2>{activeLabel}</h2>
+          </div>
+          <a href="/" target="_blank" rel="noopener noreferrer" className="admin-top-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <path d="M15 3h6v6M10 14 21 3" />
+            </svg>
+            Виж сайта
+          </a>
+        </div>
         <div className="admin-content">
           {tab === 'docs' && <DocsManager />}
           {tab === 'news' && <NewsManager authorId={profileId} />}

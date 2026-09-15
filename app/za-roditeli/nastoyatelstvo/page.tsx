@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 export const metadata = {
   title: 'Училищно настоятелство — ЦСОП Варна',
   description:
-    'Училищно настоятелство и Обществен съвет към ЦСОП – Варна: партньорство, съвместни благотворителни инициативи и родителска подкрепа.',
+    'Училищно настоятелство към ЦСОП – Варна: партньорство, съвместни благотворителни инициативи и родителска подкрепа за децата.',
 };
 
 export default function ParentsCouncilPage() {
@@ -15,7 +15,7 @@ export default function ParentsCouncilPage() {
       <Header />
       <PageHero
         kicker="За родители · Настоятелство"
-        title="Училищно настоятелство и Обществен съвет"
+        title="Училищно настоятелство"
         intro="Заедно създаваме по-добра и топла среда за децата на ЦСОП – Варна чрез активно участие на родители, общественици и приятели на центъра."
         tone="bl"
       />
@@ -64,11 +64,46 @@ export default function ParentsCouncilPage() {
               <ul style={{ paddingLeft: '20px', fontSize: '14.5px', color: 'var(--ink-2)', lineHeight: '1.8', margin: '0 0 20px' }}>
                 <li>Организиране на традиционни коледни и великденски благотворителни изложби</li>
                 <li>Съдействие за екскурзии, адаптирани летни лагери и посещения на културни събития</li>
-                <li>Участие в Обществения съвет за прозрачно управление на ресурсите</li>
+                <li>Кандидатстване по проекти и дарителски програми в полза на децата</li>
                 <li>Оказване на взаимна подкрепа и обмен на опит между родителите</li>
               </ul>
             </Reveal>
           </div>
+
+          <Reveal
+            style={{
+              background: '#fff',
+              border: '1px solid var(--line)',
+              borderRadius: '24px',
+              padding: '36px',
+              boxShadow: 'var(--shadow-sm)',
+              maxWidth: '720px',
+              margin: '0 auto 32px',
+            }}
+          >
+            <span className="kicker">Документи</span>
+            <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>Учредителни документи</h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+              <a
+                href="/dokumenti/nastoyatelstvo/ustav.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 18px', border: '1px solid var(--line)', borderRadius: '14px', textDecoration: 'none', background: 'var(--sand)' }}
+              >
+                <span style={{ flex: '0 0 auto', width: '40px', height: '40px', display: 'grid', placeItems: 'center', borderRadius: '10px', background: 'var(--clay-soft)', color: 'var(--clay-deep)', fontSize: '11px', fontWeight: 700 }}>PDF</span>
+                <span style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--ink)' }}>Устав на настоятелството</span>
+              </a>
+              <a
+                href="/dokumenti/nastoyatelstvo/uchreditelen-protokol.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 18px', border: '1px solid var(--line)', borderRadius: '14px', textDecoration: 'none', background: 'var(--sand)' }}
+              >
+                <span style={{ flex: '0 0 auto', width: '40px', height: '40px', display: 'grid', placeItems: 'center', borderRadius: '10px', background: 'var(--clay-soft)', color: 'var(--clay-deep)', fontSize: '11px', fontWeight: 700 }}>PDF</span>
+                <span style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--ink)' }}>Учредителен протокол</span>
+              </a>
+            </div>
+          </Reveal>
 
           <Reveal
             style={{

@@ -9,7 +9,7 @@
 .admin-brand h1{font-family:var(--serif,Georgia);font-size:19px;font-weight:600;color:#fff;line-height:1.1}
 .admin-brand span{font-size:12px;color:rgba(255,255,255,.7)}
 
-.admin-nav{display:flex;flex-direction:column;gap:6px;margin-top:26px;flex:1}
+.admin-nav{display:flex;flex-direction:column;gap:8px;margin-top:24px;flex:1}
 .admin-nav-btn{display:flex;align-items:center;gap:12px;padding:13px 16px;font-size:14.5px;font-weight:500;font-family:inherit;color:rgba(255,255,255,.82);background:none;border:none;border-radius:12px;cursor:pointer;text-align:left;transition:background .22s,color .22s}
 .admin-nav-btn svg{width:20px;height:20px;flex-shrink:0}
 .admin-nav-btn:hover{background:rgba(255,255,255,.1);color:#fff}
@@ -23,13 +23,20 @@
 .admin-user-info button:hover{color:#fff}
 
 /* Main */
-.admin-main{padding:40px}
-.admin-content{max-width:1080px;margin:0 auto;animation:fadeIn .4s ease}
+.admin-main{display:flex;flex-direction:column;min-height:100vh}
+.admin-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 40px;background:rgba(244,248,245,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #E4EDE7}
+.admin-top-title{display:flex;flex-direction:column;gap:2px;min-width:0}
+.admin-top-kicker{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#7C9488}
+.admin-top-title h2{font-family:var(--serif,Georgia);font-size:21px;font-weight:600;color:#22312B;line-height:1.1}
+.admin-top-link{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#0E8A61;text-decoration:none;padding:9px 16px;border:1px solid #C4E4D5;border-radius:999px;background:#fff;transition:all .2s;white-space:nowrap}
+.admin-top-link:hover{background:#EAF6EF;border-color:#9FD3BB}
+.admin-top-link svg{width:16px;height:16px}
+.admin-content{max-width:1080px;width:100%;margin:0 auto;padding:36px 40px 64px;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* Панели — общи */
-.admin-panel,.admin-list{background:#fff;border-radius:20px;padding:30px;box-shadow:0 4px 30px -18px rgba(20,90,70,.35)}
-.admin-panel h2,.admin-list h2{font-family:var(--serif,Georgia);font-size:20px;font-weight:600;color:#22312B;margin-bottom:24px}
+.admin-panel,.admin-list{background:#fff;border:1px solid #EBF1ED;border-radius:20px;padding:32px;box-shadow:0 1px 2px rgba(20,90,70,.04),0 14px 36px -26px rgba(20,90,70,.30)}
+.admin-panel h2,.admin-list h2{font-family:var(--serif,Georgia);font-size:20px;font-weight:600;color:#22312B;margin-bottom:26px}
 
 /* Форми */
 .admin-form{display:flex;flex-direction:column;gap:18px}
@@ -51,15 +58,15 @@
 
 .admin-empty{font-size:14.5px;color:#9AAaa0;text-align:center;padding:40px 20px;background:#FAFCFA;border:1px dashed #DDE7E0;border-radius:14px}
 
-/* Документи — подраздели */
+/* Документи — подраздели (увиващи се, с въздух — не се сбиват при много раздели) */
 .docs-mgr{}
-.docs-sections{display:inline-flex;gap:4px;margin-bottom:26px;background:#EAF1EC;padding:5px;border-radius:14px}
-.docs-sec-btn{padding:10px 20px;font-size:13.5px;font-weight:600;font-family:inherit;color:#5C6B63;background:none;border:none;border-radius:10px;cursor:pointer;transition:all .22s}
-.docs-sec-btn:hover{color:#22312B}
-.docs-sec-btn.on{background:#fff;color:#0B6E4E;box-shadow:0 4px 12px -6px rgba(20,90,70,.3)}
+.docs-sections{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.docs-sec-btn{padding:11px 18px;font-size:13.5px;font-weight:600;font-family:inherit;color:#4A5D53;background:#fff;border:1px solid #E4EDE7;border-radius:999px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.docs-sec-btn:hover{border-color:#9FD3BB;color:#22312B;background:#F6FBF8}
+.docs-sec-btn.on{background:linear-gradient(135deg,#22B37A,#0E8A61);color:#fff;border-color:transparent;box-shadow:0 10px 22px -12px rgba(18,138,94,.6)}
 
-.docs-mgr .admin-body,.news-mgr,.gal-mgr{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;align-items:start}
-@media(max-width:900px){.docs-mgr .admin-body,.news-mgr,.gal-mgr{grid-template-columns:1fr}}
+.docs-mgr .admin-body,.news-mgr,.gal-mgr{display:grid;grid-template-columns:1fr 1.25fr;gap:28px;align-items:start}
+@media(max-width:960px){.docs-mgr .admin-body,.news-mgr,.gal-mgr{grid-template-columns:1fr}}
 
 /* Списък документи */
 .admin-docs{display:flex;flex-direction:column;gap:8px}
@@ -157,7 +164,9 @@
   .admin-nav{flex-direction:row;flex-wrap:wrap;margin-top:0;flex:none;width:100%;order:3}
   .admin-nav-btn{padding:10px 14px;font-size:13px}
   .admin-user{margin-top:0}
-  .admin-main{padding:20px}
+  .admin-top{padding:14px 20px}
+  .admin-top-title h2{font-size:18px}
+  .admin-content{padding:22px 20px 48px}
 }
 
 /* HERO мениджър — лента с избрани + филтър */

@@ -34,6 +34,7 @@ export default function Footer() {
             <a href="/novini">Новини и блог</a>
             <a href="/za-nas/ekip">Екип</a>
             <a href="/za-nas/vatreshni-dokumenti">Документи</a>
+            <a href="/za-nas/profil-na-kupuvacha">Профил на купувача</a>
           </div>
           <div className="foot-col">
             <h4>ЗА РОДИТЕЛИ</h4>
@@ -52,7 +53,7 @@ export default function Footer() {
         </div>
         <div className="foot-bot">
           <span>© 2026 ЦСОП – Варна. Всички права запазени.</span>
-          <span>Политика за поверителност</span>
+          <a href="/za-nas/zashtita-na-lichnite-danni">Политика за поверителност</a>
         </div>
       </div>
     </footer>

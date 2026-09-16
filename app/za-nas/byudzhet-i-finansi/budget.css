@@ -26,7 +26,7 @@
 .budget-year.on{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.5)}
 
 /* Увод + категории (Бюджет) */
-.budget-intro { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+.budget-intro { padding: 0; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
 .budget-intro p { font-family: var(--sans); color: var(--ink-2); font-size: 1rem; line-height: 1.75; margin: 0 0 1.1rem; }
 .budget-intro h2 { font-family: var(--serif); font-size: clamp(1.25rem, 2.2vw, 1.5rem); color: var(--ink); margin: 0 0 0.9rem; }
 .budget-cats { list-style: none; margin: 0 0 1.1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.6rem; }

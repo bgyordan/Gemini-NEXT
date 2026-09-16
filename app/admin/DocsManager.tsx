@@ -18,6 +18,7 @@ const SECTIONS = [
   { id: 'admission', label: 'Декларации за прием' },
   { id: 'zdoi', label: 'Достъп до информация (ЗДОИ)' },
   { id: 'privacy', label: 'Лични данни (ЗЗЛД)' },
+  { id: 'signali', label: 'Сигнали (ЗЗЛПСПОИН)' },
 ];
 
 export default function DocsManager() {

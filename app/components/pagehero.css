@@ -1,4 +1,4 @@
-.page-hero{position:relative;padding:150px 0 70px;overflow:hidden}
+.page-hero{position:relative;padding:110px 0 40px;overflow:hidden}
 .page-hero.em{background:linear-gradient(160deg,#EAF6EF,#F7F3EA)}
 .page-hero.bl{background:linear-gradient(160deg,#E9F3FA,#F7F3EA)}
 .ph-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0}
@@ -10,4 +10,4 @@
 .page-hero.bl .ph-kicker{color:#1668A3}
 .page-hero h1{font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);font-weight:600;line-height:1.05;letter-spacing:-1.2px;color:var(--ink);margin-bottom:20px}
 .page-hero p{font-size:clamp(16px,1.4vw,19px);color:var(--ink-2);line-height:1.6;max-width:600px}
-@media(max-width:640px){.page-hero{padding:120px 0 54px}}
+@media(max-width:640px){.page-hero{padding:92px 0 36px}}

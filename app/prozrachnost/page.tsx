@@ -40,6 +40,12 @@ const ITEMS = [
     href: '/za-nas/zashtita-na-lichnite-danni',
     path: 'M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z',
   },
+  {
+    title: 'Подаване на сигнали',
+    desc: 'Поверителен канал за сигнали за нарушения по ЗЗЛПСПОИН.',
+    href: '/podavane-na-signali',
+    path: 'M3 11l18-5v12L3 14v-3z M11.6 16.8a3 3 0 0 1-5.8-1.6',
+  },
 ];
 
 export default function ProzrachnostPage() {

@@ -9,6 +9,15 @@
   gap: 1rem;
 }
 
+.prz-lead {
+  font-family: var(--sans);
+  color: var(--ink-2);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  margin: 0 0 2rem;
+  max-width: 62ch;
+}
+
 .prz-card {
   display: flex;
   align-items: center;

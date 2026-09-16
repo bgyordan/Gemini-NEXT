@@ -40,3 +40,12 @@
 .doc-pager button.on{background:linear-gradient(135deg,#22B37A,#0E8A61);color:#fff;border-color:transparent}
 .doc-pager button:disabled{opacity:.4;cursor:not-allowed}
 .doc-pager button svg{width:16px;height:16px}
+
+/* Увод + категории (Вътрешни документи) */
+.docs-intro { margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+.docs-intro p { font-family: var(--sans); color: var(--ink-2); font-size: 1rem; line-height: 1.75; margin: 0 0 1.1rem; }
+.docs-intro h2 { font-family: var(--serif); font-size: clamp(1.25rem, 2.2vw, 1.5rem); color: var(--ink); margin: 0 0 0.9rem; }
+.docs-cats { list-style: none; margin: 0 0 1.1rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.6rem; }
+.docs-cats li { font-family: var(--sans); font-size: 0.95rem; line-height: 1.55; color: var(--ink-2); background: var(--card-bg); border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem 1rem; }
+.docs-cats b { color: var(--ink); }
+.docs-intro-note { font-size: 0.9rem !important; color: var(--ink-3) !important; margin-bottom: 0 !important; }

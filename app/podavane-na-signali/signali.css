@@ -1,0 +1,84 @@
+.sig-page {
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
+  background: var(--sand);
+}
+
+.sig-block {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.sig-block h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  color: var(--ink);
+  margin: 0 0 0.9rem;
+}
+
+.sig-block p {
+  font-family: var(--sans);
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+
+.sig-block p:last-child { margin-bottom: 0; }
+
+.sig-block p a {
+  color: var(--em-d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Гаранции — акцентна карта */
+.sig-guarantee {
+  background: var(--green-soft);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+.sig-guarantee h2 { margin-bottom: 0.7rem; }
+
+/* Контакт за сигнали */
+.sig-contact {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.1rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.sig-contact-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+}
+
+.sig-contact-row span {
+  flex: 0 0 120px;
+  color: var(--ink-3);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.sig-contact-row b { color: var(--ink); }
+.sig-contact-row a { color: var(--green-deep); text-decoration: none; }
+.sig-contact-row a:hover { text-decoration: underline; }
+
+.sig-note {
+  font-size: 0.9rem !important;
+  color: var(--ink-3) !important;
+}
+
+.sig-docs-sub {
+  color: var(--ink-3) !important;
+  font-size: 0.95rem !important;
+}

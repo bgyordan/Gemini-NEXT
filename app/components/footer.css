@@ -21,3 +21,6 @@ footer{background:var(--ink);color:#D8CBBC;padding:72px 0 32px}
 .foot-social-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.1);color:#fff;transition:background .25s,transform .25s}
 .foot-social-btn:hover{background:#1877F2;transform:translateY(-3px)}
 .foot-social-btn svg{width:21px;height:21px}
+
+/* Дата на последна актуализация */
+.foot-updated{color:rgba(255,255,255,.55);font-size:12.5px}

@@ -77,6 +77,7 @@ export const MEGA: Mega[] = [
       { label: 'Профил на купувача', desc: 'Обществени поръчки в ЦАИС ЕОП', href: '/za-nas/profil-na-kupuvacha', icon: 'clipboard' },
       { label: 'Достъп до информация', desc: 'Заявления и отчети по ЗДОИ', href: '/za-nas/dostap-do-obshtestvena-informatsiya', icon: 'file' },
       { label: 'Защита на личните данни', desc: 'Политика за поверителност (GDPR)', href: '/za-nas/zashtita-na-lichnite-danni', icon: 'shield' },
+      { label: 'Подаване на сигнали', desc: 'Поверителен канал по ЗЗЛПСПОИН', href: '/podavane-na-signali', icon: 'chat' },
     ],
   },
   {

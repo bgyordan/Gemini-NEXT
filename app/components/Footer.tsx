@@ -1,4 +1,5 @@
 import './footer.css';
+import LastUpdated from './LastUpdated';
 
 export default function Footer() {
   return (
@@ -53,6 +54,7 @@ export default function Footer() {
         </div>
         <div className="foot-bot">
           <span>© 2026 ЦСОП – Варна. Всички права запазени.</span>
+          <LastUpdated />
           <a href="/za-nas/zashtita-na-lichnite-danni">Политика за поверителност</a>
         </div>
       </div>

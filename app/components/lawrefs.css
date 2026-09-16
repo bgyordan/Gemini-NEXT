@@ -1,0 +1,61 @@
+.lawrefs {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+  box-shadow: var(--shadow-sm);
+}
+
+.lawrefs h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  color: var(--ink);
+  margin: 0 0 1rem;
+}
+
+.lawrefs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.lawrefs li { margin: 0; }
+
+.lawrefs a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.lawrefs a:hover {
+  background: var(--sand);
+  color: var(--em-d);
+}
+
+.lawrefs a svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+  transition: color 0.18s ease;
+}
+
+.lawrefs a:hover svg { color: var(--em-d); }
+
+.lawrefs-note {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  line-height: 1.6;
+  margin: 0.9rem 0 0;
+}

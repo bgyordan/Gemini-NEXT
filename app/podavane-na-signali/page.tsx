@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import PageHero from '../components/PageHero';
 import Footer from '../components/Footer';
+import LawRefs from '../components/LawRefs';
 import DocsBrowser from '../za-nas/vatreshni-dokumenti/DocsBrowser';
 import type { DocRow } from '../za-nas/vatreshni-dokumenti/page';
 import { supabase } from '../../lib/supabase';
@@ -65,6 +66,16 @@ export default async function SignaliPage() {
             </p>
           </section>
 
+          <section className="sig-block">
+            <h2>Как се подава сигнал</h2>
+            <p>
+              Сигнал се подава писмено (включително по електронен път) или устно до определеното длъжностно
+              лице. Устният сигнал се документира чрез попълване на формуляр от отговорния служител, който се
+              предоставя на подателя за проверка, коригиране и подпис. Законът не допуска разглеждане на
+              анонимни сигнали, затова е необходимо да посочите своите данни — те остават поверителни.
+            </p>
+          </section>
+
           <section className="sig-block sig-guarantee">
             <h2>Гаранции за поверителност</h2>
             <p>
@@ -88,10 +99,20 @@ export default async function SignaliPage() {
               <div className="sig-contact-row"><span>Адрес</span><b>{CONTACT.address}</b></div>
             </div>
             <p className="sig-note">
-              До специализирания имейл достъп има само отговорното лице. Сигнали могат да се подават и до
-              Комисията за защита на личните данни (КЗЛД) като външен орган —{' '}
-              <a href="https://www.cpdp.bg" target="_blank" rel="noopener noreferrer">www.cpdp.bg</a>.
+              До специализирания имейл достъп има само отговорното лице. Освен вътрешния канал, сигнал може
+              да се подаде и до централния орган за външно подаване — Комисията за защита на личните данни
+              (КЗЛД), гр. София, бул. „Проф. Цветан Лазаров“ №2, имейл: kzld@cpdp.bg.
             </p>
+          </section>
+
+          <section className="sig-block">
+            <LawRefs
+              items={[
+                { label: 'Защита на подаващите сигнали (ЗЗЛПСПОИН) — КЗЛД', href: 'https://www.cpdp.bg' },
+                { label: 'Образец на формуляр за сигнал (КЗЛД)', href: 'https://www.cpdp.bg' },
+              ]}
+              note="КЗЛД е централният орган за външно подаване на сигнали и поддържа образеца на формуляра и указанията по закона."
+            />
           </section>
 
           <section className="sig-block">

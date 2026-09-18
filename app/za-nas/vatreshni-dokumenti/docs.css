@@ -69,3 +69,7 @@
   margin-left: auto; font-size: .72rem; font-weight: 700; color: #64748b;
   background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 9px; border-radius: 999px;
 }
+.doc-search { margin-bottom: 14px; }
+.doc-group { margin-top: 20px; }
+.doc-group:first-of-type { margin-top: 4px; }
+.docs-intro { margin-bottom: 1.1rem; }

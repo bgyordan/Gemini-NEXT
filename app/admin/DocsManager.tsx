@@ -14,6 +14,7 @@ type DocRow = {
 
 const SECTIONS = [
   { id: 'internal', label: 'Вътрешни документи' },
+   { id: 'eis', label: 'Само за деловодство (не на сайта)' },
   { id: 'budget', label: 'Бюджет и финанси' },
   { id: 'admission', label: 'Декларации за прием' },
   { id: 'zdoi', label: 'Достъп до информация (ЗДОИ)' },

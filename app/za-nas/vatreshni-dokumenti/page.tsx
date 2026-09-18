@@ -21,13 +21,15 @@ export type DocRow = {
   academic_year: string | null;
   section: string;
   sort_order: number;
+  category: string | null;
 };
 
 export default async function DocsPage() {
   const { data, error } = await supabase
     .from('site_documents')
-    .select('id, name, file_url, academic_year, section, sort_order')
+        .select('id, name, file_url, academic_year, section, sort_order, category, on_site')
     .eq('section', 'internal')
+    .eq('on_site', true)
     .order('academic_year', { ascending: false })
     .order('sort_order', { ascending: true });
 

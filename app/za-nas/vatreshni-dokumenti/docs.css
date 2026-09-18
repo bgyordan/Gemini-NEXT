@@ -49,3 +49,23 @@
 .docs-cats li { font-family: var(--sans); font-size: 0.95rem; line-height: 1.55; color: var(--ink-2); background: var(--card-bg); border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem 1rem; }
 .docs-cats b { color: var(--ink); }
 .docs-intro-note { font-size: 0.9rem !important; color: var(--ink-3) !important; margin-bottom: 0 !important; }
+/* ── Групи по категория (Вътрешни документи) — добави в края на docs.css ── */
+.doc-group { margin-top: 30px; }
+.doc-group:first-of-type { margin-top: 10px; }
+.doc-group-head {
+  display: flex; align-items: center; gap: 11px;
+  margin: 0 0 12px; padding-bottom: 10px;
+  border-bottom: 1px solid #eef2f7;
+}
+.doc-group-ic {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px; flex: 0 0 auto;
+}
+.doc-group-ic svg { width: 19px; height: 19px; }
+.doc-group-title {
+  font-weight: 700; font-size: 1.05rem; color: #0f2240; letter-spacing: .2px;
+}
+.doc-group-count {
+  margin-left: auto; font-size: .72rem; font-weight: 700; color: #64748b;
+  background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 9px; border-radius: 999px;
+}

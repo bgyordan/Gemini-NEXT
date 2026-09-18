@@ -21,7 +21,7 @@ export type DocRow = {
   academic_year: string | null;
   section: string;
   sort_order: number;
-  category: string | null;
+    category?: string | null;
   on_site?: boolean;
 };
 export default async function DocsPage() {

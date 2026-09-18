@@ -47,9 +47,10 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
     });
   }, [docs, q, year]);
 
+  const keyOf = (d: DocRow) => ((d as any).category && CAT_BY_KEY[(d as any).category]) ? (d as any).category : classify(d.name);
   const groups = useMemo(() => {
     return CATEGORIES
-      .map((c) => ({ cat: c, items: filtered.filter((d) => classify(d.name) === c.key) }))
+      .map((c) => ({ cat: c, items: filtered.filter((d) => keyOf(d) === c.key) }))
       .filter((g) => g.items.length > 0);
   }, [filtered]);
 

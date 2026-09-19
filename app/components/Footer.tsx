@@ -55,7 +55,8 @@ export default function Footer() {
         <div className="foot-bot">
           <span>© 2026 ЦСОП – Варна. Всички права запазени.</span>
           <LastUpdated />
-          <a href="/za-nas/zashtita-na-lichnite-danni">Политика за поверителност</a>
+                    <a href="/za-nas/zashtita-na-lichnite-danni">Политика за поверителност</a>
+          <a href="/obshti-usloviya">Общи условия за ползване</a>
         </div>
       </div>
     </footer>

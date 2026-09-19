@@ -1,7 +1,6 @@
-```tsx
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import DocIcon from './DocIcon';
 import type { DocRow } from './page';
 
@@ -28,7 +27,7 @@ const CAT_BY_KEY = Object.fromEntries(
 
 export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
   const [q, setQ] = useState('');
-  const [active, setActive] = useState<string>('all');
+  const [active, setActive] = useState('all');
 
   const keyOf = (d: DocRow) => {
     const category = (d as { category?: string | null }).category;
@@ -71,7 +70,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
 
   return (
     <section className="docs-browser">
-      {/* Search */}
       <div className="doc-search">
         <svg
           className="doc-search-icon"
@@ -117,7 +115,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         )}
       </div>
 
-      {/* Filters */}
       {available.length > 0 && (
         <div className="doc-filters-wrap">
           <div
@@ -147,7 +144,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         </div>
       )}
 
-      {/* Results info */}
       {filtered.length > 0 && (
         <div className="docs-meta" aria-live="polite">
           <span>
@@ -163,7 +159,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         </div>
       )}
 
-      {/* Empty state */}
       {flatDocs.length === 0 ? (
         <div className="doc-empty">
           <div className="doc-empty-icon" aria-hidden="true">
@@ -218,9 +213,11 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="doc-row"
-                style={{
-                  '--doc-color': cat.color,
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--doc-color': cat.color,
+                  } as CSSProperties
+                }
               >
                 <span className="doc-ic">
                   <DocIcon name={cat.icon} />
@@ -260,8 +257,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         .docs-browser {
           width: 100%;
         }
-
-        /* Search -------------------------------------------------- */
 
         .doc-search {
           position: relative;
@@ -348,8 +343,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           height: 17px;
         }
 
-        /* Filters ------------------------------------------------ */
-
         .doc-filters-wrap {
           margin: 0 0 17px;
           overflow: hidden;
@@ -407,8 +400,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           text-align: center;
         }
 
-        /* Meta --------------------------------------------------- */
-
         .docs-meta {
           display: flex;
           align-items: center;
@@ -425,8 +416,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           text-overflow: ellipsis;
           white-space: nowrap;
         }
-
-        /* Documents ---------------------------------------------- */
 
         .docs-list {
           display: flex;
@@ -541,8 +530,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           color: #0f2240;
         }
 
-        /* Empty state -------------------------------------------- */
-
         .doc-empty {
           display: flex;
           flex-direction: column;
@@ -602,8 +589,6 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           background: #f8fafc;
         }
 
-        /* Mobile ------------------------------------------------- */
-
         @media (max-width: 640px) {
           .doc-search {
             min-height: 50px;
@@ -659,10 +644,11 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           }
 
           .doc-txt b {
-            white-space: normal;
             display: -webkit-box;
+            overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            white-space: normal;
           }
 
           .doc-txt small {
@@ -691,8 +677,7 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
             transition: none;
           }
         }
-      `}
-      </style>
+      `}</style>
     </section>
   );
 }

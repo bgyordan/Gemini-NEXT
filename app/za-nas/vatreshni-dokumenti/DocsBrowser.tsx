@@ -37,13 +37,9 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
     [filtered]
   );
 
-  // Групите за показване според избрания филтър
-  const groups = useMemo(
-    () =>
-      CATEGORIES
-        .filter((c) => active === 'all' || c.key === active)
-        .map((c) => ({ cat: c, items: filtered.filter((d) => keyOf(d) === c.key) }))
-        .filter((g) => g.items.length > 0),
+  // Документите за показване според избрания филтър (без групови заглавия)
+  const flatDocs = useMemo(
+    () => filtered.filter((d) => active === 'all' || keyOf(d) === active),
     [filtered, active]
   );
 
@@ -75,36 +71,28 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         </div>
       )}
 
-      {groups.length === 0 ? (
+      {flatDocs.length === 0 ? (
         <div className="doc-empty">
           {docs.length === 0 ? 'Все още няма качени документи.' : 'Няма документ, който да отговаря на търсенето.'}
         </div>
       ) : (
-        groups.map(({ cat, items }) => (
-          <section className="doc-group" key={cat.key}>
-            <div className="doc-group-head">
-              <span className="doc-group-ic" style={{ background: `${cat.color}14`, color: cat.color, border: `1px solid ${cat.color}33` }}>
-                <DocIcon name={cat.icon} />
-              </span>
-              <span className="doc-group-title">{cat.title}</span>
-              <span className="doc-group-count">{items.length}</span>
-            </div>
-            <div className="docs-list">
-              {items.map((d) => (
-                <a key={d.id} href={d.file_url} target="_blank" rel="noopener noreferrer" className="doc-row" style={{ borderLeft: `3px solid ${cat.color}` }}>
-                  <span className="doc-ic" style={{ color: cat.color }}><DocIcon name={cat.icon} /></span>
-                  <span className="doc-txt"><b>{d.name}</b></span>
-                  <span className="doc-dl">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-                    </svg>
-                    <span>PDF</span>
-                  </span>
-                </a>
-              ))}
-            </div>
-          </section>
-        ))
+        <div className="docs-list">
+          {flatDocs.map((d) => {
+            const cat = CAT_BY_KEY[keyOf(d)] || CATEGORIES[CATEGORIES.length - 1];
+            return (
+              <a key={d.id} href={d.file_url} target="_blank" rel="noopener noreferrer" className="doc-row" style={{ borderLeft: `3px solid ${cat.color}` }}>
+                <span className="doc-ic" style={{ color: cat.color }}><DocIcon name={cat.icon} /></span>
+                <span className="doc-txt"><b>{d.name}</b></span>
+                <span className="doc-dl">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+                  </svg>
+                  <span>PDF</span>
+                </span>
+              </a>
+            );
+          })}
+        </div>
       )}
     </>
   );

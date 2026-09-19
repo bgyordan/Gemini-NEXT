@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollTop from "./components/ScrollTop";
+import AccessibilityWidget from "./components/AccessibilityWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://web.csop-varna.bg"),
@@ -69,7 +70,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}<ScrollTop /></body>
+            <body>{children}<ScrollTop /><AccessibilityWidget /></body>
     </html>
   );
 }

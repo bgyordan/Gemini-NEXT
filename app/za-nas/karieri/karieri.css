@@ -1,0 +1,60 @@
+.careers-main { padding: clamp(2rem,5vw,3.5rem) 0 clamp(3rem,7vw,5rem); }
+
+.careers-jobs { margin-bottom: clamp(2rem,5vw,3rem); }
+.careers-jobs > .kicker { color: var(--green-deep); }
+.careers-jobs > h2 { font-family: var(--serif); font-size: clamp(1.4rem,2.6vw,1.9rem); color: var(--ink); margin: .4rem 0 1.4rem; }
+
+.careers-empty {
+  background: #fff; border: 1px dashed var(--line); border-radius: 18px;
+  padding: 28px 24px; color: var(--ink-2); font-size: 1rem; line-height: 1.7;
+}
+
+.job-list { display: flex; flex-direction: column; gap: 16px; }
+.job-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 20px;
+  padding: 24px 26px; box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--green-deep);
+}
+.job-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.job-head h3 { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); margin: 0; }
+.job-meta { display: flex; gap: 14px; flex-wrap: wrap; }
+.job-meta span { font-size: .85rem; color: var(--ink-3); background: var(--sand-2); padding: 4px 12px; border-radius: 999px; }
+.job-desc { font-size: 1rem; color: var(--ink-2); line-height: 1.7; margin: 14px 0 0; }
+.job-req { margin-top: 16px; }
+.job-req b { display: block; font-size: .95rem; color: var(--ink); margin-bottom: 8px; }
+.job-req ul { margin: 0; padding-left: 20px; }
+.job-req li { font-size: .95rem; color: var(--ink-2); line-height: 1.6; margin-bottom: 4px; }
+
+/* Абонамент */
+.job-subscribe {
+  background: linear-gradient(145deg, var(--green-soft), var(--sand-2));
+  border: 1px solid var(--line); border-radius: 22px;
+  padding: 30px 32px; margin-bottom: clamp(1.5rem,4vw,2rem);
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center;
+}
+.job-subscribe .js-text h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--ink); margin: .3rem 0 .5rem; }
+.job-subscribe .js-text p { font-size: .95rem; color: var(--ink-2); line-height: 1.6; margin: 0; }
+.js-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.js-form input {
+  flex: 1; min-width: 180px; padding: 13px 16px; font-size: 15px; font-family: var(--sans);
+  color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 12px; outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.js-form input:focus { border-color: #22B37A; box-shadow: 0 0 0 4px rgba(34,179,122,.13); }
+.js-done { background: rgba(34,179,122,.12); border: 1px solid rgba(34,179,122,.35); color: #0E7A55; border-radius: 12px; padding: 14px 16px; font-size: .95rem; font-weight: 500; }
+.js-err { grid-column: 1 / -1; color: #c0392b; font-size: .88rem; margin-top: 8px; }
+
+/* Кандидатстване */
+.careers-apply {
+  background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 32px;
+  box-shadow: var(--shadow-sm); display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 24px; align-items: center;
+}
+.careers-apply h3 { font-family: var(--serif); font-size: 1.45rem; color: var(--ink); margin: .3rem 0 .6rem; }
+.careers-apply p { font-size: .98rem; color: var(--ink-2); line-height: 1.65; margin: 0; }
+.apply-cta { text-align: right; }
+
+@media (max-width: 640px) {
+  .job-subscribe, .careers-apply { grid-template-columns: 1fr; }
+  .apply-cta { text-align: left; }
+}

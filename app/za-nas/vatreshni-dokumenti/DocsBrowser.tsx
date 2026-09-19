@@ -19,19 +19,32 @@ const CAT_BY_KEY = Object.fromEntries(CATEGORIES.map((c) => [c.key, c]));
 
 export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
   const [q, setQ] = useState('');
+  const [active, setActive] = useState<string>('all');
+
+  const keyOf = (d: DocRow) => {
+    const c = (d as any).category as string | null;
+    return c && CAT_BY_KEY[c] ? c : 'other';
+  };
 
   const filtered = useMemo(() => {
     const query = q.trim().toLowerCase();
     return docs.filter((d) => query === '' || d.name.toLowerCase().includes(query));
   }, [docs, q]);
 
-  const keyOf = (d: DocRow) => {
-    const c = (d as any).category as string | null;
-    return c && CAT_BY_KEY[c] ? c : 'other';
-  };
-  const groups = useMemo(
-    () => CATEGORIES.map((c) => ({ cat: c, items: filtered.filter((d) => keyOf(d) === c.key) })).filter((g) => g.items.length > 0),
+  // Кои категории реално имат документи (за лентата с филтри)
+  const available = useMemo(
+    () => CATEGORIES.map((c) => ({ cat: c, count: filtered.filter((d) => keyOf(d) === c.key).length })).filter((g) => g.count > 0),
     [filtered]
+  );
+
+  // Групите за показване според избрания филтър
+  const groups = useMemo(
+    () =>
+      CATEGORIES
+        .filter((c) => active === 'all' || c.key === active)
+        .map((c) => ({ cat: c, items: filtered.filter((d) => keyOf(d) === c.key) }))
+        .filter((g) => g.items.length > 0),
+    [filtered, active]
   );
 
   return (
@@ -47,6 +60,20 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
           </button>
         )}
       </div>
+
+      {/* Хоризонтален филтър по категория */}
+      {available.length > 0 && (
+        <div
+          style={{
+            display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '4px 0 22px',
+          }}
+        >
+          <FilterChip label="Всички" count={filtered.length} color="#0f2240" active={active === 'all'} onClick={() => setActive('all')} />
+          {available.map(({ cat, count }) => (
+            <FilterChip key={cat.key} label={cat.title} count={count} color={cat.color} active={active === cat.key} onClick={() => setActive(cat.key)} />
+          ))}
+        </div>
+      )}
 
       {groups.length === 0 ? (
         <div className="doc-empty">
@@ -80,5 +107,32 @@ export default function DocsBrowser({ docs }: { docs: DocRow[] }) {
         ))
       )}
     </>
+  );
+}
+
+function FilterChip({ label, count, color, active, onClick }: { label: string; count: number; color: string; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '7px', cursor: 'pointer',
+        padding: '8px 14px', borderRadius: '999px', fontSize: '13.5px', fontWeight: 500,
+        transition: 'all .15s', whiteSpace: 'nowrap',
+        border: `1px solid ${active ? color : '#e2e8f0'}`,
+        background: active ? color : '#fff',
+        color: active ? '#fff' : '#475569',
+      }}
+    >
+      {label}
+      <span
+        style={{
+          fontSize: '11px', fontWeight: 600, borderRadius: '999px', padding: '1px 7px', lineHeight: 1.6,
+          background: active ? 'rgba(255,255,255,.22)' : `${color}14`,
+          color: active ? '#fff' : color,
+        }}
+      >
+        {count}
+      </span>
+    </button>
   );
 }

@@ -70,3 +70,29 @@
   color: var(--ink-3) !important;
   font-size: 0.95rem !important;
 }
+
+/* Празно състояние (предстои публикуване) */
+.zdoi-empty {
+  color: var(--ink-3);
+  font-size: 0.95rem;
+  font-style: italic;
+  background: var(--card-bg);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin: 0;
+}
+
+/* Годишни отчети — групиране по година */
+.zdoi-year { margin-top: 1.4rem; }
+.zdoi-year:first-of-type { margin-top: 1rem; }
+
+.zdoi-year-h {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  margin: 0 0 0.6rem;
+}

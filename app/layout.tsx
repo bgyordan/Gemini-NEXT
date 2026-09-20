@@ -48,6 +48,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
           href="/noop.css"
           rel="stylesheet"
         />

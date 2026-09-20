@@ -11,3 +11,21 @@
 .page-hero h1{font-family:var(--serif);font-size:clamp(36px,5.4vw,60px);font-weight:600;line-height:1.05;letter-spacing:-1.2px;color:var(--ink);margin-bottom:20px}
 .page-hero p{font-size:clamp(16px,1.4vw,19px);color:var(--ink-2);line-height:1.6;max-width:600px}
 @media(max-width:640px){.page-hero{padding:92px 0 36px}}
+
+/* Воднист serif надпис зад заглавието (като на assyst) */
+.ph-watermark{
+  position:absolute;
+  left:-6px;
+  bottom:-8px;
+  z-index:0;
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(120px,20vw,280px);
+  line-height:.78;
+  letter-spacing:-4px;
+  color:color-mix(in srgb, var(--green) 13%, transparent);
+  pointer-events:none;
+  user-select:none;
+  white-space:nowrap;
+}
+.page-hero.bl .ph-watermark{color:color-mix(in srgb, #1E7FC0 13%, transparent)}

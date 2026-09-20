@@ -1,636 +1,249 @@
-/* ==========================================================================
-   WORLD-CLASS HEADER & NAVIGATION STYLING — CSOP VARNA
-   Minimalist, refined, institutional craftsmanship with zero clutter.
-   ========================================================================== */
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: color-mix(in srgb, var(--card-bg) 80%, transparent);
-  backdrop-filter: blur(16px) saturate(1.15);
-  -webkit-backdrop-filter: blur(16px) saturate(1.15);
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
-  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-header.solid {
-  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
-  box-shadow: 0 8px 24px -18px rgba(20, 30, 25, 0.30);
-}
-
-/* TOP BAR CONTAINER */
-.bar {
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: height 0.3s ease;
-  position: relative;
-}
-
-header.solid .bar {
-  height: 64px;
-}
-
-/* BRAND LOGO & TITLE */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: inherit;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease;
-}
-
-.brand:hover {
-  opacity: 0.92;
-}
-
-.logo-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-}
-
-.brand:hover .logo-wrap {
-  transform: scale(1.03);
-}
-
-.logo-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.brand-txt {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-name {
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  color: var(--ink);
-}
-
-.brand-tag {
-  font-size: 11px;
-  color: var(--ink-3);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  margin-top: 1px;
-}
-
-/* DESKTOP NAVIGATION */
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  height: 100%;
-}
-
-.nav-item {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 12px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--ink);
-  border-radius: 8px;
-  text-decoration: none;
-  cursor: pointer;
-  font-family: var(--sans);
-  transition: color 0.18s ease, background 0.18s ease;
-}
-
-/* Подчертаване под активен/посочен елемент (като на assyst) */
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 1px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--green-deep);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-item:hover .nav-link::after,
-.nav-item.active .nav-link::after,
-.nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-.nav-link.single {
-  color: var(--ink);
-}
-
-.nav-item:hover .nav-link,
-.nav-item.active .nav-link,
-.nav-link:hover {
-  color: var(--green-deep);
-}
-
-.chevron-icon {
-  width: 12px;
-  height: 12px;
-  opacity: 0.55;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-}
-
-.nav-item:hover .chevron-icon,
-.nav-item.active .chevron-icon {
-  transform: rotate(180deg);
-  opacity: 1;
-  color: var(--green-deep);
-}
-
-.theme-toggle-wrap {
-  margin-left: 6px;
-  display: flex;
-  align-items: center;
-}
-
-/* CTA DONATE BUTTON */
-.btn-donate {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-left: 8px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  color: #ffffff;
-  background: var(--green-deep);
-  box-shadow: 0 2px 8px -2px rgba(11, 77, 60, 0.28);
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-donate:hover {
-  background: #083a2d;
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -6px rgba(11, 77, 60, 0.45);
-}
-
-.heart-icon {
-  width: 13px;
-  height: 13px;
-  color: #fca5a5;
-  transition: transform 0.2s ease;
-}
-
-.btn-donate:hover .heart-icon {
-  transform: scale(1.15);
-}
-
-/* ==========================================================================
-   REFINED FLOATING DROPDOWN CARD
-   ========================================================================== */
-
-.dropdown-panel {
-  position: absolute;
-  top: calc(100% - 6px);
-  left: 50%;
-  transform: translateX(-50%) translateY(8px) scale(0.98);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
-  z-index: 50;
-}
-
-.nav-item:hover .dropdown-panel,
-.nav-item.active .dropdown-panel {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-/* Hover bridge so mouse never breaks when entering panel */
-.dropdown-bridge {
-  position: absolute;
-  top: -14px;
-  left: 0;
-  right: 0;
-  height: 18px;
-}
-
-.dropdown-card {
-  background: var(--card-bg, #ffffff);
-  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
-  border-radius: 18px;
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--line) 28%, transparent),
-    0 16px 36px -16px rgba(20, 30, 25, 0.20),
-    0 5px 12px -8px rgba(20, 30, 25, 0.10);
-  padding: 10px;
-  width: 268px;
-}
-
-.dropdown-panel.wide .dropdown-card {
-  width: 430px;
-}
-
-.dropdown-grid {
-  display: grid;
-  gap: 2px;
-}
-
-.dropdown-grid.cols-2 {
-  grid-template-columns: 1fr 1fr;
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 9px 13px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.dropdown-item:hover {
-  background: var(--green-soft);
-}
-
-.item-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.item-label {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.25;
-  transition: color 0.15s ease;
-}
-
-.dropdown-item:hover .item-label {
-  color: var(--green-deep);
-  font-weight: 600;
-}
-
-.item-desc {
-  font-size: 11.5px;
-  color: var(--ink-3);
-  margin-top: 2px;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.item-arrow {
-  width: 13px;
-  height: 13px;
-  color: var(--green-deep);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-
-.dropdown-item:hover .item-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* DROPDOWN FOOTER */
-.dropdown-footer {
-  border-top: 1px solid var(--line, rgba(0, 0, 0, 0.05));
-  margin-top: 6px;
-  padding-top: 6px;
-}
-
-.footer-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green-deep);
-  background: transparent;
-  text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.footer-link:hover {
-  background: var(--green-soft);
-  color: var(--green-deep);
-}
-
-.footer-link svg {
-  width: 13px;
-  height: 13px;
-  transition: transform 0.2s ease;
-}
-
-.footer-link:hover svg {
-  transform: translateX(3px);
-}
-
-/* ==========================================================================
-   MOBILE NAVIGATION
-   ========================================================================== */
-
-.mobile-actions {
-  display: none;
-  align-items: center;
-  gap: 8px;
-}
-
-.burger-btn {
-  background: none;
-  border: none;
-  color: var(--ink);
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background 0.18s ease;
-}
-
-.burger-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.burger-btn svg {
-  width: 24px;
-  height: 24px;
-}
-
-.mobile-drawer {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  height: 100vh;
-  height: 100dvh;
-  width: 320px;
-  max-width: 85vw;
-  z-index: 200;
-  background: var(--card-bg, #ffffff);
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.25);
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.mobile-drawer.open {
-  transform: translateX(0);
-}
-
-.mobile-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 190;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.mobile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--line, rgba(0, 0, 0, 0.07));
-}
-
-.mobile-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.logo-wrap.mini {
-  width: 32px;
-  height: 32px;
-}
-
-.mobile-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--ink-2);
-  padding: 6px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mobile-close:hover {
-  background: var(--sand-2);
-  color: var(--ink);
-}
-
-.mobile-close svg {
-  width: 20px;
-  height: 20px;
-}
-
-.mobile-body {
-  padding: 12px 16px 40px;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-}
-
-.mobile-group {
-  border-bottom: 1px solid var(--line, rgba(0, 0, 0, 0.05));
-}
-
-.mobile-parent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 14px 6px;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--ink);
-  font-family: var(--sans);
-  cursor: pointer;
-  text-align: left;
-  text-decoration: none;
-}
-
-.mobile-parent.single {
-  border-bottom: 1px solid var(--line, rgba(0, 0, 0, 0.05));
-}
-
-.mobile-chevron {
-  width: 16px;
-  height: 16px;
-  color: var(--ink-3);
-  transition: transform 0.25s ease;
-}
-
-.mobile-parent.expanded .mobile-chevron {
-  transform: rotate(180deg);
-  color: var(--green-deep);
-}
-
-.mobile-sub {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.mobile-sub.open {
-  max-height: 600px;
-  padding-bottom: 10px;
-}
-
-.mobile-sub-item {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-left: 8px;
-  border-left: 2px solid rgba(11, 77, 60, 0.2);
-}
-
-.mobile-sub-item:hover {
-  background: var(--sand-2, #f2f7f4);
-  border-left-color: var(--green-deep);
-}
-
-.mobile-sub-item.main-link {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green-deep);
-  background: rgba(11, 77, 60, 0.04);
-  border-left-color: var(--green-deep);
-  margin-bottom: 4px;
-}
-
-.mobile-sub-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.mobile-sub-desc {
-  font-size: 11px;
-  color: var(--ink-3);
-  margin-top: 1px;
-}
-
-.mobile-footer {
-  margin-top: 24px;
-  padding: 0 6px;
-}
-
-.mobile-cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 13px;
-  border-radius: 999px;
-  background: var(--green-deep);
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 13.5px;
-  text-decoration: none;
-  box-shadow: 0 4px 14px -2px rgba(11, 77, 60, 0.3);
-}
-
-/* RESPONSIVE BREAKPOINT */
-@media (max-width: 960px) {
-  .main-nav {
-    display: none;
-  }
-  .mobile-actions {
-    display: inline-flex;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* ГЛАВНИ БУКВИ (CAPS) навсякъде в менюто */
-.nav-link{text-transform:uppercase;letter-spacing:.08em}
-.item-label{text-transform:uppercase;letter-spacing:.05em}
-.mobile-parent{text-transform:uppercase;letter-spacing:.06em}
-.mobile-sub-label{text-transform:uppercase;letter-spacing:.05em}
-
-/* МОДЕРЕН ШРИФТ НА МЕНЮТО (Montserrat Alternates) */
-.nav-link,
-.brand-name,
-.item-label,
-.footer-link,
-.mobile-parent,
-.mobile-sub-item{font-family:'Montserrat Alternates',var(--sans)}
-
-/* Мобилно — хедърът да се събира в екрана */
-@media (max-width: 640px) {
-  .bar { height: 62px; }
-  .brand-tag { display: none; }
-  .brand-name { font-size: 15px; }
-  .logo-wrap img { width: 38px; height: 38px; }
-  .mobile-actions { flex-shrink: 0; }
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { MEGA } from './megaData';
+import ThemeToggle from './ThemeToggle';
+import './header.css';
+
+export default function Header() {
+  const [solid, setSolid] = useState(false);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => setSolid(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const show = (id: string) => {
+    if (timer.current) clearTimeout(timer.current);
+    setOpenId(id);
+  };
+
+  const hide = () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setOpenId(null), 180);
+  };
+
+  const keep = () => {
+    if (timer.current) clearTimeout(timer.current);
+  };
+
+  return (
+    <header className={solid ? 'solid' : ''}>
+      <div className="bar wrap">
+        {/* BRAND LOGO & TITLE */}
+        <a href="/" className="brand" aria-label="ЦСОП Варна - Начало">
+          <span className="logo-wrap">
+            <img src="/logo.jpg" alt="Лого ЦСОП Варна" />
+          </span>
+          <span className="brand-txt">
+            <b className="brand-name">ЦСОП Варна</b>
+            <span className="brand-tag">Специална образователна подкрепа</span>
+          </span>
+        </a>
+
+        {/* DESKTOP NAVIGATION */}
+        <nav className="main-nav" aria-label="Основна навигация">
+          <a href="/" className="nav-link single" onMouseEnter={() => setOpenId(null)}>
+            <span>Начало</span>
+          </a>
+          {MEGA.map((m) => {
+            const isOpen = openId === m.href;
+            const isWide = m.subs.length > 4;
+
+            return (
+              <div
+                key={m.href}
+                className={`nav-item ${isOpen ? 'active' : ''}`}
+                onMouseEnter={() => show(m.href)}
+                onMouseLeave={hide}
+              >
+                <a href={m.href} className="nav-link" aria-expanded={isOpen}>
+                  <span>{m.label}</span>
+                  <svg
+                    className="chevron-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </a>
+
+                {/* DROPDOWN — clean labels only */}
+                <div
+                  className={`dropdown-panel ${isWide ? 'wide' : ''}`}
+                  onMouseEnter={keep}
+                  onMouseLeave={hide}
+                >
+                  <div className="dropdown-bridge" />
+                  <div className="dropdown-card">
+                    <div className={`dropdown-grid ${isWide ? 'cols-2' : 'cols-1'}`}>
+                      {m.subs.map((s) => (
+                        <a
+                          key={`${s.href}-${s.label}`}
+                          href={s.href}
+                          className="dropdown-item"
+                          onClick={() => setOpenId(null)}
+                        >
+                          <span className="item-label">{s.label}</span>
+                        </a>
+                      ))}
+                    </div>
+
+                    <div className="dropdown-footer">
+                      <a href={m.href} className="footer-link" onClick={() => setOpenId(null)}>
+                        <span>Преглед на „{m.label}“</span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          <a href="/kontakti" className="nav-link single" onMouseEnter={() => setOpenId(null)}>
+            <span>Контакти</span>
+          </a>
+
+          {/* THEME TOGGLE (DESKTOP) */}
+          <div className="theme-toggle-wrap">
+            <ThemeToggle />
+          </div>
+
+          <a href="/daritelstvo" className="btn-donate" onMouseEnter={() => setOpenId(null)}>
+            <svg viewBox="0 0 24 24" fill="currentColor" className="heart-icon">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span>Дарителство</span>
+          </a>
+        </nav>
+
+        {/* MOBILE CONTROLS (THEME + BURGER) */}
+        <div className="mobile-actions">
+          <ThemeToggle className="mobile-header-toggle" />
+          <button
+            className="burger-btn"
+            aria-label="Отвори менюто"
+            onClick={() => setMobileOpen(true)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE DRAWER */}
+      <div className={`mobile-drawer ${mobileOpen ? 'open' : ''}`}>
+        <div className="mobile-header">
+          <div className="mobile-brand">
+            <span className="logo-wrap mini">
+              <img src="/logo.jpg" alt="" />
+            </span>
+            <b>ЦСОП Варна</b>
+          </div>
+          <button
+            className="mobile-close"
+            aria-label="Затвори менюто"
+            onClick={() => setMobileOpen(false)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="mobile-body">
+          {MEGA.map((m) => {
+            const isExp = expanded === m.href;
+            return (
+              <div key={m.href} className="mobile-group">
+                <button
+                  className={`mobile-parent ${isExp ? 'expanded' : ''}`}
+                  onClick={() => setExpanded(isExp ? null : m.href)}
+                >
+                  <span>{m.label}</span>
+                  <svg
+                    className="mobile-chevron"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </button>
+
+                <div className={`mobile-sub ${isExp ? 'open' : ''}`}>
+                  <a
+                    href={m.href}
+                    className="mobile-sub-item main-link"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Всичко в „{m.label}“ →
+                  </a>
+                  {m.subs.map((s) => (
+                    <a
+                      key={`${s.href}-${s.label}`}
+                      href={s.href}
+                      className="mobile-sub-item"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span className="mobile-sub-label">{s.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+
+          <a
+            href="/kontakti"
+            className="mobile-parent single"
+            onClick={() => setMobileOpen(false)}
+          >
+            <span>Контакти</span>
+          </a>
+
+          <div className="mobile-footer">
+            <ThemeToggle showLabel className="mobile-toggle" />
+            <a
+              href="/daritelstvo"
+              className="mobile-cta-btn"
+              style={{ marginTop: '14px' }}
+              onClick={() => setMobileOpen(false)}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '18px', height: '18px' }}>
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+              <span>Подкрепете ни / Дарителство</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {mobileOpen && <div className="mobile-backdrop" onClick={() => setMobileOpen(false)} />}
+    </header>
+  );
 }

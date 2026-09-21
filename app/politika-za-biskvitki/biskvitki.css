@@ -7,3 +7,40 @@
 .ck-list { margin: 0 0 1rem; padding-left: 20px; }
 .ck-list li { font-family: var(--sans); color: var(--ink-2); font-size: 1rem; line-height: 1.7; margin-bottom: 6px; }
 .ck-list b { color: var(--ink); }
+
+/* ==== Редакционен вид (сдържан, за правен текст) ==== */
+.ck-page { hanging-punctuation: first last; }
+
+.ck-block h2 {
+  padding-top: 16px;
+  position: relative;
+  text-wrap: balance;
+}
+.ck-block h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.ck-block p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.ck-block:first-of-type p:first-of-type {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}

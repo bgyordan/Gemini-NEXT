@@ -83,3 +83,40 @@
   color: var(--ink-3) !important;
   font-size: 0.95rem !important;
 }
+
+/* ==== Редакционен вид (сдържан, за правен текст) ==== */
+.sig-page { hanging-punctuation: first last; }
+
+.sig-block h2 {
+  padding-top: 16px;
+  position: relative;
+  text-wrap: balance;
+}
+.sig-block h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.sig-block p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.sig-block:first-of-type p:first-of-type {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}

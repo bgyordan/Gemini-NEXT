@@ -26,3 +26,40 @@
   transition: border-color .2s;
 }
 .terms-block p a:hover { border-bottom-color: currentColor; }
+
+/* ==== Редакционен вид (сдържан, за правен текст) ==== */
+.terms-page { hanging-punctuation: first last; }
+
+.terms-block h2 {
+  padding-top: 16px;
+  position: relative;
+  text-wrap: balance;
+}
+.terms-block h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.terms-block p {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.terms-block:first-of-type p:first-of-type {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}

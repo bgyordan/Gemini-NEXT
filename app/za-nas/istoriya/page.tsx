@@ -3,6 +3,7 @@ import PageHero from '../../components/PageHero';
 import Reveal from '../../components/Reveal';
 import Footer from '../../components/Footer';
 import ParallaxImage from '../../components/ParallaxImage';
+import { Article, Kicker, Lead, Para, Note, Callout, Section, H2, Quote } from '../../components/Editorial';
 
 export const metadata = {
   title: 'История — ЦСОП Варна',
@@ -47,50 +48,66 @@ export default function HistoryPage() {
         title="75+ години традиции, отдаденост и обич към децата"
         intro="От 1949 година до днес, ЦСОП – Варна е сигурен пристан и дом за развитие за поколения деца със специални образователни потребности."
         tone="em"
+        watermark="ИСТОРИЯ"
       />
 
       <main style={{ padding: '70px 0 100px' }}>
         <div className="wrap">
-          {/* SPLIT INTRO */}
+          {/* НАРАТИВ — редакционна типография */}
+          <Article justify>
+            <Kicker>Наследство и приемственост</Kicker>
+            <Lead>
+              Пътят на центъра е път от помощното училище до съвременния европейски терапевтичен
+              дом — над седем десетилетия грижа, в които традицията среща най-новите методи.
+            </Lead>
+
+            <Note title="Накратко">
+              От Помощно училище (1949) до Център за специална образователна подкрепа (2017) —
+              над 75 години непрекъсната традиция.
+            </Note>
+
+            <Para dropCap>
+              През 1949 г. във Варна се поставя началото на институционалната грижа за деца със
+              специални образователни потребности с откриването на Помощно училище{' '}
+              <strong>„Братя Миладинови“</strong>. Оттогава през класните стаи преминават
+              поколения деца, учители и специалисти, изградили традиция, която продължаваме и днес.
+            </Para>
+
+            <Para>
+              Днес ЦСОП – Варна обединява богатия опит на няколко поколения специални педагози с
+              най-модерните терапевтични методи — от <em>сензорна интеграция</em> до овладяване на
+              професии в ресторантьорството и озеленяването.
+            </Para>
+
+            <Callout>
+              Приемствеността е в сърцето на всичко: пазим традициите на специалната педагогика, но
+              ги надграждаме с асистивни технологии, нови професии и модерна материална база.
+            </Callout>
+          </Article>
+
+          {/* ИЗОБРАЖЕНИЕ */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '48px',
-              alignItems: 'center',
-              marginBottom: '70px',
+              maxWidth: '900px',
+              margin: '48px auto 0',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow)',
             }}
           >
-            <Reveal>
-              <span className="lead-kicker">НАСЛЕДСТВО И ПРИЕМСТВЕНОСТ</span>
-              <h2 style={{ fontSize: '32px', marginBottom: '20px', fontFamily: 'var(--serif)' }}>
-                Пътят от помощното училище до съвременния европейски център
-              </h2>
-              <p style={{ fontSize: '16px', color: 'var(--ink-2)', lineHeight: '1.7', marginBottom: '16px' }}>
-                През 1949 г. във Варна се поставя началото на институционалната грижа за деца със специални образователни потребности с откриването на Помощно училище „Братя Миладинови“.
-              </p>
-              <p style={{ fontSize: '16px', color: 'var(--ink-2)', lineHeight: '1.7' }}>
-                Днес ЦСОП – Варна обединява богатия опит на няколко поколения специални педагози с най-модерните терапевтични методи — от сензорна интеграция до овладяване на професии в ресторантьорството и озеленяването.
-              </p>
-            </Reveal>
-
-            <Reveal delay={1}>
-              <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: 'var(--shadow)' }}>
-                <ParallaxImage
-                  src="/images/classroom.jpg"
-                  alt="История и традиции в ЦСОП Варна"
-                  speed={8}
-                  scale={1.1}
-                />
-              </div>
-            </Reveal>
+            <ParallaxImage
+              src="/images/classroom.jpg"
+              alt="История и традиции в ЦСОП Варна"
+              speed={8}
+              scale={1.1}
+            />
           </div>
 
-          {/* TIMELINE */}
-          <Reveal className="sec-head">
-            <span className="kicker">Хронология</span>
-            <h2>Ключови етапи в нашето развитие</h2>
-          </Reveal>
+          {/* ХРОНОЛОГИЯ */}
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <Section label="Хронология" />
+            <H2>Ключови етапи в нашето развитие</H2>
+          </div>
 
           <div
             style={{
@@ -139,24 +156,12 @@ export default function HistoryPage() {
             ))}
           </div>
 
-          {/* VALUES BANNER */}
-          <Reveal
-            style={{
-              background: 'linear-gradient(145deg, var(--green-soft), var(--sand-2))',
-              borderRadius: '24px',
-              padding: '40px',
-              marginTop: '70px',
-              textAlign: 'center',
-              border: '1px solid var(--line)',
-            }}
-          >
-            <h3 style={{ fontFamily: 'var(--serif)', fontSize: '26px', marginBottom: '12px' }}>
-              „Всяко дете има право на криле и пространство, в което да полети.“
-            </h3>
-            <p style={{ fontSize: '15.5px', color: 'var(--ink-2)', maxWidth: '640px', margin: '0 auto 24px' }}>
-              Продължаваме да надграждаме материалната база, дигиталните ресурси и квалификацията на екипа в името на всяко дете.
-            </p>
-            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center' }}>
+          {/* ЗАКЛЮЧИТЕЛЕН ЦИТАТ */}
+          <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <Quote cite="ЦСОП – Варна">
+              Всяко дете има право на криле и пространство, в което да полети.
+            </Quote>
+            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               <a href="/za-nas/ekip" className="btn btn-primary">
                 Запознайте се с екипа
               </a>
@@ -164,7 +169,7 @@ export default function HistoryPage() {
                 Актуални новини
               </a>
             </div>
-          </Reveal>
+          </div>
         </div>
       </main>
 

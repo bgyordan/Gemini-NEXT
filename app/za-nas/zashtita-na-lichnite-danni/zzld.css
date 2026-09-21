@@ -1,26 +1,59 @@
 .zzld-page {
   padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
   background: var(--sand);
+  hanging-punctuation: first last;
 }
 
 .zzld-block {
   padding: 0;
-  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: clamp(2rem, 4.5vw, 2.75rem);
 }
 
+/* Секционно заглавие със зелен акцент отгоре */
 .zzld-block h2 {
   font-family: var(--serif);
   font-size: clamp(1.3rem, 2.4vw, 1.6rem);
   color: var(--ink);
   margin: 0 0 0.9rem;
+  padding-top: 16px;
+  position: relative;
+  text-wrap: balance;
 }
 
+.zzld-block h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+/* Тяло — двустранно с пренасяне (страницата е lang="bg") */
 .zzld-block p {
   font-family: var(--sans);
   color: var(--ink-2);
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: 1.02rem;
+  line-height: 1.8;
   margin: 0 0 1rem;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+/* Водещ абзац (първата секция) — serif, въздушен, ляво */
+.zzld-block:first-of-type p:first-of-type {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
 }
 
 .zzld-block p a {
@@ -95,4 +128,7 @@
 .zzld-docs-sub {
   color: var(--ink-3) !important;
   font-size: 0.95rem !important;
+  text-align: left !important;
+  -webkit-hyphens: manual !important;
+  hyphens: manual !important;
 }

@@ -67,7 +67,6 @@ export const TEAM: Group[] = [
       { name: 'Росица Терзиева', role: 'Учител', tone: 'teacher' },
       { name: 'Румяна Асенова', role: 'Учител', tone: 'teacher' },
       { name: 'Светлана Живкова', role: 'Учител', tone: 'teacher' },
-      { name: 'Филип Стоянов', role: 'Учител', tone: 'teacher' },
       { name: 'Христина Христова', role: 'Учител', tone: 'teacher' },
     ],
   },

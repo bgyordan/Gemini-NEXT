@@ -16,11 +16,10 @@ export const metadata = {
 
 export const revalidate = 0;
 
-// TODO (Йордан): замени данните за ДЛЗД с реалните, преди публикуване
 const DPO = {
-  name: '—',
-  email: 'info-400052@edu.mon.bg',
-  phone: '—',
+  name: 'Ванина Величкова',
+  email: 'tech@csop-varna.bg',
+  phone: '0889 227 209',
 };
 
 const RIGHTS = [
@@ -96,7 +95,7 @@ export default async function ZzldPage() {
             <div className="zzld-dpo-card">
               <div className="zzld-dpo-row"><span>Име</span><b>{DPO.name}</b></div>
               <div className="zzld-dpo-row"><span>Ел. поща</span><b><a href={`mailto:${DPO.email}`}>{DPO.email}</a></b></div>
-              <div className="zzld-dpo-row"><span>Телефон</span><b>{DPO.phone}</b></div>
+              <div className="zzld-dpo-row"><span>Телефон</span><b><a href={`tel:${DPO.phone.replace(/\s/g, '')}`}>{DPO.phone}</a></b></div>
             </div>
           </section>
 

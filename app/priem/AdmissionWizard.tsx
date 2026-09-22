@@ -1,11 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Reveal from '../components/Reveal';
 import './admission-wizard.css';
 
 const FORM_NASOCHVANE = '/dokumenti/priem/zayavlenie-za-nasochvane.docx';
 const FORM_ZAPISVANE = '/dokumenti/priem/zayavlenie-za-zapisvane.docx';
+
+const DL = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a className="adm-dl" href={href} target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+    </svg>
+    {children}
+  </a>
+);
 
 interface Stage {
   n: string;
@@ -24,19 +33,14 @@ const STAGES: Stage[] = [
           <li>Записване на детето в <strong>училище</strong> или <strong>детска градина</strong>;</li>
           <li>Подаване на <strong>заявление по образец</strong> (можете да го изтеглите по-долу).</li>
         </ol>
-        <span className="adm-subhead">Допълнителни документи към заявлението:</span>
+        <span className="adm-subhead">Допълнителни документи към заявлението</span>
         <ul>
           <li>Документи за здравно състояние;</li>
           <li>Документи от съд <span className="muted">(ако има такива)</span>;</li>
           <li>Документи, свързани с обучението;</li>
           <li>Протокол от ТЕЛК / НЕЛК / ЛКК.</li>
         </ul>
-        <a className="adm-dl" href={FORM_NASOCHVANE} target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-          </svg>
-          Изтегли заявление за насочване
-        </a>
+        <DL href={FORM_NASOCHVANE}>Изтегли заявление за насочване</DL>
       </>
     ),
   },
@@ -47,8 +51,8 @@ const STAGES: Stage[] = [
       <>
         <p>След като подадете необходимия набор от документи, започва етапът на тяхното разглеждане и обработка.</p>
         <p>
-          В срок до <span className="adm-timebadge">1 месец</span> документите се окомплектоват и изпращат към
-          <strong> РЦПППО – Варна</strong>. Този пакет включва:
+          В срок до <span className="adm-timebadge">1 месец</span> документите се окомплектоват и изпращат към{' '}
+          <strong>РЦПППО – Варна</strong>. Този пакет включва:
         </p>
         <ol>
           <li><strong>Мотивирано становище</strong> от Екипа за подкрепа за личностно развитие (ЕПЛР);</li>
@@ -69,38 +73,29 @@ const STAGES: Stage[] = [
           можете да преминете към същинското му записване при нас.
         </p>
         <p>За целта е необходимо да попълните финалното заявление:</p>
-        <a className="adm-dl" href={FORM_ZAPISVANE} target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-          </svg>
-          Изтегли заявление за записване
-        </a>
+        <DL href={FORM_ZAPISVANE}>Изтегли заявление за записване</DL>
       </>
     ),
   },
 ];
 
 export default function AdmissionWizard() {
-  const [open, setOpen] = useState<Record<number, boolean>>({ 0: true });
-
-  const toggle = (i: number) =>
-    setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
-
   return (
     <div className="adm-proc">
-      <Reveal className="sec-head">
-        <span className="kicker">Стъпка по стъпка</span>
-        <h2>Процедура по записване</h2>
-        <p>Ръководство за прием в Център за специална образователна подкрепа – Варна.</p>
+      <Reveal className="adm-head">
+        <span className="adm-kicker">Стъпка по стъпка</span>
+        <h2 className="adm-h2">Процедура по записване</h2>
+        <p className="adm-lede">Ръководство за прием в Център за специална образователна подкрепа – Варна.</p>
       </Reveal>
 
-      <div className="adm-proc-head">
-        <button
-          type="button"
-          className="adm-print-btn"
-          onClick={() => window.print()}
-          aria-label="Разпечатай процедурата"
-        >
+      <div className="adm-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 8v5M12 16h.01M12 3l9 16H3z" />
+        </svg>
+        <span>
+          <strong>Важно:</strong> трите етапа (I, II и III) се изпълняват строго последователно.
+        </span>
+        <button type="button" className="adm-print-btn" onClick={() => window.print()} aria-label="Разпечатай процедурата">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z" />
           </svg>
@@ -108,50 +103,26 @@ export default function AdmissionWizard() {
         </button>
       </div>
 
-      <div className="adm-proc-warn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
-        </svg>
-        <span>
-          <strong>Внимание:</strong> За да бъде детето записано в ЦСОП – Варна, описаните по-долу етапи
-          (I, II и III) трябва да бъдат изпълнени строго последователно.
-        </span>
-      </div>
-
-      <div className="adm-stages">
-        {STAGES.map((st, i) => {
-          const isOpen = !!open[i];
-          return (
-            <div key={st.n} className={`adm-stage${isOpen ? ' is-open' : ''}`}>
-              <button
-                type="button"
-                className="adm-stage-btn"
-                onClick={() => toggle(i)}
-                aria-expanded={isOpen}
-              >
-                <span className="adm-stage-num">{st.n}</span>
-                <h3 className="adm-stage-title">{st.title}</h3>
-                <svg className="adm-stage-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </button>
-              <div className="adm-stage-body">
-                <div className="adm-stage-body-inner">
-                  <div className="adm-stage-content">{st.body}</div>
-                </div>
-              </div>
+      <div className="adm-timeline">
+        {STAGES.map((st, idx) => (
+          <Reveal key={st.n} className="adm-step" delay={((idx % 3) + 1) as 1 | 2 | 3}>
+            <div className="adm-step-node">{st.n}</div>
+            <div className="adm-step-card">
+              <span className="adm-step-tag">Етап {st.n}</span>
+              <h3 className="adm-step-title">{st.title}</h3>
+              <div className="adm-step-body">{st.body}</div>
             </div>
-          );
-        })}
+          </Reveal>
+        ))}
       </div>
 
       <div className="adm-cta">
         <h3>Готови ли сте да започнете?</h3>
         <p>
-          Ако сте родител и желаете да запишете детето си, върнете се на <strong>Етап I</strong> и изтеглете
-          заявлението за насочване. За съдействие и въпроси екипът на деловодството е на ваше разположение.
+          Върнете се на <strong>Етап I</strong> и изтеглете заявлението за насочване. За съдействие и въпроси
+          екипът на деловодството е на ваше разположение.
         </p>
-        <a href="/kontakti" className="btn btn-warm">Свържете се с нас</a>
+        <a href="/kontakti" className="btn btn-primary">Свържете се с нас</a>
       </div>
     </div>
   );

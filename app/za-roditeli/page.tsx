@@ -3,6 +3,7 @@ import PageHero from '../components/PageHero';
 import Footer from '../components/Footer';
 import Reveal from '../components/Reveal';
 import ScheduleExplorer from './ScheduleExplorer';
+import { supabase } from '../../lib/supabase';
 
 export const metadata = {
   title: 'За родители — ЦСОП Варна',
@@ -10,7 +11,17 @@ export const metadata = {
     'Полезна информация за родители: дневен режим, графици, консултации с логопед и психолог, училищно настоятелство.',
 };
 
-export default function ParentsPage() {
+export const revalidate = 0;
+
+export default async function ParentsPage() {
+  const { data: formsData } = await supabase
+    .from('site_documents')
+    .select('id, name, file_url, sort_order, on_site, section')
+    .eq('section', 'roditeli')
+    .eq('on_site', true)
+    .order('sort_order', { ascending: true });
+  const forms = formsData ?? [];
+
   const sections = [
     {
       title: 'Дневен режим и организация',
@@ -38,7 +49,6 @@ export default function ParentsPage() {
     <>
       <Header />
       <PageHero
-        watermark="РОДИТЕЛИ"
         kicker="За родители"
         title="Партньорство в грижата за вашето дете"
         intro="Ние вярваме, че най-добрите резултати за детето се постигат, когато семейството и екипът на центъра работят ръка за ръка с открито доверие, постоянна комуникация и взаимна подкрепа."
@@ -124,63 +134,34 @@ export default function ParentsPage() {
                 Можете да изтеглите основните бланки и правилници директно от дигиталния архив на ЦСОП – Варна:
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <a
-                  href="https://csop-varna.bg/wp-content/uploads/2026/03/gdneven-rezhim-25.26.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    background: 'var(--sand-2)',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    color: 'var(--ink)',
-                    fontSize: '13.5px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <span>📄 Дневен режим 2025/2026</span>
-                  <span style={{ fontSize: '12px', color: 'var(--green-deep)' }}>Свали PDF ↗</span>
-                </a>
-                <a
-                  href="https://csop-varna.bg/wp-content/uploads/2026/03/godishen-plan-za-podkrepa-na-semejstvata.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    background: 'var(--sand-2)',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    color: 'var(--ink)',
-                    fontSize: '13.5px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <span>📄 Годишен план за подкрепа на семействата</span>
-                  <span style={{ fontSize: '12px', color: 'var(--green-deep)' }}>Свали PDF ↗</span>
-                </a>
-                <a
-                  href="https://csop-varna.bg/wp-content/uploads/2026/03/etichen-kodeks-25.26.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    background: 'var(--sand-2)',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    color: 'var(--ink)',
-                    fontSize: '13.5px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <span>📄 Етичен кодекс на общността</span>
-                  <span style={{ fontSize: '12px', color: 'var(--green-deep)' }}>Свали PDF ↗</span>
-                </a>
+                {forms.length === 0 ? (
+                  <p style={{ color: 'var(--ink-3)', fontSize: '13.5px', lineHeight: '1.6' }}>
+                    Формулярите предстои да бъдат публикувани.
+                  </p>
+                ) : (
+                  forms.map((d) => (
+                    <a
+                      key={d.id}
+                      href={d.file_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        padding: '12px 16px',
+                        borderRadius: '12px',
+                        background: 'var(--sand-2)',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        color: 'var(--ink)',
+                        fontSize: '13.5px',
+                        fontWeight: 600,
+                      }}
+                    >
+                      <span>📄 {d.name}</span>
+                      <span style={{ fontSize: '12px', color: 'var(--green-deep)' }}>Свали PDF ↗</span>
+                    </a>
+                  ))
+                )}
               </div>
             </Reveal>
 

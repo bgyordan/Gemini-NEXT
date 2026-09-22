@@ -59,6 +59,7 @@ export const MEGA: Mega[] = [
       { label: 'Правила за посещение', desc: 'Как протича посещението', href: '/za-roditeli/pravila', icon: 'shield' },
       { label: 'Консултации', desc: 'График с родителите', href: '/za-roditeli/konsultacii', icon: 'chat' },
       { label: 'Административни услуги', desc: 'Заявления и удостоверения', href: '/za-roditeli/uslugi', icon: 'file' },
+      { label: 'Ресурси за родители', desc: 'Материали и подкрепа за дома', href: '/za-roditeli/resursi', icon: 'heart' },
     ],
   },
   {

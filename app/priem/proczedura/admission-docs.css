@@ -1,13 +1,59 @@
-.adm-docs{max-width:720px;margin:60px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px;box-shadow:0 16px 40px -28px rgba(20,90,70,.35)}
-.adm-docs-head{text-align:center;margin-bottom:26px}
-.adm-docs-head h2{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin-bottom:8px}
-.adm-docs-head p{font-size:14.5px;color:var(--ink-2)}
-.adm-docs-list{display:flex;flex-direction:column;gap:10px}
-.adm-doc{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:14px;border:1px solid #EEF3F8;background:#FAFCFE;transition:border-color .25s,background .25s,transform .25s}
-.adm-doc:hover{border-color:#C6E4F4;background:#F2F9FE;transform:translateX(4px)}
-.adm-doc-ic{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;background:#fff;border:1px solid #E4E9E2;color:#1668A3}
-.adm-doc-ic svg{width:22px;height:22px}
-.adm-doc-name{flex:1;font-weight:600;font-size:.98rem;color:var(--ink);line-height:1.35}
-.adm-doc-dl{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;transition:transform .25s}
-.adm-doc:hover .adm-doc-dl{transform:translateY(2px)}
-.adm-doc-dl svg{width:19px;height:19px}
+/* Блок „Бланки и декларации" — стил „Документи" (ASSYST), в палитрата на ЦСОП */
+.adm-docs { max-width: 760px; margin: 56px auto 0; }
+
+.adm-kicker {
+  font-family: 'Montserrat Alternates', var(--sans);
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--em-d); font-weight: 700; display: block; margin-bottom: 12px;
+}
+.adm-docs-head h2 {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem); color: var(--ink); margin: 0 0 8px;
+}
+.adm-docs-head p {
+  font-family: var(--sans); color: var(--ink-2); font-size: 0.98rem; line-height: 1.6; margin: 0 0 22px;
+}
+
+.adm-docs-list { display: flex; flex-direction: column; }
+
+.adm-doc {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s, padding-left 0.3s;
+}
+.adm-doc:first-of-type { border-top: 1px solid var(--line); }
+.adm-doc:hover { background: color-mix(in srgb, var(--green-soft) 55%, transparent); padding-left: 14px; }
+
+.adm-doc-num {
+  font-family: 'Montserrat Alternates', var(--sans);
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--em-d);
+}
+.adm-doc-name {
+  font-family: 'Montserrat Alternates', var(--sans);
+  font-weight: 700; font-size: 16px; color: var(--ink); line-height: 1.4;
+}
+.adm-doc-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.adm-badge {
+  font-family: 'Montserrat Alternates', var(--sans);
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 6px; background: var(--green-soft); color: var(--green-deep);
+}
+.adm-doc-dl {
+  font-family: 'Montserrat Alternates', var(--sans);
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green-deep);
+  border-bottom: 1px solid color-mix(in srgb, var(--green-deep) 30%, transparent);
+  padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.adm-doc:hover .adm-doc-dl { color: var(--em-d); border-color: var(--em-d); }
+
+@media (max-width: 640px) {
+  .adm-doc { grid-template-columns: 40px 1fr; gap: 14px; }
+  .adm-doc-right { display: none; }
+}

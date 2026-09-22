@@ -13,6 +13,7 @@ async function getDocs(): Promise<Doc[]> {
       .from('site_documents')
       .select('id, name, file_url')
       .eq('section', 'admission')
+      .eq('on_site', true)
       .order('sort_order', { ascending: true });
     return data ?? [];
   } catch {
@@ -27,22 +28,18 @@ export default async function AdmissionDocs() {
   return (
     <div className="adm-docs">
       <div className="adm-docs-head">
+        <span className="adm-kicker">Документи за прием</span>
         <h2>Бланки и декларации за изтегляне</h2>
         <p>Свалете, попълнете и донесете следните документи при записване.</p>
       </div>
       <div className="adm-docs-list">
-        {docs.map((d) => (
+        {docs.map((d, i) => (
           <a key={d.id} href={d.file_url} target="_blank" rel="noopener noreferrer" className="adm-doc">
-            <span className="adm-doc-ic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6 2h8l4 4v16H6z" /><path d="M14 2v4h4M9 13h6M9 17h4" />
-              </svg>
-            </span>
+            <span className="adm-doc-num">{String(i + 1).padStart(2, '0')}</span>
             <span className="adm-doc-name">{d.name}</span>
-            <span className="adm-doc-dl">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-              </svg>
+            <span className="adm-doc-right">
+              <span className="adm-badge">Наличен</span>
+              <span className="adm-doc-dl">Изтегли →</span>
             </span>
           </a>
         ))}

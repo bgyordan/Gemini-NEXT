@@ -6,7 +6,7 @@ import './resursi.css';
 export const metadata = {
   title: 'Ресурси за родители — ЦСОП Варна',
   description:
-    'Дигитална библиотека и психологическа подкрепа за семействата на деца със специални образователни потребности — материали за работа у дома, визуална комуникация, литература, групи за взаимопомощ и статии.',
+    'Печатни материали за работа у дома (комуникационни карти, табла за дневен режим и тоалетни навици), литература и психологическа подкрепа за семействата на деца със специални образователни потребности.',
 };
 
 type Row = {
@@ -14,16 +14,52 @@ type Row = {
   title: string;
   desc: string;
   href?: string;
-  badge: 'ok' | 'active' | 'soon';
+  badge: 'ok' | 'soon';
   badgeText: string;
   action?: string;
+  download?: boolean;
 };
 
-const LIBRARY: Row[] = [
+// Наши печатни материали (PDF за сваляне)
+const MATERIALS: Row[] = [
   {
     n: '01',
-    title: 'Брошури и материали за родители',
-    desc: 'Практични насоки по области на развитието — двигателно развитие, аутизъм, синдром на Даун, слухови и зрителни нарушения (Фондация „Карин дом“).',
+    title: 'Комуникационни карти',
+    desc: 'Основни картинки за общуване (искам, да, не, вода, храна, тоалетна, боли, помощ…) — за изрязване и ползване у дома.',
+    href: '/resursi/komunikatsionni-karti.pdf',
+    badge: 'ok',
+    badgeText: 'PDF',
+    action: 'Изтегли →',
+    download: true,
+  },
+  {
+    n: '02',
+    title: 'Табло за дневен режим',
+    desc: 'Картинки за подреждане на деня по ред — за предвидима и спокойна среда у дома.',
+    href: '/resursi/tablo-dneven-rezhim.pdf',
+    badge: 'ok',
+    badgeText: 'PDF',
+    action: 'Изтегли →',
+    download: true,
+  },
+  {
+    n: '03',
+    title: 'Табло за тоалетни навици',
+    desc: 'Стъпка по стъпка към самостоятелност — визуална последователност за тоалетните навици.',
+    href: '/resursi/tablo-toaletni-navitsi.pdf',
+    badge: 'ok',
+    badgeText: 'PDF',
+    action: 'Изтегли →',
+    download: true,
+  },
+];
+
+// Литература и външни ресурси (партньорски организации)
+const LINKS: Row[] = [
+  {
+    n: '01',
+    title: 'Брошури за родители (Карин дом)',
+    desc: 'Практични насоки по области на развитието — аутизъм, синдром на Даун, двигателно развитие, слухови и зрителни нарушения.',
     href: 'https://karindom.org/broshuri/',
     badge: 'ok',
     badgeText: 'Онлайн',
@@ -32,7 +68,7 @@ const LIBRARY: Row[] = [
   {
     n: '02',
     title: 'Визуална комуникация и PECS',
-    desc: 'Табла за комуникация, визуални графици и система PECS (общуване чрез картинки) за структуриране на деня и подпомагане на речта.',
+    desc: 'Как работят таблата за комуникация и системата PECS (общуване чрез картинки).',
     href: 'https://prepodavame.bg/dopalvashta-i-alternativna-komunikatsia-ili-kak-tehnologiite-promenyat-sadbi/',
     badge: 'ok',
     badgeText: 'Онлайн',
@@ -41,7 +77,7 @@ const LIBRARY: Row[] = [
   {
     n: '03',
     title: 'Препоръчителна литература',
-    desc: 'Подбран списък с книги и наръчници за родители на деца с аутизъм и специални потребности (Фондация „Аутизъм“).',
+    desc: 'Подбран списък с книги и наръчници за родители на деца с аутизъм и специални потребности.',
     href: 'https://autismbulgaria.com/knigi',
     badge: 'ok',
     badgeText: 'Онлайн',
@@ -49,18 +85,19 @@ const LIBRARY: Row[] = [
   },
 ];
 
+// Психологическа подкрепа за семейството
 const SUPPORT: Row[] = [
   {
     n: '01',
     title: 'Работилница за родители',
     desc: 'Съвместни срещи, в които терапевтите и родителите работят заедно за изграждане на общ език и ниво на комуникация с детето — практически техники, споделен опит и взаимна подкрепа.',
-    badge: 'active',
+    badge: 'ok',
     badgeText: 'Активна',
   },
   {
     n: '02',
     title: 'Консултации и групи за взаимопомощ',
-    desc: 'Консултации за родители и специалисти и обучения по международни стандарти в подкрепа на семействата (Фондация „Карин дом“).',
+    desc: 'Консултации за родители и специалисти и обучения по международни стандарти (Фондация „Карин дом“).',
     href: 'https://karindom.org/',
     badge: 'ok',
     badgeText: 'Онлайн',
@@ -69,7 +106,7 @@ const SUPPORT: Row[] = [
   {
     n: '03',
     title: 'Родителско прегаряне (бърнаут)',
-    desc: 'Какво е родителският бърнаут, как да го разпознаем и как да си върнем силите (Национална мрежа за децата).',
+    desc: 'Как да разпознаем родителския бърнаут и как да си върнем силите (Национална мрежа за децата).',
     href: 'https://nmd.bg/kakvo-e-i-zashto-se-stiga-do-roditelski-barnaut/',
     badge: 'ok',
     badgeText: 'Статия',
@@ -78,17 +115,8 @@ const SUPPORT: Row[] = [
   {
     n: '04',
     title: 'Братята и сестрите в семейството',
-    desc: 'Роли, отговорности и правила — как да подкрепим типично развиващото се дете в семейство на дете със СОП.',
+    desc: 'Роли и правила — как да подкрепим типично развиващото се дете в семейство на дете със СОП.',
     href: 'https://chudesa.bg/1017-otgovornosti-roli-i-pravila-bratya-sestri-na-deca-s-uvrejdaniya/',
-    badge: 'ok',
-    badgeText: 'Статия',
-    action: 'Отвори →',
-  },
-  {
-    n: '05',
-    title: 'Партньорство с училището и поведение',
-    desc: 'Как семейството и специалистите работят заедно и как да подхождаме към проблемните поведения (Prepodavame.bg).',
-    href: 'https://prepodavame.bg/partnyorstvo-i-vzaimodeystvie-s-roditelite-na-uchenitsi-sas-spetsialni-obrazovatelni-potrebnosti/',
     badge: 'ok',
     badgeText: 'Статия',
     action: 'Отвори →',
@@ -104,15 +132,16 @@ function DocRow({ r }: { r: Row }) {
         <p>{r.desc}</p>
       </div>
       <div className="dc-doc-right">
-        <span className={`dc-badge ${r.badge === 'active' ? 'ok' : r.badge}`}>{r.badgeText}</span>
+        <span className={`dc-badge ${r.badge}`}>{r.badgeText}</span>
         {r.action && <span className="dc-download">{r.action}</span>}
       </div>
     </>
   );
 
   if (r.href) {
+    const ext = { target: '_blank', rel: 'noopener noreferrer' };
     return (
-      <a href={r.href} target="_blank" rel="noopener noreferrer" className="dc-doc">
+      <a href={r.href} className="dc-doc" {...(r.download ? { download: true } : ext)}>
         {inner}
       </a>
     );
@@ -137,24 +166,35 @@ export default function ParentsResourcesPage() {
           </div>
           <div className="dc-hero-right">
             <p>
-              Терапията продължава и вкъщи. Събираме проверени материали за работа с детето у дома и
+              Терапията продължава и вкъщи. Готови за принтиране материали за работа с детето и
               подкрепа за самите родители — защото семейството е част от екипа.
             </p>
           </div>
         </Reveal>
 
-        {/* ДИГИТАЛНА БИБЛИОТЕКА */}
+        {/* НАШИ МАТЕРИАЛИ */}
         <Reveal className="dc-docs">
           <div className="dc-section-header">
-            <span className="dc-section-kicker">Дигитална библиотека</span>
+            <span className="dc-section-kicker">Материали за принтиране</span>
             <div className="dc-section-line" />
           </div>
-          {LIBRARY.map((r) => (
+          {MATERIALS.map((r) => (
             <DocRow key={r.n} r={r} />
           ))}
         </Reveal>
 
-        {/* ПСИХОЛОГИЧЕСКА ПОДКРЕПА */}
+        {/* ЛИТЕРАТУРА И ВРЪЗКИ */}
+        <Reveal className="dc-docs">
+          <div className="dc-section-header">
+            <span className="dc-section-kicker">Литература и ресурси</span>
+            <div className="dc-section-line" />
+          </div>
+          {LINKS.map((r) => (
+            <DocRow key={r.n} r={r} />
+          ))}
+        </Reveal>
+
+        {/* ПОДКРЕПА */}
         <Reveal className="dc-docs">
           <div className="dc-section-header">
             <span className="dc-section-kicker">За родителите</span>
@@ -168,9 +208,9 @@ export default function ParentsResourcesPage() {
         {/* INFO */}
         <Reveal className="dc-info">
           <p>
-            Част от ресурсите се поддържат от партньорски организации (Фондация „Карин дом“, Фондация
-            „Аутизъм“, Национална мрежа за децата и др.). За индивидуална консултация се свържете с
-            нас на <a href="mailto:info-400052@edu.mon.bg">info-400052@edu.mon.bg</a> или на телефон{' '}
+            Материалите са изготвени от екипа на ЦСОП – Варна и са свободни за ползване у дома. За
+            индивидуална консултация се свържете с нас на{' '}
+            <a href="mailto:info-400052@edu.mon.bg">info-400052@edu.mon.bg</a> или на телефон{' '}
             <a href="tel:052619456">052 619 456</a>.
           </p>
         </Reveal>

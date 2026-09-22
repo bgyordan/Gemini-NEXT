@@ -1,19 +1,26 @@
 .budget-page{padding:70px 0 40px}
 .wrap.narrow{max-width:760px;margin:0 auto;padding:0 28px}
 .budget-empty{text-align:center;padding:70px 20px;color:var(--ink-3);font-size:16px}
-.year-group{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:24px;box-shadow:0 12px 34px -24px rgba(20,90,70,.3)}
-.year-header{display:flex;align-items:center;gap:14px;padding:18px 24px;background:linear-gradient(135deg,#E9F3FA,#EAF6EF);border-bottom:1px solid var(--line)}
-.year-badge{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:#1668A3;background:#fff;border:1.5px solid #C6E4F4;border-radius:10px;padding:4px 16px}
+.year-group{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:24px;box-shadow:0 12px 34px -24px rgba(58,99,71,.28)}
+.year-header{display:flex;align-items:center;gap:14px;padding:18px 24px;background:linear-gradient(135deg,var(--green-soft),var(--sand-2));border-bottom:1px solid var(--line)}
+.year-badge{font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--green-deep);background:#fff;border:1.5px solid var(--green-soft);border-radius:10px;padding:4px 16px}
 .year-label{font-weight:600;font-size:.82rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
-.report-list{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px}
-.report-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;border:1px solid #EEF3F8;background:#FAFCFE;transition:border-color .25s,background .25s,transform .25s}
-.report-row:hover{border-color:#C6E4F4;background:#F2F9FE;transform:translateX(4px)}
-.report-ic{width:40px;height:40px;border-radius:11px;flex-shrink:0;display:grid;place-items:center;background:#fff;border:1px solid #E4E9E2;color:#1668A3}
+.year-body{padding:6px 16px 16px}
+
+/* Категория (Утвърден бюджет / Отчети) */
+.budget-cat{margin-top:12px}
+.budget-cat-label{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-deep);margin:10px 2px 8px}
+.budget-cat-label::before{content:'';width:22px;height:3px;border-radius:2px;background:var(--green)}
+
+.report-list{display:flex;flex-direction:column;gap:8px}
+.report-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--sand);transition:border-color .25s,background .25s,transform .25s}
+.report-row:hover{border-color:color-mix(in srgb,var(--green) 45%,transparent);background:color-mix(in srgb,var(--green-soft) 55%,transparent);transform:translateX(4px)}
+.report-ic{width:40px;height:40px;border-radius:11px;flex-shrink:0;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:var(--green-deep)}
 .report-ic svg{width:21px;height:21px}
 .report-name{flex:1;font-weight:600;font-size:.95rem;color:var(--ink);line-height:1.35}
-.report-dl{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;font-size:.78rem;font-weight:600;color:#1668A3;border:1.5px solid #C6E4F4;padding:7px 15px;border-radius:999px;transition:all .25s}
+.report-dl{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;font-size:.78rem;font-weight:600;color:var(--green-deep);border:1.5px solid var(--green-soft);padding:7px 15px;border-radius:999px;transition:all .25s}
 .report-dl svg{width:14px;height:14px}
-.report-row:hover .report-dl{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent}
+.report-row:hover .report-dl{background:linear-gradient(135deg,#4A7C59,#3A6347);color:#fff;border-color:transparent}
 @media(max-width:520px){
   .report-row{flex-wrap:wrap}
   .report-dl{margin-left:54px}
@@ -22,8 +29,8 @@
 /* Филтър по година */
 .budget-years{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .budget-year{padding:9px 20px;font-size:14px;font-weight:600;font-family:var(--sans);color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;cursor:pointer;transition:all .25s}
-.budget-year:hover{border-color:#1E7FC0;color:var(--ink)}
-.budget-year.on{background:linear-gradient(135deg,#1E7FC0,#1668A3);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(30,127,192,.5)}
+.budget-year:hover{border-color:var(--green);color:var(--ink)}
+.budget-year.on{background:linear-gradient(135deg,#4A7C59,#3A6347);color:#fff;border-color:transparent;box-shadow:0 8px 18px -8px rgba(58,99,71,.5)}
 
 /* Увод + категории (Бюджет) */
 .budget-intro { padding: 0; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }

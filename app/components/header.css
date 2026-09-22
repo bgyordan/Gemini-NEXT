@@ -618,13 +618,13 @@ header.solid .bar {
 .mobile-parent{text-transform:uppercase;letter-spacing:.06em}
 .mobile-sub-label{text-transform:uppercase;letter-spacing:.05em}
 
-/* МОДЕРЕН ШРИФТ НА МЕНЮТО (Montserrat Alternates) */
+/* ШРИФТ НА МЕНЮТО — Golos Text (шрифта на сайта), с разредка от CAPS-правилата */
 .nav-link,
 .brand-name,
 .item-label,
 .footer-link,
 .mobile-parent,
-.mobile-sub-item{font-family:'Montserrat Alternates',var(--sans)}
+.mobile-sub-item{font-family:var(--sans)}
 
 /* Мобилно — хедърът да се събира в екрана */
 @media (max-width: 640px) {

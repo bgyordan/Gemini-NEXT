@@ -12,7 +12,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-type Doc = { id: string; name: string; file_url: string; academic_year: string | null };
+type Doc = { id: string; name: string; file_url: string; academic_year: string | null; category: string | null };
 
 async function getBudget(): Promise<Doc[]> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -23,7 +23,7 @@ async function getBudget(): Promise<Doc[]> {
     const supabase = createClient(url, key);
     const { data } = await supabase
       .from('site_documents')
-      .select('id, name, file_url, academic_year')
+      .select('id, name, file_url, academic_year, category')
       .eq('section', 'budget')
       .order('academic_year', { ascending: false })
       .order('sort_order', { ascending: true });
@@ -43,7 +43,7 @@ export default async function BudgetPage() {
         kicker="За нас · Финанси"
         title="Бюджет и финанси"
         intro="Финансова прозрачност — публични отчети за разходване на бюджетните средства на центъра."
-        tone="bl"
+        tone="em"
       />
       <div className="budget-page">
         <div className="wrap narrow">
@@ -57,9 +57,7 @@ export default async function BudgetPage() {
             <h2>Какво ще намерите</h2>
             <ul className="budget-cats">
               <li><b>Утвърден бюджет</b> — за съответната година, с основните направления на приходите и разходите.</li>
-              <li><b>Отчети за изпълнение</b> — периодични отчети към съответния отчетен период.</li>
-              <li><b>Годишни финансови отчети</b> — в края на финансовата година.</li>
-              <li><b>Допълнително финансиране</b> — източник и предназначение, когато подлежи на оповестяване.</li>
+              <li><b>Отчети за изпълнение</b> — периодични и годишни отчети към съответния отчетен период.</li>
             </ul>
             <p className="budget-intro-note">
               Документите са подредени по години и отчетни периоди, за да може информацията да се проследява

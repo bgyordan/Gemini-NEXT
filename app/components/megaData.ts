@@ -8,7 +8,7 @@ export type Mega = {
 
 export const MEGA: Mega[] = [
   {
-    label: 'За нас',
+    label: 'ЦСОП',
     href: '/za-nas',
     feature: {
       title: 'Историята на един дом за развитие',
@@ -26,7 +26,7 @@ export const MEGA: Mega[] = [
     ],
   },
   {
-    label: 'За родители',
+    label: 'Родители',
     href: '/za-roditeli',
     feature: {
       title: 'Всичко за родителите',

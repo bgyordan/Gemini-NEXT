@@ -22,7 +22,8 @@ export default function ProcedurePage() {
         kicker="Прием · Процедура"
         title="Процедура и необходими документи за прием"
         intro="Научете всички детайли за стъпките за кандидатстване, документите от РЦПППО – Варна и индивидуалната оценка."
-        tone="bl"
+        tone="em"
+        watermark="ПРИЕМ"
       />
 
       <main style={{ padding: '70px 0 100px' }}>

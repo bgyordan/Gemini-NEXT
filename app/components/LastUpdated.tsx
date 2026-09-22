@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache';
 import { supabase } from '../../lib/supabase';
 
 // Датата = най-скорошното реално съдържание (публикувана новина или качен документ).
@@ -35,6 +36,10 @@ async function latestUpdate(): Promise<Date | null> {
 }
 
 export default async function LastUpdated() {
+  // Изключваме статичното кеширане, за да се смята при всяка заявка —
+  // датата се обновява веднага при нова новина/документ, без ребилд.
+  noStore();
+
   const d = await latestUpdate();
   if (!d || isNaN(d.getTime())) return null;
 

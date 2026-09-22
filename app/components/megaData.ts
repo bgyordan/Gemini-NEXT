@@ -26,21 +26,6 @@ export const MEGA: Mega[] = [
     ],
   },
   {
-    label: 'Прием',
-    href: '/priem',
-    feature: {
-      title: 'Добре дошли в нашето семейство',
-      text: 'Разберете как да запишете детето си и планирайте първо посещение при нас.',
-      cta: 'Планирайте посещение',
-      href: '/priem/poseshtenie',
-      tone: 'bl',
-    },
-    subs: [
-      { label: 'Процедура и документи', desc: 'Стъпки за записване', href: '/priem/proczedura', icon: 'clipboard' },
-      { label: 'Планирайте посещение', desc: 'Елате да се запознаем', href: '/priem/poseshtenie', icon: 'calendar' },
-    ],
-  },
-  {
     label: 'За родители',
     href: '/za-roditeli',
     feature: {
@@ -51,13 +36,10 @@ export const MEGA: Mega[] = [
       tone: 'em',
     },
     subs: [
+      { label: 'Процедура и документи', desc: 'Стъпки за записване', href: '/priem/proczedura', icon: 'clipboard' },
+      { label: 'Планирайте посещение', desc: 'Елате да се запознаем', href: '/priem/poseshtenie', icon: 'calendar' },
       { label: 'Училищно настоятелство', desc: 'Заедно за децата', href: '/za-roditeli/nastoyatelstvo', icon: 'heart' },
       { label: 'Дневен режим', desc: 'Ритъмът на деня', href: '/za-roditeli/dneven-rezhim', icon: 'clock' },
-      { label: 'Учебни часове', desc: 'Седмично разписание', href: '/za-roditeli/uchebno-razpisanie', icon: 'book' },
-      { label: 'Терапевтични часове', desc: 'График на терапиите', href: '/za-roditeli/terapevtichno-razpisanie', icon: 'puzzle' },
-      { label: 'Приемно време', desc: 'Кога да ни намерите', href: '/za-roditeli/priemno-vreme', icon: 'clock' },
-      { label: 'Правила за посещение', desc: 'Как протича посещението', href: '/za-roditeli/pravila', icon: 'shield' },
-      { label: 'Консултации', desc: 'График с родителите', href: '/za-roditeli/konsultacii', icon: 'chat' },
       { label: 'Административни услуги', desc: 'Заявления и удостоверения', href: '/za-roditeli/uslugi', icon: 'file' },
       { label: 'Ресурси за родители', desc: 'Материали и подкрепа за дома', href: '/za-roditeli/resursi', icon: 'heart' },
     ],

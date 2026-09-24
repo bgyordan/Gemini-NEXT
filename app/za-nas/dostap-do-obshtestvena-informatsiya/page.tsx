@@ -85,9 +85,9 @@ export default async function ZdoiPage() {
       <div className="zdoi-page">
         <div className="wrap narrow">
           {/* Право на достъп */}
-          <section className="zdoi-block">
+          <section className="zdoi-block prose-block">
             <h2>Право на достъп</h2>
-            <p>
+            <p className="prose-lead">
               Всеки гражданин на Република България, чужденците и лицата без гражданство, както и всички
               юридически лица, имат право на достъп до обществена информация. При упражняване на това право
               не е необходимо да се доказва правен интерес, нито да се посочват причини и цели. Правото не
@@ -96,7 +96,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Как да подадете заявление */}
-          <section className="zdoi-block zdoi-intro">
+          <section className="zdoi-block prose-block zdoi-intro">
             <h2>Как да подадете заявление</h2>
             <p>
               Заявление може да се подаде писмено — на място в деловодството на центъра, по пощата или по
@@ -113,7 +113,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Форми на достъп */}
-          <section className="zdoi-block">
+          <section className="zdoi-block prose-block">
             <h2>Форми на достъп</h2>
             <p>
               Достъпът може да бъде предоставен като преглед на информацията (оригинал или копие), устна
@@ -123,7 +123,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Разходи */}
-          <section className="zdoi-block zdoi-cost">
+          <section className="zdoi-block prose-block zdoi-cost">
             <h2>Разходи</h2>
             <p>
               Достъпът до обществена информация е безплатен. Заплащат се единствено разходите по
@@ -133,7 +133,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Звено за приемане */}
-          <section className="zdoi-block">
+          <section className="zdoi-block prose-block">
             <h2>Звено за приемане на заявления</h2>
             <div className="zdoi-contact">
               <div className="zdoi-contact-row"><span>Звено</span><b>{UNIT.name}</b></div>
@@ -145,9 +145,9 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Образци и бланки */}
-          <section className="zdoi-block zdoi-docs">
+          <section className="zdoi-block prose-block zdoi-docs">
             <h2>Образци и бланки</h2>
-            <p className="zdoi-docs-sub">
+            <p className="zdoi-docs-sub prose-note">
               Заявление за достъп, протоколи за приемане и предоставяне на информация, решения по ЗДОИ.
             </p>
             {obrazci.length > 0 ? (
@@ -158,7 +158,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Вътрешни правила */}
-          <section className="zdoi-block zdoi-docs">
+          <section className="zdoi-block prose-block zdoi-docs">
             <h2>Вътрешни правила по ЗДОИ</h2>
             {pravila.length > 0 ? (
               <DocList docs={pravila} icon="shield" />
@@ -169,16 +169,16 @@ export default async function ZdoiPage() {
 
           {/* Нормативи за разходите (само ако има качени) */}
           {normativi.length > 0 && (
-            <section className="zdoi-block zdoi-docs">
+            <section className="zdoi-block prose-block zdoi-docs">
               <h2>Нормативи за разходите</h2>
               <DocList docs={normativi} icon="target" />
             </section>
           )}
 
           {/* Годишни отчети по чл. 15, ал. 2 */}
-          <section className="zdoi-block zdoi-docs">
+          <section className="zdoi-block prose-block zdoi-docs">
             <h2>Годишни отчети по чл. 15, ал. 2 от ЗДОИ</h2>
-            <p className="zdoi-docs-sub">
+            <p className="zdoi-docs-sub prose-note">
               Отчет за постъпилите заявления за достъп до обществена информация — публикува се ежегодно,
               включително когато през годината не са постъпили заявления.
             </p>
@@ -195,7 +195,7 @@ export default async function ZdoiPage() {
           </section>
 
           {/* Нормативна уредба */}
-          <section className="zdoi-block">
+          <section className="zdoi-block prose-block">
             <LawRefs
               items={[
                 { label: 'Закон за достъп до обществена информация (пълен текст)', href: 'https://pitay.government.bg/documents/zakon-za-dostup-do-obshestvena-informaciya' },

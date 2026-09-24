@@ -47,8 +47,8 @@ export default async function BudgetPage() {
       />
       <div className="budget-page">
         <div className="wrap narrow">
-          <section className="budget-intro">
-            <p>
+          <section className="budget-intro prose-block">
+            <p className="prose-lead">
               Публичността на финансовата информация е важна част от прозрачността в управлението на
               ЦСОП – Варна. Тук публикуваме утвърдения бюджет на центъра и информация за изпълнението му
               през годината, за да могат родители, служители, институции и граждани да проследят
@@ -59,7 +59,7 @@ export default async function BudgetPage() {
               <li><b>Утвърден бюджет</b> — за съответната година, с основните направления на приходите и разходите.</li>
               <li><b>Отчети за изпълнение</b> — периодични и годишни отчети към съответния отчетен период.</li>
             </ul>
-            <p className="budget-intro-note">
+            <p className="budget-intro-note prose-note">
               Документите са подредени по години и отчетни периоди, за да може информацията да се проследява
               във времето.
             </p>

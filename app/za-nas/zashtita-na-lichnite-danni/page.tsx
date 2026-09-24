@@ -53,16 +53,16 @@ export default async function ZzldPage() {
 
       <div className="zzld-page">
         <div className="wrap narrow">
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Кой обработва Вашите данни</h2>
-            <p>
+            <p className="prose-lead">
               Администратор на лични данни е Център за специална образователна подкрепа – Варна, с адрес
               гр. Варна, ул. „Петко Стайнов“ №7. Центърът определя целите и средствата за обработване на
               данните и отговаря за тяхната сигурност.
             </p>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Какви данни обработваме и защо</h2>
             <p>
               Обработваме лични данни на ученици, родители и настойници, служители и партньори — само за
@@ -76,7 +76,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Срок на съхранение</h2>
             <p>
               Съхраняваме личните данни само толкова, колкото е необходимо за целите, за които са събрани,
@@ -86,7 +86,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block zzld-dpo">
+          <section className="zzld-block prose-block zzld-dpo">
             <h2>Длъжностно лице по защита на данните (ДЛЗД)</h2>
             <p>
               За всички въпроси, свързани с обработването на Вашите лични данни и с упражняването на
@@ -99,7 +99,7 @@ export default async function ZzldPage() {
             </div>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Вашите права</h2>
             <div className="zzld-rights">
               {RIGHTS.map(([title, text]) => (
@@ -111,7 +111,7 @@ export default async function ZzldPage() {
             </div>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Видеонаблюдение</h2>
             <p>
               В случай че в сградата или двора на центъра са монтирани камери, видеонаблюдението се
@@ -120,7 +120,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Жалби</h2>
             <p>
               Ако считате, че правата Ви са нарушени, имате право да подадете жалба до Комисията за защита
@@ -129,7 +129,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <LawRefs
               items={[
                 { label: 'Регламент (ЕС) 2016/679 (ОРЗД / GDPR)', href: 'https://eur-lex.europa.eu/legal-content/BG/TXT/?uri=CELEX:32016R0679' },
@@ -138,9 +138,9 @@ export default async function ZzldPage() {
             />
           </section>
 
-          <section className="zzld-block">
+          <section className="zzld-block prose-block">
             <h2>Документи</h2>
-            <p className="zzld-docs-sub">
+            <p className="zzld-docs-sub prose-note">
               Политика за поверителност, вътрешни правила, декларация за съгласие за снимане и формуляр за
               упражняване на права.
             </p>

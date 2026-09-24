@@ -45,15 +45,15 @@ export default async function DocsPage() {
       />
       <div className="docs-page">
         <div className="wrap narrow">
-          <section className="docs-intro">
-            <p>
+          <section className="docs-intro prose-block">
+            <p className="prose-lead">
               В този раздел ЦСОП – Варна публикува основните документи, които определят организацията,
               развитието и ежедневната работа на центъра — стратегическите и плановите документи,
               правилниците и вътрешните правила, както и документи, свързани с образователната,
               терапевтичната и административната дейност.
             </p>
             
-            <p className="docs-intro-note">
+            <p className="docs-intro-note prose-note">
               Документите се актуализират при промяна в нормативната уредба, при приемане на нови вътрешни
               правила или при промени в организацията на дейността на центъра.
             </p>

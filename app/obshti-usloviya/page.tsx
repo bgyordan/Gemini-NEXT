@@ -22,16 +22,16 @@ export default function TermsPage() {
 
       <div className="terms-page">
         <div className="wrap narrow">
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>1. Общи положения</h2>
-            <p>
+            <p className="prose-lead">
               Този уебсайт се поддържа от Център за специална образователна подкрепа – Варна (ЦСОП – Варна),
               с адрес гр. Варна, ул. „Петко Стайнов“ №7. Сайтът има за цел да предоставя официална и
               актуална информация за дейността на центъра на родители, ученици, институции и широката общественост.
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>2. Предназначение на съдържанието</h2>
             <p>
               Публикуваната информация има информативен характер. Центърът полага усилия съдържанието да бъде
@@ -41,7 +41,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>3. Авторски права и интелектуална собственост</h2>
             <p>
               Цялото съдържание на сайта — текстове, изображения, документи, графики, лого и структура — е
@@ -51,7 +51,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>4. Използване на съдържанието</h2>
             <p>
               Допуска се използване на публично достъпната информация с нетърговска, образователна или
@@ -60,7 +60,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>5. Външни връзки</h2>
             <p>
               Сайтът може да съдържа връзки към външни интернет страници (напр. институции, регистри, партньори).
@@ -69,7 +69,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>6. Лични данни</h2>
             <p>
               Обработването на лични данни при използване на сайта се извършва съгласно Регламент (ЕС) 2016/679
@@ -78,7 +78,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>7. Отговорност</h2>
             <p>
               ЦСОП – Варна не носи отговорност за преки или косвени вреди, произтичащи от достъпа до или
@@ -87,7 +87,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>8. Промени в условията</h2>
             <p>
               Настоящите Общи условия могат да бъдат актуализирани при промяна в нормативната уредба или в
@@ -95,7 +95,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <section className="terms-block">
+          <section className="terms-block prose-block">
             <h2>9. Приложимо право и контакт</h2>
             <p>
               За всички неуредени въпроси се прилага действащото българско законодателство. При въпроси относно

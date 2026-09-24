@@ -388,6 +388,9 @@ h2 {
 
 .prose-block p:last-child { margin-bottom: 0; }
 
+/* Подзаглавие след абзац в същата секция */
+.prose-block p + h2 { margin-top: 1.75rem; }
+
 .prose-block p a {
   color: var(--em-d);
   text-decoration: underline;

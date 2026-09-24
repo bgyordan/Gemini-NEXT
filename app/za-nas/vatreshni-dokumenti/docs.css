@@ -1,5 +1,4 @@
 .docs-page{padding:36px 0 56px}
-.wrap.narrow{max-width:860px;margin:0 auto;padding:0 28px}
 
 .doc-search{position:relative;margin-bottom:28px}
 .doc-search>svg{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--ink-3);pointer-events:none}

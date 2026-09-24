@@ -3,9 +3,9 @@
   background: var(--sand);
 }
 
-/* Акцентни карти */
-.zdoi-intro,
-.zdoi-cost {
+/* Акцентни карти (.prose-block, за да не ги нулира padding: 0 от globals.css) */
+.prose-block.zdoi-intro,
+.prose-block.zdoi-cost {
   background: var(--card-bg);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -13,7 +13,7 @@
   box-shadow: var(--shadow-sm);
 }
 
-.zdoi-cost { background: var(--green-soft); }
+.prose-block.zdoi-cost { background: var(--green-soft); }
 
 /* Контакт */
 .zdoi-contact {

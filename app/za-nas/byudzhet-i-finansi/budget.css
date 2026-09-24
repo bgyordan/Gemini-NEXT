@@ -1,5 +1,4 @@
 .budget-page{padding:70px 0 40px}
-.wrap.narrow{max-width:760px;margin:0 auto;padding:0 28px}
 .budget-empty{text-align:center;padding:70px 20px;color:var(--ink-3);font-size:16px}
 .year-group{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:24px;box-shadow:0 12px 34px -24px rgba(58,99,71,.28)}
 .year-header{display:flex;align-items:center;gap:14px;padding:18px 24px;background:linear-gradient(135deg,var(--green-soft),var(--sand-2));border-bottom:1px solid var(--line)}

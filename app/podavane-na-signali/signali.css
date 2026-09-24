@@ -3,8 +3,8 @@
   background: var(--sand);
 }
 
-/* Гаранции — акцентна карта */
-.sig-guarantee {
+/* Гаранции — акцентна карта (.prose-block, за да не я нулира padding: 0 от globals.css) */
+.prose-block.sig-guarantee {
   background: var(--green-soft);
   border: 1px solid var(--line);
   border-radius: 16px;

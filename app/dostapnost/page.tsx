@@ -22,16 +22,16 @@ export default function AccessibilityDeclarationPage() {
 
       <div className="acc-page">
         <div className="wrap narrow">
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Ангажимент за достъпност</h2>
-            <p>
+            <p className="prose-lead">
               ЦСОП – Варна се стреми да направи своя уебсайт достъпен за всички потребители, включително за хора
               с увреждания, като прилага общопризнатите стандарти за уеб достъпност и непрекъснато подобрява
               съдържанието и функционалностите му.
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Стандарт, който се прилага</h2>
             <p>
               Достъпността се осигурява в съответствие с европейския стандарт EN 301 549 и Насоките за достъпност
@@ -39,7 +39,7 @@ export default function AccessibilityDeclarationPage() {
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Състояние на съответствие</h2>
             <p>
               Този уебсайт съответства <b>частично</b> с изискванията на посочения стандарт, поради изброените
@@ -49,7 +49,7 @@ export default function AccessibilityDeclarationPage() {
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Недостъпно съдържание</h2>
             <p>
               Възможно е част от по-старите прикачени документи (PDF) да не са изцяло достъпни за екранни четци.
@@ -58,7 +58,7 @@ export default function AccessibilityDeclarationPage() {
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Изготвяне на декларацията</h2>
             <p>
               Настоящата декларация е изготвена въз основа на <b>самооценка</b> на съответствието на уебсайта с
@@ -66,7 +66,7 @@ export default function AccessibilityDeclarationPage() {
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Обратна връзка</h2>
             <p>
               Ако установите проблем с достъпността на сайта или се нуждаете от информация в достъпен формат, можете
@@ -75,7 +75,7 @@ export default function AccessibilityDeclarationPage() {
             </p>
           </section>
 
-          <section className="acc-block">
+          <section className="acc-block prose-block">
             <h2>Процедура по прилагане</h2>
             <p>
               В случай че не получите задоволителен отговор в разумен срок, имате право да подадете сигнал до

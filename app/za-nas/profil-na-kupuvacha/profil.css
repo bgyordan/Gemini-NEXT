@@ -3,13 +3,7 @@
   background: var(--sand);
 }
 
-.pk-lead {
-  font-family: var(--sans);
-  color: var(--ink-2);
-  font-size: 1.05rem;
-  line-height: 1.75;
-  margin: 0 0 1.75rem;
-}
+.pk-page .pk-lead { margin: 0 0 1.75rem; }
 
 .pk-card {
   display: flex;
@@ -87,17 +81,9 @@
   color: var(--blue-accent);
 }
 
-.pk-note {
-  font-family: var(--sans);
-  color: var(--ink-3);
-  font-size: 0.9rem;
-  line-height: 1.65;
-  margin: 1.5rem 0 0;
-}
+.pk-page .pk-note { margin: 1.5rem 0 0; }
 
 /* Какво можете да намерите */
 .pk-find { margin-top: 2rem; }
-.pk-find h2 { font-family: var(--serif); font-size: clamp(1.25rem, 2.2vw, 1.5rem); color: var(--ink); margin: 0 0 0.9rem; }
 .pk-find ul { margin: 0 0 1.1rem; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
-.pk-find li { font-family: var(--sans); font-size: 1rem; line-height: 1.6; color: var(--ink-2); }
-.pk-find p { font-family: var(--sans); font-size: 1rem; line-height: 1.75; color: var(--ink-2); margin: 0; }
+.pk-find li { font-family: var(--sans); font-size: var(--fs-body); line-height: 1.6; color: var(--ink-2); }

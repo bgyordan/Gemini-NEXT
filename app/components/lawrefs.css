@@ -8,7 +8,7 @@
 
 .lawrefs h2 {
   font-family: var(--serif);
-  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  font-size: var(--fs-h2);
   color: var(--ink);
   margin: 0 0 1rem;
 }
@@ -52,10 +52,4 @@
 
 .lawrefs a:hover svg { color: var(--em-d); }
 
-.lawrefs-note {
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: var(--ink-3);
-  line-height: 1.6;
-  margin: 0.9rem 0 0;
-}
+.lawrefs .lawrefs-note { margin: 0.9rem 0 0; }

@@ -46,16 +46,16 @@ export default async function SignaliPage() {
 
       <div className="sig-page">
         <div className="wrap narrow">
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Кой може да подаде сигнал</h2>
-            <p>
+            <p className="prose-lead">
               Сигнал може да подаде всяко лице, което е узнало за нарушение в работен контекст — настоящи и
               бивши служители, кандидати за работа, лица, работещи по граждански договор, стажанти, както и
               партньори, доставчици и техни служители, свързани с дейността на центъра.
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>За какви нарушения</h2>
             <p>
               Каналът е за сигнали за нарушения на българското законодателство или на актове на Европейския
@@ -66,7 +66,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Как се подава сигнал</h2>
             <p>
               Сигнал се подава писмено (включително по електронен път) или устно до определеното длъжностно
@@ -80,7 +80,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Какво трябва да съдържа сигналът</h2>
             <p>
               Трите Ви имена, адрес и телефон (и имейл, ако имате); имената и месторабота на лицето, срещу
@@ -93,7 +93,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Срокове</h2>
             <p>
               В срок до 7 дни ще получите потвърждение за получаването на сигнала и неговия уникален
@@ -102,7 +102,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block sig-guarantee">
+          <section className="sig-block prose-block sig-guarantee">
             <h2>Гаранции за поверителност</h2>
             <p>
               Самоличността на подателя и на всяко засегнато лице е защитена и не се разкрива без съгласие,
@@ -112,7 +112,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Канал за сигнали</h2>
             <p>
               Сигнал може да се подаде писмено или устно до определеното със заповед на директора длъжностно
@@ -124,7 +124,7 @@ export default async function SignaliPage() {
               <div className="sig-contact-row"><span>Телефон</span><b>{CONTACT.phone}</b></div>
               <div className="sig-contact-row"><span>Адрес</span><b>{CONTACT.address}</b></div>
             </div>
-            <p className="sig-note">
+            <p className="sig-note prose-note">
               До специализирания имейл достъп има само отговорното лице. Освен вътрешния канал, сигнал може
               да се подаде и до централния орган за външно подаване — Комисията за защита на личните данни
               (КЗЛД), гр. София 1592, бул. „Проф. Цветан Лазаров“ №2, имейл:{' '}
@@ -132,7 +132,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Лични данни</h2>
             <p>
               Личните данни в сигнала се обработват от ЦСОП – Варна само за целите на разглеждането му,
@@ -142,7 +142,7 @@ export default async function SignaliPage() {
             </p>
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <LawRefs
               items={[
                 { label: 'Защита на подаващите сигнали (ЗЗЛПСПОИН) — КЗЛД', href: 'https://www.cpdp.bg' },
@@ -152,9 +152,9 @@ export default async function SignaliPage() {
             />
           </section>
 
-          <section className="sig-block">
+          <section className="sig-block prose-block">
             <h2>Документи и формуляр</h2>
-            <p className="sig-docs-sub">
+            <p className="sig-docs-sub prose-note">
               Вътрешни правила по ЗЗЛПСПОИН и официалният формуляр за подаване на сигнал (по образец на КЗЛД).
             </p>
             <DocsBrowser docs={docs} />

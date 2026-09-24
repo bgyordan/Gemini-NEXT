@@ -23,7 +23,7 @@ export default function ProfilNaKupuvachaPage() {
 
       <div className="pk-page">
         <div className="wrap narrow">
-          <p className="pk-lead">
+          <p className="pk-lead prose-lead">
             Считано от 01.01.2020 г. и съгласно Закона за обществените поръчки (ЗОП), обществените
             поръчки, пазарните консултации и цялата свързана документация на ЦСОП Варна се провеждат и
             публикуват електронно чрез ЦАИС ЕОП. Пълният профил на купувача, заедно с всички процедури,
@@ -52,12 +52,12 @@ export default function ProfilNaKupuvachaPage() {
             </svg>
           </a>
 
-          <p className="pk-note">
+          <p className="pk-note prose-note">
             Връзката отваря профила в нов раздел на сайта на ЦАИС ЕОП. За въпроси и разяснения по
             конкретна процедура използвайте модула за комуникация в самата система.
           </p>
 
-          <div className="pk-find">
+          <div className="pk-find prose-block">
             <h2>Какво можете да намерите в ЦАИС ЕОП</h2>
             <ul>
               <li>текущи и приключили процедури за обществени поръчки;</li>

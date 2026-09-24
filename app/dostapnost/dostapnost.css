@@ -1,28 +1,3 @@
 .acc-page {
   padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
 }
-.acc-block {
-  padding: 0;
-  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
-}
-.acc-block h2 {
-  font-family: var(--serif);
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-  color: var(--ink);
-  margin: 0 0 0.9rem;
-}
-.acc-block p {
-  font-family: var(--sans);
-  color: var(--ink-2);
-  font-size: 1rem;
-  line-height: 1.75;
-  margin: 0 0 1rem;
-}
-.acc-block p a {
-  color: var(--green-deep, #0E8A61);
-  font-weight: 600;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color .2s;
-}
-.acc-block p a:hover { border-bottom-color: currentColor; }

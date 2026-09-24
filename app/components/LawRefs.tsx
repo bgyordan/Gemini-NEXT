@@ -26,7 +26,7 @@ export default function LawRefs({
           </li>
         ))}
       </ul>
-      {note ? <p className="lawrefs-note">{note}</p> : null}
+      {note ? <p className="lawrefs-note prose-note">{note}</p> : null}
     </div>
   );
 }

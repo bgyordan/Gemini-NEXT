@@ -22,15 +22,15 @@ export default function CookiePolicyPage() {
 
       <div className="ck-page">
         <div className="wrap narrow">
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Какво представляват бисквитките</h2>
-            <p>
+            <p className="prose-lead">
               „Бисквитки“ (cookies) и подобни технологии (напр. локално хранилище на браузъра) са малки данни, които
               уебсайтовете съхраняват във Вашето устройство, за да запомнят Ваши настройки или да осигурят определени функции.
             </p>
           </section>
 
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Какви данни използваме ние</h2>
             <p>
               Уебсайтът на ЦСОП – Варна <b>не използва рекламни или аналитични бисквитки</b> и не проследява поведението
@@ -46,7 +46,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Бисквитки от трети страни</h2>
             <p>
               На страница <a href="/kontakti">Контакти</a> е вградена интерактивна карта от Google Maps. При зареждането ѝ
@@ -56,7 +56,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Как да управлявате бисквитките</h2>
             <p>
               Можете по всяко време да изтриете или блокирате съхранените данни от настройките на Вашия браузър
@@ -65,7 +65,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Връзка с други документи</h2>
             <p>
               Обработването на лични данни е описано в{' '}
@@ -74,7 +74,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block">
+          <section className="ck-block prose-block">
             <h2>Промени</h2>
             <p>
               Настоящата политика може да бъде актуализирана при промяна във функционалностите на сайта или в нормативната уредба.

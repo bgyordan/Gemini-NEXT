@@ -336,6 +336,83 @@ h2 {
   color: var(--ink-2);
 }
 
+/* ==========================================================================
+   ТЕКСТОВИ СТРАНИЦИ (правен/информационен текст)
+   Общ „редакционен вид“ — .prose-block на всяка секция, .prose-lead за
+   водещия абзац, .prose-note за бележки. Текстът е ляво подравнен
+   (WCAG 1.4.8 — без двустранно подравняване).
+   ========================================================================== */
+:root {
+  --fs-h2: clamp(1.3rem, 2.4vw, 1.6rem);
+  --fs-body: 1rem;
+  --lh-body: 1.75;
+  --fs-note: 0.9rem;
+}
+
+.prose-block {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  hanging-punctuation: first last;
+}
+
+.prose-block h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: var(--fs-h2);
+  color: var(--ink);
+  margin: 0 0 0.9rem;
+  padding-top: 16px;
+  position: relative;
+  text-wrap: balance;
+}
+
+.prose-block h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.prose-block p {
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-2);
+  margin: 0 0 1rem;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+.prose-block p:last-child { margin-bottom: 0; }
+
+.prose-block p a {
+  color: var(--em-d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Водещ абзац — serif, въздушен */
+p.prose-lead {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  text-align: left;
+}
+
+/* Бележка под текста */
+p.prose-note {
+  font-family: var(--sans);
+  font-size: var(--fs-note);
+  line-height: 1.65;
+  color: var(--ink-3);
+  text-align: left;
+}
+
 /* REVEAL ON SCROLL */
 .reveal {
   opacity: 0;

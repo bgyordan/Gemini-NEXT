@@ -16,7 +16,7 @@ export const metadata = {
 
 export const revalidate = 0;
 
-// TODO (Йордан): попълни телефона и заместника след заповедта; имейлът трябва реално да съществува
+// TODO (Йордан): попълни телефона
 const CONTACT = {
   person: 'Силвия Кьошкерян, ЗДУД',
   email: 'signali@csop-varna.bg',

@@ -59,7 +59,7 @@ export default async function Home() {
             </div>
             <p className="hh-quick">
               <span><strong>{CONTACT.address}</strong>, Варна</span>
-              <span>Понеделник – петък, <strong>8:00 – 17:30</strong></span>
+              <span>Понеделник – петък, <strong>8:00 – 18:00</strong></span>
             </p>
           </div>
           <div className="swirl" aria-hidden="true">

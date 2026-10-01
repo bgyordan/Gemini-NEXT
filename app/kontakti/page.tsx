@@ -45,8 +45,8 @@ export default function ContactsPage() {
             <h3>Работно време</h3>
             <table className="facts">
               <tbody>
-                <tr><th>Център</th><td>пон – пет, 8:00 – 17:30</td></tr>
-                <tr><th>Приемане на документи</th><td>8:00 – 16:30</td></tr>
+                <tr><th>Център</th><td>пон – пет, 8:00 – 18:00</td></tr>
+                <tr><th>Администрация и деловодство</th><td>8:00 – 16:30</td></tr>
                 <tr><th>Приемно време на директора</th><td>вторник, 9:00 – 10:00</td></tr>
               </tbody>
             </table>

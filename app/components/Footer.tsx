@@ -32,7 +32,7 @@ export default function Footer() {
             </address>
             <p><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <p><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
-            <p className="sf-hours">Пон – пет, 8:00 – 17:30</p>
+            <p className="sf-hours">Пон – пет, 8:00 – 18:00</p>
           </div>
         </div>
 

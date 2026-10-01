@@ -1,107 +1,75 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Reveal from '../../components/Reveal';
-import Footer from '../../components/Footer';
-import { supabase } from '../../../lib/supabase';
+import { db } from '../../../lib/supabase';
+import { CONTACT } from '../../components/nav';
 import JobSubscribe from './JobSubscribe';
 import './karieri.css';
 
 export const metadata = {
   title: 'Кариери — ЦСОП Варна',
-  description:
-    'Свободни позиции в ЦСОП – Варна. Присъединете се към екип от специални педагози, логопеди, психолози и терапевти.',
+  description: 'Свободни позиции в ЦСОП – Варна. Присъединете се към екип от специални педагози, логопеди, психолози и терапевти.',
 };
+export const dynamic = 'force-dynamic';
 
-export const revalidate = 0;
+type Job = { id: string; title: string; employment: string | null; description: string | null; requirements: string | null; location: string | null };
 
-type Job = {
-  id: string;
-  title: string;
-  employment: string | null;
-  description: string | null;
-  requirements: string | null;
-  location: string | null;
-};
+async function getJobs(): Promise<Job[]> {
+  const s = db();
+  if (!s) return [];
+  try {
+    const { data } = await s.from('site_jobs').select('id, title, employment, description, requirements, location')
+      .eq('status', 'active').order('sort_order', { ascending: true });
+    return data ?? [];
+  } catch { return []; }
+}
 
 export default async function CareersPage() {
-  const { data } = await supabase
-    .from('site_jobs')
-    .select('id, title, employment, description, requirements, location')
-    .eq('status', 'active')
-    .order('sort_order', { ascending: true });
-  const jobs: Job[] = data ?? [];
-
+  const jobs = await getJobs();
   return (
     <>
-      <Header />
       <PageHero
-        kicker="За нас · Кариери"
+        path="/za-nas/karieri"
+        page="karieri"
         title="Станете част от екипа"
-        intro="В ЦСОП – Варна работят специални педагози, логопеди, психолози и терапевти, отдадени на грижата за всяко дете. Ако споделяте нашата мисия, ще се радваме да се запознаем."
-        tone="bl"
+        intro="При нас работят специални педагози, логопеди, психолози и терапевти. Ако споделяте нашата мисия, ще се радваме да се запознаем."
       />
 
-      <main className="careers-main">
-        <div className="wrap narrow">
-          {/* Свободни позиции */}
-          <section className="careers-jobs">
-            <span className="kicker">Свободни позиции</span>
-            <h2>Актуални обяви</h2>
-
+      <section className="section tone-blue">
+        <div className="wrap split">
+          <div>
+            <h2 style={{ marginBottom: 20 }}>Свободни позиции</h2>
             {jobs.length === 0 ? (
-              <div className="careers-empty">
-                В момента няма обявени свободни позиции. Можете да изпратите документите си по всяко време —
-                ще ги разгледаме при бъдеща възможност.
-              </div>
+              <p className="empty">В момента няма обявени свободни позиции. Можете да ни изпратите документите си по всяко време.</p>
             ) : (
               <div className="job-list">
                 {jobs.map((j) => (
-                  <Reveal key={j.id} className="job-card">
-                    <div className="job-head">
-                      <h3>{j.title}</h3>
-                      <div className="job-meta">
-                        {j.employment && <span>{j.employment}</span>}
-                        {j.location && <span>{j.location}</span>}
-                      </div>
-                    </div>
+                  <article key={j.id} className="job">
+                    <h3>{j.title}</h3>
+                    {(j.employment || j.location) && (
+                      <p className="job-meta">{[j.employment, j.location].filter(Boolean).join(', ')}</p>
+                    )}
                     {j.description && <p className="job-desc">{j.description}</p>}
                     {j.requirements && (
-                      <div className="job-req">
-                        <b>Изисквания</b>
-                        <ul>
-                          {j.requirements.split('\n').filter((r) => r.trim()).map((r, i) => (
-                            <li key={i}>{r.trim()}</li>
-                          ))}
+                      <>
+                        <h4>Изисквания</h4>
+                        <ul className="feature-list">
+                          {j.requirements.split('\n').filter((r) => r.trim()).map((r, i) => <li key={i}>{r.trim()}</li>)}
                         </ul>
-                      </div>
+                      </>
                     )}
-                  </Reveal>
+                  </article>
                 ))}
               </div>
             )}
-          </section>
-
-          {/* Абонамент */}
-          <JobSubscribe />
-
-          {/* Как да кандидатствам */}
-          <Reveal className="careers-apply">
-            <div>
-              <span className="kicker" style={{ color: 'var(--green-deep)' }}>Кандидатстване</span>
-              <h3>Изпратете ни своите документи</h3>
-              <p>
-                Изпратете CV, мотивационно писмо и копия от дипломи на място в канцеларията на
-                ул. „Петко Стайнов“ №7 или на имейл: <b>info-400052@edu.mon.bg</b>.
-              </p>
-            </div>
-            <div className="apply-cta">
-              <a href="/kontakti" className="btn btn-warm">Свържете се с нас</a>
-            </div>
-          </Reveal>
+          </div>
+          <aside className="aside-box">
+            <h3>Как да кандидатствате</h3>
+            <p className="muted">Изпратете CV, мотивационно писмо и копия от дипломите си на имейл или ги донесете в деловодството.</p>
+            <p className="apply-mail">{CONTACT.email}</p>
+            <p className="muted">{CONTACT.address}, Варна</p>
+            <JobSubscribe />
+          </aside>
         </div>
-      </main>
-
-      <Footer />
+      </section>
     </>
   );
 }

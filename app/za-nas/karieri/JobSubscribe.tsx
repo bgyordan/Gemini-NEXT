@@ -33,8 +33,7 @@ export default function JobSubscribe() {
   return (
     <section className="job-subscribe">
       <div className="js-text">
-        <span className="kicker" style={{ color: 'var(--green-deep)' }}>Известия за нови обяви</span>
-        <h3>Абонирайте се</h3>
+        <h3>Известие за нови обяви</h3>
         <p>Оставете имейла си и ще ви уведомим, когато обявим нова свободна позиция.</p>
       </div>
 
@@ -50,7 +49,7 @@ export default function JobSubscribe() {
             aria-label="Имейл за абонамент"
             disabled={state === 'busy'}
           />
-          <button type="submit" className="btn btn-warm" disabled={state === 'busy'}>
+          <button type="submit" className="btn btn-primary" disabled={state === 'busy'}>
             {state === 'busy' ? 'Момент…' : 'Абонирай ме'}
           </button>
         </form>

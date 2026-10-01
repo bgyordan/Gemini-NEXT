@@ -1,94 +1,34 @@
-import Header from '../components/Header';
 import PageHero from '../components/PageHero';
-import Footer from '../components/Footer';
-import './prozrachnost.css';
+import LinkList from '../components/LinkList';
 
 export const metadata = {
   title: 'Прозрачност — ЦСОП Варна',
   description:
-    'Бюджет, обществени поръчки, вътрешни документи, достъп до информация и защита на личните данни — публично и на едно място.',
+    'Бюджет, обществени поръчки, вътрешни документи, достъп до информация и защита на личните данни – публично и на едно място.',
 };
-
-const ITEMS = [
-  {
-    title: 'Вътрешни документи',
-    desc: 'Правилници, стратегии, планове и политики на центъра.',
-    href: '/za-nas/vatreshni-dokumenti',
-    path: 'M6 2h8l4 4v16H6z M14 2v4h4',
-  },
-  {
-    title: 'Бюджет и финанси',
-    desc: 'Бюджети, тримесечни и годишни отчети — прозрачно в числата.',
-    href: '/za-nas/byudzhet-i-finansi',
-    path: 'M4 20V10 M10 20V4 M16 20v-7 M22 20H2',
-  },
-  {
-    title: 'Профил на купувача',
-    desc: 'Обществени поръчки и процедури в ЦАИС ЕОП.',
-    href: '/za-nas/profil-na-kupuvacha',
-    path: 'M9 4h6v2h4v15H5V6h4z M9 4v2h6',
-  },
-  {
-    title: 'Достъп до обществена информация',
-    desc: 'Заявления, ред за достъп и годишни отчети по ЗДОИ.',
-    href: '/za-nas/dostap-do-obshtestvena-informatsiya',
-    path: 'M4 4h11l5 5v11H4z M15 4v5h5 M8 13h8 M8 17h5',
-  },
-  {
-    title: 'Защита на личните данни',
-    desc: 'Политика за поверителност, ДЛЗД и правата Ви по GDPR.',
-    href: '/za-nas/zashtita-na-lichnite-danni',
-    path: 'M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z',
-  },
-  {
-    title: 'Подаване на сигнали',
-    desc: 'Поверителен канал за сигнали за нарушения по ЗЗЛПСПОИН.',
-    href: '/podavane-na-signali',
-    path: 'M3 11l18-5v12L3 14v-3z M11.6 16.8a3 3 0 0 1-5.8-1.6',
-  },
-];
 
 export default function ProzrachnostPage() {
   return (
     <>
-      <Header />
       <PageHero
-        kicker="За нас · Отчетност"
+        path="/prozrachnost"
         title="Прозрачност"
-        intro="Бюджет, обществени поръчки, документи и защита на данните — открито и на едно място, както подобава на публична институция."
-        tone="bl"
+        intro="Като публична институция работим открито. Тук са бюджетът и отчетите, обществените поръчки, вътрешните документи и начинът, по който пазим личните данни."
       />
-
-      <div className="prz-page">
-        <div className="wrap narrow">
-          <p className="prz-lead">
-            Като публична институция ЦСОП – Варна работи открито и отчетно. На едно място събираме
-            бюджета и финансовите отчети, обществените поръчки, вътрешните документи, реда за достъп до
-            информация и начина, по който защитаваме личните данни — за да могат родителите, служителите и
-            гражданите ясно да видят как функционира центърът и как се управляват ресурсите му.
-          </p>
-          <div className="prz-grid">
-            {ITEMS.map((it) => (
-              <a key={it.href} href={it.href} className="prz-card">
-                <div className="prz-card-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                    <path d={it.path} />
-                  </svg>
-                </div>
-                <div className="prz-card-body">
-                  <b className="prz-card-title">{it.title}</b>
-                  <span className="prz-card-desc">{it.desc}</span>
-                </div>
-                <svg className="prz-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
-            ))}
-          </div>
+      <section className="section tone-blue">
+        <div className="wrap">
+          <LinkList
+            items={[
+              { t: 'Бюджет и финанси', d: 'Бюджети, тримесечни и годишни отчети', href: '/za-nas/byudzhet-i-finansi', icon: 'chart' },
+              { t: 'Вътрешни документи', d: 'Правилници, стратегии, планове и политики', href: '/za-nas/vatreshni-dokumenti', icon: 'doc' },
+              { t: 'Профил на купувача', d: 'Обществени поръчки в ЦАИС ЕОП', href: '/za-nas/profil-na-kupuvacha', icon: 'cart' },
+              { t: 'Достъп до обществена информация', d: 'Заявления, ред за достъп и отчети по ЗДОИ', href: '/za-nas/dostap-do-obshtestvena-informatsiya', icon: 'search' },
+              { t: 'Защита на личните данни', d: 'Политика за поверителност, ДЛЗД и правата ви', href: '/za-nas/zashtita-na-lichnite-danni', icon: 'shield' },
+              { t: 'Подаване на сигнали', d: 'Поверителен канал по ЗЗЛПСПОИН', href: '/podavane-na-signali', icon: 'chat' },
+            ]}
+          />
         </div>
-      </div>
-
-      <Footer />
+      </section>
     </>
   );
 }

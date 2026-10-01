@@ -1,12 +1,7 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Footer from '../../components/Footer';
 import LawRefs from '../../components/LawRefs';
-import DocsBrowser from '../vatreshni-dokumenti/DocsBrowser';
-import type { DocRow } from '../vatreshni-dokumenti/page';
-import { supabase } from '../../../lib/supabase';
-import '../vatreshni-dokumenti/docs.css';
-import './zzld.css';
+import DocsBrowser from '../../components/DocsBrowser';
+import { getDocuments } from '../../../lib/data';
 
 export const metadata = {
   title: 'Защита на личните данни — ЦСОП Варна',
@@ -31,29 +26,22 @@ const RIGHTS = [
   ['Преносимост', 'Да получите данните си в структуриран, машинночетим формат.'],
 ];
 
-export default async function ZzldPage() {
-  const { data, error } = await supabase
-    .from('site_documents')
-    .select('id, name, file_url, academic_year, section, sort_order')
-    .eq('section', 'privacy')
-    .order('academic_year', { ascending: false })
-    .order('sort_order', { ascending: true });
+export const dynamic = 'force-dynamic';
 
-  const docs: DocRow[] = error ? [] : (data ?? []);
+export default async function ZzldPage() {
+  const docs = await getDocuments('privacy');
 
   return (
     <>
-      <Header />
       <PageHero
-        kicker="Прозрачност · Лични данни"
+        path="/za-nas/zashtita-na-lichnite-danni"
         title="Защита на личните данни"
         intro="ЦСОП – Варна обработва лични данни законосъобразно, добросъвестно и прозрачно, при спазване на Регламент (ЕС) 2016/679 (ОРЗД/GDPR) и Закона за защита на личните данни."
-        tone="bl"
       />
 
-      <div className="zzld-page">
-        <div className="wrap narrow">
-          <section className="zzld-block prose-block">
+      <section className="section tone-blue">
+        <div className="wrap narrow legal">
+          <section className="prose-block">
             <h2>Кой обработва Вашите данни</h2>
             <p className="prose-lead">
               Администратор на лични данни е Център за специална образователна подкрепа – Варна, с адрес
@@ -62,7 +50,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Какви данни обработваме и защо</h2>
             <p>
               Обработваме лични данни на ученици, родители и настойници, служители и партньори — само за
@@ -76,7 +64,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Срок на съхранение</h2>
             <p>
               Съхраняваме личните данни само толкова, колкото е необходимо за целите, за които са събрани,
@@ -86,24 +74,24 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block prose-block zzld-dpo">
+          <section className="prose-block">
             <h2>Длъжностно лице по защита на данните (ДЛЗД)</h2>
             <p>
               За всички въпроси, свързани с обработването на Вашите лични данни и с упражняването на
               правата Ви, можете да се свържете с длъжностното лице по защита на данните:
             </p>
-            <div className="zzld-dpo-card">
-              <div className="zzld-dpo-row"><span>Име</span><b>{DPO.name}</b></div>
-              <div className="zzld-dpo-row"><span>Ел. поща</span><b><a href={`mailto:${DPO.email}`}>{DPO.email}</a></b></div>
-              <div className="zzld-dpo-row"><span>Телефон</span><b><a href={`tel:${DPO.phone.replace(/\s/g, '')}`}>{DPO.phone}</a></b></div>
+            <div className="kv">
+              <div className="kv-row"><span>Име</span><b>{DPO.name}</b></div>
+              <div className="kv-row"><span>Ел. поща</span><b><a href={`mailto:${DPO.email}`}>{DPO.email}</a></b></div>
+              <div className="kv-row"><span>Телефон</span><b><a href={`tel:${DPO.phone.replace(/\s/g, '')}`}>{DPO.phone}</a></b></div>
             </div>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Вашите права</h2>
-            <div className="zzld-rights">
+            <div className="rights">
               {RIGHTS.map(([title, text]) => (
-                <div className="zzld-right" key={title}>
+                <div className="right" key={title}>
                   <b>{title}</b>
                   <span>{text}</span>
                 </div>
@@ -111,7 +99,7 @@ export default async function ZzldPage() {
             </div>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Видеонаблюдение</h2>
             <p>
               В случай че в сградата или двора на центъра са монтирани камери, видеонаблюдението се
@@ -120,7 +108,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Жалби</h2>
             <p>
               Ако считате, че правата Ви са нарушени, имате право да подадете жалба до Комисията за защита
@@ -129,7 +117,7 @@ export default async function ZzldPage() {
             </p>
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <LawRefs
               items={[
                 { label: 'Регламент (ЕС) 2016/679 (ОРЗД / GDPR)', href: 'https://eur-lex.europa.eu/legal-content/BG/TXT/?uri=CELEX:32016R0679' },
@@ -138,18 +126,16 @@ export default async function ZzldPage() {
             />
           </section>
 
-          <section className="zzld-block prose-block">
+          <section className="prose-block">
             <h2>Документи</h2>
-            <p className="zzld-docs-sub prose-note">
+            <p className="prose-note">
               Политика за поверителност, вътрешни правила, декларация за съгласие за снимане и формуляр за
               упражняване на права.
             </p>
             <DocsBrowser docs={docs} />
           </section>
         </div>
-      </div>
-
-      <Footer />
+      </section>
     </>
   );
 }

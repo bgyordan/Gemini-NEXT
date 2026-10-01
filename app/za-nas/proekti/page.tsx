@@ -1,15 +1,18 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Reveal from '../../components/Reveal';
-import Footer from '../../components/Footer';
+import PagePhotos from '../../components/PagePhotos';
 
 export const metadata = {
   title: 'Проекти и национални програми — ЦСОП Варна',
   description:
-    'Проекти на ЦСОП – Варна: Изграждане на модерен STEM център по НПВУ (BG-RRP-1.015) и Национални програми на МОН за БДП и достъпна образователна среда.',
+    'Проекти на ЦСОП – Варна: STEM център по НПВУ (BG-RRP-1.015) и национални програми на МОН за безопасност на движението и достъпна образователна среда.',
 };
 
-const projects = [
+type Project = {
+  tag: string; agency: string; title: string; status: string; statusTone: string; featured: boolean; desc: string;
+  sections?: { title: string; text: string }[]; highlights?: string[];
+};
+
+const projects: Project[] = [
   {
     tag: 'BG-RRP-1.015 · НПВУ',
     agency: 'Национален план за възстановяване и устойчивост · NextGenerationEU',
@@ -68,237 +71,51 @@ const projects = [
 ];
 
 export default function ProjectsPage() {
+  const [main, ...rest] = projects;
   return (
     <>
-      <Header />
       <PageHero
-        kicker="За нас · Проекти"
+        path="/za-nas/proekti"
+        page="proekti"
         title="Проекти и национални програми"
-        intro="Участие на ЦСОП – Варна в Националния план за възстановяване и устойчивост (STEM център) и национални програми на МОН за достъпна и модерна среда."
-        tone="bl"
+        intro="Участваме в Националния план за възстановяване и устойчивост и в национални програми на МОН за модерна и достъпна среда."
       />
 
-      <main style={{ padding: '60px 0 90px' }}>
+      <section className="section tone-blue">
         <div className="wrap">
-          <Reveal className="sec-head">
-            <span className="kicker">Модернизация и иновации</span>
-            <h2>Проектна дейност и програми</h2>
-            <p>
-              Официална информация за реализираните и текущите проекти на ЦСОП – Варна, насочени към високи технологии, практическо обучение и безопасност на децата.
-            </p>
-          </Reveal>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', maxWidth: '920px', margin: '0 auto' }}>
-            {projects.map((p, idx) => (
-              <Reveal
-                key={p.title}
-                delay={((idx % 3) + 1) as 1 | 2 | 3}
-                style={{
-                  background: '#ffffff',
-                  border: p.featured ? '2px solid rgba(11, 77, 60, 0.25)' : '1px solid var(--line)',
-                  borderRadius: '18px',
-                  padding: '32px',
-                  boxShadow: p.featured
-                    ? '0 8px 24px -4px rgba(11, 77, 60, 0.08), 0 2px 8px rgba(0,0,0,0.02)'
-                    : '0 2px 10px rgba(0, 0, 0, 0.03)',
-                  position: 'relative',
-                }}
-              >
-                {p.featured && (
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      background: 'var(--green-deep)',
-                      color: '#ffffff',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      padding: '3px 10px',
-                      borderRadius: '999px',
-                      marginBottom: '14px',
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '12px', height: '12px' }}>
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                    Ключов проект · Иновативна STEM среда
-                  </div>
-                )}
-
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start',
-                    flexWrap: 'wrap',
-                    gap: '12px',
-                    marginBottom: '12px',
-                  }}
-                >
-                  <div style={{ flex: 1, minWidth: '280px' }}>
-                    <span
-                      style={{
-                        display: 'block',
-                        fontSize: '11.5px',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        color: 'var(--clay-deep)',
-                        letterSpacing: '0.04em',
-                        marginBottom: '4px',
-                      }}
-                    >
-                      {p.agency}
-                    </span>
-                    <h3
-                      style={{
-                        fontFamily: 'var(--sans)',
-                        fontSize: '21px',
-                        fontWeight: 700,
-                        color: 'var(--ink)',
-                        margin: 0,
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {p.title}
-                    </h3>
-                  </div>
-
-                  <span
-                    style={{
-                      fontSize: '12px',
-                      fontWeight: 600,
-                      color: 'var(--green-deep)',
-                      background: 'rgba(11, 77, 60, 0.08)',
-                      padding: '4px 12px',
-                      borderRadius: '999px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {p.status}
-                  </span>
-                </div>
-
-                <p
-                  style={{
-                    fontSize: '15px',
-                    color: 'var(--ink-2)',
-                    lineHeight: '1.65',
-                    marginBottom: p.sections || p.highlights ? '20px' : '0',
-                  }}
-                >
-                  {p.desc}
-                </p>
-
-                {/* STEM SPECIAL SECTIONS GRID */}
-                {p.sections && (
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                      gap: '14px',
-                      marginTop: '16px',
-                    }}
-                  >
-                    {p.sections.map((sec, sIdx) => (
-                      <div
-                        key={sIdx}
-                        style={{
-                          background: 'var(--sand-2)',
-                          padding: '16px',
-                          borderRadius: '12px',
-                          border: '1px solid rgba(0, 0, 0, 0.04)',
-                        }}
-                      >
-                        <h4
-                          style={{
-                            fontSize: '13.5px',
-                            fontWeight: 700,
-                            color: 'var(--green-deep)',
-                            margin: '0 0 6px',
-                            lineHeight: 1.3,
-                          }}
-                        >
-                          {sec.title}
-                        </h4>
-                        <p
-                          style={{
-                            fontSize: '12.5px',
-                            color: 'var(--ink-2)',
-                            margin: 0,
-                            lineHeight: '1.5',
-                          }}
-                        >
-                          {sec.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* HIGHLIGHTS BULLETS */}
-                {p.highlights && (
-                  <div
-                    style={{
-                      background: 'var(--sand-2)',
-                      padding: '16px 20px',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(0, 0, 0, 0.03)',
-                    }}
-                  >
-                    <b
-                      style={{
-                        display: 'block',
-                        fontSize: '12px',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        color: 'var(--green-deep)',
-                        marginBottom: '8px',
-                        letterSpacing: '0.04em',
-                      }}
-                    >
-                      Основни компоненти и дейности:
-                    </b>
-                    <ul
-                      style={{
-                        margin: 0,
-                        paddingLeft: '18px',
-                        fontSize: '13.5px',
-                        color: 'var(--ink-2)',
-                        lineHeight: '1.6',
-                      }}
-                    >
-                      {p.highlights.map((h, hIdx) => (
-                        <li key={hIdx}>{h}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </Reveal>
-            ))}
-
-            <div
-              style={{
-                marginTop: '8px',
-                padding: '16px 20px',
-                borderRadius: '12px',
-                background: 'rgba(0, 0, 0, 0.02)',
-                border: '1px dashed var(--line)',
-                fontSize: '13px',
-                color: 'var(--ink-3)',
-                lineHeight: '1.5',
-                textAlign: 'center',
-              }}
-            >
-              Информацията за проектите и програмите на ЦСОП – Варна се актуализира редовно в съответствие с изискванията за публичност и прозрачност по НПВУ и МОН.
-            </div>
-          </div>
+          <article className="project feat">
+            <p className="pj-meta"><span className="tag">{main.tag}</span><span>{main.status}</span></p>
+            <h2>{main.title}</h2>
+            <p className="pj-agency">{main.agency}</p>
+            <p className="pj-desc">{main.desc}</p>
+            {main.sections && (
+              <div className="grid-2 pj-parts">
+                {main.sections.map((x) => (
+                  <div key={x.title}><h3>{x.title}</h3><p>{x.text}</p></div>
+                ))}
+              </div>
+            )}
+          </article>
         </div>
-      </main>
+      </section>
 
-      <Footer />
+      <PagePhotos page="proekti" title="Проекти" heading="Снимки от проектите" />
+
+      <section className="section tint tone-blue">
+        <div className="wrap grid-2">
+          {rest.map((p) => (
+            <article key={p.title} className="project">
+              <p className="pj-meta"><span className="tag">{p.tag}</span><span>{p.status}</span></p>
+              <h2>{p.title}</h2>
+              <p className="pj-agency">{p.agency}</p>
+              <p className="pj-desc">{p.desc}</p>
+              {p.highlights && (
+                <ul className="feature-list">{p.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

@@ -1,162 +1,65 @@
-import Header from '../components/Header';
 import PageHero from '../components/PageHero';
-import Footer from '../components/Footer';
-import Reveal from '../components/Reveal';
+import PagePhotos from '../components/PagePhotos';
+import CopyText from './CopyText';
 
 export const metadata = {
-  title: 'Дарителство и подкрепа — ЦСОП Варна',
-  description:
-    'Подкрепете децата и младежите със специални образователни потребности в ЦСОП – Варна. Всяко дарение обновява учебната и терапевтична среда.',
+  title: 'Дарителство — ЦСОП Варна',
+  description: 'Подкрепете децата и младежите в ЦСОП – Варна. Всяко дарение отива за учебната и терапевтичната среда.',
 };
 
-export default function DonationsPage() {
+// ВНИМАНИЕ: банковите данни трябва да са проверени от счетоводството.
+const BANK = {
+  to: 'Училищно настоятелство към ЦСОП – Варна',
+  iban: 'BG12 UNCR 7000 1523 4891 00',
+  bic: 'UNCRBGSF',
+  reason: 'Дарение за дейността на ЦСОП – Варна',
+};
+
+export default function DonatePage() {
   return (
     <>
-      <Header />
       <PageHero
-        kicker="Подкрепете ни"
-        title="Заедно създаваме по-добра среда за децата"
-        intro="Вашата подкрепа помага за закупуване на специализирано оборудване, материали за арт терапия, поддръжка на сензорната зала и организиране на образователни събития."
-        tone="em"
+        tone="orange"
+        page="daritelstvo"
+        title="Помогнете ни да направим средата още по-добра"
+        intro="Даренията отиват за специализирано оборудване, материали за арт терапия, сензорната зала и събития за децата."
       />
-
-      <main style={{ padding: '60px 0 100px' }}>
-        <div className="wrap">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '32px',
-              marginBottom: '60px',
-            }}
-          >
-            <Reveal
-              style={{
-                background: '#fff',
-                padding: '36px',
-                borderRadius: '24px',
-                border: '1px solid var(--line)',
-                boxShadow: 'var(--shadow-sm)',
-              }}
-            >
-              <span
-                style={{
-                  display: 'inline-block',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--green-deep)',
-                  marginBottom: '12px',
-                }}
-              >
-                БАНКОВА СМЕТКА (IBAN)
-              </span>
-              <h3
-                style={{
-                  fontFamily: 'var(--serif)',
-                  fontSize: '22px',
-                  marginBottom: '16px',
-                }}
-              >
-                Дарения по банков път
-              </h3>
-              <p style={{ color: 'var(--ink-2)', fontSize: '15px', marginBottom: '20px' }}>
-                Можете да направите целево дарение към Училищното настоятелство при ЦСОП – Варна за оборудване или терапевтични пособия.
-              </p>
-
-              <div
-                style={{
-                  background: 'var(--sand-2)',
-                  padding: '20px',
-                  borderRadius: '16px',
-                  fontSize: '14px',
-                  lineHeight: '1.8',
-                  color: 'var(--ink)',
-                }}
-              >
-                <div><b>Получател:</b> Училищно настоятелство към ЦСОП – Варна</div>
-                <div><b>IBAN:</b> BG12 UNCR 7000 1523 4891 00</div>
-                <div><b>BIC / SWIFT:</b> UNCRBGSF</div>
-                <div><b>Основание:</b> Дарение за дейността на ЦСОП – Варна</div>
-              </div>
-            </Reveal>
-
-            <Reveal
-              style={{
-                background: '#fff',
-                padding: '36px',
-                borderRadius: '24px',
-                border: '1px solid var(--line)',
-                boxShadow: 'var(--shadow-sm)',
-              }}
-              delay={1}
-            >
-              <span
-                style={{
-                  display: 'inline-block',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--clay-deep)',
-                  marginBottom: '12px',
-                }}
-              >
-                МАТЕРИАЛНИ ДАРЕНИЯ
-              </span>
-              <h3
-                style={{
-                  fontFamily: 'var(--serif)',
-                  fontSize: '22px',
-                  marginBottom: '16px',
-                }}
-              >
-                Материали и пособия
-              </h3>
-              <p style={{ color: 'var(--ink-2)', fontSize: '15px', marginBottom: '20px' }}>
-                Центърът с благодарност приема образователни играчки, сензорни материали, пособия за рисуване и керамика, както и спортни уреди.
-              </p>
-
-              <ul
-                style={{
-                  paddingLeft: '20px',
-                  color: 'var(--ink-2)',
-                  fontSize: '14.5px',
-                  lineHeight: '1.7',
-                }}
-              >
-                <li>Материали за арт терапия (глина, четки, бои, картони)</li>
-                <li>Сензорни и тактилни играчки за развитие на моториката</li>
-                <li>Кухненски консумативи за обучителния кабинет</li>
-                <li>Книжки с едри илюстрации и учебни табла</li>
-              </ul>
-            </Reveal>
+      <section className="section tone-orange">
+        <div className="wrap grid-2">
+          <div>
+            <h2>Дарение по банков път</h2>
+            <p className="muted" style={{ marginTop: 10 }}>Целевото дарение се превежда на Училищното настоятелство към центъра.</p>
+            <div className="kv" style={{ marginTop: 18 }}>
+              <div className="kv-row"><span>Получател</span><b>{BANK.to}</b></div>
+              <div className="kv-row"><span>IBAN</span><b><CopyText text={BANK.iban} /></b></div>
+              <div className="kv-row"><span>BIC</span><b>{BANK.bic}</b></div>
+              <div className="kv-row"><span>Основание</span><b>{BANK.reason}</b></div>
+            </div>
           </div>
-
-          <Reveal
-            style={{
-              background: 'linear-gradient(145deg, var(--green-soft), var(--sand-2))',
-              borderRadius: '28px',
-              padding: '44px',
-              border: '1px solid var(--line)',
-              textAlign: 'center',
-            }}
-          >
-            <h3 style={{ fontFamily: 'var(--serif)', fontSize: '24px', marginBottom: '12px' }}>
-              Имате идея за съвместен проект или кампания?
-            </h3>
-            <p style={{ color: 'var(--ink-2)', maxWidth: '600px', margin: '0 auto 24px', fontSize: '15.5px' }}>
-              Свържете се с нашия екип, за да обсъдим как заедно можем да създадем най-голяма стойност за децата.
-            </p>
-            <a href="/kontakti" className="btn btn-primary">
-              Свържете се с нас
-            </a>
-          </Reveal>
+          <div>
+            <h2>Материали и пособия</h2>
+            <p className="muted" style={{ marginTop: 10 }}>С благодарност приемаме образователни играчки, сензорни материали, пособия за рисуване и керамика и спортни уреди. Най-нужни са ни:</p>
+            <ul className="feature-list" style={{ marginTop: 18 }}>
+              <li>Материали за арт терапия: глина, четки, бои, картони</li>
+              <li>Сензорни и тактилни играчки за фината моторика</li>
+              <li>Консумативи за учебния кулинарен кабинет</li>
+              <li>Книжки с едри илюстрации и учебни табла</li>
+            </ul>
+          </div>
         </div>
-      </main>
-
-      <Footer />
+      </section>
+      <section className="section tone-orange">
+        <div className="wrap">
+          <div className="donate-band">
+            <div>
+              <h2>Имате идея за общ проект или кампания?</h2>
+              <p>Свържете се с нас и ще обсъдим как заедно да помогнем най-много на децата.</p>
+            </div>
+            <a className="btn btn-primary" href="/kontakti">Свържете се с нас</a>
+          </div>
+        </div>
+      </section>
+      <PagePhotos page="daritelstvo" title="Дарителство" heading="Какво постигнахме с ваша помощ" />
     </>
   );
 }

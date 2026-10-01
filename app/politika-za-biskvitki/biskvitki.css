@@ -1,4 +1,0 @@
-.ck-page { padding: clamp(2rem, 5vw, 4rem) 0 clamp(3rem, 7vw, 5rem); }
-.ck-list { margin: 0 0 1rem; padding-left: 20px; }
-.ck-list li { font-family: var(--sans); color: var(--ink-2); font-size: var(--fs-body); line-height: 1.7; margin-bottom: 6px; }
-.ck-list b { color: var(--ink); }

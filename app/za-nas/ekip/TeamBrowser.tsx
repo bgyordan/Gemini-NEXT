@@ -1,20 +1,16 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { TEAM, initials } from './teamData';
+import { initials, type Group } from './teamData';
 
-const TABS = [
-  { id: 'all', label: 'Всички' },
-  ...TEAM.map((g) => ({ id: g.label, label: g.label })),
-];
-
-export default function TeamBrowser() {
+export default function TeamBrowser({ team }: { team: Group[] }) {
+  const TABS = [{ id: 'all', label: 'Всички' }, ...team.map((g) => ({ id: g.label, label: g.label }))];
   const [tab, setTab] = useState('all');
   const [q, setQ] = useState('');
 
   const groups = useMemo(() => {
     const query = q.trim().toLowerCase();
-    return TEAM
+    return team
       .filter((g) => tab === 'all' || g.label === tab)
       .map((g) => ({
         ...g,
@@ -26,7 +22,7 @@ export default function TeamBrowser() {
         ),
       }))
       .filter((g) => g.members.length > 0);
-  }, [tab, q]);
+  }, [team, tab, q]);
 
   const shown = groups.reduce((n, g) => n + g.members.length, 0);
 

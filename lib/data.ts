@@ -198,3 +198,42 @@ export async function getDocuments(section: string, onlyOnSite = false): Promise
     return [];
   }
 }
+
+// Екипът: от изгледа public_team в базата (служителите в ЕИС). null → сайтът ползва вградения списък.
+const TEAM_GROUPS: { key: string; label: string; compact?: boolean }[] = [
+  { key: 'admin', label: 'Администрация' },
+  { key: 'therapy', label: 'Терапевти и специалисти' },
+  { key: 'teachers', label: 'Педагогически екип', compact: true },
+  { key: 'educators', label: 'Възпитатели ЦОУД' },
+  { key: 'assistants', label: 'Помощник на учителя' },
+  { key: 'other', label: 'Помощен персонал' },
+];
+function teamTone(grp: string, title: string): string {
+  const t = title.toLowerCase();
+  if (t.startsWith('директор')) return 'dir';
+  if (t.includes('психолог')) return 'psy';
+  if (t.includes('логопед')) return 'logo';
+  if (t.includes('ерготерапевт')) return 'ergo';
+  if (t.includes('рехабилитатор') || t.includes('кинезитерапевт')) return 'rehab';
+  if (grp === 'teachers') return 'teacher';
+  if (grp === 'assistants') return 'logo';
+  return 'admin';
+}
+export async function getTeam(): Promise<{ label: string; compact?: boolean; members: { name: string; role: string; tone: string }[] }[] | null> {
+  noStore();
+  const s = db();
+  if (!s) return null;
+  try {
+    const { data, error } = await s.from('public_team').select('name, grp, title, sort');
+    if (error || !data?.length) return null;
+    return TEAM_GROUPS.map((g) => ({
+      label: g.label,
+      compact: g.compact,
+      members: data
+        .filter((r: any) => r.grp === g.key)
+        .map((r: any) => ({ name: r.name as string, role: r.title as string, tone: teamTone(g.key, r.title || '') })),
+    })).filter((g) => g.members.length > 0);
+  } catch {
+    return null;
+  }
+}

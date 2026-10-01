@@ -10,7 +10,8 @@ async function latestUpdate(): Promise<Date | null> {
     const { data } = await supabase
       .from('site_news')
       .select('published_at')
-      .not('published_at', 'is', null)
+      .eq('status', 'published')
+      .lte('published_at', new Date().toISOString())
       .order('published_at', { ascending: false })
       .limit(1);
     const v = data?.[0]?.published_at;

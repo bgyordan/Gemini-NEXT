@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import ShareButton from './ShareButton';
 import ArticleMedia from './ArticleMedia';
 import { getArticle, getNews, fmtDate } from '../../../lib/data';
+import { RichText } from '../../../lib/rich';
 import '../novini.css';
 import './article.css';
 
@@ -27,7 +28,6 @@ export default async function ArticlePage({ params }: Props) {
   const post = await getArticle(slug);
   if (!post) notFound();
 
-  const paragraphs = (post.content ?? '').split('\n').filter((p) => p.trim() !== '');
   const more = (await getNews(4)).filter((n) => n.id !== post.id).slice(0, 3);
 
   return (
@@ -49,7 +49,7 @@ export default async function ArticlePage({ params }: Props) {
       <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images}>
         <div className="article-body">
           {post.excerpt && <p className="article-lead">{post.excerpt}</p>}
-          {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+          <RichText text={post.content} />
         </div>
       </ArticleMedia>
 

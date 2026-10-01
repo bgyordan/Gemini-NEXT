@@ -21,6 +21,7 @@ export async function getNews(limit?: number): Promise<NewsCard[]> {
       .from('site_news')
       .select('id, title, excerpt, cover_url, category, published_at')
       .eq('status', 'published')
+      .lte('published_at', new Date().toISOString()) // насрочените излизат чак в уречения час
       .order('published_at', { ascending: false });
     if (limit) q = q.limit(limit);
     const { data } = await q;
@@ -47,6 +48,7 @@ export async function getArticle(id: string): Promise<Article | null> {
       .eq('id', id)
       .single();
     if (error || !data || data.status !== 'published') return null;
+    if (data.published_at && new Date(data.published_at) > new Date()) return null; // още е насрочена
     const a = (data as any).staff_profiles;
     return {
       id: data.id,

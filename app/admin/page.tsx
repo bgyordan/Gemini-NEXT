@@ -6,7 +6,7 @@ import './admin.css';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
-  const supabase = createSupabaseServer();
+  const supabase = await createSupabaseServer();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/vhod');
 

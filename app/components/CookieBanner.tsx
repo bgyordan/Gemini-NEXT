@@ -26,25 +26,25 @@ export default function CookieBanner() {
         .cookie-bar {
           position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 1100;
           max-width: 720px; margin: 0 auto;
-          background: #fff; border: 1px solid #e6eaf0; border-radius: 18px;
+          background: var(--paper); border: 1px solid var(--line); border-radius: 18px;
           box-shadow: 0 20px 50px -16px rgba(16,34,64,.3);
           padding: 18px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
           font-family: var(--sans, system-ui);
         }
         .cookie-bar .ck-ic {
           width: 40px; height: 40px; border-radius: 12px; flex: 0 0 auto;
-          background: rgba(34,179,122,.12); color: #0E8A61; display: grid; place-items: center;
+          background: var(--blue-soft); color: var(--blue-ink); display: grid; place-items: center;
         }
         .cookie-bar .ck-txt { flex: 1; min-width: 220px; }
-        .cookie-bar .ck-txt p { margin: 0; font-size: 13.5px; line-height: 1.6; color: #475569; }
-        .cookie-bar .ck-txt a { color: #0E8A61; font-weight: 600; text-decoration: none; }
+        .cookie-bar .ck-txt p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--ink-2); }
+        .cookie-bar .ck-txt a { color: var(--blue-ink); font-weight: 600; text-decoration: none; }
         .cookie-bar .ck-txt a:hover { text-decoration: underline; }
         .cookie-bar .ck-btn {
-          border: none; cursor: pointer; background: #0E8A61; color: #fff;
+          border: none; cursor: pointer; background: var(--ink); color: var(--paper);
           padding: 11px 22px; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 600;
           transition: background .2s; flex: 0 0 auto;
         }
-        .cookie-bar .ck-btn:hover { background: #0c7350; }
+        .cookie-bar .ck-btn:hover { background: var(--ink); }
         @media (max-width: 520px) {
           .cookie-bar { flex-direction: column; align-items: stretch; text-align: left; }
           .cookie-bar .ck-btn { width: 100%; }

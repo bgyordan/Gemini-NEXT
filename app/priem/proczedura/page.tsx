@@ -1,46 +1,45 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Reveal from '../../components/Reveal';
-import Footer from '../../components/Footer';
+import DocRows from '../../components/DocRows';
 import AdmissionWizard from '../AdmissionWizard';
-import AdmissionDocs from './AdmissionDocs';
-
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+import { getDocuments } from '../../../lib/data';
+import { CONTACT } from '../../components/nav';
 
 export const metadata = {
-  title: 'Процедура и документи за прием — ЦСОП Варна',
-  description:
-    'Пълно ръководство за процедурата по прием и необходимите документи за записване в ЦСОП – Варна.',
+  title: 'Как се записва дете — ЦСОП Варна',
+  description: 'Процедурата по прием в ЦСОП – Варна стъпка по стъпка: заявление, документи, становище на РЦПППО и записване.',
 };
+export const dynamic = 'force-dynamic';
 
-export default function ProcedurePage() {
+export default async function ProcedurePage() {
+  const docs = await getDocuments('admission', true);
   return (
     <>
-      <Header />
       <PageHero
-        kicker="Прием · Процедура"
-        title="Процедура и необходими документи за прием"
-        intro="Научете всички детайли за стъпките за кандидатстване, документите от РЦПППО – Варна и индивидуалната оценка."
-        tone="em"
-        watermark="ПРИЕМ"
+        path="/priem/proczedura"
+        page="priem"
+        title="Как се записва дете"
+        intro="Приемът е за деца и младежи със специални образователни потребности, насочени от РЦПППО – Варна. Процедурата има три етапа, които вървят поред."
       />
-
-      <main style={{ padding: '70px 0 100px' }}>
-        <div className="wrap">
+      <section className="section tone-orange">
+        <div className="wrap split">
           <AdmissionWizard />
-
-          <AdmissionDocs />
-
-          <div style={{ marginTop: '50px', textAlign: 'center' }}>
-            <a href="/priem/poseshtenie" className="btn btn-warm">
-              Планирайте посещение и оглед на кабинетите
-            </a>
-          </div>
+          <aside className="aside-box">
+            <h3>Документи се приемат в деловодството</h3>
+            <p className="muted">{CONTACT.address}, Варна, в работни дни 8:00 – 16:30.</p>
+            <p style={{ marginTop: 10, fontWeight: 600 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
+            <a className="btn btn-dark" style={{ marginTop: 16 }} href="/priem/poseshtenie">Елате на посещение</a>
+          </aside>
         </div>
-      </main>
-
-      <Footer />
+      </section>
+      {docs.length > 0 && (
+        <section className="section soft tone-orange">
+          <div className="wrap narrow">
+            <h2>Още бланки и декларации</h2>
+            <p className="muted" style={{ margin: '8px 0 16px' }}>Изтеглете, попълнете и донесете при записване.</p>
+            <DocRows docs={docs} />
+          </div>
+        </section>
+      )}
     </>
   );
 }

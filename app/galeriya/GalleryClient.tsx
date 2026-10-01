@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Reveal from '../components/Reveal';
 import Lightbox from '../components/Lightbox';
-import type { Album, Photo } from './page';
+import type { Album, Photo } from '../../lib/data';
 
 function formatDate(iso: string | null): string {
   if (!iso) return '';
@@ -38,8 +37,8 @@ export default function GalleryClient({ albums, photos }: { albums: Album[]; pho
         {/* ===== АЛБУМИ ===== */}
         {!openAlbum && (
           <div className="gal-albums">
-            {albums.map((a, i) => (
-              <Reveal as="div" key={a.id} delay={((i % 3) + 1) as 1 | 2 | 3}>
+            {albums.map((a) => (
+              <div key={a.id}>
                 <button className="gal-album" onClick={() => setOpenAlbum(a)}>
                   <div className="gal-album-img">
                     {a.cover_url ? <img src={a.cover_url} alt={a.title} /> : <div className="gal-noimg"><span>ЦСОП</span></div>}
@@ -52,7 +51,7 @@ export default function GalleryClient({ albums, photos }: { albums: Album[]; pho
                     <span>{formatDate(a.event_date)}</span>
                   </div>
                 </button>
-              </Reveal>
+              </div>
             ))}
           </div>
         )}

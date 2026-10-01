@@ -1,9 +1,7 @@
-import Header from '../components/Header';
 import PageHero from '../components/PageHero';
-import Reveal from '../components/Reveal';
-import Icon from '../components/Icon';
-import Footer from '../components/Footer';
-import './za-nas.css';
+import PagePhotos from '../components/PagePhotos';
+import LinkList from '../components/LinkList';
+import { CONTACT } from '../components/nav';
 
 export const metadata = {
   title: 'За нас — ЦСОП Варна',
@@ -11,159 +9,99 @@ export const metadata = {
     'Център за специална образователна подкрепа – Варна: мисия, история и ценностите, които водят ежедневната ни работа с деца и младежи.',
 };
 
-const values = [
-  {
-    icon: 'heart',
-    title: 'Приемане',
-    text: 'Всяко дете е добре дошло такова, каквото е — със своя ритъм, характер и начин да опознава света.',
-  },
-  {
-    icon: 'puzzle',
-    title: 'Индивидуалност',
-    text: 'Работим по личен план за всеки ученик, изготвен от екип специалисти според неговите нужди.',
-  },
-  {
-    icon: 'users',
-    title: 'Заедно',
-    text: 'Родители, учители и терапевти сме един екип. Развитието на детето е обща грижа и обща радост.',
-  },
-  {
-    icon: 'compass',
-    title: 'Посока',
-    text: 'Не бързаме. Вярваме, че посоката, в която се движим, е по-важна от скоростта, с която го правим.',
-  },
+const VALUES = [
+  { t: 'Приемане', d: 'Всяко дете е добре дошло такова, каквото е – със своя ритъм, характер и начин да опознава света.' },
+  { t: 'Индивидуалност', d: 'Работим по личен план за всеки ученик, изготвен от екип специалисти според неговите нужди.' },
+  { t: 'Заедно', d: 'Родители, учители и терапевти сме един екип. Развитието на детето е обща грижа и обща радост.' },
+  { t: 'Посока', d: 'Не бързаме. Вярваме, че посоката, в която се движим, е по-важна от скоростта, с която го правим.' },
 ];
 
-const timeline = [
-  {
-    year: 'Началото',
-    title: 'Един дом за развитие',
-    text: 'Центърът отваря врати, за да отговори на нуждата от специализирана образователна подкрепа за деца във Варна и региона.',
-  },
-  {
-    year: 'Растеж',
-    title: 'Разширяваме грижата',
-    text: 'Обособяваме девет учебни кабинета и ерготерапевтично пространство — среда, създадена да подкрепя, а не да претоварва.',
-  },
-  {
-    year: 'Днес',
-    title: 'Над 150 деца и младежи',
-    text: 'Всеки ден повече от 150 деца и младежи се обучават и получават терапия при нас, водени от екип от специалисти.',
-  },
+const PATH = [
+  { when: '1949 г.', t: 'Помощно училище „Братя Миладинови“', d: 'Във Варна започва институционалната грижа за деца със специални образователни потребности.' },
+  { when: '2017 г.', t: 'Център за специална образователна подкрепа', d: 'Училището се преобразува в ЦСОП по Закона за предучилищното и училищното образование, с диагностична, терапевтична и професионална подкрепа.' },
+  { when: 'Днес', t: 'Над 150 деца и младежи', d: 'Всеки ден повече от 150 деца и младежи се обучават и получават терапия при нас, водени от екип специалисти.' },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <Header />
       <PageHero
-        watermark="НАС"
-        kicker="За нас"
+        path="/za-nas"
+        page="za-nas"
         title="Място, където всяко дете получава своя ритъм"
         intro="Център за специална образователна подкрепа – Варна предоставя обучение, специализирана подкрепа и рехабилитация в безопасна, стимулираща и приемаща среда."
       />
 
-      {/* MISSION */}
-      <section className="mission">
-        <div className="wrap mission-grid">
-          <Reveal className="mission-art">
-            <img
-              src="/images/team_care.jpg"
-              alt="Екип от специалисти и учители в ЦСОП Варна"
-              referrerPolicy="no-referrer"
-            />
-            <div className="mission-badge">
-              <b>150+</b>
-              <span>деца и младежи</span>
-            </div>
-          </Reveal>
-          <Reveal delay={1}>
-            <span className="lead-kicker">НАШАТА МИСИЯ</span>
+      <section className="section tone-blue">
+        <div className="wrap split">
+          <div className="prose-block">
             <h2>Подкрепяме развитието, уважаваме личността</h2>
             <p>
-              Съществуваме, за да могат децата и техните семейства да изживеят
-              пълноценно своя личен и социален живот. Съчетаваме диагностична,
-              терапевтична и образователна подкрепа под един покрив.
+              Съществуваме, за да могат децата и техните семейства да изживеят пълноценно своя личен и социален живот.
+              Съчетаваме диагностична, терапевтична и образователна подкрепа под един покрив.
             </p>
             <p>
-              Всяко дете при нас работи по индивидуален план, а всеки малък успех —
-              първата изречена дума, първата самостоятелна крачка, първата глинена
-              чаша — е триумф, който празнуваме заедно.
+              Всяко дете при нас работи по индивидуален план, а всеки малък успех – първата изречена дума, първата
+              самостоятелна крачка, първата глинена чаша – е триумф, който празнуваме заедно.
             </p>
-          </Reveal>
+          </div>
+          <aside className="aside-box">
+            <h3>Накратко</h3>
+            <table className="facts">
+              <tbody>
+                <tr><th>Деца и младежи</th><td>над 150</td></tr>
+                <tr><th>Учебни кабинети</th><td>9, плюс ерготерапия</td></tr>
+                <tr><th>Адрес</th><td>{CONTACT.address}, Варна</td></tr>
+                <tr><th>Работно време</th><td>пон – пет, 8:00 – 17:30</td></tr>
+              </tbody>
+            </table>
+          </aside>
         </div>
       </section>
 
-      {/* VALUES */}
-      <section className="values">
+      <section className="section tint">
         <div className="wrap">
-          <Reveal className="sec-head center">
-            <span className="lead-kicker">ЦЕННОСТИ</span>
-            <h2>Това, в което вярваме</h2>
-          </Reveal>
-          <div className="values-grid">
-            {values.map((v, i) => (
-              <Reveal key={v.title} className="value-card" delay={(i % 4 + 1) as 1 | 2 | 3 | 4}>
-                <span className="value-ic"><Icon name={v.icon} /></span>
-                <h3>{v.title}</h3>
-                <p>{v.text}</p>
-              </Reveal>
+          <div className="sec-head"><h2>Това, в което вярваме</h2></div>
+          <div className="vals">
+            {VALUES.map((v) => (
+              <div key={v.t} className="val"><h3>{v.t}</h3><p>{v.d}</p></div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="story">
+      <section className="section tone-blue">
         <div className="wrap">
-          <Reveal className="sec-head">
-            <span className="lead-kicker">НАШИЯТ ПЪТ</span>
-            <h2>Историята на един дом за развитие</h2>
-          </Reveal>
-          <div className="timeline">
-            {timeline.map((t, i) => (
-              <Reveal key={t.year} className="tl-item" delay={(i + 1) as 1 | 2 | 3}>
-                <div className="tl-marker"><span /></div>
-                <div className="tl-body">
-                  <span className="tl-year">{t.year}</span>
-                  <h3>{t.title}</h3>
-                  <p>{t.text}</p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="sec-head">
+            <h2>Нашият път</h2>
+            <a className="more" href="/za-nas/istoriya">Цялата история</a>
           </div>
+          <ol className="timeline">
+            {PATH.map((p) => (
+              <li key={p.when}><span className="tl-when">{p.when}</span><h3>{p.t}</h3><p>{p.d}</p></li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* SUBPAGES */}
-      <section className="explore">
+      <PagePhotos page="za-nas" title="ЦСОП Варна" heading="От живота в центъра" />
+
+      <section className="section tone-blue">
         <div className="wrap">
-          <Reveal className="sec-head center">
-            <span className="lead-kicker">РАЗГЛЕДАЙТЕ</span>
-            <h2>Още за центъра</h2>
-          </Reveal>
-          <div className="explore-grid">
-            {[
-              { icon: 'history', label: 'История', href: '/za-nas/istoriya' },
-              { icon: 'bulb', label: 'Проекти', href: '/za-nas/proekti' },
-              { icon: 'users', label: 'Екип', href: '/za-nas/ekip' },
-              { icon: 'file', label: 'Вътрешни документи', href: '/za-nas/vatreshni-dokumenti' },
-              { icon: 'chart', label: 'Бюджет и финанси', href: '/za-nas/byudzhet-i-finansi' },
-              { icon: 'briefcase', label: 'Кариери', href: '/za-nas/karieri' },
-            ].map((s) => (
-              <a key={s.href} href={s.href} className="explore-card">
-                <span className="explore-ic"><Icon name={s.icon} /></span>
-                <span className="explore-label">{s.label.toUpperCase()}</span>
-                <svg className="explore-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
-            ))}
-          </div>
+          <div className="sec-head"><h2>Още за центъра</h2></div>
+          <LinkList
+            cols={3}
+            items={[
+              { t: 'История', d: 'Пътят на центъра през годините', href: '/za-nas/istoriya', icon: 'history' },
+              { t: 'Екип', d: 'Специалистите при нас', href: '/za-nas/ekip', icon: 'users' },
+              { t: 'Материална база', d: 'Кабинети, зали и двор', href: '/za-nas/materialna-baza', icon: 'building' },
+              { t: 'Проекти', d: 'Програми и инициативи', href: '/za-nas/proekti', icon: 'bulb' },
+              { t: 'Кариери', d: 'Свободни позиции', href: '/za-nas/karieri', icon: 'briefcase' },
+              { t: 'Прозрачност', d: 'Бюджет, документи, поръчки', href: '/prozrachnost', icon: 'doc' },
+            ]}
+          />
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

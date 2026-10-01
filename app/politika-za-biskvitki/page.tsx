@@ -1,7 +1,4 @@
-import Header from '../components/Header';
 import PageHero from '../components/PageHero';
-import Footer from '../components/Footer';
-import './biskvitki.css';
 
 export const metadata = {
   title: 'Политика за бисквитки — ЦСОП Варна',
@@ -12,17 +9,15 @@ export const metadata = {
 export default function CookiePolicyPage() {
   return (
     <>
-      <Header />
       <PageHero
-        kicker="Правна информация · Бисквитки"
+        kicker="Правна информация"
         title="Политика за бисквитки"
         intro="Тази страница обяснява какви бисквитки и подобни технологии използва уебсайтът на ЦСОП – Варна и как можете да ги управлявате."
-        tone="bl"
       />
 
-      <div className="ck-page">
-        <div className="wrap narrow">
-          <section className="ck-block prose-block">
+      <section className="section tone-blue">
+        <div className="wrap narrow legal">
+          <section className="prose-block">
             <h2>Какво представляват бисквитките</h2>
             <p className="prose-lead">
               „Бисквитки“ (cookies) и подобни технологии (напр. локално хранилище на браузъра) са малки данни, които
@@ -30,7 +25,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block prose-block">
+          <section className="prose-block">
             <h2>Какви данни използваме ние</h2>
             <p>
               Уебсайтът на ЦСОП – Варна <b>не използва рекламни или аналитични бисквитки</b> и не проследява поведението
@@ -46,7 +41,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block prose-block">
+          <section className="prose-block">
             <h2>Бисквитки от трети страни</h2>
             <p>
               На страница <a href="/kontakti">Контакти</a> е вградена интерактивна карта от Google Maps. При зареждането ѝ
@@ -56,7 +51,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block prose-block">
+          <section className="prose-block">
             <h2>Как да управлявате бисквитките</h2>
             <p>
               Можете по всяко време да изтриете или блокирате съхранените данни от настройките на Вашия браузър
@@ -65,7 +60,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block prose-block">
+          <section className="prose-block">
             <h2>Връзка с други документи</h2>
             <p>
               Обработването на лични данни е описано в{' '}
@@ -74,7 +69,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
 
-          <section className="ck-block prose-block">
+          <section className="prose-block">
             <h2>Промени</h2>
             <p>
               Настоящата политика може да бъде актуализирана при промяна във функционалностите на сайта или в нормативната уредба.
@@ -82,9 +77,7 @@ export default function CookiePolicyPage() {
             </p>
           </section>
         </div>
-      </div>
-
-      <Footer />
+      </section>
     </>
   );
 }

@@ -71,11 +71,11 @@ export default function TeamBrowser() {
           Няма съвпадения за „{q}“. Опитайте друго име или роля.
         </div>
       ) : (
-        groups.map((group, gi) => (
+        groups.map((group) => (
           <section className="team-section" key={group.label}>
             <div className="team-head">
-              <span className="team-label">{group.label.toUpperCase()}</span>
-              <span className="team-count">{group.members.length}</span>
+              <h2 className="team-label">{group.label}</h2>
+              <span className="team-count">{group.members.length} души</span>
             </div>
             <div className={`team-grid ${group.compact ? 'compact' : ''}`}>
               {group.members.map((m) => (
@@ -86,7 +86,6 @@ export default function TeamBrowser() {
                 </div>
               ))}
             </div>
-            {gi < groups.length - 1 && <div className="team-divider" />}
           </section>
         ))
       )}

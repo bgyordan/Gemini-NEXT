@@ -1,143 +1,228 @@
-import Link from 'next/link';
-import HomeBoard from './components/HomeBoard';
-import GalleryStrip from './components/GalleryStrip';
-import Header from './components/Header';
-import Hero3D from './components/Hero3D';
-import Reveal from './components/Reveal';
-import CountUp from './components/CountUp';
-import Footer from './components/Footer';
-import ParallaxImage from './components/ParallaxImage';
-import ParallaxElement from './components/ParallaxElement';
-import TherapyInteractive from './components/TherapyInteractive';
-import type { NewsCard } from './novini/page';
-import './components/hero.css';
-import './components/sections.css';
+import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
+import { CONTACT } from './components/nav';
+import PhotoBand from './components/PhotoBand';
+import './home.css';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// снимки по подразбиране, докато в ЕИС не са избрани други
+const FALLBACK = ['/nachalna/kabineti-3.jpg', '/nachalna/terapiya-1.jpg', '/nachalna/kabineti-1.jpg'];
 
-async function getLatest(): Promise<NewsCard[]> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return [];
-  try {
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabase = createClient(url, key);
-    const { data } = await supabase
-      .from('site_news')
-      .select('id, title, excerpt, cover_url, category, published_at')
-      .eq('status', 'published')
-      .order('published_at', { ascending: false })
-      .limit(3);
-    return (data ?? []).map((n) => ({ ...n, slug: n.id }));
-  } catch {
-    return [];
-  }
-}
+const STEPS = [
+  {
+    title: 'Подавате заявление',
+    text: 'Детето е записано в училище или детска градина. Подавате заявление за насочване заедно с документите за здравословното състояние и протокол от ТЕЛК, НЕЛК или ЛКК.',
+  },
+  {
+    title: 'Ние подготвяме преписката',
+    text: 'Екипът за подкрепа за личностно развитие изготвя становище и протокол. Изпращаме документите към РЦПППО – Варна в срок до един месец.',
+  },
+  {
+    title: 'Детето започва при нас',
+    text: 'След становището на РЦПППО попълвате заявлението за записване и детето започва обучение и терапия по своя план.',
+  },
+];
 
-function fmtDate(iso: string | null): string {
-  if (!iso) return '';
-  try { return new Date(iso).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' }); }
-  catch { return ''; }
-}
+const VALUES = [
+  { t: 'Приемане', d: 'Всяко дете е добре дошло такова, каквото е – със своя ритъм, характер и начин да опознава света.' },
+  { t: 'Индивидуалност', d: 'Работим по личен план за всеки ученик, изготвен от екип специалисти според неговите нужди.' },
+  { t: 'Заедно', d: 'Родители, учители и терапевти сме един екип. Развитието на детето е обща грижа и обща радост.' },
+  { t: 'Посока', d: 'Не бързаме. Важното е да вървим в правилната посока.' },
+];
+
+const DOCS = [
+  { t: 'Бюджет и финанси', d: 'Бюджет и отчети', href: '/za-nas/byudzhet-i-finansi', icon: 'M4 20V10M10 20V4M16 20v-7M22 20H2' },
+  { t: 'Вътрешни документи', d: 'Правилници, планове и политики', href: '/za-nas/vatreshni-dokumenti', icon: 'M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h6' },
+  { t: 'Профил на купувача', d: 'Обществени поръчки в ЦАИС ЕОП', href: '/za-nas/profil-na-kupuvacha', icon: 'M3 7h18v13H3zM8 7V4h8v3' },
+  { t: 'Достъп до информация', d: 'Заявления и отчети по ЗДОИ', href: '/za-nas/dostap-do-obshtestvena-informatsiya', icon: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4' },
+  { t: 'Защита на личните данни', d: 'Политика по GDPR', href: '/za-nas/zashtita-na-lichnite-danni', icon: 'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z' },
+  { t: 'Подаване на сигнали', d: 'Поверителен канал по ЗЗЛПСПОИН', href: '/podavane-na-signali', icon: 'M4 5h16v11H9l-5 4z' },
+];
 
 export default async function Home() {
-  const latestNews = await getLatest();
+  const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
+  const h = [...hero, ...FALLBACK].slice(0, 3);
+  const [feat, ...rest] = news;
 
   return (
     <>
-      <Header />
-      <Hero3D />
-
-      {/* ТАБЛО — Събития + Последно добавено */}
-      <HomeBoard />
-
-
-      {/* NEWS / BLOG - 3 CARDS */}
-      <section id="novini" className="news-sec">
-        <div className="wrap">
-          <div className="news-head">
-            <Reveal>
-              <span className="kicker">Новини и събития</span>
-              <h2 style={{ marginBottom: 0 }}>Животът и успехите в ЦСОП – Варна</h2>
-            </Reveal>
-            <Reveal delay={1}>
-              <Link href="/novini" className="btn btn-ghost">
-                Всички публикации
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" style={{ width: '16px', height: '16px' }}>
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </Link>
-            </Reveal>
+      {/* ===== Герой: трите снимки се завъртат около общ център, като в логото ===== */}
+      <section className="home-hero">
+        <div className="wrap hh-grid">
+          <div className="hh-text">
+            <h1>Посоката, в която се движим, е по‑важна от скоростта</h1>
+            <p className="hh-lead">
+              Обучаваме и подкрепяме над 150 деца и младежи със специални образователни потребности.
+              Всяко дете учи по свой план, изготвен от екип специалисти, а родителите са част от този екип.
+            </p>
+            <div className="btn-row hh-actions">
+              <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
+              <a className="btn btn-ghost" href="/priem/poseshtenie">Елате на посещение</a>
+            </div>
+            <p className="hh-quick">
+              <span><strong>{CONTACT.address}</strong>, Варна</span>
+              <span>Понеделник – петък, <strong>8:00 – 17:30</strong></span>
+            </p>
           </div>
-          {latestNews.length === 0 ? (
-            <Reveal className="news-soon">Очаквайте първите новини съвсем скоро.</Reveal>
+          <div className="swirl" aria-hidden="true">
+            <div className="swirl-spin">
+              <div className="sw-ph sw-1"><img src={h[0]} alt="" /></div>
+              <div className="sw-ph sw-2"><img src={h[1]} alt="" /></div>
+              <div className="sw-ph sw-3"><img src={h[2]} alt="" /></div>
+            </div>
+            <div className="sw-core">ЦСОП<br />Варна</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Записване: истинска последователност I–III ===== */}
+      <section className="section soft tone-orange" aria-labelledby="priem-h">
+        <div className="wrap">
+          <div className="sec-head">
+            <div>
+              <h2 id="priem-h">Записване на дете в три стъпки</h2>
+              <p>Насочването става чрез РЦПППО – Варна. Ние подготвяме документите и ви водим през целия път.</p>
+            </div>
+            <a className="more" href="/priem/proczedura">Пълната процедура и бланките</a>
+          </div>
+          <ol className="steps">
+            {STEPS.map((s, i) => (
+              <li key={s.title}>
+                <span className="st-n">{['I', 'II', 'III'][i]}</span>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ===== Новини + събития ===== */}
+      <section className="section tone-lime" aria-labelledby="news-h">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 id="news-h">Какво се случва при нас</h2>
+            <a className="more" href="/novini">Всички новини</a>
+          </div>
+          {!feat ? (
+            <p className="empty">Скоро тук ще има новини от живота в центъра.</p>
           ) : (
-            <div className="news-grid">
-              {latestNews.map((post, idx) => (
-                <Reveal as="article" key={post.id} className="post" delay={((idx % 3) + 1) as 1 | 2 | 3}>
-                  <Link href={`/novini/${post.slug}`} style={{ display: 'contents' }}>
-                    <div className="post-img">
-                      {post.cover_url ? (
-                        <ParallaxImage src={post.cover_url} alt={post.title} speed={7} scale={1.1} />
-                      ) : (
-                        <div className="post-noimg"><span>ЦСОП</span></div>
-                      )}
-                      <span className="post-category-tag">{post.category}</span>
-                    </div>
-                    <div className="post-body">
-                      <div className="post-meta">
-                        <span className="post-date">{fmtDate(post.published_at)}</span>
-                      </div>
-                      <h3>{post.title}</h3>
-                      <p>{post.excerpt}</p>
-                      <div className="post-footer">
-                        <span className="read">
-                          Прочетете{' '}
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
+            <div className="hn-grid">
+              <a className="hn-feat" href={`/novini/${feat.slug}`}>
+                <div className="hn-img">
+                  {feat.cover_url ? <img src={feat.cover_url} alt="" /> : <span className="hn-noimg" />}
+                </div>
+                <p className="hn-meta"><span className="tag">{feat.category}</span> <time>{fmtDate(feat.published_at)}</time></p>
+                <h3>{feat.title}</h3>
+                {feat.excerpt && <p className="hn-ex">{feat.excerpt}</p>}
+              </a>
+              <div className="hn-side">
+                {rest.length > 0 && (
+                  <ul className="hn-list">
+                    {rest.map((n) => (
+                      <li key={n.id}>
+                        <a href={`/novini/${n.slug}`}>
+                          {n.cover_url ? <img src={n.cover_url} alt="" loading="lazy" /> : <span className="hn-noimg" />}
+                          <span>
+                            <b>{n.title}</b>
+                            <time>{fmtDate(n.published_at)}</time>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="hn-events">
+                  <h3>Предстоящи събития</h3>
+                  {events.length === 0 ? (
+                    <p className="muted">Няма обявени събития в момента.</p>
+                  ) : (
+                    <ul>
+                      {events.map((e) => (
+                        <li key={e.id}>
+                          <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
+                          <span>
+                            <b>{e.title}</b>
+                            {(e.event_time || e.location) && (
+                              <small>{[e.event_time && `${e.event_time} ч.`, e.location].filter(Boolean).join(', ')}</small>
+                            )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <a className="more" href="/sabitiya">Всички събития</a>
+                </div>
+              </div>
             </div>
           )}
         </div>
       </section>
 
-      {/* INTERACTIVE THERAPY SHOWCASE */}
-      <TherapyInteractive />
+      {/* ===== Галерия ===== */}
+      {photos.length > 0 && (
+        <section className="section tone-lime" aria-labelledby="gal-h">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2 id="gal-h">Моменти от ежедневието</h2>
+              <a className="more" href="/galeriya">Към галерията</a>
+            </div>
+            <PhotoBand photos={photos.map((p) => p.photo_url)} title="Моменти от ежедневието" />
+          </div>
+        </section>
+      )}
 
-
-      {/* GALLERY STRIP */}
-      <GalleryStrip />
-
-
-      {/* DONATE */}
-      <section id="donate" className="donate-sec">
+      {/* ===== Ценности ===== */}
+      <section className="section tint" aria-labelledby="val-h">
         <div className="wrap">
-          <Reveal className="donate-card">
-            <ParallaxElement className="db db1" speed={-35} />
-            <ParallaxElement className="db db2" speed={25} />
-            <span className="kicker">Подкрепете ни</span>
-            <h2>С вашата подкрепа средата става по-добра.</h2>
-            <p>
-              Всяко дарение подобрява терапевтичната и учебна среда за над 150 деца и младежи със специални образователни потребности във Варна.
-            </p>
-            <a href="/daritelstvo" className="btn btn-warm">
-              Направете дарение{' '}
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21s-7-4.35-9.5-8.5C.9 9.7 2.2 6 5.5 6c2 0 3.3 1.2 4 2.3C10.2 7.2 11.5 6 13.5 6c3.3 0 4.6 3.7 3 6.5C19 16.65 12 21 12 21z" />
-              </svg>
-            </a>
-          </Reveal>
+          <div className="sec-head">
+            <h2 id="val-h">Това, в което вярваме</h2>
+            <a className="more" href="/za-nas">Повече за центъра</a>
+          </div>
+          <div className="vals">
+            {VALUES.map((v) => (
+              <div key={v.t} className="val">
+                <h3>{v.t}</h3>
+                <p>{v.d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <Footer />
+      {/* ===== Прозрачност ===== */}
+      <section className="section tone-blue" aria-labelledby="prz-h">
+        <div className="wrap">
+          <div className="sec-head">
+            <div>
+              <h2 id="prz-h">Прозрачност</h2>
+              <p>Документите на центъра са публични и на едно място.</p>
+            </div>
+            <a className="more" href="/prozrachnost">Всички документи</a>
+          </div>
+          <div className="link-list" style={{ ['--cols' as any]: 3 }}>
+            {DOCS.map((d) => (
+              <a key={d.href} href={d.href}>
+                <span className="ll-ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={d.icon} /></svg>
+                </span>
+                <span><span className="ll-t">{d.t}</span><span className="ll-d">{d.d}</span></span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Дарителство ===== */}
+      <section className="section tone-orange" aria-labelledby="don-h">
+        <div className="wrap">
+          <div className="donate-band">
+            <div>
+              <h2 id="don-h">Помогнете ни да направим средата още по-добра</h2>
+              <p>Всяко дарение отива за терапевтичната и учебната среда на децата.</p>
+            </div>
+            <a className="btn btn-primary" href="/daritelstvo">Как да дарите</a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

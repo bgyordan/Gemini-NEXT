@@ -1,67 +1,27 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Footer from '../../components/Footer';
-import DocsBrowser from './DocsBrowser';
-import { supabase } from '../../../lib/supabase';
-import './docs.css';
+import DocsBrowser from '../../components/DocsBrowser';
+import { getDocuments } from '../../../lib/data';
 
 export const metadata = {
   title: 'Вътрешни документи — ЦСОП Варна',
-  description:
-    'Актуална нормативна уредба, правилници, планове и стратегии за развитие на Център за специална образователна подкрепа – Варна.',
+  description: 'Стратегия, правилници, програми и вътрешни правила на ЦСОП – Варна.',
 };
+export const dynamic = 'force-dynamic';
 
-// Всеки път се чете свежо от базата (без кеширане на стари данни)
-export const revalidate = 0;
-
-export type DocRow = {
-  id: string;
-  name: string;
-  file_url: string;
-  academic_year: string | null;
-  section: string;
-  sort_order: number;
-    category?: string | null;
-  on_site?: boolean;
-};
 export default async function DocsPage() {
-  const { data, error } = await supabase
-    .from('site_documents')
-     .select('id, name, file_url, academic_year, section, sort_order, category, on_site')
-    .eq('section', 'internal')
-    .eq('on_site', true)
-    .order('academic_year', { ascending: false })
-    .order('sort_order', { ascending: true });
-
-  const docs: DocRow[] = error ? [] : (data ?? []);
-
+  const docs = await getDocuments('internal', true);
   return (
     <>
-      <Header />
       <PageHero
-        kicker="За нас · Документи"
+        path="/za-nas/vatreshni-dokumenti"
         title="Вътрешни документи"
-        intro="Актуална нормативна уредба, правилници и планове за развитие на центъра. Всеки документ се отваря като PDF."
+        intro="Стратегията, правилниците, програмите и вътрешните правила, по които работи центърът. Документите се обновяват при всяка промяна."
       />
-      <div className="docs-page">
+      <section className="section tone-blue">
         <div className="wrap narrow">
-          <section className="docs-intro prose-block">
-            <p className="prose-lead">
-              В този раздел ЦСОП – Варна публикува основните документи, които определят организацията,
-              развитието и ежедневната работа на центъра — стратегическите и плановите документи,
-              правилниците и вътрешните правила, както и документи, свързани с образователната,
-              терапевтичната и административната дейност.
-            </p>
-            
-            <p className="docs-intro-note prose-note">
-              Документите се актуализират при промяна в нормативната уредба, при приемане на нови вътрешни
-              правила или при промени в организацията на дейността на центъра.
-            </p>
-          </section>
           <DocsBrowser docs={docs} />
         </div>
-      </div>
-      <Footer />
+      </section>
     </>
   );
 }

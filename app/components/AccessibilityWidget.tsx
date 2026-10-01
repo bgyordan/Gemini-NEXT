@@ -45,46 +45,46 @@ export default function AccessibilityWidget() {
         html.a11y-contrast { filter: contrast(1.4); }
         html.a11y-links a { text-decoration: underline !important; text-underline-offset: 2px; }
         .a11y-fab {
-          position: fixed; left: 20px; bottom: 20px; z-index: 1000;
-          width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
-          background: #0E8A61; color: #fff; display: grid; place-items: center;
-          box-shadow: 0 10px 26px -8px rgba(14,138,97,.6); transition: transform .2s, box-shadow .2s;
+          position: fixed; right: 20px; bottom: 20px; z-index: 1000;
+          width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer;
+          background: var(--ink); color: var(--paper); display: grid; place-items: center;
+          box-shadow: 0 10px 26px -8px rgba(21,50,74,.45); transition: transform .2s, box-shadow .2s;
         }
         .a11y-fab:hover { transform: scale(1.06); }
-        .a11y-fab:focus-visible { outline: 3px solid #22B37A; outline-offset: 3px; }
-        .a11y-fab.on { background: #0f2240; }
+        .a11y-fab:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+        .a11y-fab.on { background: var(--ink); }
         .a11y-panel {
-          position: fixed; left: 20px; bottom: 84px; z-index: 1000; width: 268px;
-          background: #fff; border: 1px solid #e6eaf0; border-radius: 18px;
+          position: fixed; right: 20px; bottom: 80px; z-index: 1000; width: min(268px, calc(100vw - 40px));
+          background: var(--paper); border: 1px solid var(--line); border-radius: 18px;
           box-shadow: 0 24px 60px -18px rgba(16,34,64,.28); padding: 16px; font-family: var(--sans, system-ui);
         }
-        .a11y-panel h3 { font-size: 15px; font-weight: 700; color: #0f2240; margin: 0 0 2px; }
-        .a11y-panel .sub { font-size: 12px; color: #7a8699; margin: 0 0 14px; }
+        .a11y-panel h3 { font-size: 15px; font-weight: 700; color: var(--ink); margin: 0 0 2px; }
+        .a11y-panel .sub { font-size: 12px; color: var(--ink-2); margin: 0 0 14px; }
         .a11y-row { margin-bottom: 13px; }
-        .a11y-lbl { font-size: 12.5px; font-weight: 600; color: #26385c; margin-bottom: 6px; display: block; }
+        .a11y-lbl { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px; display: block; }
         .a11y-seg { display: flex; gap: 5px; }
         .a11y-seg button {
-          flex: 1; border: 1px solid #e6eaf0; background: #f5f7fa; border-radius: 10px; cursor: pointer;
-          padding: 8px 0; font-family: inherit; color: #475569; transition: .15s;
+          flex: 1; border: 1px solid var(--line); background: var(--sky); border-radius: 10px; cursor: pointer;
+          padding: 8px 0; font-family: inherit; color: var(--ink-2); transition: .15s;
         }
-        .a11y-seg button:hover { background: #eef2f7; }
-        .a11y-seg button.on { background: #0E8A61; color: #fff; border-color: #0E8A61; }
+        .a11y-seg button:hover { background: var(--sky-2); }
+        .a11y-seg button.on { background: var(--ink); color: var(--paper); border-color: var(--blue-ink); }
         .a11y-toggle {
           display: flex; align-items: center; justify-content: space-between; width: 100%;
-          border: 1px solid #e6eaf0; background: #f5f7fa; border-radius: 11px; cursor: pointer;
-          padding: 10px 12px; font-family: inherit; font-size: 13px; color: #26385c; transition: .15s;
+          border: 1px solid var(--line); background: var(--sky); border-radius: 11px; cursor: pointer;
+          padding: 10px 12px; font-family: inherit; font-size: 13px; color: var(--ink); transition: .15s;
         }
-        .a11y-toggle:hover { background: #eef2f7; }
-        .a11y-sw { width: 36px; height: 20px; border-radius: 999px; background: #cdd6e2; position: relative; transition: .15s; flex: 0 0 auto; }
-        .a11y-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-        .a11y-sw.on { background: #0E8A61; }
+        .a11y-toggle:hover { background: var(--sky-2); }
+        .a11y-sw { width: 36px; height: 20px; border-radius: 999px; background: var(--line-strong); position: relative; transition: .15s; flex: 0 0 auto; }
+        .a11y-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--paper); transition: .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+        .a11y-sw.on { background: var(--blue-ink); }
         .a11y-sw.on::after { left: 18px; }
         .a11y-reset {
-          width: 100%; margin-top: 4px; border: 1px solid #e6eaf0; background: #fff; border-radius: 11px;
-          cursor: pointer; padding: 9px 0; font-family: inherit; font-size: 12.5px; color: #64748b; transition: .15s;
+          width: 100%; margin-top: 4px; border: 1px solid var(--line); background: var(--paper); border-radius: 11px;
+          cursor: pointer; padding: 9px 0; font-family: inherit; font-size: 12.5px; color: var(--ink-2); transition: .15s;
         }
         .a11y-reset:hover { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
-        .a11y-more { display: block; text-align: center; font-size: 11.5px; color: #0E8A61; margin-top: 10px; text-decoration: none; }
+        .a11y-more { display: block; text-align: center; font-size: 11.5px; color: var(--blue-ink); margin-top: 10px; text-decoration: none; }
         .a11y-more:hover { text-decoration: underline; }
       `}</style>
 

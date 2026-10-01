@@ -1,249 +1,113 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { MEGA } from './megaData';
-import ThemeToggle from './ThemeToggle';
+import { usePathname } from 'next/navigation';
+import { NAV } from './nav';
 import './header.css';
 
 export default function Header() {
-  const [solid, setSolid] = useState(false);
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const pathname = usePathname() || '/';
+  const [open, setOpen] = useState<string | null>(null); // отворено падащо меню (desktop)
+  const [mobile, setMobile] = useState(false);
+  const [mobGroup, setMobGroup] = useState<string | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // затваря менютата при смяна на страница
+  useEffect(() => { setOpen(null); setMobile(false); }, [pathname]);
+
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(null); setMobile(false); } };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const show = (id: string) => {
-    if (timer.current) clearTimeout(timer.current);
-    setOpenId(id);
-  };
+  useEffect(() => {
+    document.body.style.overflow = mobile ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobile]);
 
-  const hide = () => {
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setOpenId(null), 180);
-  };
+  const enter = (k: string) => { if (timer.current) clearTimeout(timer.current); setOpen(k); };
+  const leave = () => { if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(null), 160); };
 
-  const keep = () => {
-    if (timer.current) clearTimeout(timer.current);
-  };
+  const isActive = (href: string, links: { href: string }[]) =>
+    pathname === href || links.some((l) => pathname === l.href || pathname.startsWith(l.href + '/'));
 
   return (
-    <header className={solid ? 'solid' : ''}>
-      <div className="bar wrap">
-        {/* BRAND LOGO & TITLE */}
-        <a href="/" className="brand" aria-label="ЦСОП Варна - Начало">
-          <span className="logo-wrap">
-            <img src="/logo.jpg" alt="Лого ЦСОП Варна" />
-          </span>
-          <span className="brand-txt">
-            <b className="brand-name">ЦСОП Варна</b>
-            <span className="brand-tag">Специална образователна подкрепа</span>
+    <header className="site-head">
+      <a className="skip" href="#main">Към съдържанието</a>
+      <div className="wrap sh-bar">
+        <a href="/" className="sh-brand" aria-label="ЦСОП Варна – начална страница">
+          <img src="/logo.jpg" alt="" width={44} height={44} />
+          <span>
+            <b>ЦСОП Варна</b>
+            <small>Център за специална образователна подкрепа</small>
           </span>
         </a>
 
-        {/* DESKTOP NAVIGATION */}
-        <nav className="main-nav" aria-label="Основна навигация">
-          <a href="/" className="nav-link single" onMouseEnter={() => setOpenId(null)}>
-            <span>Начало</span>
-          </a>
-          {MEGA.map((m) => {
-            const isOpen = openId === m.href;
-            const isWide = m.subs.length > 4;
-
-            return (
-              <div
-                key={m.href}
-                className={`nav-item ${isOpen ? 'active' : ''}`}
-                onMouseEnter={() => show(m.href)}
-                onMouseLeave={hide}
+        <nav className="sh-nav" aria-label="Основно меню">
+          {NAV.map((g) => (
+            <div
+              key={g.href}
+              className={`sh-item tone-${g.tone}${open === g.href ? ' open' : ''}`}
+              onMouseEnter={() => enter(g.href)}
+              onMouseLeave={leave}
+            >
+              <button
+                type="button"
+                className={`sh-link${isActive(g.href, g.links) ? ' current' : ''}`}
+                aria-expanded={open === g.href}
+                onClick={() => setOpen(open === g.href ? null : g.href)}
               >
-                <a href={m.href} className="nav-link" aria-expanded={isOpen}>
-                  <span>{m.label}</span>
-                  <svg
-                    className="chevron-icon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </a>
-
-                {/* DROPDOWN — clean labels only */}
-                <div
-                  className={`dropdown-panel ${isWide ? 'wide' : ''}`}
-                  onMouseEnter={keep}
-                  onMouseLeave={hide}
-                >
-                  <div className="dropdown-bridge" />
-                  <div className="dropdown-card">
-                    <div className={`dropdown-grid ${isWide ? 'cols-2' : 'cols-1'}`}>
-                      {m.subs.map((s) => (
-                        <a
-                          key={`${s.href}-${s.label}`}
-                          href={s.href}
-                          className="dropdown-item"
-                          onClick={() => setOpenId(null)}
-                        >
-                          <span className="item-label">{s.label}</span>
-                        </a>
-                      ))}
-                    </div>
-
-                    <div className="dropdown-footer">
-                      <a href={m.href} className="footer-link" onClick={() => setOpenId(null)}>
-                        <span>Преглед на „{m.label}“</span>
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12h14M13 6l6 6-6 6" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
+                {g.label}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              <div className="sh-panel" hidden={open !== g.href}>
+                <div className="sh-panel-intro">
+                  <a href={g.href} className="sh-panel-title">{g.label}</a>
+                  <p>{g.intro}</p>
                 </div>
+                <ul>
+                  {g.links.map((l) => (
+                    <li key={l.href}>
+                      <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>
+                        <b>{l.label}</b>
+                        {l.desc && <span>{l.desc}</span>}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            );
-          })}
-
-          <a href="/kontakti" className="nav-link single" onMouseEnter={() => setOpenId(null)}>
-            <span>Контакти</span>
-          </a>
-
-          {/* THEME TOGGLE (DESKTOP) */}
-          <div className="theme-toggle-wrap">
-            <ThemeToggle />
-          </div>
-
-          <a href="/daritelstvo" className="btn-donate" onMouseEnter={() => setOpenId(null)}>
-            <svg viewBox="0 0 24 24" fill="currentColor" className="heart-icon">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-            <span>Дарителство</span>
-          </a>
+            </div>
+          ))}
+          <a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}>Контакти</a>
         </nav>
 
-        {/* MOBILE CONTROLS (THEME + BURGER) */}
-        <div className="mobile-actions">
-          <ThemeToggle className="mobile-header-toggle" />
-          <button
-            className="burger-btn"
-            aria-label="Отвори менюто"
-            onClick={() => setMobileOpen(true)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+        <a href="/daritelstvo" className="sh-donate">Дарете</a>
+        <button type="button" className="sh-menu" aria-expanded={mobile} aria-controls="mob-nav" onClick={() => setMobile(!mobile)}>
+          {mobile ? 'Затвори' : 'Меню'}
+        </button>
       </div>
 
-      {/* MOBILE DRAWER */}
-      <div className={`mobile-drawer ${mobileOpen ? 'open' : ''}`}>
-        <div className="mobile-header">
-          <div className="mobile-brand">
-            <span className="logo-wrap mini">
-              <img src="/logo.jpg" alt="" />
-            </span>
-            <b>ЦСОП Варна</b>
-          </div>
-          <button
-            className="mobile-close"
-            aria-label="Затвори менюто"
-            onClick={() => setMobileOpen(false)}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="mobile-body">
-          {MEGA.map((m) => {
-            const isExp = expanded === m.href;
-            return (
-              <div key={m.href} className="mobile-group">
-                <button
-                  className={`mobile-parent ${isExp ? 'expanded' : ''}`}
-                  onClick={() => setExpanded(isExp ? null : m.href)}
-                >
-                  <span>{m.label}</span>
-                  <svg
-                    className="mobile-chevron"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </button>
-
-                <div className={`mobile-sub ${isExp ? 'open' : ''}`}>
-                  <a
-                    href={m.href}
-                    className="mobile-sub-item main-link"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    Всичко в „{m.label}“ →
-                  </a>
-                  {m.subs.map((s) => (
-                    <a
-                      key={`${s.href}-${s.label}`}
-                      href={s.href}
-                      className="mobile-sub-item"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      <span className="mobile-sub-label">{s.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-
-          <a
-            href="/kontakti"
-            className="mobile-parent single"
-            onClick={() => setMobileOpen(false)}
-          >
-            <span>Контакти</span>
-          </a>
-
-          <div className="mobile-footer">
-            <ThemeToggle showLabel className="mobile-toggle" />
-            <a
-              href="/daritelstvo"
-              className="mobile-cta-btn"
-              style={{ marginTop: '14px' }}
-              onClick={() => setMobileOpen(false)}
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '18px', height: '18px' }}>
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
-              <span>Подкрепете ни / Дарителство</span>
-            </a>
-          </div>
+      {/* Мобилно меню */}
+      <div id="mob-nav" className="sh-mob" hidden={!mobile}>
+        <div className="wrap">
+          {NAV.map((g) => (
+            <div key={g.href} className={`sh-mob-g tone-${g.tone}`}>
+              <button type="button" aria-expanded={mobGroup === g.href} onClick={() => setMobGroup(mobGroup === g.href ? null : g.href)}>
+                {g.label}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              <ul hidden={mobGroup !== g.href}>
+                {g.links.map((l) => (
+                  <li key={l.href}><a href={l.href}>{l.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <a className="sh-mob-solo" href="/kontakti">Контакти</a>
+          <a className="btn btn-primary sh-mob-donate" href="/daritelstvo">Дарете</a>
         </div>
       </div>
-
-      {mobileOpen && <div className="mobile-backdrop" onClick={() => setMobileOpen(false)} />}
     </header>
   );
 }

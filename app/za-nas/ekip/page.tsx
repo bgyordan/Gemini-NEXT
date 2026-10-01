@@ -1,6 +1,4 @@
-import Header from '../../components/Header';
 import PageHero from '../../components/PageHero';
-import Footer from '../../components/Footer';
 import TeamBrowser from './TeamBrowser';
 import { TEAM } from './teamData';
 import './ekip.css';
@@ -16,19 +14,17 @@ export default function TeamPage() {
 
   return (
     <>
-      <Header />
       <PageHero
-        kicker="За нас · Екип"
+        path="/za-nas/ekip"
+        page="ekip"
         title="Хората зад грижата"
         intro={`Висококвалифицирани специалисти, посветени на мисията да подкрепят развитието и потенциала на всяко дете. Заедно сме ${total} души в един екип.`}
-        tone="bl"
       />
-      <div className="team-page">
+      <section className="section tone-blue">
         <div className="wrap">
           <TeamBrowser />
         </div>
-      </div>
-      <Footer />
+      </section>
     </>
   );
 }

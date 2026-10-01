@@ -1,68 +1,14 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import ShareButton from './ShareButton';
 import ArticleMedia from './ArticleMedia';
+import { getArticle, getNews, fmtDate } from '../../../lib/data';
 import '../novini.css';
 import './article.css';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 interface Props {
   params: Promise<{ slug: string }>;
-}
-
-type Article = {
-  id: string;
-  title: string;
-  excerpt: string | null;
-  content: string | null;
-  cover_url: string | null;
-  gallery_images: string[];
-  category: string;
-  published_at: string | null;
-  author_name: string | null;
-};
-
-async function getArticle(id: string): Promise<Article | null> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return null;
-  try {
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabase = createClient(url, key);
-    const { data, error } = await supabase
-      .from('site_news')
-      .select('id, title, excerpt, content, cover_url, gallery_images, category, published_at, status, staff_profiles(first_name, last_name)')
-      .eq('id', id)
-      .single();
-    if (error || !data || data.status !== 'published') return null;
-    const author = (data as any).staff_profiles;
-    return {
-      id: data.id,
-      title: data.title,
-      excerpt: data.excerpt,
-      content: data.content,
-      cover_url: data.cover_url,
-      gallery_images: Array.isArray(data.gallery_images) ? data.gallery_images : [],
-      category: data.category,
-      published_at: data.published_at,
-      author_name: author ? `${author.first_name} ${author.last_name}` : null,
-    };
-  } catch {
-    return null;
-  }
-}
-
-function formatDate(iso: string | null): string {
-  if (!iso) return '';
-  try {
-    return new Date(iso).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch {
-    return '';
-  }
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -72,6 +18,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${post.title} — ЦСОП Варна`,
     description: post.excerpt ?? undefined,
+    openGraph: { title: post.title, description: post.excerpt ?? undefined, images: post.cover_url ? [post.cover_url] : undefined },
   };
 }
 
@@ -80,44 +27,52 @@ export default async function ArticlePage({ params }: Props) {
   const post = await getArticle(slug);
   if (!post) notFound();
 
-  // Текстът е с нови редове → параграфи
   const paragraphs = (post.content ?? '').split('\n').filter((p) => p.trim() !== '');
+  const more = (await getNews(4)).filter((n) => n.id !== post.id).slice(0, 3);
 
   return (
-    <>
-      <Header />
-      <article className="article">
-        <div className="article-hero">
-          <div className="wrap narrow">
-            <Link href="/novini" className="article-back">← Всички новини</Link>
-            <span className="news-badge">{post.category}</span>
-            <h1>{post.title}</h1>
-            <div className="article-meta">
-              {post.author_name && <span>{post.author_name}</span>}
-              {post.author_name && post.published_at && <span className="dot">·</span>}
-              <span>{formatDate(post.published_at)}</span>
+    <article className="article tone-lime">
+      <header className="article-hero">
+        <div className="wrap narrow">
+          <nav className="ph-crumb" aria-label="Пътечка">
+            <a href="/">Начало</a><span aria-hidden="true">/</span><a href="/novini">Новини</a>
+          </nav>
+          <h1>{post.title}</h1>
+          <p className="article-meta">
+            <span className="tag">{post.category}</span>
+            <time>{fmtDate(post.published_at)}</time>
+            {post.author_name && <span>{post.author_name}</span>}
+          </p>
+        </div>
+      </header>
+
+      <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images}>
+        <div className="article-body">
+          {post.excerpt && <p className="article-lead">{post.excerpt}</p>}
+          {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+      </ArticleMedia>
+
+      <div className="wrap narrow">
+        <ShareButton title={post.title} />
+      </div>
+
+      {more.length > 0 && (
+        <section className="section tint">
+          <div className="wrap">
+            <div className="sec-head"><h2>Още новини</h2><a className="more" href="/novini">Всички новини</a></div>
+            <div className="nl-grid">
+              {more.map((n) => (
+                <a key={n.id} className="nl-item" href={`/novini/${n.slug}`}>
+                  <div className="nl-img">{n.cover_url ? <img src={n.cover_url} alt="" loading="lazy" /> : <span className="nl-noimg" />}</div>
+                  <p className="nl-meta"><time>{fmtDate(n.published_at)}</time></p>
+                  <h3>{n.title}</h3>
+                </a>
+              ))}
             </div>
           </div>
-        </div>
-
-        <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images}>
-          <div className="article-body">
-            {post.excerpt && <p className="article-lead">{post.excerpt}</p>}
-            {paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        </ArticleMedia>
-
-        <div className="wrap narrow">
-          <ShareButton title={post.title} />
-
-          <div className="article-foot">
-            <Link href="/novini" className="article-back-btn">← Обратно към новините</Link>
-          </div>
-        </div>
-      </article>
-      <Footer />
-    </>
+        </section>
+      )}
+    </article>
   );
 }

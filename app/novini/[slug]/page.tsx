@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 type Article = {
@@ -66,7 +66,8 @@ function formatDate(iso: string | null): string {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const post = await getArticle(params.slug);
+  const { slug } = await params;
+  const post = await getArticle(slug);
   if (!post) return { title: 'Статията не е намерена — ЦСОП Варна' };
   return {
     title: `${post.title} — ЦСОП Варна`,
@@ -75,7 +76,8 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const post = await getArticle(params.slug);
+  const { slug } = await params;
+  const post = await getArticle(slug);
   if (!post) notFound();
 
   // Текстът е с нови редове → параграфи

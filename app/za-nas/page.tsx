@@ -52,7 +52,7 @@ export default function AboutPage() {
                 <tr><th>Деца и младежи</th><td>над 150</td></tr>
                 <tr><th>Учебни кабинети</th><td>9, плюс ерготерапия</td></tr>
                 <tr><th>Адрес</th><td>{CONTACT.address}, Варна</td></tr>
-                <tr><th>Работно време</th><td>пон – пет, 8:00 – 17:30</td></tr>
+                <tr><th>Работно време</th><td>пон – пет, 8:00 – 18:00</td></tr>
               </tbody>
             </table>
           </aside>

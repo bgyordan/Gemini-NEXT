@@ -43,11 +43,11 @@ export default function ContactsPage() {
           </div>
           <aside className="aside-box">
             <h3>Работно време</h3>
-            <table className="facts">
+            <table className="facts hours">
               <tbody>
-                <tr><th>Център</th><td>пон – пет, 8:00 – 17:30</td></tr>
-                <tr><th>Приемане на документи</th><td>8:00 – 16:30</td></tr>
-                <tr><th>Приемно време на директора</th><td>вторник, 9:00 – 10:00</td></tr>
+                <tr><th>Център, пон – пет</th><td>8:00 – 18:00</td></tr>
+                <tr><th>Администрация и деловодство</th><td>8:00 – 16:30</td></tr>
+                <tr><th>Приемно време на директора, вторник</th><td>9:00 – 10:00</td></tr>
               </tbody>
             </table>
             <h3 style={{ marginTop: 24 }}>Адрес</h3>

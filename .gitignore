@@ -6,3 +6,7 @@ out
 *.log
 .vercel
 next-env.d.ts
+
+# локални/генерирани (lock-ът се прави на сървъра)
+package-lock.json
+*.tsbuildinfo

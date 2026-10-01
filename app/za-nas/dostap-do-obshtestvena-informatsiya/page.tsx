@@ -25,7 +25,7 @@ const UNIT = {
   address: 'ул. „Петко Стайнов“ №7, гр. Варна',
   email: 'info-400052@edu.mon.bg',
   phones: '052 619 456 · 0878 521 823',
-  hours: 'Работни дни, 8:30 – 16:30 ч.',
+  hours: 'Работни дни, 8:00 – 16:30 ч.',
 };
 
 export default async function ZdoiPage() {

@@ -197,6 +197,7 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .aside-box { padding: 24px; border-radius: var(--r); background: var(--tone-soft); }
 .aside-box h3 { font-weight: 600; margin-bottom: 10px; }
 .aside-box .facts td:last-child { text-align: left; font-weight: 500; }
+.aside-box .facts.hours td:last-child { text-align: right; font-weight: 600; white-space: nowrap; }
 
 /* Хронология — истинска последователност */
 .timeline { list-style: none; display: grid; gap: 0; max-width: 760px; }

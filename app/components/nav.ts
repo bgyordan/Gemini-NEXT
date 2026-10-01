@@ -70,7 +70,7 @@ export const CONTACT = {
   maps: 'https://www.google.com/maps/search/?api=1&query=%D0%A6%D0%A1%D0%9E%D0%9F+%D0%92%D0%B0%D1%80%D0%BD%D0%B0+%D0%9F%D0%B5%D1%82%D0%BA%D0%BE+%D0%A1%D1%82%D0%B0%D0%B9%D0%BD%D0%BE%D0%B2+7',
   facebook: 'https://www.facebook.com/dimitar.miladinov.374/?locale=bg_BG',
   hours: [
-    { label: 'Център', value: 'пон – пет, 8:00 – 17:30' },
+    { label: 'Център', value: 'пон – пет, 8:00 – 18:00' },
     { label: 'Деловодство', value: '8:00 – 16:30' },
     { label: 'Директор', value: 'вторник, 9:00 – 10:00' },
   ],

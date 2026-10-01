@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ShareButton from './ShareButton';
+import ArticleMedia from './ArticleMedia';
 import '../novini.css';
 import './article.css';
 
@@ -97,32 +98,16 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         </div>
 
-        {post.cover_url && (
-          <div className="wrap narrow">
-            <div className="article-cover">
-              <img src={post.cover_url} alt={post.title} />
-            </div>
-          </div>
-        )}
-
-        <div className="wrap narrow">
+        <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images}>
           <div className="article-body">
             {post.excerpt && <p className="article-lead">{post.excerpt}</p>}
             {paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </div>
+        </ArticleMedia>
 
-          {post.gallery_images.length > 0 && (
-            <div className="article-gallery">
-              {post.gallery_images.map((src, i) => (
-                <a key={i} href={src} target="_blank" rel="noopener noreferrer" className="ag-item">
-                  <img src={src} alt={`${post.title} — снимка ${i + 1}`} loading="lazy" />
-                </a>
-              ))}
-            </div>
-          )}
-
+        <div className="wrap narrow">
           <ShareButton title={post.title} />
 
           <div className="article-foot">

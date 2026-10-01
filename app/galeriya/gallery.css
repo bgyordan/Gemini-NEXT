@@ -34,22 +34,6 @@
 .gal-tile-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 12px;font-size:12.5px;color:#fff;background:linear-gradient(to top,rgba(20,50,40,.7),transparent);opacity:0;transition:opacity .35s;text-align:left}
 .gal-tile:hover .gal-tile-cap{opacity:1}
 
-/* ===== LIGHTBOX ===== */
-.gal-lb{position:fixed;inset:0;z-index:300;background:rgba(12,24,20,.94);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;animation:lbFade .3s ease}
-@keyframes lbFade{from{opacity:0}to{opacity:1}}
-.gal-lb-stage{position:relative;max-width:90vw;max-height:86vh;display:flex;flex-direction:column;align-items:center;animation:lbPop .4s cubic-bezier(.2,.9,.3,1.05)}
-@keyframes lbPop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-.gal-lb-stage img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:8px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
-.gal-lb-cap{margin-top:14px;font-size:14px;color:rgba(255,255,255,.85);text-align:center;max-width:600px}
-.gal-lb-counter{position:absolute;top:-38px;left:50%;transform:translateX(-50%);font-size:13px;color:rgba(255,255,255,.6);letter-spacing:.05em}
-.gal-lb-close{position:fixed;top:24px;right:24px;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s,transform .3s;z-index:2}
-.gal-lb-close:hover{background:rgba(255,255,255,.25);transform:rotate(90deg)}
-.gal-lb-close svg{width:22px;height:22px}
-.gal-lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;cursor:pointer;transition:background .25s;z-index:2}
-.gal-lb-nav:hover{background:rgba(255,255,255,.25)}
-.gal-lb-nav svg{width:26px;height:26px}
-.gal-lb-nav.prev{left:24px}
-.gal-lb-nav.next{right:24px}
 
 @media(max-width:900px){
   .gal-albums{grid-template-columns:1fr 1fr;gap:18px}
@@ -59,7 +43,4 @@
 @media(max-width:560px){
   .gal-albums{grid-template-columns:1fr}
   .gal-masonry{columns:1}
-  .gal-lb-nav{width:44px;height:44px}
-  .gal-lb-nav.prev{left:10px}
-  .gal-lb-nav.next{right:10px}
 }

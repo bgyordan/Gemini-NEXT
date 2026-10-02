@@ -15,7 +15,23 @@
 .sw-1 { --c: var(--orange); --dx: -6%; --dy: -5%; left: 24%; top: 0; }
 .sw-2 { --c: var(--lime); --dx: 7%; --dy: -2%; right: 0; top: 40%; }
 .sw-3 { --c: var(--blue); --dx: -4%; --dy: 7%; left: 0; top: 44%; }
-.sw-core { position: absolute; left: 50%; top: 56%; width: 20%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 10px var(--sky-2); display: grid; place-items: center; text-align: center; font: 600 clamp(10px, 1.1vw, 13px)/1.2 var(--display); color: var(--ink); z-index: 2; }
+.sw-core { position: absolute; left: 50%; top: 56%; width: 25%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; padding: 5px; background: conic-gradient(from 200deg, var(--orange) 0 33.3%, var(--lime) 0 66.6%, var(--blue) 0); box-shadow: 0 10px 30px -10px rgba(21, 50, 74, .45), 0 0 0 8px var(--paper); z-index: 2; transition: transform .9s cubic-bezier(.2, .75, .25, 1); }
+/* децата от логото в средата */
+.sw-kids { display: block; width: 100%; height: 100%; border-radius: 50%; background: #d7ecf9 url(/logo.jpg) 51% 52% / 285% no-repeat; border: 3px solid var(--paper); }
+/* лек завой при посочване: кръговете се завъртат около центъра, снимките остават изправени,
+   а цветният кант на всяка снимка „обикаля“ около нея */
+.swirl-spin, .sw-ph img { transition: rotate 1.1s cubic-bezier(.2, .75, .25, 1), scale .5s ease; }
+.sw-ph::before { transition: rotate 1.1s cubic-bezier(.2, .75, .25, 1); }
+.swirl:hover .swirl-spin { rotate: 16deg; }
+.swirl:hover .sw-ph img { rotate: -16deg; }
+.swirl:hover .sw-ph::before { rotate: 110deg; }
+.sw-ph:hover img { scale: 1.04; }
+.swirl:hover .sw-core { transform: translate(-50%, -50%) rotate(-12deg) scale(1.06); }
+@media (prefers-reduced-motion: reduce) {
+  .swirl-spin, .sw-ph img, .sw-ph::before, .sw-core { transition: none; }
+  .swirl:hover .swirl-spin, .swirl:hover .sw-ph img, .swirl:hover .sw-ph::before { rotate: none; }
+  .swirl:hover .sw-core { transform: translate(-50%, -50%); }
+}
 @keyframes sw-turn { from { transform: rotate(-70deg) scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes sw-unturn { from { transform: rotate(70deg); } to { transform: none; } }
 

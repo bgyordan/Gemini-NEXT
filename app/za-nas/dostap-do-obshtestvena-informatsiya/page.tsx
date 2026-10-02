@@ -1,3 +1,4 @@
+import { getSiteInfo } from '../../../lib/siteinfo';
 import PageHero from '../../components/PageHero';
 import LawRefs from '../../components/LawRefs';
 import DocRows from '../../components/DocRows';
@@ -20,7 +21,7 @@ type Doc = {
 };
 
 // Звено за приемане на заявления по ЗДОИ
-const UNIT = {
+const UNIT_BASE = {
   name: 'Деловодство на ЦСОП – Варна',
   address: 'ул. „Петко Стайнов“ №7, гр. Варна',
   email: 'info-400052@edu.mon.bg',
@@ -29,6 +30,8 @@ const UNIT = {
 };
 
 export default async function ZdoiPage() {
+  const info = await getSiteInfo();
+  const UNIT = { ...UNIT_BASE, email: info.contact.email, hours: `Работни дни, ${info.hours.admin} ч.` };
   const docs: Doc[] = (await getDocuments('zdoi', true)).map((d) => ({ ...d, category: d.category ?? null }));
 
   const byCat = (k: string) => docs.filter((d) => (d.category ?? '') === k);

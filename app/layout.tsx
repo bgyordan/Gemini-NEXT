@@ -4,6 +4,7 @@ import '@fontsource-variable/golos-text';
 import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SiteNotice from './components/SiteNotice';
 import ScrollTop from './components/ScrollTop';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import CookieBanner from './components/CookieBanner';
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
+        <SiteNotice />
         <Header />
         <main id="main">{children}</main>
         <Footer />

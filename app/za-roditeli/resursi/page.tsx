@@ -1,13 +1,14 @@
 import PageHero from '../../components/PageHero';
 import LinkList from '../../components/LinkList';
-import { CONTACT } from '../../components/nav';
+import { getSiteInfo } from '../../../lib/siteinfo';
 
 export const metadata = {
   title: 'Ресурси за родители — ЦСОП Варна',
   description: 'Печатни материали за работа у дома, литература и подкрепа за родители на деца със специални образователни потребности.',
 };
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  const { contact: CONTACT } = await getSiteInfo();
   return (
     <>
       <PageHero

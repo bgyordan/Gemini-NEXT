@@ -1,6 +1,6 @@
 import PageHero from '../../components/PageHero';
 import { db } from '../../../lib/supabase';
-import { CONTACT } from '../../components/nav';
+import { getSiteInfo } from '../../../lib/siteinfo';
 import JobSubscribe from './JobSubscribe';
 import './karieri.css';
 
@@ -23,6 +23,7 @@ async function getJobs(): Promise<Job[]> {
 }
 
 export default async function CareersPage() {
+  const { contact: CONTACT } = await getSiteInfo();
   const jobs = await getJobs();
   return (
     <>

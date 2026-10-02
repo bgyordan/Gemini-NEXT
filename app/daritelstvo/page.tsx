@@ -1,21 +1,16 @@
 import PageHero from '../components/PageHero';
 import PagePhotos from '../components/PagePhotos';
 import CopyText from './CopyText';
+import { getSiteInfo } from '../../lib/siteinfo';
 
 export const metadata = {
   title: 'Дарителство — ЦСОП Варна',
   description: 'Подкрепете децата и младежите в ЦСОП – Варна. Всяко дарение отива за учебната и терапевтичната среда.',
 };
 
-// ВНИМАНИЕ: банковите данни трябва да са проверени от счетоводството.
-const BANK = {
-  to: 'Училищно настоятелство към ЦСОП – Варна',
-  iban: 'BG12 UNCR 7000 1523 4891 00',
-  bic: 'UNCRBGSF',
-  reason: 'Дарение за дейността на ЦСОП – Варна',
-};
 
-export default function DonatePage() {
+export default async function DonatePage() {
+  const { bank: BANK } = await getSiteInfo();
   return (
     <>
       <PageHero

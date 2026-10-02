@@ -1,9 +1,11 @@
-import { NAV, CONTACT } from './nav';
+import { NAV } from './nav';
+import { getSiteInfo } from '../../lib/siteinfo';
 import LastUpdated from './LastUpdated';
 import ThemeToggle from './ThemeToggle';
 import './footer.css';
 
-export default function Footer() {
+export default async function Footer() {
+  const { contact: CONTACT, hours: HOURS } = await getSiteInfo();
   const groups = NAV.filter((g) => g.label !== 'Новини');
   return (
     <footer className="site-foot">
@@ -32,7 +34,7 @@ export default function Footer() {
             </address>
             <p><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <p><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
-            <p className="sf-hours">Пон – пет, 8:00 – 18:00</p>
+            <p className="sf-hours">Пон – пет, {HOURS.center}</p>
           </div>
         </div>
 

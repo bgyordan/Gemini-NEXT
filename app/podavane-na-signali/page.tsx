@@ -1,3 +1,4 @@
+import { getSiteInfo } from '../../lib/siteinfo';
 import PageHero from '../components/PageHero';
 import DocsBrowser from '../components/DocsBrowser';
 import { getDocuments } from '../../lib/data';
@@ -11,15 +12,10 @@ export const metadata = {
 
 export const revalidate = 0;
 
-// TODO (Йордан): попълни телефона
-const CONTACT = {
-  person: 'Силвия Кьошкерян, ЗДУД',
-  email: 'signali@csop-varna.bg',
-  phone: '—',
-  address: 'гр. Варна, ул. „Петко Стайнов“ №7',
-};
 
 export default async function SignaliPage() {
+  const info = await getSiteInfo();
+  const CONTACT = { ...info.signali, phone: info.signali.phone || '—', address: `${info.contact.address}, ${info.contact.city}` };
   const docs = await getDocuments('signali');
 
   return (

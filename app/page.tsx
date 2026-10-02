@@ -39,7 +39,8 @@ const DOCS = [
 
 export default async function Home() {
   const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
-  const h = [...hero, ...FALLBACK].slice(0, 3);
+  // празно място ('') от ЕИС → стандартната снимка точно там
+  const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
   const [feat, ...rest] = news;
 
   return (

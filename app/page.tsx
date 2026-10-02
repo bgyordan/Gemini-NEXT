@@ -70,7 +70,7 @@ export default async function Home() {
               <div className="sw-ph sw-2"><img src={h[1]} alt="" /></div>
               <div className="sw-ph sw-3"><img src={h[2]} alt="" /></div>
             </div>
-            <div className="sw-core">ЦСОП<br />Варна</div>
+            <div className="sw-core"><span className="sw-kids" /></div>
           </div>
         </div>
       </section>

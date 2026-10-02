@@ -30,7 +30,7 @@ const VALUES = [
 
 const DOCS = [
   { t: 'Бюджет и финанси', d: 'Бюджет и отчети', href: '/za-nas/byudzhet-i-finansi', icon: 'M4 20V10M10 20V4M16 20v-7M22 20H2' },
-  { t: 'Вътрешни документи', d: 'Правилници, планове и политики', href: '/za-nas/vatreshni-dokumenti', icon: 'M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h6' },
+  { t: 'Документи в ЦСОП', d: 'Правилници, планове и политики', href: '/za-nas/dokumenti-v-tsop', icon: 'M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h6' },
   { t: 'Профил на купувача', d: 'Обществени поръчки в ЦАИС ЕОП', href: '/za-nas/profil-na-kupuvacha', icon: 'M3 7h18v13H3zM8 7V4h8v3' },
   { t: 'Достъп до информация', d: 'Заявления и отчети по ЗДОИ', href: '/za-nas/dostap-do-obshtestvena-informatsiya', icon: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4' },
   { t: 'Защита на личните данни', d: 'Политика по GDPR', href: '/za-nas/zashtita-na-lichnite-danni', icon: 'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z' },

@@ -3,7 +3,7 @@ import DocsBrowser from '../../components/DocsBrowser';
 import { getDocuments } from '../../../lib/data';
 
 export const metadata = {
-  title: 'Вътрешни документи — ЦСОП Варна',
+  title: 'Документи — ЦСОП Варна',
   description: 'Стратегия, правилници, програми и вътрешни правила на ЦСОП – Варна.',
 };
 export const dynamic = 'force-dynamic';
@@ -13,8 +13,8 @@ export default async function DocsPage() {
   return (
     <>
       <PageHero
-        path="/za-nas/vatreshni-dokumenti"
-        title="Вътрешни документи"
+        path="/za-nas/dokumenti-v-tsop"
+        title="Документи в ЦСОП"
         intro="Стратегията, правилниците, програмите и вътрешните правила, по които работи центърът. Документите се обновяват при всяка промяна."
       />
       <section className="section tone-blue">

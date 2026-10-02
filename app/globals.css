@@ -321,3 +321,8 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .ev-desc { margin-top: 8px; color: var(--ink-2); }
 .ev-list.past .ev-day { background: var(--sky); color: var(--ink-2); }
 .page-hero + .section, .page-hero + section.section { padding-top: clamp(28px, 4vw, 52px); }
+
+/* Обява най-горе (от ЕИС → Сайт → Настройки) */
+.site-notice { background: var(--orange); color: #15324A; font-weight: 600; font-size: 15px; line-height: 1.45; text-align: center; padding: 9px 0; }
+.site-notice a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.site-notice a:hover { text-decoration-thickness: 2px; }

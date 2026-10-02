@@ -1,7 +1,7 @@
 import PageHero from '../components/PageHero';
 import PagePhotos from '../components/PagePhotos';
 import LinkList from '../components/LinkList';
-import { CONTACT } from '../components/nav';
+import { getSiteInfo } from '../../lib/siteinfo';
 
 export const metadata = {
   title: 'За нас — ЦСОП Варна',
@@ -22,7 +22,8 @@ const PATH = [
   { when: 'Днес', t: 'Над 150 деца и младежи', d: 'Всеки ден повече от 150 деца и младежи се обучават и получават терапия при нас, водени от екип специалисти.' },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { contact: CONTACT, hours: HOURS } = await getSiteInfo();
   return (
     <>
       <PageHero
@@ -52,7 +53,7 @@ export default function AboutPage() {
                 <tr><th>Деца и младежи</th><td>над 150</td></tr>
                 <tr><th>Учебни кабинети</th><td>9, плюс ерготерапия</td></tr>
                 <tr><th>Адрес</th><td>{CONTACT.address}, Варна</td></tr>
-                <tr><th>Работно време</th><td>пон – пет, 8:00 – 18:00</td></tr>
+                <tr><th>Работно време</th><td>пон – пет, {HOURS.center}</td></tr>
               </tbody>
             </table>
           </aside>

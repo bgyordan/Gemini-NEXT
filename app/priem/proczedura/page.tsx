@@ -2,7 +2,7 @@ import PageHero from '../../components/PageHero';
 import DocRows from '../../components/DocRows';
 import AdmissionWizard from '../AdmissionWizard';
 import { getDocuments } from '../../../lib/data';
-import { CONTACT } from '../../components/nav';
+import { getSiteInfo } from '../../../lib/siteinfo';
 
 export const metadata = {
   title: 'Как се записва дете — ЦСОП Варна',
@@ -11,6 +11,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ProcedurePage() {
+  const { contact: CONTACT, hours: HOURS } = await getSiteInfo();
   const docs = await getDocuments('admission', true);
   return (
     <>
@@ -25,7 +26,7 @@ export default async function ProcedurePage() {
           <AdmissionWizard />
           <aside className="aside-box">
             <h3>Документи се приемат в деловодството</h3>
-            <p className="muted">{CONTACT.address}, Варна, в работни дни 8:00 – 16:30.</p>
+            <p className="muted">{CONTACT.address}, Варна, в работни дни {HOURS.admin}.</p>
             <p style={{ marginTop: 10, fontWeight: 600 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <a className="btn btn-dark" style={{ marginTop: 16 }} href="/priem/poseshtenie">Елате на посещение</a>
           </aside>

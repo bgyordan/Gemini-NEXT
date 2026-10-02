@@ -4,7 +4,7 @@ import LinkList from '../components/LinkList';
 import DocRows from '../components/DocRows';
 import ScheduleExplorer from './ScheduleExplorer';
 import { getDocuments } from '../../lib/data';
-import { CONTACT } from '../components/nav';
+import { getSiteInfo } from '../../lib/siteinfo';
 
 export const metadata = {
   title: 'За родители — ЦСОП Варна',
@@ -13,6 +13,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ParentsPage() {
+  const { contact: CONTACT } = await getSiteInfo();
   const forms = await getDocuments('roditeli', true);
   return (
     <>

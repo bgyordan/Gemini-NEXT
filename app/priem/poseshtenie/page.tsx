@@ -1,13 +1,14 @@
 import PageHero from '../../components/PageHero';
 import PagePhotos from '../../components/PagePhotos';
-import { CONTACT } from '../../components/nav';
+import { getSiteInfo } from '../../../lib/siteinfo';
 
 export const metadata = {
   title: 'Елате на посещение — ЦСОП Варна',
   description: 'Заповядайте на безплатна опознавателна обиколка на ЦСОП – Варна заедно с детето си. Разгледайте кабинетите и се запознайте с екипа.',
 };
 
-export default function VisitPage() {
+export default async function VisitPage() {
+  const { contact: CONTACT } = await getSiteInfo();
   return (
     <>
       <PageHero

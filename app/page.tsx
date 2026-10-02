@@ -1,5 +1,5 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
-import { CONTACT } from './components/nav';
+import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
 import './home.css';
 
@@ -38,6 +38,7 @@ const DOCS = [
 ];
 
 export default async function Home() {
+  const { contact: CONTACT, hours: HOURS } = await getSiteInfo();
   const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
@@ -60,7 +61,7 @@ export default async function Home() {
             </div>
             <p className="hh-quick">
               <span><strong>{CONTACT.address}</strong>, Варна</span>
-              <span>Понеделник – петък, <strong>8:00 – 18:00</strong></span>
+              <span>Понеделник – петък, <strong>{HOURS.center}</strong></span>
             </p>
           </div>
           <div className="swirl" aria-hidden="true">

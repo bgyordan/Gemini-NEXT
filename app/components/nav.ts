@@ -52,7 +52,7 @@ export const NAV: NavGroup[] = [
     intro: 'Документите на центъра са публични и на едно място.',
     links: [
       { label: 'Бюджет и финанси', desc: 'Бюджет и отчети', href: '/za-nas/byudzhet-i-finansi' },
-      { label: 'Вътрешни документи', desc: 'Правилници и политики', href: '/za-nas/vatreshni-dokumenti' },
+      { label: 'Документи в ЦСОП', desc: 'Правилници и политики', href: '/za-nas/dokumenti-v-tsop' },
       { label: 'Профил на купувача', desc: 'Обществени поръчки', href: '/za-nas/profil-na-kupuvacha' },
       { label: 'Достъп до информация', desc: 'По ЗДОИ', href: '/za-nas/dostap-do-obshtestvena-informatsiya' },
       { label: 'Защита на личните данни', desc: 'GDPR и ДЛЗД', href: '/za-nas/zashtita-na-lichnite-danni' },

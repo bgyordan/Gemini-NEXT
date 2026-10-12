@@ -51,7 +51,8 @@ export default async function AboutPage() {
             <table className="facts">
               <tbody>
                 <tr><th>Деца и младежи</th><td>над 150</td></tr>
-                <tr><th>Учебни кабинети</th><td>9, плюс ерготерапия</td></tr>
+                <tr><th>Специалисти</th><td>над 40</td></tr>
+                <tr><th>С децата на Варна</th><td>от 1949 г.</td></tr>
                 <tr><th>Адрес</th><td>{CONTACT.address}, Варна</td></tr>
                 <tr><th>Работно време</th><td>пон – пет, {HOURS.center}</td></tr>
               </tbody>

@@ -18,7 +18,7 @@ export default async function DocsPage() {
         intro="Стратегията, правилниците, програмите и вътрешните правила, по които работи центърът. Документите се обновяват при всяка промяна."
       />
       <section className="section tone-blue">
-        <div className="wrap narrow">
+        <div className="wrap">
           <DocsBrowser docs={docs} />
         </div>
       </section>

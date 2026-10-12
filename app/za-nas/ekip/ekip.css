@@ -23,7 +23,7 @@
 .m-role { font-size: 14.5px; color: var(--ink-2); line-height: 1.35; align-self: start; }
 
 /* цвят по роля — от трите цвята на логото */
-.t-dir { background: var(--blue); color: #fff; }
+.t-dir { background: var(--ink); color: var(--paper); }
 .t-admin { --c-soft: var(--blue-soft); --c-ink: var(--blue-ink); }
 .t-psy, .t-rehab { --c-soft: var(--orange-soft); --c-ink: var(--orange-ink); }
 .t-logo, .t-ergo { --c-soft: var(--lime-soft); --c-ink: var(--lime-ink); }

@@ -17,13 +17,19 @@
   --line-strong: #C6D1DA;
 
   /* трите цвята от логото: запълване / текст върху бяло / мек фон */
-  --orange: #F39A1E; --orange-ink: #A65800; --orange-soft: #FCF3E6;
-  --blue: #1D8BD1;   --blue-ink: #0F5E96;   --blue-soft: #EDF4F9;
-  --lime: #8CC63F;   --lime-ink: #477510;   --lime-soft: #F2F7EA;
-  --on-orange: #2B1700;
+  /* цветовете на логото — само за логото и детелината на началната */
+  --brand-orange: #F39A1E; --brand-lime: #8CC63F; --brand-blue: #1D8BD1;
+
+  /* интерфейсът е монохромен: тъмносиньо мастило, бяло и светлосива мъгла.
+     Старите имена (orange/blue/lime и *-ink/*-soft) остават, но вече сочат към мастилото и мъглата. */
+  --accent: #0C2638;
+  --orange: var(--accent); --orange-ink: var(--accent); --orange-soft: var(--sky);
+  --blue: var(--accent);   --blue-ink: var(--accent);   --blue-soft: var(--sky);
+  --lime: var(--accent);   --lime-ink: var(--accent);   --lime-soft: var(--sky);
+  --on-orange: #FFFFFF;
 
   /* текущ цвят на раздела (задава се с .tone-*) */
-  --tone: var(--blue); --tone-ink: var(--blue-ink); --tone-soft: var(--blue-soft);
+  --tone: var(--accent); --tone-ink: var(--accent); --tone-soft: var(--sky);
 
   --display: 'Unbounded Variable', 'Unbounded', 'Arial Black', system-ui, sans-serif;
   --body: 'Golos Text Variable', 'Golos Text', 'Segoe UI', system-ui, sans-serif;
@@ -47,17 +53,17 @@
   --paper: #0D1A25; --sky: #12273A; --sky-2: #18324A;
   --ink: #E6F0F7; --ink-2: #A9BDCC; --ink-3: #87A0B3;
   --line: #25415A; --line-strong: #31536F;
-  --orange: #F6A94A; --orange-ink: #F8B566; --orange-soft: #2E2414;
-  --blue: #4DAAE6;   --blue-ink: #7CC1EE;   --blue-soft: #132E45;
-  --lime: #A3D45F;   --lime-ink: #B2DC77;   --lime-soft: #1B2C14;
+  --accent: #E6F0F7;
+  --orange: var(--accent); --orange-ink: var(--accent); --orange-soft: var(--sky);
+  --blue: var(--accent);   --blue-ink: var(--accent);   --blue-soft: var(--sky);
+  --lime: var(--accent);   --lime-ink: var(--accent);   --lime-soft: var(--sky);
+  --on-orange: #0C2638;
   --shadow: 0 18px 40px -24px rgba(0, 0, 0, .7);
   --header-bg: rgba(13, 26, 37, .92); --header-solid: rgba(13, 26, 37, .97);
   color-scheme: dark;
 }
 
-.tone-orange { --tone: var(--orange); --tone-ink: var(--orange-ink); --tone-soft: var(--orange-soft); }
-.tone-blue   { --tone: var(--blue);   --tone-ink: var(--blue-ink);   --tone-soft: var(--blue-soft); }
-.tone-lime   { --tone: var(--lime);   --tone-ink: var(--lime-ink);   --tone-soft: var(--lime-soft); }
+.tone-orange, .tone-blue, .tone-lime { --tone: var(--accent); --tone-ink: var(--accent); --tone-soft: var(--sky); }
 
 /* ---------- база ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -326,6 +332,76 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .page-hero + .section, .page-hero + section.section { padding-top: clamp(28px, 4vw, 52px); }
 
 /* Обява най-горе (от ЕИС → Сайт → Настройки) */
-.site-notice { background: var(--orange); color: #15324A; font-weight: 600; font-size: 15px; line-height: 1.45; text-align: center; padding: 9px 0; }
+.site-notice { background: var(--ink); color: var(--paper); font-weight: 600; font-size: 15px; line-height: 1.45; text-align: center; padding: 9px 0; }
 .site-notice a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .site-notice a:hover { text-decoration-thickness: 2px; }
+
+/* =====================================================================
+   Широки вътрешни страници (2026-10)
+   Списъците се подреждат в колони по ширината на екрана, правните страници
+   са „индекс“: заглавието вляво, текстът вдясно с удобна дължина на реда.
+   ===================================================================== */
+
+/* документи — мрежа от редове вместо една тясна колона */
+.doc-rows { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); column-gap: clamp(24px, 3vw, 48px); border-top: 0; }
+.doc-rows li { border-top: 1px solid var(--line); border-bottom: 0; }
+.doc-rows a { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 16px; padding: 16px 10px 16px 0; border-radius: 0; transition: background .2s, padding .25s cubic-bezier(.2, .8, .2, 1); }
+.doc-rows a:hover { background: transparent; padding-left: 8px; }
+.doc-rows a:hover .dr-name { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.dr-ic { width: 44px; height: 44px; border-radius: 12px; border: 0; background: var(--sky); color: var(--ink); transition: background .2s, color .2s; }
+.doc-rows a:hover .dr-ic { background: var(--ink); color: var(--paper); }
+.dr-name { font-weight: 500; line-height: 1.4; }
+.dr-type { font-size: 12px; letter-spacing: .04em; font-weight: 600; color: var(--ink-3); border: 0; padding: 0; }
+
+/* документи с търсачка — категориите вляво, групите вдясно */
+.db-layout { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: clamp(32px, 4.5vw, 88px); align-items: start; }
+.db-side { position: sticky; top: calc(var(--header-h) + 24px); display: grid; gap: 22px; }
+.db-search { max-width: none; }
+.db-search input { border: 1px solid var(--line-strong); border-radius: 12px; padding: 13px 16px 13px 46px; }
+.db-search input:focus { border-color: var(--ink); }
+.db-cats { display: grid; gap: 2px; }
+.db-cats button { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; width: 100%; text-align: left; padding: 11px 14px; border: 0; border-radius: 10px; background: none; cursor: pointer; font-size: 15.5px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s; }
+.db-cats button span { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.db-cats button:hover { background: var(--sky); color: var(--ink); }
+.db-cats button.on { background: var(--ink); color: var(--paper); }
+.db-cats button.on span { color: inherit; opacity: .7; }
+.db-group + .db-group { margin-top: clamp(40px, 4vw, 64px); }
+.db-group-h { display: flex; align-items: baseline; gap: 12px; font: 300 clamp(22px, 1.8vw, 30px)/1.15 var(--display); letter-spacing: -.02em; margin-bottom: 14px; }
+.db-group-h span { font: 500 14px var(--body); color: var(--ink-3); }
+@media (max-width: 900px) {
+  .db-layout { grid-template-columns: 1fr; }
+  .db-side { position: static; }
+  .db-cats { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+  .db-cats button { width: auto; white-space: nowrap; border: 1px solid var(--line-strong); border-radius: var(--r-pill); }
+}
+
+/* правни и справочни страници — индекс: заглавие вляво, текст вдясно */
+.wrap.narrow.legal { max-width: 1880px; }
+.legal { gap: 0; }
+.legal > .prose-block { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: clamp(32px, 6vw, 120px); row-gap: 0; align-content: start;
+  padding-block: clamp(32px, 3.5vw, 56px); border-top: 1px solid var(--line); }
+.legal > .prose-block:first-child { border-top: 0; padding-top: 0; }
+.legal > .prose-block > h2 { grid-column: 1; grid-row: 1 / span 60; align-self: start; margin: 0; font-size: clamp(22px, 1.9vw, 32px); font-weight: 300; letter-spacing: -.02em; }
+.legal > .prose-block > *:not(h2) { grid-column: 2; max-width: 46rem; }
+.legal > .prose-block > .docs-wide, .legal > .prose-block > .db-layout, .legal > .prose-block > .doc-rows { max-width: none; }
+.legal .prose-block > p + p, .legal .prose-block > p + ul, .legal .prose-block > ul + p { margin-top: 14px; }
+@media (max-width: 860px) {
+  .legal > .prose-block { grid-template-columns: 1fr; }
+  .legal > .prose-block > h2 { grid-row: auto; margin-bottom: 14px; }
+  .legal > .prose-block > *:not(h2) { grid-column: 1; }
+}
+
+/* услуги — карти в колони */
+.services { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: clamp(16px, 2vw, 28px); border-top: 0; }
+.services li { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 24px; padding: clamp(24px, 2.4vw, 36px); border: 1px solid var(--line); border-radius: var(--r-lg); }
+.services h2 { font-size: clamp(20px, 1.6vw, 26px); font-weight: 400; }
+
+/* събития — в колони */
+.ev-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); column-gap: clamp(24px, 3vw, 48px); border-top: 0; }
+.ev-list li { border-top: 1px solid var(--line); border-bottom: 0; }
+.ev-list .ev-day, .ev-day { background: transparent; border: 1px solid var(--line-strong); color: var(--ink-2); }
+.ev-list.past .ev-day { background: transparent; color: var(--ink-3); }
+/* раздел с много документи в правна страница — на цялата ширина */
+.legal > .prose-block:has(.db-layout) { grid-template-columns: 1fr; }
+.legal > .prose-block:has(.db-layout) > h2 { grid-row: auto; margin-bottom: 20px; }
+.legal > .prose-block:has(.db-layout) > *:not(h2) { grid-column: 1; }

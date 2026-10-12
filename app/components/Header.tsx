@@ -27,14 +27,20 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [mobile]);
 
-  const enter = (k: string) => { if (timer.current) clearTimeout(timer.current); setOpen(k); };
+  // кратко забавяне при първо отваряне — менюто не „мига“, ако мишката само минава през лентата
+  const enter = (k: string) => {
+    if (timer.current) clearTimeout(timer.current);
+    if (open) setOpen(k);
+    else timer.current = setTimeout(() => setOpen(k), 110);
+  };
   const leave = () => { if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(null), 160); };
 
-  const isActive = (href: string, links: { href: string }[]) =>
-    pathname === href || links.some((l) => pathname === l.href || pathname.startsWith(l.href + '/'));
+  // само един раздел е „текущ“ — първият, в който е страницата (някои страници са в два раздела)
+  const activeGroup = NAV.find((g) => pathname === g.href || g.links.some((l) => pathname === l.href || pathname.startsWith(l.href + '/')))?.href;
+  const isActive = (href: string, _links?: { href: string }[]) => href === activeGroup;
 
   return (
-    <header className="site-head">
+    <header className={`site-head${open ? ' is-open' : ''}`}>
       <a className="skip" href="#main">Към съдържанието</a>
       <div className="wrap sh-bar">
         <a href="/" className="sh-brand" aria-label="ЦСОП Варна – начална страница">
@@ -63,20 +69,23 @@ export default function Header() {
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
               <div className="sh-panel" hidden={open !== g.href}>
-                <div className="sh-panel-intro">
-                  <a href={g.href} className="sh-panel-title">{g.label}</a>
-                  <p>{g.intro}</p>
+                <div className="wrap sh-panel-in">
+                  <div className="sh-panel-intro">
+                    <p className="sh-panel-title">{g.label}</p>
+                    <p>{g.intro}</p>
+                    <a href={g.href} className="sh-panel-all">Към раздела</a>
+                  </div>
+                  <ul>
+                    {g.links.map((l, i) => (
+                      <li key={l.href} style={{ ['--i' as any]: i }}>
+                        <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>
+                          <b>{l.label}</b>
+                          {l.desc && <span>{l.desc}</span>}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul>
-                  {g.links.map((l) => (
-                    <li key={l.href}>
-                      <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>
-                        <b>{l.label}</b>
-                        {l.desc && <span>{l.desc}</span>}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           ))}
@@ -89,6 +98,9 @@ export default function Header() {
           {mobile ? 'Затвори' : 'Меню'}
         </button>
       </div>
+
+      {/* затъмняване на страницата под отвореното меню */}
+      <div className="sh-scrim" aria-hidden="true" />
 
       {/* Мобилно меню */}
       <div id="mob-nav" className="sh-mob" hidden={!mobile}>

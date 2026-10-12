@@ -12,7 +12,7 @@
 
 .sf-h { font-weight: 600; color: var(--paper); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 :root[data-theme="dark"] .sf-h { color: var(--ink); }
-.sf-col:not(.sf-contact) .sf-h::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--tone); }
+
 .sf-col ul { list-style: none; display: grid; gap: 7px; }
 .sf-contact address { font-style: normal; line-height: 1.55; margin-bottom: 10px; }
 .sf-contact p + p { margin-top: 4px; }

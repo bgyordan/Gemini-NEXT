@@ -6,7 +6,7 @@ export type NavGroup = { label: string; href: string; tone: Tone; intro: string;
 
 export const NAV: NavGroup[] = [
   {
-    label: 'Центърът',
+    label: 'За нас',
     href: '/za-nas',
     tone: 'blue',
     intro: 'Обучение, специализирана подкрепа и рехабилитация за деца и младежи.',

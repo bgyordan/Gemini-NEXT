@@ -8,18 +8,18 @@
 
 /* общи за секциите на началната */
 .hs { padding-block: var(--hs-pad); }
-.hs-head { display: grid; gap: 18px; max-width: 46rem; margin-bottom: clamp(40px, 5vw, 72px); }
+.hs-head { display: grid; gap: 18px; max-width: min(100%, 62rem); margin-bottom: clamp(40px, 5vw, 72px); }
 .hs-head.row { max-width: none; display: flex; align-items: end; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
-.hs-head h2 { font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; font-weight: 400; letter-spacing: -.025em; }
+.hs-head h2 { font-size: clamp(30px, 3.3vw, 64px); line-height: 1.08; font-weight: 400; letter-spacing: -.025em; }
 .hs-head p { color: var(--ink-2); font-size: clamp(17px, 1.4vw, 19px); max-width: 38em; }
 .hs-head.row p { margin-top: 14px; }
 
 /* ===== Герой =====
    ред 1: мотото през цялата ширина (3 реда);  ред 2: текст + бутони | спиралата, издърпана нагоре до 3-ия ред */
 .hx { position: relative; overflow: hidden; padding-block: clamp(40px, 5.5vw, 88px) clamp(32px, 4vw, 56px); }
-.hx-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 470px); column-gap: clamp(24px, 5vw, 80px); align-items: start; }
+.hx-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, clamp(380px, 33vw, 680px)); column-gap: clamp(24px, 5vw, 80px); align-items: start; }
 
-.hx-title { grid-column: 1 / -1; grid-row: 1; position: relative; z-index: 1; font-size: clamp(38px, 5.3vw, 80px); line-height: 1.04; font-weight: 300; letter-spacing: -.035em; max-width: none; }
+.hx-title { grid-column: 1 / -1; grid-row: 1; position: relative; z-index: 1; font-size: clamp(38px, 5.4vw, 116px); line-height: 1.04; font-weight: 300; letter-spacing: -.035em; max-width: none; }
 .hx-title > span { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
 .hx-title > span > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--l, 0) * 90ms + 150ms); }
 .hx-title > span:nth-child(2) > span { --l: 1; }
@@ -27,12 +27,12 @@
 @keyframes hx-rise { from { transform: translateY(105%); } to { transform: none; } }
 
 .hx-text { grid-column: 1; grid-row: 2; }
-.hx-lead { margin-top: clamp(28px, 3vw, 44px); font-size: clamp(17px, 1.45vw, 20px); line-height: 1.6; color: var(--ink-2); max-width: 31em; animation: hx-fade .9s .65s both; }
+.hx-lead { margin-top: clamp(28px, 3vw, 56px); font-size: clamp(17px, 1.3vw, 23px); line-height: 1.6; color: var(--ink-2); max-width: 31em; animation: hx-fade .9s .65s both; }
 .hx-actions { margin-top: clamp(28px, 3vw, 40px); animation: hx-fade .9s .8s both; }
 @keyframes hx-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* спиралата — трите полумесеца от логото около снимка 1 от ЕИС */
-.hx-swirl { grid-column: 2; grid-row: 2; align-self: start; margin-top: calc(clamp(38px, 5.3vw, 80px) * -.7); position: relative; width: 100%; aspect-ratio: 1; margin-right: clamp(-90px, -4vw, 0px); }
+.hx-swirl { grid-column: 2; grid-row: 2; align-self: start; margin-top: calc(clamp(38px, 5.4vw, 116px) * -.7); position: relative; width: 100%; aspect-ratio: 1; margin-right: clamp(-90px, -4vw, 0px); }
 .hx-arcs { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .hx-arcs path { transform-origin: 0 0; stroke: var(--paper); stroke-width: .022; animation: hx-arc 1.5s cubic-bezier(.16, .8, .2, 1) both; animation-delay: calc(var(--i) * 120ms); }
 @keyframes hx-arc { from { transform: rotate(-150deg) scale(.6); opacity: 0; } 40% { opacity: 1; } to { transform: none; opacity: 1; } }
@@ -56,7 +56,7 @@
 /* ===== Какво правим ===== */
 .hx-about { padding-top: clamp(72px, 9vw, 140px); }
 .ab-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
-.ab-say { font-size: clamp(26px, 2.9vw, 42px); line-height: 1.2; font-weight: 300; letter-spacing: -.02em; }
+.ab-say { font-size: clamp(26px, 2.7vw, 54px); line-height: 1.2; font-weight: 300; letter-spacing: -.02em; }
 .ab-text p { margin-top: clamp(24px, 2.4vw, 36px); color: var(--ink-2); font-size: clamp(17px, 1.3vw, 18.5px); max-width: 34em; }
 .ab-text .more { margin-top: 28px; }
 .ab-photos { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 28px); align-items: start; }
@@ -105,7 +105,7 @@
 .hn-events .ev-day b { color: #0C2638; }
 
 /* ===== Галерия ===== */
-.hx-gal .pband { grid-auto-rows: clamp(160px, 19vw, 280px); gap: clamp(10px, 1.2vw, 16px); }
+.hx-gal .pband { grid-auto-rows: clamp(160px, 17vw, 380px); gap: clamp(10px, 1.2vw, 16px); }
 .hx-gal .pband-item { border-radius: var(--r-lg); }
 
 /* ===== Ценности: дълбоко морско синьо ===== */
@@ -114,7 +114,7 @@
 .hx-vals .more { color: #fff; }
 .hx-vlist { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); }
 .hx-v { min-width: 0; }
-.hx-v h3 { font-size: clamp(20px, 1.7vw, 23px); overflow-wrap: anywhere; font-weight: 300; letter-spacing: -.02em; }
+.hx-v h3 { font-size: clamp(20px, 1.6vw, 30px); overflow-wrap: anywhere; font-weight: 300; letter-spacing: -.02em; }
 .hx-v h3::before { content: ""; display: block; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 26px; background: var(--c); }
 .hx-v:nth-child(1) { --c: var(--orange); }
 .hx-v:nth-child(2) { --c: var(--lime); }
@@ -124,7 +124,7 @@
 
 /* ===== Дарителство ===== */
 .hd-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: end; padding-top: clamp(40px, 5vw, 72px); border-top: 1px solid var(--line-strong); }
-.hd-grid h2 { font-size: clamp(32px, 4.4vw, 68px); line-height: 1.05; font-weight: 300; letter-spacing: -.03em; }
+.hd-grid h2 { font-size: clamp(32px, 4.2vw, 88px); line-height: 1.05; font-weight: 300; letter-spacing: -.03em; }
 .hd-grid p { color: var(--ink-2); font-size: clamp(17px, 1.4vw, 19px); margin-bottom: 24px; max-width: 26em; }
 
 /* бели секции една след друга — без двоен отстъп */

@@ -1,7 +1,6 @@
 import { NAV } from './nav';
 import { getSiteInfo } from '../../lib/siteinfo';
 import LastUpdated from './LastUpdated';
-import ThemeToggle from './ThemeToggle';
 import './footer.css';
 
 export default async function Footer() {
@@ -47,7 +46,6 @@ export default async function Footer() {
             <a href="/politika-za-biskvitki">Бисквитки</a>
             <a href="/obshti-usloviya">Общи условия</a>
           </span>
-          <ThemeToggle />
         </div>
       </div>
     </footer>

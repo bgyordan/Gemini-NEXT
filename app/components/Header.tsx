@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NAV } from './nav';
+import ThemeToggle from './ThemeToggle';
 import './header.css';
 
 export default function Header() {
@@ -82,6 +83,7 @@ export default function Header() {
           <a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}>Контакти</a>
         </nav>
 
+        <ThemeToggle />
         <a href="/daritelstvo" className="sh-donate">Дарете</a>
         <button type="button" className="sh-menu" aria-expanded={mobile} aria-controls="mob-nav" onClick={() => setMobile(!mobile)}>
           {mobile ? 'Затвори' : 'Меню'}

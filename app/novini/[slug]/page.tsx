@@ -31,9 +31,9 @@ export default async function ArticlePage({ params }: Props) {
   const more = (await getNews(4)).filter((n) => n.id !== post.id).slice(0, 3);
 
   return (
-    <article className="article tone-lime">
+    <article className="article">
       <header className="article-hero">
-        <div className="wrap narrow">
+        <div className="wrap">
           <nav className="ph-crumb" aria-label="Пътечка">
             <a href="/">Начало</a><span aria-hidden="true">/</span><a href="/novini">Новини</a>
           </nav>
@@ -46,16 +46,12 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </header>
 
-      <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images}>
+      <ArticleMedia title={post.title} cover={post.cover_url} gallery={post.gallery_images} after={<ShareButton title={post.title} />}>
         <div className="article-body">
           {post.excerpt && <p className="article-lead">{post.excerpt}</p>}
           <RichText text={post.content} />
         </div>
       </ArticleMedia>
-
-      <div className="wrap narrow">
-        <ShareButton title={post.title} />
-      </div>
 
       {more.length > 0 && (
         <section className="section tint">

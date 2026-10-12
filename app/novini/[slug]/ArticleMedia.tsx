@@ -3,10 +3,12 @@
 import { useState, type ReactNode } from 'react';
 import Lightbox from '../../components/Lightbox';
 
-const SHOW = 5; // колко плочки се виждат в мозайката; останалите са зад „+N“
+const SHOW = 7; // колко плочки се виждат до текста; останалите са зад „+N“
 
 /**
- * Корица + текст + мозайка от снимки в новината.
+ * Корица на цялата ширина, а под нея — текстът и снимките един до друг:
+ * текстът вляво с удобна дължина на реда, снимките вдясно (залепени при превъртане).
+ * Без снимки в галерията — текстът е в средата, а бутоните за споделяне вдясно.
  * Всяка снимка (и корицата) отваря общия преглед с всички снимки на новината.
  */
 export default function ArticleMedia({
@@ -14,11 +16,13 @@ export default function ArticleMedia({
   cover,
   gallery,
   children,
+  after,
 }: {
   title: string;
   cover: string | null;
   gallery: string[];
   children: ReactNode;
+  after?: ReactNode;
 }) {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -33,7 +37,7 @@ export default function ArticleMedia({
   return (
     <>
       {cover && (
-        <div className="wrap narrow">
+        <div className="wrap">
           <button type="button" className="article-cover is-zoom" onClick={() => setOpen(0)} aria-label="Отвори снимките">
             <img src={cover} alt={title} />
             {all.length > 1 && (
@@ -46,33 +50,39 @@ export default function ArticleMedia({
         </div>
       )}
 
-      <div className="wrap narrow">
-        {children}
+      <div className={`wrap art-grid${visible.length > 0 ? ' has-photos' : ''}`}>
+        <div className="art-text">
+          {children}
+          {after}
+        </div>
 
         {visible.length > 0 && (
-          <div className={`ng-grid n${Math.min(visible.length, SHOW)}`}>
-            {visible.map((src, i) => {
-              const last = i === visible.length - 1 && more > 0;
-              return (
-                <button
-                  type="button"
-                  key={src}
-                  className="ng-item"
-                  onClick={() => setOpen(i + offset)}
-                  aria-label={last ? `Още ${more} снимки` : `Снимка ${i + 1}`}
-                >
-                  <img src={src} alt={`${title} — снимка ${i + 1}`} loading="lazy" />
-                  {last ? (
-                    <span className="ng-more">+{more}</span>
-                  ) : (
-                    <span className="ng-zoom" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5M11 8v6M8 11h6" /></svg>
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <aside className="art-photos" aria-label="Снимки от новината">
+            <p className="art-photos-h">Снимки <span>{all.length}</span></p>
+            <div className={`ng-grid n${Math.min(visible.length, SHOW)}`}>
+              {visible.map((src, i) => {
+                const last = i === visible.length - 1 && more > 0;
+                return (
+                  <button
+                    type="button"
+                    key={src}
+                    className="ng-item"
+                    onClick={() => setOpen(i + offset)}
+                    aria-label={last ? `Още ${more} снимки` : `Снимка ${i + 1}`}
+                  >
+                    <img src={src} alt={`${title} — снимка ${i + 1}`} loading="lazy" />
+                    {last ? (
+                      <span className="ng-more">+{more}</span>
+                    ) : (
+                      <span className="ng-zoom" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5M11 8v6M8 11h6" /></svg>
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
         )}
       </div>
 

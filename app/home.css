@@ -177,20 +177,13 @@
 }
 
 /* ===== Съединения между секциите с различен фон (SectionJoin) =====
-   Нулева височина точно на линията на смяната. */
+   Нулева височина точно на линията на смяната; горният фон прелива надолу с вълна.
+   Всяка втора вълна е обърната огледално, за да не се повтаря еднакво. */
+.home { --j-navy: #0B2D47; --j-sea: #0B2D47; }
+:root[data-theme="dark"] .home, .dark .home { --j-navy: #0A2236; --j-sea: #10273B; }
 .sj { position: relative; z-index: 2; height: 0; pointer-events: none; }
-
-/* Г — нишка с възел: тънка нишка минава през смяната, а в средата е спиралата от логото, която се върти при превъртане */
-.sj-knot { position: absolute; left: 50%; top: 0; width: clamp(72px, 6vw, 104px); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
-  background: var(--paper); box-shadow: 0 0 0 1px var(--line-strong), 0 14px 30px -14px rgba(8, 31, 49, .45); display: grid; place-items: center; }
-.sj-knot::before { content: ""; position: absolute; left: 50%; top: calc(-1 * clamp(56px, 6vw, 96px)); bottom: calc(-1 * clamp(56px, 6vw, 96px)); width: 1px; z-index: -1;
-  background: linear-gradient(transparent, var(--ink-3) 30%, var(--ink-3) 70%, transparent); opacity: .55; }
-.sj-knot svg { width: 78%; height: 78%; overflow: visible; }
-@supports (animation-timeline: view()) {
-  .sj-knot-g { transform-origin: 0 0; animation: sj-spin linear both; animation-timeline: view(); }
-  @keyframes sj-spin { from { transform: rotate(-120deg); } to { transform: rotate(120deg); } }
-}
-@media (prefers-reduced-motion: reduce) { .sj-knot-g { animation: none !important; } }
+.sj svg { position: absolute; left: 0; top: -1px; width: 100%; height: clamp(36px, 6vw, 110px); fill: var(--sj-from); }
+.sj.flip svg { transform: scaleX(-1); }
 
 /* ===== Детски длани (Handprints) ===== */
 .hx-about, .hx-steps, .hx-vals, .hx-donate { position: relative; overflow: hidden; }

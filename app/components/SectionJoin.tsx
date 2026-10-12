@@ -1,17 +1,12 @@
-// Съединение между две секции с различен фон на началната страница.
-// Тънка нишка минава през смяната на фона, а в средата е „възел“ — спиралата от логото, която се върти при превъртане.
-export default function SectionJoin() {
+// Съединение между две секции с различен фон на началната страница:
+// горният фон „прелива“ надолу с плавна вълнообразна линия.
+// from — цветът на горната секция (CSS стойност).
+export default function SectionJoin({ from, flip = false }: { from: string; flip?: boolean }) {
   return (
-    <div className="sj" aria-hidden="true">
-      <span className="sj-knot">
-        <svg viewBox="-1.15 -1.15 2.3 2.3">
-          <g className="sj-knot-g">
-            <path fill="var(--brand-orange)" d="M-0.922 0.386A1 1 0 1 1 0.999 0.047A1 1 0 0 0 -0.922 0.386Z" />
-            <path fill="var(--brand-lime)" d="M0.127 -0.992A1 1 0 1 1 -0.540 0.841A1 1 0 0 0 0.127 -0.992Z" />
-            <path fill="var(--brand-blue)" d="M0.796 0.606A1 1 0 1 1 -0.459 -0.889A1 1 0 0 0 0.796 0.606Z" />
-          </g>
-        </svg>
-      </span>
+    <div className={`sj${flip ? ' flip' : ''}`} aria-hidden="true" style={{ ['--sj-from' as any]: from }}>
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0 0H1440V38C1260 92 1080 96 900 70C700 40 520 18 320 40C200 54 100 74 0 64Z" />
+      </svg>
     </div>
   );
 }

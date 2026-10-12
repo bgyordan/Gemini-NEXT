@@ -69,7 +69,7 @@ export default function Header() {
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
               <div className="sh-panel" hidden={open !== g.href}>
-                <div className="wrap sh-panel-in">
+                <div className="sh-panel-in">
                   <div className="sh-panel-intro">
                     <p className="sh-panel-title">{g.label}</p>
                     <p>{g.intro}</p>
@@ -98,9 +98,6 @@ export default function Header() {
           {mobile ? 'Затвори' : 'Меню'}
         </button>
       </div>
-
-      {/* затъмняване на страницата под отвореното меню */}
-      <div className="sh-scrim" aria-hidden="true" />
 
       {/* Мобилно меню */}
       <div id="mob-nav" className="sh-mob" hidden={!mobile}>

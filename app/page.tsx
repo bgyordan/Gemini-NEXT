@@ -1,10 +1,12 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
 import PhotoBand from './components/PhotoBand';
+import HeroPointer from './components/HeroPointer';
 import '@fontsource-variable/caveat';
 import './home.css';
 
 // снимки по подразбиране, докато в ЕИС не са избрани други
 const FALLBACK = ['/nachalna/kabineti-3.jpg', '/nachalna/terapiya-1.jpg', '/nachalna/kabineti-1.jpg'];
+const FALLBACK_ABOUT = ['/nachalna/kabineti-2.jpg', '/nachalna/kabineti-4.jpg'];
 
 const STEPS = [
   {
@@ -19,13 +21,6 @@ const STEPS = [
     title: 'Детето започва при нас',
     text: 'След становището на РЦПППО попълвате заявлението за записване и детето започва обучение и терапия по своя план.',
   },
-];
-
-// трите полумесеца от логото (изчислени: кръг R=1 минус кръг r=1, изместен с 0.44)
-const ARCS = [
-  { c: 'var(--orange)', d: 'M-0.922 0.386A1 1 0 1 1 0.999 0.047A1 1 0 0 0 -0.922 0.386Z' },
-  { c: 'var(--lime)', d: 'M0.127 -0.992A1 1 0 1 1 -0.540 0.841A1 1 0 0 0 0.127 -0.992Z' },
-  { c: 'var(--blue)', d: 'M0.796 0.606A1 1 0 1 1 -0.459 -0.889A1 1 0 0 0 0.796 0.606Z' },
 ];
 
 const VALUES = [
@@ -48,35 +43,44 @@ export default async function Home() {
   const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
+  // за блока под херото: последните снимки от галерията, различни от трите в детелината
+  const about = [...photos.map((p) => p.photo_url).filter((u) => !h.includes(u)), ...FALLBACK_ABOUT].slice(0, 2);
   const [feat, ...rest] = news;
 
   return (
     <div className="home">
-      {/* ===== Герой: снимка 1 от ЕИС на цял екран, текстът върху нея, спиралата от логото в ъгъла ===== */}
+      {/* ===== Герой: детелината от трите снимки от ЕИС (като в логото), а мотото я застъпва ===== */}
       <section className="hx">
-        <div className="hx-bg" aria-hidden="true"><img src={h[0]} alt="" /></div>
-        <svg className="hx-arcs" viewBox="-1.12 -1.12 2.24 2.24" aria-hidden="true">
-          <g className="hx-arcs-g">
-            {ARCS.map((a, i) => (
-              <path key={i} d={a.d} fill={a.c} style={{ ['--i' as any]: i }} />
-            ))}
-          </g>
-        </svg>
+        <HeroPointer />
+        <div className="wrap hx-grid">
+          <div className="hx-clover" aria-hidden="true">
+            <div className="cl-spin">
+              <div className="cl-turn">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className={`cl-ph cl-${i + 1}`}>
+                    <div className="cl-up"><img src={h[i]} alt="" /></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="cl-core"><span /></div>
+          </div>
 
-        <div className="wrap hx-in">
-          <h1 className="hx-title">
-            <span className="hx-script"><span>Вярваме, че</span></span>
-            <span className="hx-line"><span>посоката, в която</span></span>
-            <span className="hx-line"><span>се движим, е по‑важна</span></span>
-            <span className="hx-line"><span>от скоростта.</span></span>
-          </h1>
-          <p className="hx-lead">
-            Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
-            за деца и младежи със специални образователни потребности.
-          </p>
-          <div className="btn-row hx-actions">
-            <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
-            <a className="btn btn-glass" href="/priem/poseshtenie">Елате на посещение</a>
+          <div className="hx-in">
+            <h1 className="hx-title">
+              <span className="hx-script"><span>Вярваме, че</span></span>
+              <span className="hx-line"><span>посоката, в която</span></span>
+              <span className="hx-line"><span>се движим, е по‑важна</span></span>
+              <span className="hx-line"><span>от скоростта.</span></span>
+            </h1>
+            <p className="hx-lead">
+              Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
+              за деца и младежи със специални образователни потребности.
+            </p>
+            <div className="btn-row hx-actions">
+              <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
+              <a className="btn btn-glass" href="/priem/poseshtenie">Елате на посещение</a>
+            </div>
           </div>
         </div>
       </section>
@@ -95,8 +99,8 @@ export default async function Home() {
             <a className="more" href="/za-nas">Повече за центъра</a>
           </div>
           <div className="ab-photos" aria-hidden="true">
-            <img className="ab-p1" src={h[1]} alt="" loading="lazy" />
-            <img className="ab-p2" src={h[2]} alt="" loading="lazy" />
+            <img className="ab-p1" src={about[0]} alt="" loading="lazy" />
+            <img className="ab-p2" src={about[1]} alt="" loading="lazy" />
           </div>
         </div>
       </section>

@@ -89,7 +89,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionJoin />
+      <SectionJoin from="var(--j-navy)" />
 
       {/* ===== Какво правим: голямо изречение + снимки 2 и 3 ===== */}
       <section className="hs hx-about" aria-labelledby="about-h">
@@ -112,7 +112,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionJoin />
+      <SectionJoin from="var(--paper)" flip />
 
       {/* ===== Записване: истинска последователност I–III, на плътно оранжево ===== */}
       <section className="hs hx-steps" aria-labelledby="priem-h">
@@ -135,7 +135,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionJoin />
+      <SectionJoin from="var(--sky)" />
 
       {/* ===== Новини + събития ===== */}
       <section className="hs tone-lime" aria-labelledby="news-h">
@@ -212,7 +212,7 @@ export default async function Home() {
         </section>
       )}
 
-      <SectionJoin />
+      <SectionJoin from="var(--paper)" flip />
 
       {/* ===== Ценности — на тъмно морско синьо ===== */}
       <section className="hs hx-vals" aria-labelledby="val-h">
@@ -236,7 +236,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <SectionJoin />
+      <SectionJoin from="var(--j-sea)" />
 
       {/* ===== Прозрачност ===== */}
       <section className="hs tone-blue" aria-labelledby="prz-h">

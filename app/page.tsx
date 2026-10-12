@@ -1,6 +1,6 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
-import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
+import '@fontsource-variable/caveat';
 import './home.css';
 
 // снимки по подразбиране, докато в ЕИС не са избрани други
@@ -45,7 +45,6 @@ const DOCS = [
 ];
 
 export default async function Home() {
-  const { contact: CONTACT, hours: HOURS } = await getSiteInfo();
   const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
@@ -53,42 +52,32 @@ export default async function Home() {
 
   return (
     <div className="home">
-      {/* ===== Герой: мотото с голям лек шрифт + логото като жива спирала около снимка 1 ===== */}
+      {/* ===== Герой: снимка 1 от ЕИС на цял екран, текстът върху нея, спиралата от логото в ъгъла ===== */}
       <section className="hx">
-        <div className="wrap hx-grid">
-          <h1 className="hx-title" aria-label="Посоката, в която се движим, е по-важна от скоростта.">
-            <span aria-hidden="true"><span>Посоката, в която</span></span>
-            <span aria-hidden="true"><span>се движим, е по‑важна</span></span>
-            <span aria-hidden="true"><span>от скоростта.</span></span>
+        <div className="hx-bg" aria-hidden="true"><img src={h[0]} alt="" /></div>
+        <svg className="hx-arcs" viewBox="-1.12 -1.12 2.24 2.24" aria-hidden="true">
+          <g className="hx-arcs-g">
+            {ARCS.map((a, i) => (
+              <path key={i} d={a.d} fill={a.c} style={{ ['--i' as any]: i }} />
+            ))}
+          </g>
+        </svg>
+
+        <div className="wrap hx-in">
+          <h1 className="hx-title">
+            <span className="hx-script"><span>Вярваме, че</span></span>
+            <span className="hx-line"><span>посоката, в която</span></span>
+            <span className="hx-line"><span>се движим, е по‑важна</span></span>
+            <span className="hx-line"><span>от скоростта.</span></span>
           </h1>
-
-          <div className="hx-text">
-            <p className="hx-lead">
-              Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
-              за деца и младежи със специални образователни потребности.
-            </p>
-            <div className="btn-row hx-actions">
-              <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
-              <a className="btn btn-line" href="/priem/poseshtenie">Елате на посещение</a>
-            </div>
+          <p className="hx-lead">
+            Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
+            за деца и младежи със специални образователни потребности.
+          </p>
+          <div className="btn-row hx-actions">
+            <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
+            <a className="btn btn-glass" href="/priem/poseshtenie">Елате на посещение</a>
           </div>
-
-          <div className="hx-swirl" aria-hidden="true">
-            <svg className="hx-arcs" viewBox="-1.12 -1.12 2.24 2.24">
-              <g className="hx-arcs-g">
-                {ARCS.map((a, i) => (
-                  <path key={i} d={a.d} fill={a.c} style={{ ['--i' as any]: i }} />
-                ))}
-              </g>
-            </svg>
-            <div className="hx-photo"><img src={h[0]} alt="" /></div>
-          </div>
-
-          <dl className="hx-facts">
-            <div><dt>Адрес</dt><dd>{CONTACT.address}, Варна</dd></div>
-            <div><dt>Работим</dt><dd>Понеделник – петък, {HOURS.center}</dd></div>
-            <div><dt>Телефон</dt><dd><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
-          </dl>
         </div>
       </section>
 

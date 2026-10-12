@@ -15,43 +15,46 @@
 .hs-head.row p { margin-top: 14px; }
 
 /* ===== Герой =====
-   ред 1: мотото през цялата ширина (3 реда);  ред 2: текст + бутони | спиралата, издърпана нагоре до 3-ия ред */
-.hx { position: relative; overflow: hidden; padding-block: clamp(40px, 5.5vw, 88px) clamp(32px, 4vw, 56px); }
-.hx-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, clamp(380px, 33vw, 680px)); column-gap: clamp(24px, 5vw, 80px); align-items: start; }
+   Снимка 1 от ЕИС на цял екран, тъмно-синьо преливане отляво за четимост,
+   „Вярваме, че“ на ръка (Caveat) над мотото, трите полумесеца от логото излизат от долния десен ъгъл. */
+.hx { --hx-ink: #fff; position: relative; isolation: isolate; overflow: hidden; display: grid; align-items: center;
+  min-height: clamp(560px, calc(100svh - var(--header-h)), 1040px); padding-block: clamp(56px, 8vw, 120px); color: var(--hx-ink); background: #0B2D47; }
+.hx-bg { position: absolute; inset: 0; z-index: -2; }
+.hx-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; animation: hx-zoom 2.6s cubic-bezier(.2, .7, .2, 1) both; }
+.hx-bg::after { content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 31, 49, .92) 0%, rgba(8, 31, 49, .78) 34%, rgba(8, 31, 49, .35) 62%, rgba(8, 31, 49, .05) 100%),
+    linear-gradient(0deg, rgba(8, 31, 49, .55) 0%, rgba(8, 31, 49, 0) 40%); }
+@keyframes hx-zoom { from { transform: scale(1.1); } to { transform: none; } }
 
-.hx-title { grid-column: 1 / -1; grid-row: 1; position: relative; z-index: 1; font-size: clamp(38px, 5.4vw, 116px); line-height: 1.04; font-weight: 300; letter-spacing: -.035em; max-width: none; }
+.hx-in { position: relative; z-index: 1; width: 100%; }
+.hx-title { color: var(--hx-ink); font-weight: 300; max-width: none; }
 .hx-title > span { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
-.hx-title > span > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--l, 0) * 90ms + 150ms); }
+.hx-title > span > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--l, 0) * 90ms + 250ms); }
 .hx-title > span:nth-child(2) > span { --l: 1; }
 .hx-title > span:nth-child(3) > span { --l: 2; }
+.hx-title > span:nth-child(4) > span { --l: 3; }
 @keyframes hx-rise { from { transform: translateY(105%); } to { transform: none; } }
 
-.hx-text { grid-column: 1; grid-row: 2; }
-.hx-lead { margin-top: clamp(28px, 3vw, 56px); font-size: clamp(17px, 1.3vw, 23px); line-height: 1.6; color: var(--ink-2); max-width: 31em; animation: hx-fade .9s .65s both; }
-.hx-actions { margin-top: clamp(28px, 3vw, 40px); animation: hx-fade .9s .8s both; }
+/* ръкописното „Вярваме, че“ */
+.hx-script { font: 600 clamp(40px, 4.4vw, 92px)/1 'Caveat Variable', 'Caveat', cursive; color: var(--orange); letter-spacing: 0; margin-bottom: clamp(4px, .6vw, 12px); padding-left: .06em; }
+.hx-script > span { rotate: -3deg; }
+.hx-line { font-size: clamp(36px, 5.2vw, 112px); line-height: 1.04; letter-spacing: -.035em; }
+
+.hx-lead { margin-top: clamp(28px, 3vw, 52px); font-size: clamp(17px, 1.3vw, 23px); line-height: 1.6; color: rgba(255, 255, 255, .86); max-width: 32em; animation: hx-fade .9s .8s both; }
+.hx-actions { margin-top: clamp(28px, 3vw, 44px); animation: hx-fade .9s .95s both; }
+.btn-glass { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .7); color: #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.btn-glass:hover { background: #fff; color: #0C2638; }
 @keyframes hx-fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
-/* спиралата — трите полумесеца от логото около снимка 1 от ЕИС */
-.hx-swirl { grid-column: 2; grid-row: 2; align-self: start; margin-top: calc(clamp(38px, 5.4vw, 116px) * -.7); position: relative; width: 100%; aspect-ratio: 1; margin-right: clamp(-90px, -4vw, 0px); }
-.hx-arcs { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.hx-arcs path { transform-origin: 0 0; stroke: var(--paper); stroke-width: .022; animation: hx-arc 1.5s cubic-bezier(.16, .8, .2, 1) both; animation-delay: calc(var(--i) * 120ms); }
+/* трите полумесеца — излизат от долния десен ъгъл и се въртят при превъртане */
+.hx-arcs { --s: clamp(340px, 40vw, 860px); position: absolute; z-index: -1; width: var(--s); aspect-ratio: 1; right: calc(var(--s) * -.46); bottom: calc(var(--s) * -.5); overflow: visible; }
+.hx-arcs path { transform-origin: 0 0; animation: hx-arc 1.6s cubic-bezier(.16, .8, .2, 1) both; animation-delay: calc(var(--i) * 120ms + 200ms); }
 @keyframes hx-arc { from { transform: rotate(-150deg) scale(.6); opacity: 0; } 40% { opacity: 1; } to { transform: none; opacity: 1; } }
-.hx-photo { position: absolute; left: 50%; top: 50%; width: 48%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden; background: var(--sky); animation: hx-pop 1.2s .35s cubic-bezier(.2, .8, .2, 1) both; }
-.hx-photo img { width: 100%; height: 100%; object-fit: cover; }
-@keyframes hx-pop { from { transform: translate(-50%, -50%) scale(.7); opacity: 0; } to { transform: translate(-50%, -50%); opacity: 1; } }
-
-/* при превъртане спиралата продължава да се върти — „посоката“ */
 @supports (animation-timeline: scroll()) {
-  .hx-arcs-g { transform-origin: 0 0; animation: hx-turn linear both; animation-timeline: scroll(root); animation-range: 0 120vh; }
-  @keyframes hx-turn { to { transform: rotate(140deg); } }
+  .hx-arcs-g { transform-origin: 0 0; animation: hx-turn linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+  @keyframes hx-turn { to { transform: rotate(120deg); } }
 }
-
-/* кратки факти под героя */
-.hx-facts { grid-column: 1 / -1; grid-row: 4; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 16px clamp(24px, 3.5vw, 56px); margin-top: clamp(44px, 5vw, 72px); padding-top: 22px; border-top: 1px solid var(--line-strong); animation: hx-fade .9s 1s both; }
-.hx-facts dt { font-size: 14px; color: var(--ink-3); }
-.hx-facts dd { margin-top: 4px; font-weight: 600; font-size: 16px; }
-@media (min-width: 681px) { .hx-facts dd { white-space: nowrap; } }
-.hx-facts a:hover { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ===== Какво правим ===== */
 .hx-about { padding-top: clamp(72px, 9vw, 140px); }
@@ -135,20 +138,19 @@
 
 /* ===== по-малки екрани ===== */
 @media (max-width: 1020px) {
-  .hx-grid { grid-template-columns: 1fr; }
-  .hx-title { grid-row: 2; }
-  .hx-text { grid-row: 3; }
-  .hx-swirl { grid-column: 1; grid-row: 1; width: min(76vw, 400px); justify-self: end; margin: 0 clamp(-60px, -6vw, 0px) clamp(16px, 3vw, 32px) 0; align-self: auto; }
+  .hx-bg::after { background: linear-gradient(90deg, rgba(8, 31, 49, .9) 0%, rgba(8, 31, 49, .7) 60%, rgba(8, 31, 49, .45) 100%), linear-gradient(0deg, rgba(8, 31, 49, .6) 0%, rgba(8, 31, 49, 0) 50%); }
   .ab-grid, .hn-grid, .hd-grid { grid-template-columns: 1fr; }
   .hx-vlist { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
-  .hx-facts { grid-template-columns: 1fr; gap: 14px; }
+  .hx { align-items: end; min-height: min(calc(100svh - var(--header-h)), 760px); }
+  .hx-arcs { width: 300px; right: -110px; bottom: auto; top: -90px; }
+  .hx-bg img { object-position: 65% 50%; }
   .hx-steplist { grid-template-columns: 1fr; }
   .hx-vlist { grid-template-columns: 1fr; }
   .hn-list a { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; }
   .hn-list img, .hn-list .hn-noimg { width: 92px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hx-title > span > span, .hx-lead, .hx-actions, .hx-arcs path, .hx-photo, .hx-facts, .hx-arcs-g { animation: none !important; }
+  .hx-title > span > span, .hx-lead, .hx-actions, .hx-arcs path, .hx-bg img, .hx-arcs-g { animation: none !important; }
 }

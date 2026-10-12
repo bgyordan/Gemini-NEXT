@@ -199,12 +199,5 @@
 }
 @media (prefers-reduced-motion: reduce) { .hp { animation: none !important; } }
 
-/* ===== Брайл ===== */
-.hv-title { display: grid; gap: 18px; }
-.braille { display: flex; align-items: center; gap: 14px; margin: 0; }
-.braille svg { width: clamp(150px, 12vw, 210px); height: auto; overflow: visible; }
-.braille .on { fill: #fff; filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .35)); }
-.braille .off { fill: rgba(255, 255, 255, .16); }
-.braille figcaption { font-size: 13px; color: #9DB6C8; }
 :root[data-theme="dark"] .btn-ink, .dark .btn-ink { background: var(--ink); color: var(--paper); }
 @media (max-width: 680px) { .hp { width: 84px; opacity: .1; } }

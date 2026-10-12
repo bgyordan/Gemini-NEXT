@@ -3,7 +3,6 @@ import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
 import SectionJoin from './components/SectionJoin';
 import Handprints, { HandDefs } from './components/Handprints';
-import Braille from './components/Braille';
 import '@fontsource-variable/caveat';
 import './home.css';
 
@@ -219,10 +218,7 @@ export default async function Home() {
         <Handprints dark count={2} slots={[{ bottom: '-6%', right: '3%' }, { bottom: '-10%', left: '-2%' }, { bottom: '-8%', left: '38%' }]} />
         <div className="wrap">
           <div className="hs-head row">
-            <div className="hv-title">
-              <h2 id="val-h">Това, в което вярваме</h2>
-              <Braille word="заедно" />
-            </div>
+            <h2 id="val-h">Това, в което вярваме</h2>
             <a className="more" href="/za-nas">Повече за центъра</a>
           </div>
           <div className="hx-vlist">

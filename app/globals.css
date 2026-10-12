@@ -84,9 +84,10 @@ h2 { font-size: clamp(24px, 2.7vw, 38px); line-height: 1.15; font-weight: 400; l
 h3 { font-size: 18px; line-height: 1.32; font-weight: 500; }
 h4 { font-size: 16px; line-height: 1.35; font-weight: 500; }
 
-.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+/* мрежата расте с екрана: на широк монитор съдържанието стига почти до краищата, а текстът си пази удобната ширина */
+.wrap { max-width: 1880px; margin-inline: auto; padding-inline: clamp(16px, 5vw, 112px); }
 .wrap.narrow, .narrow { max-width: 840px; }
-.wrap-wide { max-width: 1360px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.wrap-wide { max-width: 1880px; margin-inline: auto; padding-inline: clamp(16px, 5vw, 112px); }
 
 .skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: var(--r-sm); font-weight: 600; }
 .skip:focus { top: 12px; }

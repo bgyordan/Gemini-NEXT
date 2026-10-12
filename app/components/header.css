@@ -32,6 +32,9 @@
 
 .sh-donate { flex-shrink: 0; font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: var(--r-pill); background: var(--ink); color: var(--paper); }
 .sh-donate:hover { background: color-mix(in srgb, var(--ink) 85%, var(--blue)); }
+.theme-btn { flex-shrink: 0; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); cursor: pointer; transition: background .2s, border-color .2s; }
+.theme-btn:hover { background: var(--sky); border-color: var(--ink-3); }
+.theme-btn svg { width: 19px; height: 19px; }
 .sh-menu { display: none; flex-shrink: 0; border: 0; cursor: pointer; font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: var(--r-pill); background: var(--sky); color: var(--ink); }
 
 .sh-mob { position: fixed; inset: var(--header-h) 0 0 0; background: var(--paper); overflow-y: auto; padding-block: 12px 40px; border-top: 1px solid var(--line); }

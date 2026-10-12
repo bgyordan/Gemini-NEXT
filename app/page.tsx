@@ -1,6 +1,9 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
 import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
+import SectionJoin from './components/SectionJoin';
+import Handprints, { HandDefs } from './components/Handprints';
+import Braille from './components/Braille';
 import '@fontsource-variable/caveat';
 import './home.css';
 
@@ -49,6 +52,7 @@ export default async function Home() {
 
   return (
     <div className="home">
+      <HandDefs />
       {/* ===== Герой: детелината от трите снимки от ЕИС (като в логото), а мотото я застъпва ===== */}
       <section className="hx">
         <HeroPointer />
@@ -85,8 +89,11 @@ export default async function Home() {
         </div>
       </section>
 
+      <SectionJoin />
+
       {/* ===== Какво правим: голямо изречение + снимки 2 и 3 ===== */}
       <section className="hs hx-about" aria-labelledby="about-h">
+        <Handprints slots={[{ top: '6%', left: '-2%' }, { bottom: '4%', left: '30%' }, { top: '2%', right: '1%' }]} />
         <div className="wrap ab-grid">
           <div className="ab-text">
             <h2 id="about-h" className="ab-say">
@@ -105,8 +112,11 @@ export default async function Home() {
         </div>
       </section>
 
+      <SectionJoin />
+
       {/* ===== Записване: истинска последователност I–III, на плътно оранжево ===== */}
       <section className="hs hx-steps" aria-labelledby="priem-h">
+        <Handprints count={2} slots={[{ top: '10%', right: '4%' }, { top: '6%', right: '22%' }, { bottom: '8%', right: '6%' }, { bottom: '4%', right: '30%' }]} />
         <div className="wrap">
           <div className="hs-head">
             <h2 id="priem-h">Записване на дете в три стъпки</h2>
@@ -124,6 +134,8 @@ export default async function Home() {
           <a className="btn btn-ink" href="/priem/proczedura">Пълната процедура и бланките</a>
         </div>
       </section>
+
+      <SectionJoin />
 
       {/* ===== Новини + събития ===== */}
       <section className="hs tone-lime" aria-labelledby="news-h">
@@ -200,11 +212,17 @@ export default async function Home() {
         </section>
       )}
 
+      <SectionJoin />
+
       {/* ===== Ценности — на тъмно морско синьо ===== */}
       <section className="hs hx-vals" aria-labelledby="val-h">
+        <Handprints dark count={2} slots={[{ bottom: '-6%', right: '3%' }, { bottom: '-10%', left: '-2%' }, { bottom: '-8%', left: '38%' }]} />
         <div className="wrap">
           <div className="hs-head row">
-            <h2 id="val-h">Това, в което вярваме</h2>
+            <div className="hv-title">
+              <h2 id="val-h">Това, в което вярваме</h2>
+              <Braille word="заедно" />
+            </div>
             <a className="more" href="/za-nas">Повече за центъра</a>
           </div>
           <div className="hx-vlist">
@@ -217,6 +235,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <SectionJoin />
 
       {/* ===== Прозрачност ===== */}
       <section className="hs tone-blue" aria-labelledby="prz-h">
@@ -243,6 +263,7 @@ export default async function Home() {
 
       {/* ===== Дарителство ===== */}
       <section className="hs hx-donate tone-orange" aria-labelledby="don-h">
+        <Handprints slots={[{ top: '6%', right: '3%' }, { bottom: '2%', right: '18%' }, { top: '14%', left: '46%' }]} />
         <div className="wrap">
           <div className="hd-grid">
             <h2 id="don-h">Помогнете ни да направим средата още по‑добра</h2>

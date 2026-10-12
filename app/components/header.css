@@ -1,19 +1,39 @@
-.site-head { position: sticky; top: 0; z-index: 50; background: var(--header-bg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-.sh-bar { display: flex; align-items: center; gap: 20px; height: var(--header-h); }
+/* ===== Горна лента — тъмно морско синьо, слято с херото =====
+   Разделите са с главни букви (Unbounded). Пред всеки има точка в цвета на раздела,
+   която при посочване се „разлива“ в овал зад текста. */
+.site-head { --sh-bg: #0B2D47; --sh-ink: #fff; position: sticky; top: 0; z-index: 50; background: var(--sh-bg); color: var(--sh-ink); border-bottom: 1px solid rgba(255, 255, 255, .08); box-shadow: 0 12px 30px -24px rgba(0, 0, 0, .6); }
+:root[data-theme="dark"] .site-head, .dark .site-head { --sh-bg: #081B2B; }
+.sh-bar { display: flex; align-items: center; gap: 18px; height: var(--header-h); }
 
-.sh-brand { display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: auto; }
-.sh-brand img { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
-.sh-brand b { display: block; font-family: var(--display); font-weight: 600; font-size: 16px; line-height: 1.15; }
-.sh-brand small { display: block; font-size: 12.5px; color: var(--ink-2); line-height: 1.25; }
+.sh-brand { display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: auto; color: var(--sh-ink); }
+.sh-brand img { width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(255, 255, 255, .12); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.sh-brand:hover img { transform: rotate(-20deg); }
+.sh-brand b { display: block; font-family: var(--display); font-weight: 600; font-size: 16px; line-height: 1.15; color: var(--sh-ink); white-space: nowrap; }
+.sh-brand small { display: block; font-size: 12.5px; color: #9DB6C8; line-height: 1.25; }
 
-.sh-nav { display: flex; align-items: center; gap: 2px; }
+.sh-nav { display: flex; align-items: center; gap: 4px; }
 .sh-item { position: relative; }
-.sh-link { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 10px 12px; border: 0; background: none; border-radius: var(--r-sm); cursor: pointer; font-weight: 500; font-size: 15.5px; white-space: nowrap; color: var(--ink); }
-.sh-link svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; transition: transform .2s; }
+.sh-link { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 4px; padding: 12px 15px 12px 30px; border: 0; background: none; border-radius: var(--r-pill); cursor: pointer;
+  font: 500 13px/1 var(--display); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; color: var(--sh-ink); transition: color .3s; }
+.sh-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; transition: transform .25s; }
 .sh-item.open .sh-link svg { transform: rotate(180deg); }
-.sh-link::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 3px; border-radius: 3px; background: var(--tone); transform: scaleX(0); transform-origin: left; transition: transform .2s; }
+/* точката → овал */
+.sh-link::before { content: ""; position: absolute; z-index: -1; left: 14px; top: calc(50% - 4px); width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--tone);
+  transition: left .4s cubic-bezier(.2, .8, .2, 1), top .4s cubic-bezier(.2, .8, .2, 1), width .4s cubic-bezier(.2, .8, .2, 1), height .4s cubic-bezier(.2, .8, .2, 1), box-shadow .4s; }
+.sh-link:hover, .sh-item.open .sh-link, .sh-link.current { color: #0C2638; }
+.sh-link:hover::before, .sh-item.open .sh-link::before, .sh-link.current::before { left: 0; top: 0; width: 100%; height: 100%; box-shadow: 0 8px 24px -8px var(--tone); }
+.sh-link:focus-visible { outline-color: #fff; }
 .sh-link.solo { --tone: var(--blue); }
-.sh-link:hover::after, .sh-item.open .sh-link::after, .sh-link.current::after { transform: scaleX(1); }
+
+.sh-donate { flex-shrink: 0; font: 600 13px/1 var(--display); text-transform: uppercase; letter-spacing: .06em; padding: 14px 22px; border-radius: var(--r-pill); background: var(--orange); color: #2B1700;
+  box-shadow: 0 8px 26px -8px rgba(243, 154, 30, .85); transition: transform .2s, box-shadow .2s; }
+.sh-donate:hover { transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(243, 154, 30, 1); }
+.theme-btn { flex-shrink: 0; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .3); background: transparent; color: var(--sh-ink); cursor: pointer; transition: background .2s, border-color .2s; }
+.theme-btn:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .6); }
+.theme-btn svg { width: 19px; height: 19px; }
+.sh-menu { display: none; flex-shrink: 0; cursor: pointer; font: 600 13px/1 var(--display); text-transform: uppercase; letter-spacing: .06em; padding: 13px 20px; border-radius: var(--r-pill); border: 1px solid rgba(255, 255, 255, .35); background: transparent; color: var(--sh-ink); }
+.sh-menu[aria-expanded="true"] { background: var(--orange); border-color: var(--orange); color: #2B1700; }
+.skip { color: #fff; }
 
 .sh-panel { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: min(620px, 92vw); display: grid; grid-template-columns: 190px 1fr; gap: 20px; padding: 22px; background: var(--paper); border: 1px solid var(--line); border-top: 4px solid var(--tone); border-radius: var(--r); box-shadow: var(--shadow); }
 .sh-item:nth-child(-n+2) .sh-panel { left: 0; transform: none; }
@@ -29,30 +49,31 @@
 .sh-panel li a:hover, .sh-panel li a[aria-current] { background: var(--tone-soft); }
 .sh-panel li b { display: block; font-weight: 600; font-size: 15px; line-height: 1.3; }
 .sh-panel li span { display: block; font-size: 13.5px; color: var(--ink-2); line-height: 1.35; }
+.sh-panel { border-radius: 20px; box-shadow: 0 30px 60px -24px rgba(8, 31, 49, .55); color: var(--ink); }
 
-.sh-donate { flex-shrink: 0; font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: var(--r-pill); background: var(--ink); color: var(--paper); }
-.sh-donate:hover { background: color-mix(in srgb, var(--ink) 85%, var(--blue)); }
-.theme-btn { flex-shrink: 0; width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); cursor: pointer; transition: background .2s, border-color .2s; }
-.theme-btn:hover { background: var(--sky); border-color: var(--ink-3); }
-.theme-btn svg { width: 19px; height: 19px; }
-.sh-menu { display: none; flex-shrink: 0; border: 0; cursor: pointer; font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: var(--r-pill); background: var(--sky); color: var(--ink); }
-
-.sh-mob { position: fixed; inset: var(--header-h) 0 0 0; background: var(--paper); overflow-y: auto; padding-block: 12px 40px; border-top: 1px solid var(--line); }
+.sh-mob { position: fixed; inset: var(--header-h) 0 0 0; background: var(--paper); color: var(--ink); overflow-y: auto; padding-block: 12px 40px; border-top: 1px solid var(--line); }
 .sh-mob[hidden] { display: none; }
 .sh-mob-g { border-bottom: 1px solid var(--line); }
-.sh-mob-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: none; border: 0; padding: 16px 0; font: 600 18px var(--display); color: var(--ink); cursor: pointer; text-align: left; }
+.sh-mob-g > button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: none; border: 0; padding: 18px 0; font: 500 16px var(--display); text-transform: uppercase; letter-spacing: .05em; color: var(--ink); cursor: pointer; text-align: left; }
 .sh-mob-g > button::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--tone); flex-shrink: 0; }
 .sh-mob-g > button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; margin-left: auto; transition: transform .2s; }
 .sh-mob-g > button[aria-expanded="true"] svg { transform: rotate(180deg); }
 .sh-mob-g ul { list-style: none; padding: 0 0 14px 22px; display: grid; gap: 2px; }
 .sh-mob-g ul a { display: block; padding: 9px 0; font-size: 16.5px; }
-.sh-mob-solo { display: block; padding: 16px 0 16px 22px; font: 600 18px var(--display); border-bottom: 1px solid var(--line); }
+.sh-mob-solo { display: block; padding: 18px 0 18px 22px; font: 500 16px var(--display); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--line); }
 .sh-mob-donate { margin-top: 24px; width: 100%; }
 
-@media (max-width: 1120px) {
+@media (max-width: 1500px) {
   .sh-brand small { display: none; }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1400px) {
+  .sh-bar { gap: 12px; }
+  .sh-nav { gap: 0; }
+  .sh-link { padding: 12px 11px 12px 25px; font-size: 12.5px; }
+  .sh-link::before { left: 11px; }
+  .sh-donate { padding: 14px 18px; }
+}
+@media (max-width: 1240px) {
   .sh-nav, .sh-donate { display: none; }
   .sh-menu { display: inline-block; }
 }

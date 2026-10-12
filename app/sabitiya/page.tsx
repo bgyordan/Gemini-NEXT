@@ -14,7 +14,7 @@ export default async function EventsPage() {
     <>
       <PageHero path="/sabitiya" title="Събития" intro="Предстоящите събития в центъра и архив на отминалите." />
       <section className="section tone-lime">
-        <div className="wrap narrow">
+        <div className="wrap">
           <h2 style={{ marginBottom: 16 }}>Предстоящи</h2>
           {upcoming.length === 0 ? <p className="empty">Няма обявени предстоящи събития.</p> : (
             <ul className="ev-list">

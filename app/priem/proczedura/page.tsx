@@ -34,7 +34,7 @@ export default async function ProcedurePage() {
       </section>
       {docs.length > 0 && (
         <section className="section soft tone-orange">
-          <div className="wrap narrow">
+          <div className="wrap">
             <h2>Още бланки и декларации</h2>
             <p className="muted" style={{ margin: '8px 0 16px' }}>Изтеглете, попълнете и донесете при записване.</p>
             <DocRows docs={docs} />

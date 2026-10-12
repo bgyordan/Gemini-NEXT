@@ -44,7 +44,7 @@ export default function ParentsCouncilPage() {
         </div>
       </section>
       <section className="section tone-orange">
-        <div className="wrap narrow">
+        <div className="wrap">
           <h2 style={{ marginBottom: 16 }}>Учредителни документи</h2>
           <DocRows
             docs={[

@@ -20,7 +20,7 @@ export default function ServicesPage() {
         intro="След заявление от родителя центърът издава следните документи в посочените срокове."
       />
       <section className="section tone-orange">
-        <div className="wrap narrow">
+        <div className="wrap">
           <ul className="services">
             {SERVICES.map((s) => (
               <li key={s.t}>

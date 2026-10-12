@@ -8,18 +8,18 @@
 :root {
   /* основа */
   --paper: #FFFFFF;
-  --sky: #ECF6FC;
-  --sky-2: #DCEEF9;
-  --ink: #15324A;
-  --ink-2: #4B6579;
-  --ink-3: #6E8698;
-  --line: #D5E6F2;
-  --line-strong: #B9D3E6;
+  --sky: #F2F5F8;
+  --sky-2: #E6ECF1;
+  --ink: #0C2638;
+  --ink-2: #46596A;
+  --ink-3: #6A7D8D;
+  --line: #E0E6EB;
+  --line-strong: #C6D1DA;
 
   /* трите цвята от логото: запълване / текст върху бяло / мек фон */
-  --orange: #F39A1E; --orange-ink: #A65800; --orange-soft: #FEF1DF;
-  --blue: #1D8BD1;   --blue-ink: #0F5E96;   --blue-soft: #E3F1FB;
-  --lime: #8CC63F;   --lime-ink: #477510;   --lime-soft: #EEF7E1;
+  --orange: #F39A1E; --orange-ink: #A65800; --orange-soft: #FCF3E6;
+  --blue: #1D8BD1;   --blue-ink: #0F5E96;   --blue-soft: #EDF4F9;
+  --lime: #8CC63F;   --lime-ink: #477510;   --lime-soft: #F2F7EA;
   --on-orange: #2B1700;
 
   /* текущ цвят на раздела (задава се с .tone-*) */
@@ -29,7 +29,7 @@
   --body: 'Golos Text Variable', 'Golos Text', 'Segoe UI', system-ui, sans-serif;
 
   --r-sm: 10px; --r: 16px; --r-lg: 24px; --r-pill: 999px;
-  --shadow: 0 18px 40px -24px rgba(21, 50, 74, .35);
+  --shadow: 0 24px 48px -28px rgba(12, 38, 56, .35);
   --header-h: 72px;
 
   /* --- съвместимост със старите имена (за компонентите, които още ги ползват) --- */
@@ -79,8 +79,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
 
 h1, h2, h3, h4 { font-family: var(--display); color: var(--ink); text-wrap: balance; letter-spacing: -.01em; }
-h1 { font-size: clamp(30px, 3.9vw, 50px); line-height: 1.1; font-weight: 600; letter-spacing: -.02em; }
-h2 { font-size: clamp(23px, 2.5vw, 33px); line-height: 1.18; font-weight: 600; }
+h1 { font-size: clamp(34px, 4.6vw, 64px); line-height: 1.06; font-weight: 300; letter-spacing: -.03em; }
+h2 { font-size: clamp(24px, 2.7vw, 38px); line-height: 1.15; font-weight: 400; letter-spacing: -.02em; }
 h3 { font-size: 18px; line-height: 1.32; font-weight: 500; }
 h4 { font-size: 16px; line-height: 1.35; font-weight: 500; }
 
@@ -92,7 +92,7 @@ h4 { font-size: 16px; line-height: 1.35; font-weight: 500; }
 .skip:focus { top: 12px; }
 
 /* ---------- секции ---------- */
-.section { padding-block: clamp(52px, 7vw, 92px); }
+.section { padding-block: clamp(60px, 8vw, 112px); }
 .section.tint { background: var(--sky); }
 .section.soft { background: var(--tone-soft); }
 .section.dark { background: var(--ink); color: var(--paper); }
@@ -114,6 +114,8 @@ h4 { font-size: 16px; line-height: 1.35; font-weight: 500; }
 .btn-dark { background: var(--ink); color: var(--paper); }
 .btn-ghost, .btn.ghost { background: var(--paper); border-color: var(--line-strong); color: var(--ink); }
 .btn-ghost:hover { border-color: var(--ink-3); }
+.btn-line { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: var(--paper); }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ---------- малки елементи ---------- */
@@ -132,7 +134,7 @@ h4 { font-size: 16px; line-height: 1.35; font-weight: 500; }
 /* Списък с връзки/документи — редове с икона (без карти) */
 .link-list { display: grid; grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr)); gap: 0 clamp(24px, 3vw, 44px); }
 .link-list > a, .link-list > .ll-item { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding-block: 16px; border-bottom: 1px solid var(--line); }
-.ll-ic { width: 44px; height: 44px; border-radius: 12px; background: var(--tone-soft); color: var(--tone-ink); display: grid; place-items: center; }
+.ll-ic { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--tone); color: var(--tone-ink); display: grid; place-items: center; }
 .ll-ic svg { width: 22px; height: 22px; }
 .ll-t { display: block; font-weight: 600; line-height: 1.35; }
 .ll-d { display: block; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; margin-top: 2px; }
@@ -231,7 +233,7 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .doc-rows { list-style: none; border-top: 1px solid var(--line); }
 .doc-rows li { border-bottom: 1px solid var(--line); }
 .doc-rows a { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 4px; }
-.dr-ic { width: 40px; height: 40px; border-radius: 10px; background: var(--tone-soft); color: var(--tone-ink); display: grid; place-items: center; }
+.dr-ic { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--tone); color: var(--tone-ink); display: grid; place-items: center; }
 .dr-ic svg { width: 20px; height: 20px; }
 .dr-name { font-weight: 500; line-height: 1.4; }
 .dr-type { font-size: 13px; font-weight: 600; color: var(--ink-2); border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 8px; }

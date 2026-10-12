@@ -1,12 +1,12 @@
-.page-hero { background: linear-gradient(180deg, var(--tone-soft), var(--paper)); padding-block: clamp(36px, 5vw, 64px) clamp(32px, 4vw, 52px); overflow: hidden; }
+.page-hero { background: var(--paper); padding-block: clamp(44px, 6vw, 96px) clamp(28px, 3vw, 44px); overflow: hidden; border-bottom: 1px solid var(--line); }
 .ph-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
 .page-hero.has-photo .ph-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); }
 .ph-crumb { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14.5px; color: var(--ink-2); margin-bottom: 14px; }
 .ph-crumb a:hover { color: var(--tone-ink); text-decoration: underline; text-underline-offset: 3px; }
 .ph-crumb span:last-child { color: var(--tone-ink); font-weight: 600; }
-.page-hero h1 { max-width: 18em; }
+.page-hero h1 { max-width: 16em; }
 .ph-intro { margin-top: 16px; font-size: clamp(17px, 1.5vw, 19.5px); color: var(--ink-2); max-width: 40em; }
-.ph-text { border-left: 4px solid var(--tone); padding-left: clamp(16px, 2vw, 24px); }
+.ph-text::before { content: ""; display: block; width: 56px; height: 6px; border-radius: 6px; background: var(--tone); margin-bottom: 22px; }
 
 /* снимка в кръг с полумесец в цвета на раздела — като в логото */
 .ph-photo { position: relative; width: min(100%, 300px); aspect-ratio: 1; justify-self: end; }

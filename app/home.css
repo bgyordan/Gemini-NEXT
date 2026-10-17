@@ -209,3 +209,7 @@
 
 :root[data-theme="dark"] .btn-ink, .dark .btn-ink { background: var(--ink); color: var(--paper); }
 @media (max-width: 680px) { .hp { width: 84px; opacity: .1; } }
+
+/* ===== Покана за разговор (след ценностите) — без черта отгоре, вълната вече разделя ===== */
+.hx-ask .hd-grid { border-top: 0; padding-top: 0; align-items: center; }
+.hx-ask .hd-grid p { margin-bottom: 20px; }

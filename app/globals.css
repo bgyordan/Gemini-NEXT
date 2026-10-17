@@ -406,3 +406,10 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .legal > .prose-block:has(.db-layout) { grid-template-columns: 1fr; }
 .legal > .prose-block:has(.db-layout) > h2 { grid-row: auto; margin-bottom: 20px; }
 .legal > .prose-block:has(.db-layout) > *:not(h2) { grid-column: 1; }
+
+/* Прием: каре „Преди да дойдете“ */
+.pr-before ul { list-style: none; display: grid; gap: 10px; margin-top: 4px; }
+.pr-before li { position: relative; padding-left: 26px; color: var(--ink-2); }
+.pr-before li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 12px; height: 7px; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); rotate: -45deg; }
+.pr-before li a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.pr-before .pr-q { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-strong); font-weight: 600; }

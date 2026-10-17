@@ -29,6 +29,7 @@ const PAGES: { path: string; freq: Freq; priority: number }[] = [
   { path: '/za-roditeli/dneven-rezhim', freq: 'yearly', priority: 0.6 },
   { path: '/za-roditeli/resursi', freq: 'monthly', priority: 0.6 },
   { path: '/za-roditeli/nastoyatelstvo', freq: 'yearly', priority: 0.4 },
+  { path: '/obuchenie-i-podkrepa', freq: 'monthly', priority: 0.8 },
   { path: '/priem', freq: 'monthly', priority: 0.8 },
   { path: '/priem/proczedura', freq: 'yearly', priority: 0.7 },
   { path: '/priem/poseshtenie', freq: 'yearly', priority: 0.6 },

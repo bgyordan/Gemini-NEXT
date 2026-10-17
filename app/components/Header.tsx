@@ -73,32 +73,21 @@ export default function Header() {
                 aria-expanded={open === g.href}
                 onClick={() => setOpen(open === g.href ? null : g.href)}
               >
-                <i className="sh-dot" aria-hidden="true" />
                 {g.label}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
               <div className="sh-panel" hidden={open !== g.href}>
-                <div className="sh-panel-in">
-                  <div className="sh-panel-intro">
-                    <p className="sh-panel-title">{g.label}</p>
-                    <p>{g.intro}</p>
-                    <a href={g.href} className="sh-panel-all">Към раздела</a>
-                  </div>
-                  <ul>
-                    {g.links.map((l, i) => (
-                      <li key={l.href} style={{ ['--i' as any]: i }}>
-                        <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>
-                          <b>{l.label}</b>
-                          {l.desc && <span>{l.desc}</span>}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <ul>
+                  {g.links.map((l) => (
+                    <li key={l.href}>
+                      <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>{l.label}</a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
-          <div className="sh-item tone-orange"><a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}><i className="sh-dot" aria-hidden="true" />Контакти</a></div>
+          <div className="sh-item"><a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}>Контакти</a></div>
         </nav>
 
         <ThemeToggle />
@@ -114,7 +103,6 @@ export default function Header() {
           {NAV.map((g) => (
             <div key={g.href} className={`sh-mob-g tone-${g.tone}`}>
               <button type="button" aria-expanded={mobGroup === g.href} onClick={() => setMobGroup(mobGroup === g.href ? null : g.href)}>
-                <i className="sh-dot" aria-hidden="true" />
                 {g.label}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
@@ -125,7 +113,7 @@ export default function Header() {
               </ul>
             </div>
           ))}
-          <a className="sh-mob-solo tone-orange" href="/kontakti"><i className="sh-dot" aria-hidden="true" />Контакти</a>
+          <a className="sh-mob-solo" href="/kontakti">Контакти</a>
           <a className="sh-donate sh-mob-donate" href="/daritelstvo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дарителство</a>
         </div>
       </div>

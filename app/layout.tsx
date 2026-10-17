@@ -3,6 +3,7 @@ import '@fontsource-variable/unbounded';
 import '@fontsource-variable/golos-text';
 import './globals.css';
 import Header from './components/Header';
+import TopBar from './components/TopBar';
 import Footer from './components/Footer';
 import SiteNotice from './components/SiteNotice';
 import ScrollTop from './components/ScrollTop';
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SiteNotice />
+        <TopBar />
         <Header />
         <main id="main">{children}</main>
         <Footer />

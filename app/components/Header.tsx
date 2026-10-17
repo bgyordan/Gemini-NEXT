@@ -11,6 +11,7 @@ export default function Header() {
   const [open, setOpen] = useState<string | null>(null); // отворено падащо меню (desktop)
   const [mobile, setMobile] = useState(false);
   const [mobGroup, setMobGroup] = useState<string | null>(null);
+  const [stuck, setStuck] = useState(false); // страницата е превъртяна → капсулата става „стъклена“ и по-ниска
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // затваря менютата при смяна на страница
@@ -20,6 +21,13 @@ export default function Header() {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(null); setMobile(false); } };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
@@ -40,11 +48,11 @@ export default function Header() {
   const isActive = (href: string, _links?: { href: string }[]) => href === activeGroup;
 
   return (
-    <header className={`site-head${open ? ' is-open' : ''}`}>
+    <header className={`site-head${open ? ' is-open' : ''}${stuck ? ' is-stuck' : ''}${mobile ? ' is-mob' : ''}`}>
       <a className="skip" href="#main">Към съдържанието</a>
       <div className="wrap sh-bar">
         <a href="/" className="sh-brand" aria-label="ЦСОП Варна – начална страница">
-          <img src="/logo.jpg" alt="" width={44} height={44} />
+          <img src="/logo.jpg" alt="" width={56} height={56} />
           <span>
             <b>ЦСОП Варна</b>
             <small>Център за специална образователна подкрепа</small>
@@ -65,6 +73,7 @@ export default function Header() {
                 aria-expanded={open === g.href}
                 onClick={() => setOpen(open === g.href ? null : g.href)}
               >
+                <i className="sh-dot" aria-hidden="true" />
                 {g.label}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
@@ -89,7 +98,7 @@ export default function Header() {
               </div>
             </div>
           ))}
-          <a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}>Контакти</a>
+          <div className="sh-item tone-orange"><a href="/kontakti" className={`sh-link solo${pathname === '/kontakti' ? ' current' : ''}`}><i className="sh-dot" aria-hidden="true" />Контакти</a></div>
         </nav>
 
         <ThemeToggle />
@@ -105,6 +114,7 @@ export default function Header() {
           {NAV.map((g) => (
             <div key={g.href} className={`sh-mob-g tone-${g.tone}`}>
               <button type="button" aria-expanded={mobGroup === g.href} onClick={() => setMobGroup(mobGroup === g.href ? null : g.href)}>
+                <i className="sh-dot" aria-hidden="true" />
                 {g.label}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
@@ -115,7 +125,7 @@ export default function Header() {
               </ul>
             </div>
           ))}
-          <a className="sh-mob-solo" href="/kontakti">Контакти</a>
+          <a className="sh-mob-solo tone-orange" href="/kontakti"><i className="sh-dot" aria-hidden="true" />Контакти</a>
           <a className="sh-donate sh-mob-donate" href="/daritelstvo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дарителство</a>
         </div>
       </div>

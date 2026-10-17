@@ -84,7 +84,7 @@ export default async function Home() {
         </div>
 
         <nav className="wrap hx-paths" aria-label="За родители">
-          <a href="/za-roditeli/uslugi">
+          <a href="/obuchenie-i-podkrepa">
             <b>Какво предлагаме</b>
             <span>Обучение, терапии и рехабилитация по личен план за всяко дете</span>
           </a>
@@ -242,6 +242,20 @@ export default async function Home() {
       </section>
 
       <SectionJoin from="var(--j-sea)" />
+
+      {/* ===== Покана за разговор ===== */}
+      <section className="hs hx-ask" aria-labelledby="ask-h">
+        <div className="wrap hd-grid">
+          <h2 id="ask-h">Не е нужно да знаете всичко предварително.</h2>
+          <div>
+            <p>Обадете се или ни пишете – ще ви кажем какви са следващите стъпки за вашето дете.</p>
+            <div className="btn-row">
+              <a className="btn btn-dark" href={info.contact.phoneHref}>{info.contact.phone}</a>
+              <a className="btn btn-ghost" href="/kontakti">Всички контакти</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ===== Прозрачност ===== */}
       <section className="hs tone-blue" aria-labelledby="prz-h">

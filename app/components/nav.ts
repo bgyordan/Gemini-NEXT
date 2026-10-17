@@ -25,6 +25,7 @@ export const NAV: NavGroup[] = [
     tone: 'orange',
     intro: 'Как се записва дете, какъв е денят при нас и с какво можем да помогнем.',
     links: [
+      { label: 'Обучение и подкрепа', desc: 'Терапии и специалисти', href: '/obuchenie-i-podkrepa' },
       { label: 'Как се записва дете', desc: 'Процедура и документи', href: '/priem/proczedura' },
       { label: 'Елате на посещение', desc: 'Запознайте се с центъра', href: '/priem/poseshtenie' },
       { label: 'За родители', desc: 'Всичко на едно място', href: '/za-roditeli' },

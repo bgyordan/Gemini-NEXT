@@ -1,4 +1,5 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
+import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
 import SectionJoin from './components/SectionJoin';
@@ -42,7 +43,7 @@ const DOCS = [
 ];
 
 export default async function Home() {
-  const [hero, news, events, photos] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8)]);
+  const [hero, news, events, photos, info] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8), getSiteInfo()]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
   // за блока под херото: последните снимки от галерията, различни от трите в детелината
@@ -52,10 +53,22 @@ export default async function Home() {
   return (
     <div className="home">
       <HandDefs />
-      {/* ===== Герой: детелината от трите снимки от ЕИС (като в логото), а мотото я застъпва ===== */}
+      {/* ===== Герой: светъл. Вляво мотото, вдясно детелината от трите снимки от ЕИС върху бледонебесен диск.
+           Отдолу — трите неща, за които идва родителят: услуги, записване, контакт. ===== */}
       <section className="hx">
         <HeroPointer />
         <div className="wrap hx-grid">
+          <div className="hx-in">
+            <h1 className="hx-title">
+              <span className="hx-script"><span>Вярваме, че</span></span>
+              <span className="hx-line"><span>посоката, в която се движим, е по‑важна от скоростта.</span></span>
+            </h1>
+            <p className="hx-lead">
+              Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
+              за деца и младежи със специални образователни потребности.
+            </p>
+          </div>
+
           <div className="hx-clover" aria-hidden="true">
             <div className="cl-spin">
               <div className="cl-turn">
@@ -68,27 +81,23 @@ export default async function Home() {
             </div>
             <div className="cl-core"><span /></div>
           </div>
-
-          <div className="hx-in">
-            <h1 className="hx-title">
-              <span className="hx-script"><span>Вярваме, че</span></span>
-              <span className="hx-line"><span>посоката, в която</span></span>
-              <span className="hx-line"><span>се движим, е по‑важна</span></span>
-              <span className="hx-line"><span>от скоростта.</span></span>
-            </h1>
-            <p className="hx-lead">
-              Център за специална образователна подкрепа във Варна. Обучение, терапия и рехабилитация
-              за деца и младежи със специални образователни потребности.
-            </p>
-            <div className="btn-row hx-actions">
-              <a className="btn btn-primary" href="/priem/proczedura">Как се записва дете</a>
-              <a className="btn btn-glass" href="/priem/poseshtenie">Елате на посещение</a>
-            </div>
-          </div>
         </div>
-      </section>
 
-      <SectionJoin from="var(--j-navy)" />
+        <nav className="wrap hx-paths" aria-label="За родители">
+          <a href="/za-roditeli/uslugi">
+            <b>Какво предлагаме</b>
+            <span>Обучение, терапии и рехабилитация по личен план за всяко дете</span>
+          </a>
+          <a href="/priem/proczedura">
+            <b>Как се записва дете</b>
+            <span>Насочване чрез РЦПППО – Варна. Ние подготвяме документите</span>
+          </a>
+          <a href="/kontakti">
+            <b>Свържете се с нас</b>
+            <span>{info.contact.phone}, деловодство {info.hours.admin} ч.</span>
+          </a>
+        </nav>
+      </section>
 
       {/* ===== Какво правим: голямо изречение + снимки 2 и 3 ===== */}
       <section className="hs hx-about" aria-labelledby="about-h">

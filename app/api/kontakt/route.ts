@@ -34,7 +34,8 @@ export async function POST(req: Request) {
   const started = Number(b.t) || 0;
   if (str(b.website, 200) || !started || Date.now() - started < 3000) return NextResponse.json({ ok: true });
 
-  const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || req.headers.get('x-real-ip') || 'unknown';
+  // зад Cloudflare тунела истинският адрес е в cf-connecting-ip
+  const ip = req.headers.get('cf-connecting-ip') || (req.headers.get('x-forwarded-for') || '').split(',')[0].trim() || req.headers.get('x-real-ip') || 'unknown';
   if (limited(ip)) return NextResponse.json({ ok: false, error: 'rate' }, { status: 429 });
 
   const name = str(b.name, 120);

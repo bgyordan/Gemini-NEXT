@@ -52,7 +52,7 @@ export default function ChatWidget({ phone, phoneHref }: { phone: string; phoneH
 
   // разговорът се пази само в този раздел на браузъра (до затваряне)
   useEffect(() => {
-    try { const s = JSON.parse(sessionStorage.getItem(KEY) || '[]'); if (Array.isArray(s)) setMsgs(s); } catch { /* ignore */ }
+    try { const s = JSON.parse(sessionStorage.getItem(KEY) || '[]'); if (Array.isArray(s)) setMsgs(s[s.length - 1]?.role === 'user' ? s.slice(0, -1) : s); } catch { /* ignore */ }
   }, []);
   useEffect(() => {
     try { sessionStorage.setItem(KEY, JSON.stringify(msgs.slice(-20))); } catch { /* ignore */ }
@@ -65,6 +65,16 @@ export default function ChatWidget({ phone, phoneHref }: { phone: string; phoneH
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // въпрос без отговор не остава в разговора (иначе следващият отговор е за него) — връща се в полето
+  function fail(e: string) {
+    setMsgs((m) => {
+      const last = m[m.length - 1];
+      if (last?.role === 'user') { setText(last.text); return m.slice(0, -1); }
+      return m;
+    });
+    setError(e);
+  }
+
   async function ask(q: string) {
     const question = q.trim();
     if (!question || busy) return;
@@ -74,9 +84,9 @@ export default function ChatWidget({ phone, phoneHref }: { phone: string; phoneH
       const res = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: next, lang }) });
       const j = await res.json().catch(() => ({}));
       if (j.ok && j.reply) setMsgs([...next, { role: 'assistant', text: j.reply }]);
-      else setError(j.error === 'rate' ? t.rate : j.error === 'busy' ? 'busy' : 'err');
+      else fail(j.error === 'rate' ? t.rate : j.error === 'busy' ? 'busy' : 'err');
     } catch {
-      setError('err');
+      fail('err');
     } finally {
       setBusy(false);
     }

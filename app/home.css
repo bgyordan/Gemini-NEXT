@@ -126,11 +126,12 @@
 .ab-text .more { margin-top: 28px; }
 .ab-photos { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 28px); align-items: start; }
 .ab-photos { align-items: center; }
-/* снимките като цветя: 7 и 8 листа (clip-path от lib/flower.ts); отзад — същото цвете в мек цвят от логото, леко изместено */
+/* снимките като неправилни маргаритки (clip-path от lib/flower.ts); отзад — друга маргаритка в мек цвят от логото */
 .ab-fl { position: relative; aspect-ratio: 1; }
 .ab-fl img, .ab-fl span { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: var(--fl); }
+.ab-fl span { clip-path: var(--fl2, var(--fl)); }
 .ab-fl img { object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .75, .25, 1); }
-.ab-fl span { background: var(--petal); transform: translate(5%, 5%) rotate(12deg); }
+.ab-fl span { background: var(--petal); transform: translate(4%, 5%) rotate(14deg) scale(1.03); }
 .ab-p1 { --petal: color-mix(in srgb, var(--brand-orange) 30%, var(--paper)); }
 .ab-p2 { --petal: color-mix(in srgb, var(--brand-lime) 34%, var(--paper)); margin-top: clamp(80px, 11vw, 180px); }
 .ab-fl:hover img { transform: rotate(-6deg) scale(1.02); }

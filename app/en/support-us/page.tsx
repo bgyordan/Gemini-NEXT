@@ -26,11 +26,12 @@ export default async function EnSupport() {
         <div className="wrap grid-2">
           <div>
             <h2>Bank transfer</h2>
-            <p className="muted" style={{ marginTop: 10 }}>Donations are made to the School Board of Trustees of the centre.</p>
+            <p className="muted" style={{ marginTop: 10 }}>{/настоятелство/i.test(BANK.to) ? 'Donations are made to the School Board of Trustees of the centre.' : 'Donations are made to the centre’s own bank account, in euro.'}</p>
             <div className="kv" style={{ marginTop: 18 }}>
               <div className="kv-row"><span>Recipient</span><b>{BANK.to}</b></div>
               <div className="kv-row"><span>IBAN</span><b><CopyText text={BANK.iban} lang="en" /></b></div>
               <div className="kv-row"><span>BIC</span><b>{BANK.bic}</b></div>
+              {!/настоятелство/i.test(BANK.to) && <div className="kv-row"><span>Bank</span><b>Central Cooperative Bank (CCB)</b></div>}
               <div className="kv-row"><span>Reference</span><b>{BANK.reason}</b></div>
             </div>
             <p className="muted" style={{ marginTop: 14 }}>The reference may also be written in English, e.g. “Donation to CSOP Varna”.</p>

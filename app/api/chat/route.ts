@@ -99,8 +99,10 @@ export async function POST(req: Request) {
     // без markdown — звездички и решетки махаме, ако моделът все пак ги сложи
     // без markdown: [текст](адрес) → адресът (на сайта — относителен), звездички и решетки — махаме
     const clean = reply
-      .replace(/\[([^\]]*)\]\((https?:\/\/(?:www\.)?csop-varna\.bg)?([^)\s]*)\)/g, (_m, txt: string, own: string | undefined, url: string) =>
-        own || url.startsWith('/') ? (url || '/') : txt.startsWith('/') || txt === url ? url : `${txt} (${url})`)
+      .replace(/\[([^\]]*)\]\((https?:\/\/(?:www\.)?csop-varna\.bg)?([^)\s]*)\)/g, (_m: string, txt: string, own: string | undefined, url: string) => {
+        const path = own ? url || '/' : url;
+        return txt.startsWith('/') || txt === path ? path : `${txt} (${path})`;
+      })
       .replace(/\*\*?|^#+\s*/gm, '');
     return NextResponse.json({ ok: true, reply: clean });
   } catch (e) {

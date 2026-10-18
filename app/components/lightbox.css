@@ -4,8 +4,8 @@
 .lb>*:not(.lb-bg){position:relative}
 
 .lb-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px}
-.lb-count{display:flex;align-items:baseline;gap:2px;font-size:14px;color:rgba(255,255,255,.6);min-width:0}
-.lb-count strong{font-size:17px;font-weight:600;color:#fff}
+.lb-count{display:flex;align-items:baseline;gap:2px;font-size:calc(14px * var(--fs, 1));color:rgba(255,255,255,.6);min-width:0}
+.lb-count strong{font-size:calc(17px * var(--fs, 1));font-weight:600;color:#fff}
 .lb-title{font-style:normal;margin-left:14px;padding-left:14px;border-left:1px solid rgba(255,255,255,.2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.75)}
 .lb-actions{display:flex;gap:8px;flex-shrink:0}
 .lb-btn{width:42px;height:42px;border-radius:50%;border:none;display:grid;place-items:center;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);color:#fff;cursor:pointer;transition:background .2s,transform .25s}
@@ -17,7 +17,7 @@
 .lb-figure{position:relative;margin:0;flex:1;min-width:0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .lb-figure img{max-width:100%;max-height:calc(100% - 40px);object-fit:contain;border-radius:10px;box-shadow:0 30px 90px -20px rgba(0,0,0,.7);opacity:0;transform:scale(.97);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
 .lb-figure img.is-in{opacity:1;transform:none}
-.lb-figure figcaption{margin-top:12px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.85);text-align:center;max-width:640px}
+.lb-figure figcaption{margin-top:12px;font-size:calc(14px * var(--fs, 1));line-height:1.5;color:rgba(255,255,255,.85);text-align:center;max-width:640px}
 .lb-spin{position:absolute;width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:#22B37A;animation:lbSpin .8s linear infinite}
 
 .lb-nav{flex-shrink:0;width:52px;height:52px;border-radius:50%;border:none;display:grid;place-items:center;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);color:#fff;cursor:pointer;transition:background .2s,transform .2s}

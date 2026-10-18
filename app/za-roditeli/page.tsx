@@ -56,7 +56,7 @@ export default async function ParentsPage() {
           <aside className="aside-box">
             <h3>Нужна ви е консултация?</h3>
             <p className="muted">Логопедите, психолозите и специалните педагози са на разположение за лични срещи. Обадете се в деловодството, за да уговорите час.</p>
-            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 18 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
+            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 'calc(18px * var(--fs, 1))' }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <a className="btn btn-primary" style={{ marginTop: 16 }} href="/kontakti">Всички контакти</a>
           </aside>
         </div>

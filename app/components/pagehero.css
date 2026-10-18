@@ -33,11 +33,11 @@
 .ph-v3 .pd-o { display: none; }
 .ph-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
 .page-hero.has-photo .ph-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); }
-.ph-crumb { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14.5px; color: var(--ink-2); margin-bottom: 14px; }
+.ph-crumb { display: flex; flex-wrap: wrap; gap: 8px; font-size: calc(14.5px * var(--fs, 1)); color: var(--ink-2); margin-bottom: 14px; }
 .ph-crumb a:hover { color: var(--tone-ink); text-decoration: underline; text-underline-offset: 3px; }
 .ph-crumb span:last-child { color: var(--tone-ink); font-weight: 600; }
 .page-hero h1 { max-width: 16em; }
-.ph-intro { margin-top: 16px; font-size: clamp(17px, 1.5vw, 19.5px); color: var(--ink-2); max-width: 40em; }
+.ph-intro { margin-top: 16px; font-size: calc(clamp(17px, 1.5vw, 19.5px) * var(--fs-ui, 1)); color: var(--ink-2); max-width: 40em; }
 .ph-text::before { content: ""; display: block; width: 56px; height: 6px; border-radius: 6px; background: var(--tone); margin-bottom: 22px; }
 
 /* снимка в кръг с полумесец в цвета на раздела — като в логото */

@@ -93,7 +93,7 @@ export default async function SupportPage() {
           <aside className="aside-box">
             <h3>Искате да поговорите със специалист?</h3>
             <p className="muted">Обадете се в деловодството и ще уговорим среща.</p>
-            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 18 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
+            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 'calc(18px * var(--fs, 1))' }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
           </aside>
         </div>
       </section>

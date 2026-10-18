@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import '@fontsource-variable/unbounded';
-import '@fontsource-variable/golos-text';
+import './fonts.css';
 import './globals.css';
 import Header from './components/Header';
 import TopBar from './components/TopBar';

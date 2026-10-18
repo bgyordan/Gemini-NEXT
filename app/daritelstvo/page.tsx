@@ -26,11 +26,12 @@ export default async function DonatePage() {
         <div className="wrap grid-2">
           <div>
             <h2>Дарение по банков път</h2>
-            <p className="muted" style={{ marginTop: 10 }}>Целевото дарение се превежда на Училищното настоятелство към центъра.</p>
+            <p className="muted" style={{ marginTop: 10 }}>{/настоятелство/i.test(BANK.to) ? 'Целевото дарение се превежда на Училищното настоятелство към центъра.' : 'Дарението се превежда по сметката на центъра, в евро.'}</p>
             <div className="kv" style={{ marginTop: 18 }}>
               <div className="kv-row"><span>Получател</span><b>{BANK.to}</b></div>
               <div className="kv-row"><span>IBAN</span><b><CopyText text={BANK.iban} /></b></div>
               <div className="kv-row"><span>BIC</span><b>{BANK.bic}</b></div>
+              {!/настоятелство/i.test(BANK.to) && <div className="kv-row"><span>Банка</span><b>Централна кооперативна банка</b></div>}
               <div className="kv-row"><span>Основание</span><b>{BANK.reason}</b></div>
             </div>
           </div>

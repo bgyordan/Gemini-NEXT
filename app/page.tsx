@@ -1,4 +1,9 @@
-import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, monthShort } from '../lib/data';
+import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, getPagePhotos, fmtDate, monthShort } from '../lib/data';
+import { flowerPolygon } from '../lib/flower';
+
+// две цветя за снимките до „Над 150 деца…“: 7 и 8 листа, леко завъртени
+const FLOWER_7 = flowerPolygon(7, 0.17, -0.2);
+const FLOWER_8 = flowerPolygon(8, 0.15, 0.25);
 import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
@@ -44,11 +49,13 @@ const DOCS = [
 ];
 
 export default async function Home() {
-  const [hero, news, events, photos, info] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8), getSiteInfo()]);
+  const [hero, news, events, photos, info, chosenAbout] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8), getSiteInfo(), getPagePhotos('nachalna-pod')]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
   // за блока под херото: последните снимки от галерията, различни от трите в детелината
-  const about = [...photos.map((p) => p.photo_url).filter((u) => !h.includes(u)), ...FALLBACK_ABOUT].slice(0, 2);
+  // снимки 4 и 5 се избират в ЕИС → Сайт → Начална; празно място → най-новите от галерията (без трите от началото)
+  const auto = [...photos.map((p) => p.photo_url).filter((u) => !h.includes(u) && !chosenAbout.includes(u)), ...FALLBACK_ABOUT];
+  const about = [0, 1].map((i) => chosenAbout[i] || auto.shift()!);
   const [feat, ...rest] = news;
 
   return (
@@ -121,8 +128,8 @@ export default async function Home() {
             <a className="more" href="/za-nas">Повече за центъра</a>
           </div>
           <div className="ab-photos" aria-hidden="true">
-            <img className="ab-p1" src={about[0]} alt="" loading="lazy" />
-            <img className="ab-p2" src={about[1]} alt="" loading="lazy" />
+            <div className="ab-fl ab-p1" style={{ ['--fl' as any]: FLOWER_7 }}><span /><img src={about[0]} alt="" loading="lazy" /></div>
+            <div className="ab-fl ab-p2" style={{ ['--fl' as any]: FLOWER_8 }}><span /><img src={about[1]} alt="" loading="lazy" /></div>
           </div>
         </div>
       </section>

@@ -125,8 +125,16 @@
 .ab-text p { margin-top: clamp(24px, 2.4vw, 36px); color: var(--ink-2); font-size: clamp(17px, 1.3vw, 18.5px); max-width: 34em; }
 .ab-text .more { margin-top: 28px; }
 .ab-photos { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 28px); align-items: start; }
-.ab-photos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 999px 999px var(--r) var(--r); }
-.ab-photos .ab-p2 { margin-top: clamp(48px, 7vw, 110px); border-radius: var(--r) var(--r) 999px 999px; }
+.ab-photos { align-items: center; }
+/* снимките като цветя: 7 и 8 листа (clip-path от lib/flower.ts); отзад — същото цвете в мек цвят от логото, леко изместено */
+.ab-fl { position: relative; aspect-ratio: 1; }
+.ab-fl img, .ab-fl span { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: var(--fl); }
+.ab-fl img { object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .75, .25, 1); }
+.ab-fl span { background: var(--petal); transform: translate(5%, 5%) rotate(12deg); }
+.ab-p1 { --petal: color-mix(in srgb, var(--brand-orange) 30%, var(--paper)); }
+.ab-p2 { --petal: color-mix(in srgb, var(--brand-lime) 34%, var(--paper)); margin-top: clamp(80px, 11vw, 180px); }
+.ab-fl:hover img { transform: rotate(-6deg) scale(1.02); }
+@media (prefers-reduced-motion: reduce) { .ab-fl img { transition: none; } }
 
 /* ===== Записване: плътно оранжево ===== */
 .hx-steps { --t-ink: var(--ink); background: var(--sky); color: var(--t-ink); }

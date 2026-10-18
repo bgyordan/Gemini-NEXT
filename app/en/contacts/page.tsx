@@ -1,3 +1,4 @@
+import ContactForm from '../../components/ContactForm';
 import PageHero from '../../components/PageHero';
 import MapEmbed from '../../kontakti/MapEmbed';
 import { getSiteInfo } from '../../../lib/siteinfo';
@@ -57,6 +58,11 @@ export default async function EnContacts() {
             <h3 style={{ marginTop: 24 }}>Address</h3>
             <p>7 Petko Staynov Str.<br />9000 Varna, Bulgaria</p>
           </aside>
+        </div>
+      </section>
+      <section className="section tone-blue" id="write">
+        <div className="wrap cf-wrap">
+          <ContactForm lang="en" email={CONTACT.email} />
         </div>
       </section>
       <section className="section tone-blue">

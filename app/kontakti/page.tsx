@@ -1,3 +1,4 @@
+import ContactForm from '../components/ContactForm';
 import PageHero from '../components/PageHero';
 import MapEmbed from './MapEmbed';
 import { getSiteInfo } from '../../lib/siteinfo';
@@ -51,6 +52,11 @@ export default async function ContactsPage() {
             <h3 style={{ marginTop: 24 }}>Адрес</h3>
             <p>{CONTACT.address}<br />{CONTACT.city}</p>
           </aside>
+        </div>
+      </section>
+      <section className="section tone-blue" id="pishete-ni">
+        <div className="wrap cf-wrap">
+          <ContactForm lang="bg" email={CONTACT.email} />
         </div>
       </section>
       <section className="section tone-blue">

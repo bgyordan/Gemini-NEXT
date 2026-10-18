@@ -6,7 +6,7 @@ import { alternates } from '../../../lib/lang';
 
 export const metadata = {
   title: 'Support us — CSOP Varna',
-  description: 'Support the children and young people at CSOP Varna. Every donation goes into their learning and therapy environment.',
+  description: 'Donations and partnerships for CSOP Varna: bank details, useful materials and joint initiatives.',
   alternates: alternates('/en/support-us'),
 };
 
@@ -19,8 +19,8 @@ export default async function EnSupport() {
         kicker="Support us"
         tone="orange"
         page="daritelstvo"
-        title="Help us make the environment even better"
-        intro="Donations go towards specialised equipment, art therapy materials, the sensory room and events for the children."
+        title="Supporting the centre"
+        intro="Donations and partnerships enrich the children’s learning and therapy environment – equipment, materials, the sensory room and our shared events."
       />
       <section className="section tone-orange">
         <div className="wrap grid-2">
@@ -37,14 +37,15 @@ export default async function EnSupport() {
             <p className="muted" style={{ marginTop: 14 }}>The reference may also be written in English, e.g. “Donation to CSOP Varna”.</p>
           </div>
           <div>
-            <h2>Materials and supplies</h2>
-            <p className="muted" style={{ marginTop: 10 }}>We gratefully accept educational toys, sensory materials, drawing and pottery supplies and sports equipment. We most need:</p>
+            <h2>Donating materials</h2>
+            <p className="muted" style={{ marginTop: 10 }}>In our everyday work with the children we most often use:</p>
             <ul className="feature-list" style={{ marginTop: 18 }}>
-              <li>Art therapy materials: clay, brushes, paints, card</li>
-              <li>Sensory and tactile toys for fine motor skills</li>
-              <li>Supplies for the teaching kitchen</li>
-              <li>Books with large illustrations and learning boards</li>
+              <li>art therapy materials – clay, paints, brushes, card;</li>
+              <li>sensory and tactile aids for fine motor skills;</li>
+              <li>supplies for the teaching kitchen;</li>
+              <li>books with large illustrations and learning boards.</li>
             </ul>
+            <p className="muted" style={{ marginTop: 14 }}>Before bringing materials, please get in touch – we will tell you what is currently useful.</p>
           </div>
         </div>
       </section>
@@ -52,14 +53,14 @@ export default async function EnSupport() {
         <div className="wrap">
           <div className="donate-band">
             <div>
-              <h2>Have an idea for a joint project or campaign?</h2>
-              <p>Get in touch and we will discuss how we can help the children most, together.</p>
+              <h2>An idea for a joint project or initiative?</h2>
+              <p>We welcome partnerships with organisations, companies and parents. Write to us and we will discuss it.</p>
             </div>
             <a className="btn btn-primary" href="/en/contacts">Contact us</a>
           </div>
         </div>
       </section>
-      <PagePhotos page="daritelstvo" title="Support us" heading="What we have achieved with your help" />
+      <PagePhotos page="daritelstvo" title="Support us" heading="Made possible by our donors" />
     </>
   );
 }

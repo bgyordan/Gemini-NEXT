@@ -53,6 +53,9 @@ export default async function Home() {
   return (
     <div className="home">
       <HandDefs />
+      {/* верига от ефирни кръгове: големият синкав диск в херото → по-малък зелен → още по-малък оранжев,
+          диагонално надолу и наляво, без да се допират; продължава и под първия екран */}
+      <div className="home-dots" aria-hidden="true"><span className="hd-g" /><span className="hd-o" /></div>
       {/* ===== Герой: светъл. Вляво мотото, вдясно детелината от трите снимки от ЕИС върху бледонебесен диск.
            Отдолу — трите неща, за които идва родителят: услуги, записване, контакт. ===== */}
       <section className="hx">
@@ -70,18 +73,16 @@ export default async function Home() {
           </div>
 
           <div className="hx-clover" aria-hidden="true">
-            {/* два по-малки ефирни кръга, които слизат диагонално наляво от големия синкав диск */}
-            <span className="hx-dot hx-dot-g" />
-            <span className="hx-dot hx-dot-o" />
-            <div className="cl-spin">
-              <div className="cl-turn">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className={`cl-ph cl-${i + 1}`}>
-                    <div className="cl-up"><img src={h[i]} alt="" /></div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* „Пътят“: пунктирна пътека, която се изкачва през трите снимки — всяка стъпка по-голяма от предишната */}
+            <svg className="pt-path" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M2 102 C6 76 6 58 15 49 S 34 28 44 19 S 60 4 70 -4" />
+            </svg>
+            {[0, 1, 2].map((i) => (
+              // снимка 1 от ЕИС е най-голямата (последната стъпка), 3 — най-малката
+              <div key={i} className={`pt-ph pt-${i + 1}`}><img src={h[2 - i]} alt="" /></div>
+            ))}
+            <i className="pt-mark pt-m1" />
+            <i className="pt-mark pt-m2" />
             <div className="cl-core"><span /></div>
           </div>
         </div>

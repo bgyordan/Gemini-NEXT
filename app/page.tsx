@@ -70,6 +70,9 @@ export default async function Home() {
           </div>
 
           <div className="hx-clover" aria-hidden="true">
+            {/* два по-малки ефирни кръга, които слизат диагонално наляво от големия синкав диск */}
+            <span className="hx-dot hx-dot-g" />
+            <span className="hx-dot hx-dot-o" />
             <div className="cl-spin">
               <div className="cl-turn">
                 {[0, 1, 2].map((i) => (

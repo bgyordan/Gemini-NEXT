@@ -28,6 +28,9 @@
 /* дискът */
 .hx::before { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: var(--hx-disc);
   width: min(92vh, 62vw); aspect-ratio: 1; right: max(-14vw, -220px); top: 50%; translate: 0 -56%; }
+.hx-dot { position: absolute; z-index: -2; border-radius: 50%; pointer-events: none; }
+.hx-dot-g { width: 41%; aspect-ratio: 1; left: -39%; top: 50%; background: color-mix(in srgb, var(--brand-lime) 13%, var(--paper)); }
+.hx-dot-o { width: 17%; aspect-ratio: 1; left: -45%; top: 81%; background: color-mix(in srgb, var(--brand-orange) 12%, var(--paper)); }
 .hx-grid { flex: 1; width: 100%; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 96px); align-items: center; }
 
 /* детелината */
@@ -56,7 +59,7 @@
 
 /* мотото */
 .hx-in { position: relative; z-index: 1; min-width: 0; }
-.hx-title { color: var(--hx-ink); font-weight: 450; max-width: none; }
+.hx-title { color: var(--hx-ink); font-weight: 350; max-width: none; }
 .hx-title > span { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
 .hx-title > span > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--l, 0) * 120ms + 350ms); }
 .hx-title > span:nth-child(2) > span { --l: 1; }
@@ -64,7 +67,7 @@
 
 .hx-script { font: 600 clamp(42px, 4.2vw, 88px)/1 'Caveat Variable', 'Caveat', cursive; color: var(--brand-orange); letter-spacing: 0; margin-bottom: clamp(6px, .8vw, 14px); padding-left: .04em; }
 .hx-script > span { rotate: -3deg; }
-.hx-line { font-size: clamp(32px, 3.5vw, 76px); line-height: 1.1; letter-spacing: -.035em; max-width: 13.5em; }
+.hx-line { font-size: clamp(30px, 2.9vw, 62px); line-height: 1.14; letter-spacing: -.03em; max-width: 17em; }
 .hx-line > span { text-wrap: balance; }
 
 .hx-lead { margin-top: clamp(24px, 2.6vw, 44px); font-size: clamp(17px, 1.25vw, 22px); line-height: 1.6; color: var(--ink-2); max-width: 30em; animation: hx-fade .9s .9s both; }
@@ -171,6 +174,8 @@
   .hx::before { width: min(110vw, 680px); right: -18vw; top: 0; translate: 0 -12%; }
   .hx-grid { grid-template-columns: 1fr; }
   .hx-clover { grid-row: 1; width: min(84vw, 520px); min-width: 0; }
+  .hx-dot-g { left: -22%; top: 64%; width: 34%; }
+  .hx-dot-o { left: -8%; top: 96%; width: 13%; }
   .hx-in { grid-row: 2; }
   .ab-grid, .hn-grid, .hd-grid { grid-template-columns: 1fr; }
   .hx-vlist { grid-template-columns: 1fr 1fr; }

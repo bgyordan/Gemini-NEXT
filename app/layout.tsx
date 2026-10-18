@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 };
 
 // Темата се избира преди първото рисуване (без проблясване).
-const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem('csop-theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.classList.toggle('dark',d);}catch(e){}})();`;
+const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem('csop-theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.classList.toggle('dark',d);}catch(e){}try{var a=JSON.parse(localStorage.getItem('csop-a11y')||'null');if(a){var F=[1,1.12,1.25,1.4];if(a.font)document.documentElement.style.setProperty('--fs',String(F[a.font]||1));if(a.contrast)document.documentElement.classList.add('a11y-contrast');if(a.links)document.documentElement.classList.add('a11y-links');}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

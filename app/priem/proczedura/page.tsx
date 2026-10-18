@@ -32,7 +32,7 @@ export default async function ProcedurePage() {
               <li><a href={CONTACT.maps} target="_blank" rel="noreferrer">{CONTACT.address}, Варна</a></li>
             </ul>
             <p className="pr-q">Въпроси по процедурата?</p>
-            <p style={{ fontWeight: 600, fontSize: 18 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
+            <p style={{ fontWeight: 600, fontSize: 'calc(18px * var(--fs, 1))' }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <a className="btn btn-dark" style={{ marginTop: 16 }} href="/priem/poseshtenie">Елате на посещение</a>
           </aside>
         </div>

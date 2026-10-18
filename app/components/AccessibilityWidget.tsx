@@ -9,7 +9,8 @@ const KEY = 'csop-a11y';
 
 function apply(s: Settings) {
   const html = document.documentElement;
-  html.style.fontSize = `${FONT_STEPS[s.font] * 100}%`;
+  // всички размери на шрифта в CSS са умножени по --fs (html font-size не стига — размерите са в px)
+  html.style.setProperty('--fs', String(FONT_STEPS[s.font]));
   html.classList.toggle('a11y-contrast', s.contrast);
   html.classList.toggle('a11y-links', s.links);
 }

@@ -1,4 +1,4 @@
-.lawrefs h2 { font-size: clamp(21px, 2.1vw, 27px); }
+.lawrefs h2 { font-size: calc(clamp(21px, 2.1vw, 27px) * var(--fs-ui, 1)); }
 .lawrefs ul { list-style: none; border-top: 1px solid var(--line); }
 .lawrefs li { border-bottom: 1px solid var(--line); }
 .lawrefs a { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 13px 4px; color: var(--blue-ink); font-weight: 500; }

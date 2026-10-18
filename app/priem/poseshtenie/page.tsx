@@ -33,7 +33,7 @@ export default async function VisitPage() {
           <aside className="aside-box">
             <h3>Уговорете час</h3>
             <p className="muted">Обадете се в деловодството и ще изберем ден и час, в който детето да опознае средата без шум.</p>
-            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 19 }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
+            <p style={{ marginTop: 12, fontWeight: 600, fontSize: 'calc(19px * var(--fs, 1))' }}><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></p>
             <p className="muted" style={{ overflowWrap: 'anywhere' }}>{CONTACT.email}</p>
             <a className="btn btn-dark" style={{ marginTop: 16 }} href="/kontakti">Адрес и карта</a>
           </aside>

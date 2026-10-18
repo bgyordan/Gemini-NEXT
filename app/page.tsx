@@ -2,6 +2,7 @@ import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, fmtDate, mo
 import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
+import HeroKnockout from './components/HeroKnockout';
 import SectionJoin from './components/SectionJoin';
 import Handprints, { HandDefs } from './components/Handprints';
 import '@fontsource-variable/caveat';
@@ -60,6 +61,7 @@ export default async function Home() {
            Отдолу — трите неща, за които идва родителят: услуги, записване, контакт. ===== */}
       <section className="hx">
         <HeroPointer />
+        <HeroKnockout />
         <div className="wrap hx-grid">
           <div className="hx-in">
             <h1 className="hx-title">
@@ -75,7 +77,8 @@ export default async function Home() {
           <div className="hx-clover" aria-hidden="true">
             {/* „Пътят“: пунктирна пътека, която се изкачва през трите снимки — всяка стъпка по-голяма от предишната */}
             <svg className="pt-path" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M2 102 C6 76 6 58 15 49 S 34 28 44 19 S 60 4 70 -4" />
+              <path className="pt-d" d="M-6 92 C4 64 14 34 26 24 S 44 10 52 8 S 60 2 68 -8" />
+              <path className="pt-m" d="M-4 98 C0 74 6 54 12 46 S 28 26 36 22 S 52 6 60 -6" />
             </svg>
             {[0, 1, 2].map((i) => (
               // снимка 1 от ЕИС е най-голямата (последната стъпка), 3 — най-малката

@@ -41,10 +41,20 @@ export async function POST(req: Request) {
 
   let b: { messages?: Msg[]; lang?: string };
   try { b = await req.json(); } catch { return NextResponse.json({ ok: false, error: 'bad' }, { status: 400 }); }
-  const msgs = (Array.isArray(b.messages) ? b.messages : [])
-    .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.text === 'string')
-    .slice(-10)
+  const raw = (Array.isArray(b.messages) ? b.messages : [])
+    .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.text === 'string' && m.text.trim())
     .map((m) => ({ role: m.role, text: m.text.trim().slice(0, m.role === 'user' ? 600 : 1500) }));
+  // остават само въпроси, които имат отговор, плюс последния въпрос — стар въпрос без отговор
+  // (напр. при грешка) не бива да „изпревари“ новия
+  const msgs: Msg[] = [];
+  raw.forEach((m, i) => {
+    const isLast = i === raw.length - 1;
+    if (m.role === 'user' && !isLast && raw[i + 1]?.role !== 'assistant') return;
+    if (m.role === 'assistant' && msgs[msgs.length - 1]?.role !== 'user') return;
+    msgs.push(m);
+  });
+  msgs.splice(0, Math.max(0, msgs.length - 10));
+  while (msgs.length && msgs[0].role !== 'user') msgs.shift();
   const last = msgs[msgs.length - 1];
   if (!last || last.role !== 'user' || !last.text) return NextResponse.json({ ok: false, error: 'bad' }, { status: 400 });
 
@@ -52,7 +62,10 @@ export async function POST(req: Request) {
   if (limited(ip)) return NextResponse.json({ ok: false, error: 'rate' }, { status: 429 });
 
   const origin = process.env.SITE_INTERNAL_URL || (process.env.PORT ? `http://127.0.0.1:${process.env.PORT}` : new URL(req.url).origin);
-  const userText = msgs.filter((m) => m.role === 'user').slice(-2).map((m) => m.text).join(' ');
+  // търсим по последния въпрос; ако е много кратък („а за събота?“), добавяме и предишния
+  const users = msgs.filter((m) => m.role === 'user');
+  const lastQ = users[users.length - 1]?.text || '';
+  const userText = lastQ.split(/\s+/).length < 4 && users.length > 1 ? users[users.length - 2].text + ' ' + lastQ : lastQ;
   const [chunks, core] = await Promise.all([getChunks(origin), coreFacts()]);
   const found = pick(chunks, userText);
   const today = new Date().toLocaleDateString('bg-BG', { timeZone: 'Europe/Sofia', day: 'numeric', month: 'long', year: 'numeric' });

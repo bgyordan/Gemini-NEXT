@@ -170,52 +170,56 @@ export default async function Home() {
             <p className="empty">Скоро тук ще има новини от живота в центъра.</p>
           ) : (
             <div className="hn-grid">
+              {/* водеща новина — снимка и текст един до друг (като в новинарските сайтове), с мек кръг зад снимката */}
               <a className="hn-feat" href={`/novini/${feat.slug}`}>
                 <div className="hn-img">
                   {feat.cover_url ? <img src={feat.cover_url} alt="" /> : <span className="hn-noimg" />}
                 </div>
-                <p className="hn-meta"><span className="tag">{feat.category}</span> <time>{fmtDate(feat.published_at)}</time></p>
-                <h3>{feat.title}</h3>
-                {feat.excerpt && <p className="hn-ex">{feat.excerpt}</p>}
+                <div className="hn-ftext">
+                  <p className="hn-meta"><span className="tag">{feat.category}</span> <time>{fmtDate(feat.published_at)}</time></p>
+                  <h3>{feat.title}</h3>
+                  {feat.excerpt && <p className="hn-ex">{feat.excerpt}</p>}
+                  <span className="hn-read">Прочетете</span>
+                </div>
               </a>
-              <div className="hn-side">
-                {rest.length > 0 && (
-                  <ul className="hn-list">
-                    {rest.map((n) => (
-                      <li key={n.id}>
-                        <a href={`/novini/${n.slug}`}>
-                          {n.cover_url ? <img src={n.cover_url} alt="" loading="lazy" /> : <span className="hn-noimg" />}
-                          <span>
-                            <b>{n.title}</b>
-                            <time>{fmtDate(n.published_at)}</time>
-                          </span>
-                        </a>
+
+              <div className="hn-events">
+                <h3>Предстоящи събития</h3>
+                {events.length === 0 ? (
+                  <p className="muted">Няма обявени събития в момента.</p>
+                ) : (
+                  <ul>
+                    {events.map((e) => (
+                      <li key={e.id}>
+                        <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
+                        <span>
+                          <b>{e.title}</b>
+                          {(e.event_time || e.location) && (
+                            <small>{[e.event_time && `${e.event_time} ч.`, e.location].filter(Boolean).join(', ')}</small>
+                          )}
+                        </span>
                       </li>
                     ))}
                   </ul>
                 )}
-                <div className="hn-events">
-                  <h3>Предстоящи събития</h3>
-                  {events.length === 0 ? (
-                    <p className="muted">Няма обявени събития в момента.</p>
-                  ) : (
-                    <ul>
-                      {events.map((e) => (
-                        <li key={e.id}>
-                          <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
-                          <span>
-                            <b>{e.title}</b>
-                            {(e.event_time || e.location) && (
-                              <small>{[e.event_time && `${e.event_time} ч.`, e.location].filter(Boolean).join(', ')}</small>
-                            )}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <a className="more" href="/sabitiya">Всички събития</a>
-                </div>
+                <a className="more" href="/sabitiya">Всички събития</a>
               </div>
+
+              {rest.length > 0 && (
+                <ul className="hn-cards">
+                  {rest.map((n, i) => (
+                    <li key={n.id} className={`hn-c${i % 3}`}>
+                      <a href={`/novini/${n.slug}`}>
+                        <span className="hn-cimg">
+                          {n.cover_url ? <img src={n.cover_url} alt="" loading="lazy" /> : <span className="hn-noimg" />}
+                        </span>
+                        <time>{fmtDate(n.published_at)}</time>
+                        <b>{n.title}</b>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
         </div>

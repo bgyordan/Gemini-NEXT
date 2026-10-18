@@ -2,7 +2,7 @@
    ЦСОП Варна — дизайн система
    Трите цвята от логото подреждат сайта:
      оранжево = родители и прием, синьо = центърът и прозрачност, зелено = ежедневие и новини
-   Шрифтове: Unbounded (заглавия) + Golos Text (текст), self-hosted (без Google).
+   Шрифтове: Unbounded (заглавия) + Sofia Sans (текст, българска кирилица), self-hosted (без Google).
    ===================================================================== */
 
 :root {
@@ -32,7 +32,7 @@
   --tone: var(--accent); --tone-ink: var(--accent); --tone-soft: var(--sky);
 
   --display: 'Unbounded Variable', 'Unbounded', 'Arial Black', system-ui, sans-serif;
-  --body: 'Golos Text Variable', 'Golos Text', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Sofia Sans Variable', 'Sofia Sans', 'Segoe UI', system-ui, sans-serif;
 
   --r-sm: 10px; --r: 16px; --r-lg: 24px; --r-pill: 999px;
   --shadow: 0 24px 48px -28px rgba(12, 38, 56, .35);
@@ -72,7 +72,7 @@
 html { scroll-behavior: smooth; color-scheme: light; -webkit-text-size-adjust: 100%; }
 html[data-theme="dark"] { color-scheme: dark; }
 body {
-  font: 400 17px/1.65 var(--body);
+  font: 400 18px/1.62 var(--body);
   background: var(--paper);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;

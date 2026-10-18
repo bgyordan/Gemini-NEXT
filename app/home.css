@@ -197,9 +197,9 @@
 .hx-about, .hx-steps, .hx-vals, .hx-donate { position: relative; overflow: hidden; }
 .hx-about > .wrap, .hx-steps > .wrap, .hx-vals > .wrap, .hx-donate > .wrap { position: relative; z-index: 1; }
 .hp-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.hp { position: absolute; width: clamp(110px, 10vw, 200px); height: auto; color: var(--ink-3); opacity: .16; transform: rotate(var(--r)) scaleX(var(--fx)); }
-.hp-layer.dark .hp { color: #fff; opacity: .07; }
-:root[data-theme="dark"] .hp-layer:not(.dark) .hp, .dark .hp-layer:not(.dark) .hp { opacity: .14; }
+.hp { position: absolute; width: clamp(110px, 10vw, 200px); height: auto; color: var(--hp-c, var(--brand-orange)); opacity: .3; transform: rotate(var(--r)) scaleX(var(--fx)); }
+.hp-layer.dark .hp { opacity: .75; } /* на тъмносиньо почти плътни — прозрачната боя върху тъмно „калнее“ */
+:root[data-theme="dark"] .hp-layer:not(.dark) .hp, .dark .hp-layer:not(.dark) .hp { opacity: .22; }
 /* „отпечатване“, когато дланта се появи на екрана */
 @supports (animation-timeline: view()) {
   .hp { animation: hp-stamp linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
@@ -208,7 +208,7 @@
 @media (prefers-reduced-motion: reduce) { .hp { animation: none !important; } }
 
 :root[data-theme="dark"] .btn-ink, .dark .btn-ink { background: var(--ink); color: var(--paper); }
-@media (max-width: 680px) { .hp { width: 84px; opacity: .1; } }
+@media (max-width: 680px) { .hp { width: 84px; opacity: .2; } }
 
 /* ===== Покана за разговор (след ценностите) — без черта отгоре, вълната вече разделя ===== */
 .hx-ask .hd-grid { border-top: 0; padding-top: 0; align-items: center; }

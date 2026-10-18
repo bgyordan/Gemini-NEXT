@@ -3,7 +3,10 @@ import PagePhotos from '../components/PagePhotos';
 import { getSiteInfo } from '../../lib/siteinfo';
 import './podkrepa.css';
 
+import { alternates } from '../../lib/lang';
+
 export const metadata = {
+  alternates: alternates('/obuchenie-i-podkrepa'),
   title: 'Обучение и подкрепа — ЦСОП Варна',
   description:
     'Какво предлага ЦСОП – Варна: обучение по индивидуален план, логопедична и психологическа подкрепа, ерготерапия, рехабилитация и кинезитерапия, целодневна организация и работа със семейството.',

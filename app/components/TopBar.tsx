@@ -1,8 +1,10 @@
 import { getSiteInfo } from '../../lib/siteinfo';
+import LangSwitch from './LangSwitch';
+import type { Lang } from '../../lib/lang';
 
 // Тънкият горен ред над менюто: телефон, имейл, работно време и сигнали.
 // Данните идват от ЕИС → Сайт → Настройки. Превърта се заедно със страницата; лепне само менюто под него.
-export default async function TopBar() {
+export default async function TopBar({ lang = 'bg' }: { lang?: Lang }) {
   const { contact, hours } = await getSiteInfo();
   return (
     <div className="topbar">
@@ -20,9 +22,10 @@ export default async function TopBar() {
         <div className="tb-group">
           <span className="tb-item tb-hours">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7v5l3 2" /></svg>
-            Център {hours.center} ч., деловодство {hours.admin} ч.
+            {lang === 'en' ? `Mon – Fri, ${hours.center}` : `Център ${hours.center} ч., деловодство ${hours.admin} ч.`}
           </span>
-          <a href="/podavane-na-signali" className="tb-item">Подаване на сигнали</a>
+          {lang === 'bg' && <a href="/podavane-na-signali" className="tb-item">Подаване на сигнали</a>}
+          <LangSwitch />
         </div>
       </div>
     </div>

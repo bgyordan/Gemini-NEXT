@@ -1,10 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { isEnPath } from '../../lib/lang';
 
 // Превключвател светъл/тъмен режим (изборът се пази в браузъра).
 export default function ThemeToggle() {
   const [dark, setDark] = useState<boolean | null>(null);
+  const en = isEnPath(usePathname() || '/');
 
   useEffect(() => {
     setDark(document.documentElement.getAttribute('data-theme') === 'dark');
@@ -26,8 +29,8 @@ export default function ThemeToggle() {
       type="button"
       className="theme-btn"
       onClick={toggle}
-      aria-label={dark ? 'Светъл режим' : 'Тъмен режим'}
-      title={dark ? 'Светъл режим' : 'Тъмен режим'}
+      aria-label={en ? (dark ? 'Light mode' : 'Dark mode') : dark ? 'Светъл режим' : 'Тъмен режим'}
+      title={en ? (dark ? 'Light mode' : 'Dark mode') : dark ? 'Светъл режим' : 'Тъмен режим'}
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
         {dark

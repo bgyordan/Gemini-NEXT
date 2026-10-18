@@ -4,6 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NAV } from './nav';
 import ThemeToggle from './ThemeToggle';
+import LangSwitch from './LangSwitch';
+import { isEnPath } from '../../lib/lang';
+
+// Английската част е кратка — само няколко страници, без падащи менюта
+const EN_NAV = [
+  { label: 'Home', href: '/en' },
+  { label: 'Services', href: '/en/services' },
+  { label: 'Admission', href: '/en/admission' },
+  { label: 'Contacts', href: '/en/contacts' },
+];
+const HEART = 'M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z';
 import './header.css';
 
 export default function Header() {
@@ -46,6 +57,40 @@ export default function Header() {
   // само един раздел е „текущ“ — първият, в който е страницата (някои страници са в два раздела)
   const activeGroup = NAV.find((g) => pathname === g.href || g.links.some((l) => pathname === l.href || pathname.startsWith(l.href + '/')))?.href;
   const isActive = (href: string) => href === activeGroup;
+
+  if (isEnPath(pathname)) {
+    return (
+      <header className={`site-head${stuck ? ' is-stuck' : ''}${mobile ? ' is-mob' : ''}`}>
+        <a className="skip" href="#main">Skip to content</a>
+        <div className="wrap sh-bar">
+          <a href="/en" className="sh-brand" aria-label="CSOP Varna – home">
+            <img src="/logo.jpg" alt="" width={56} height={56} />
+            <span>
+              <b>CSOP Varna</b>
+              <small>Centre for Special Educational Support</small>
+            </span>
+          </a>
+          <nav className="sh-nav" aria-label="Main menu">
+            {EN_NAV.map((l) => (
+              <div key={l.href} className="sh-item"><a href={l.href} className={`sh-link solo${pathname === l.href ? ' current' : ''}`}>{l.label}</a></div>
+            ))}
+          </nav>
+          <ThemeToggle />
+          <a href="/en/support-us" className="sh-donate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={HEART} /></svg>Donate</a>
+          <button type="button" className="sh-menu" aria-expanded={mobile} aria-controls="mob-nav" onClick={() => setMobile(!mobile)}>
+            {mobile ? 'Close' : 'Menu'}
+          </button>
+        </div>
+        <div id="mob-nav" className="sh-mob" hidden={!mobile}>
+          <div className="wrap">
+            {EN_NAV.map((l) => <a key={l.href} className="sh-mob-solo" href={l.href}>{l.label}</a>)}
+            <LangSwitch className="sh-mob-solo" full />
+            <a className="sh-donate sh-mob-donate" href="/en/support-us"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={HEART} /></svg>Donate</a>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className={`site-head${open ? ' is-open' : ''}${stuck ? ' is-stuck' : ''}${mobile ? ' is-mob' : ''}`}>
@@ -120,6 +165,7 @@ export default function Header() {
             </div>
           ))}
           <a className="sh-mob-solo" href="/kontakti">Контакти</a>
+          <LangSwitch className="sh-mob-solo" full />
           <a className="sh-donate sh-mob-donate" href="/daritelstvo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дари</a>
         </div>
       </div>

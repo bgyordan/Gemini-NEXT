@@ -1,11 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { isEnPath } from '../../lib/lang';
 
 const KEY = 'csop-cookie-consent';
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
+  const en = isEnPath(usePathname() || '/');
 
   useEffect(() => {
     try {
@@ -50,7 +53,7 @@ export default function CookieBanner() {
           .cookie-bar .ck-btn { width: 100%; }
         }
       `}</style>
-      <div className="cookie-bar" role="dialog" aria-label="Съобщение за бисквитки">
+      <div className="cookie-bar" role="dialog" aria-label={en ? 'Cookie notice' : 'Съобщение за бисквитки'}>
         <span className="ck-ic" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5Z" />
@@ -58,13 +61,21 @@ export default function CookieBanner() {
           </svg>
         </span>
         <div className="ck-txt">
-          <p>
-            Този сайт използва само технически необходими данни (напр. избраната тема и настройки за достъпност).
-            Не използваме рекламни или аналитични бисквитки. Вградената карта в „Контакти“ може да зареди бисквитки от Google.{' '}
-            <a href="/politika-za-biskvitki">Политика за бисквитки</a>
-          </p>
+          {en ? (
+            <p>
+              This site only stores technically necessary data (e.g. your theme and accessibility settings).
+              We use no advertising or analytics cookies. The embedded map on the Contacts page may load cookies from Google.{' '}
+              <a href="/politika-za-biskvitki" hrefLang="bg">Cookie policy (in Bulgarian)</a>
+            </p>
+          ) : (
+            <p>
+              Този сайт използва само технически необходими данни (напр. избраната тема и настройки за достъпност).
+              Не използваме рекламни или аналитични бисквитки. Вградената карта в „Контакти“ може да зареди бисквитки от Google.{' '}
+              <a href="/politika-za-biskvitki">Политика за бисквитки</a>
+            </p>
+          )}
         </div>
-        <button className="ck-btn" onClick={accept}>Разбрах</button>
+        <button className="ck-btn" onClick={accept}>{en ? 'Got it' : 'Разбрах'}</button>
       </div>
     </>
   );

@@ -97,7 +97,12 @@ export async function POST(req: Request) {
     const reply = (j?.candidates?.[0]?.content?.parts || []).map((p: { text?: string }) => p.text || '').join('').trim();
     if (!reply) return NextResponse.json({ ok: false, error: 'ai' }, { status: 502 });
     // без markdown — звездички и решетки махаме, ако моделът все пак ги сложи
-    return NextResponse.json({ ok: true, reply: reply.replace(/\*\*?|^#+\s*/gm, '') });
+    // без markdown: [текст](адрес) → адресът (на сайта — относителен), звездички и решетки — махаме
+    const clean = reply
+      .replace(/\[([^\]]*)\]\((https?:\/\/(?:www\.)?csop-varna\.bg)?([^)\s]*)\)/g, (_m, txt: string, own: string | undefined, url: string) =>
+        own || url.startsWith('/') ? (url || '/') : txt.startsWith('/') || txt === url ? url : `${txt} (${url})`)
+      .replace(/\*\*?|^#+\s*/gm, '');
+    return NextResponse.json({ ok: true, reply: clean });
   } catch (e) {
     console.error('[chat]', String(e).slice(0, 200));
     return NextResponse.json({ ok: false, error: 'ai' }, { status: 502 });

@@ -31,39 +31,32 @@
 .hx-grid { flex: 1; width: 100%; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 96px); align-items: center; }
 
 /* детелината */
-.hx-clover { position: relative; z-index: 0; width: min(100%, calc(100svh - var(--header-h) - var(--topbar-h) - 280px)); min-width: 320px; max-width: 760px; aspect-ratio: 1; justify-self: center; }
+.hx-clover { position: relative; z-index: 0; width: min(100%, calc(100svh - var(--header-h) - var(--topbar-h) - 260px)); min-width: 320px; max-width: 760px; aspect-ratio: 1.05; justify-self: center; }
+/* „детелината“ от три снимки — заоблени правоъгълници, които леко се застъпват;
+   зад всяка наднича кръг в един от цветовете на логото, а в средата са децата от логото */
 .cl-spin, .cl-turn { position: absolute; inset: 0; }
-.cl-spin { animation: cl-in 1.7s cubic-bezier(.2, .75, .25, 1) both; }
-@keyframes cl-in { from { transform: rotate(-80deg) scale(.86); opacity: 0; } to { transform: none; opacity: 1; } }
-.cl-ph { position: absolute; width: 52%; aspect-ratio: 1; translate: calc(var(--px, 0) * var(--d) * 1px) calc(var(--py, 0) * var(--d) * 1px); }
-.cl-ph::before { content: ""; position: absolute; inset: -7%; border-radius: 50%; background: var(--c); transform: translate(var(--dx), var(--dy)); transition: rotate 1.2s cubic-bezier(.2, .75, .25, 1); }
+.cl-ph { position: absolute; translate: calc(var(--px, 0) * var(--d) * 1px) calc(var(--py, 0) * var(--d) * 1px); animation: cl-in .9s cubic-bezier(.2, .75, .25, 1) both; animation-delay: var(--del); }
+@keyframes cl-in { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
+.cl-ph::before { content: ""; position: absolute; z-index: -1; width: var(--cs, 46%); aspect-ratio: 1; border-radius: 50%; background: var(--c); top: var(--ct, auto); bottom: var(--cb, auto); left: var(--cl, auto); right: var(--cr, auto); transition: transform .8s cubic-bezier(.2, .75, .25, 1); }
 .cl-up { position: absolute; inset: 0; }
-.cl-up img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: clamp(4px, .5vw, 8px) solid var(--hx-bg); animation: cl-un 1.7s cubic-bezier(.2, .75, .25, 1) both; transition: scale .6s cubic-bezier(.2, .75, .25, 1); }
-@keyframes cl-un { from { transform: rotate(80deg); } to { transform: none; } }
-.cl-1 { --c: var(--brand-orange); --dx: -6%; --dy: -5%; --d: 16; left: 24%; top: 0; }
-.cl-2 { --c: var(--brand-lime);   --dx: 7%;  --dy: -2%; --d: -22; right: 0; top: 40%; }
-.cl-3 { --c: var(--brand-blue);   --dx: -4%; --dy: 7%;  --d: 28; left: 0; top: 44%; }
-.cl-core { position: absolute; left: 50%; top: 56%; z-index: 2; width: 24%; aspect-ratio: 1; translate: calc(-50% + var(--px, 0) * -10px) calc(-50% + var(--py, 0) * -10px); border-radius: 50%; padding: 5px;
+.cl-up img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: clamp(20px, 2.4vw, 36px); border: clamp(4px, .5vw, 7px) solid var(--paper);
+  box-shadow: 0 24px 50px -26px rgba(12, 38, 56, .45); transition: scale .6s cubic-bezier(.2, .75, .25, 1); }
+.cl-1 { --c: var(--brand-orange); --d: 14;  --del: .15s; left: 24%; top: 0;   width: 60%; aspect-ratio: 4 / 3; --cs: 42%; --ct: -9%; --cl: -9%; }
+.cl-3 { --c: var(--brand-blue);   --d: 24;  --del: .3s;  left: 0;   top: 47%; width: 47%; aspect-ratio: 4 / 3; --cs: 54%; --cb: 6%;  --cl: -10%; }
+.cl-2 { --c: var(--brand-lime);   --d: -18; --del: .45s; right: 0;  top: 41%; width: 51%; aspect-ratio: 1 / .92; --cs: 46%; --ct: -7%; --cr: -9%; }
+.cl-core { position: absolute; left: 49%; top: 52%; z-index: 2; width: 21%; aspect-ratio: 1; translate: calc(-50% + var(--px, 0) * -10px) calc(-50% + var(--py, 0) * -10px); border-radius: 50%; padding: 5px;
   background: conic-gradient(from 200deg, var(--brand-orange) 0 33.3%, var(--brand-lime) 0 66.6%, var(--brand-blue) 0);
-  box-shadow: 0 0 0 clamp(6px, .7vw, 10px) var(--hx-bg), 0 18px 40px -14px rgba(12, 38, 56, .35); animation: cl-pop 1s .9s cubic-bezier(.2, .9, .3, 1.3) both; }
-.cl-core span { display: block; width: 100%; height: 100%; border-radius: 50%; background: #d7ecf9 url(/logo.jpg) 51% 52% / 285% no-repeat; border: 3px solid var(--hx-bg); }
+  box-shadow: 0 0 0 clamp(5px, .6vw, 8px) var(--paper), 0 18px 40px -14px rgba(12, 38, 56, .35); animation: cl-pop 1s .8s cubic-bezier(.2, .9, .3, 1.3) both; }
+.cl-core span { display: block; width: 100%; height: 100%; border-radius: 50%; background: #d7ecf9 url(/logo.jpg) 51% 52% / 285% no-repeat; border: 3px solid var(--paper); }
 @keyframes cl-pop { from { scale: 0; } to { scale: 1; } }
 
-/* при посочване: полумесеците обикалят, снимките леко се приближават */
-.hx-clover:hover .cl-ph::before { rotate: 120deg; }
-.cl-ph:hover img { scale: 1.04; }
-
-/* при превъртане детелината се завърта, а снимките остават изправени */
-@supports (animation-timeline: scroll()) {
-  .cl-turn { animation: cl-turn linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  .cl-up { animation: cl-unturn linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  @keyframes cl-turn { to { transform: rotate(60deg); } }
-  @keyframes cl-unturn { to { transform: rotate(-60deg); } }
-}
+/* при посочване: цветните кръгове леко се изместват, снимката се приближава */
+.hx-clover:hover .cl-ph::before { transform: scale(1.08); }
+.cl-ph:hover img { scale: 1.03; }
 
 /* мотото */
 .hx-in { position: relative; z-index: 1; min-width: 0; }
-.hx-title { color: var(--hx-ink); font-weight: 300; max-width: none; }
+.hx-title { color: var(--hx-ink); font-weight: 450; max-width: none; }
 .hx-title > span { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
 .hx-title > span > span { display: inline-block; animation: hx-rise 1s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--l, 0) * 120ms + 350ms); }
 .hx-title > span:nth-child(2) > span { --l: 1; }
@@ -79,9 +72,19 @@
 
 /* трите пътя */
 .hx-paths { width: 100%; position: relative; z-index: 1; margin-top: clamp(28px, 3vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 56px); animation: hx-fade .9s 1.15s both; }
-.hx-paths a { display: block; min-width: 0; padding-top: clamp(16px, 1.4vw, 24px); border-top: 2px solid var(--ink); }
-.hx-paths b { display: block; font: 400 clamp(19px, 1.45vw, 27px)/1.2 var(--display); letter-spacing: -.02em; }
-.hx-paths a span { display: block; margin-top: 8px; font-size: clamp(15px, 1vw, 17px); line-height: 1.5; color: var(--ink-2); max-width: 28em; }
+.hx-paths { padding-top: clamp(20px, 2vw, 32px);
+  /* тънка черта отгоре само по ширината на съдържанието (без страничните отстъпи на .wrap) */
+  background: linear-gradient(var(--line-strong), var(--line-strong)) top center / calc(100% - 2 * clamp(16px, 5vw, 112px)) 1px no-repeat; }
+.hx-paths a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: start; min-width: 0; }
+.hx-paths a + a { border-left: 1px solid var(--line); padding-left: clamp(20px, 3vw, 56px); margin-left: calc(-1 * clamp(10px, 1.5vw, 28px)); }
+.hx-paths i { display: grid; place-items: center; width: clamp(54px, 4.4vw, 68px); aspect-ratio: 1; border-radius: 50%; background: color-mix(in srgb, var(--ic) 14%, var(--paper)); color: var(--ic-ink); transition: transform .3s cubic-bezier(.2, .9, .3, 1.4); }
+.hx-paths i svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hx-paths a:hover i { transform: scale(1.08); }
+.hp-blue   { --ic: var(--brand-blue);   --ic-ink: #1570AE; }
+.hp-orange { --ic: var(--brand-orange); --ic-ink: #C66A00; }
+.hp-lime   { --ic: var(--brand-lime);   --ic-ink: #4E8A16; }
+.hx-paths b { display: block; margin-top: 4px; font: 500 clamp(19px, 1.45vw, 26px)/1.2 var(--display); letter-spacing: -.02em; }
+.hx-paths a > span > span { display: block; margin-top: 8px; font-size: clamp(15px, 1vw, 17px); line-height: 1.5; color: var(--ink-2); max-width: 28em; }
 .hx-paths a:hover b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
 
 :root[data-theme="dark"] .hx, .dark .hx { --hx-disc: #132B40; }
@@ -173,15 +176,16 @@
   .hx-vlist { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
-  .hx-paths { grid-template-columns: 1fr; gap: 20px; }
+  .hx-paths { grid-template-columns: 1fr; gap: 22px; }
+  .hx-paths a + a { border-left: 0; padding-left: 0; margin-left: 0; }
   .hx-steplist { grid-template-columns: 1fr; }
   .hx-vlist { grid-template-columns: 1fr; }
   .hn-list a { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; }
   .hn-list img, .hn-list .hn-noimg { width: 92px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hx-title > span > span, .hx-lead, .hx-paths, .cl-spin, .cl-turn, .cl-up, .cl-up img, .cl-core { animation: none !important; }
-  .cl-ph::before { transition: none; }
+  .hx-title > span > span, .hx-lead, .hx-paths, .cl-ph, .cl-core { animation: none !important; }
+  .cl-ph::before, .hx-paths i { transition: none; }
 }
 
 /* ===== Съединения между секциите с различен фон (SectionJoin) =====

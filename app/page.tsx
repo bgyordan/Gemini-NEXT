@@ -84,17 +84,17 @@ export default async function Home() {
         </div>
 
         <nav className="wrap hx-paths" aria-label="За родители">
-          <a href="/obuchenie-i-podkrepa">
-            <b>Какво предлагаме</b>
-            <span>Обучение, терапии и рехабилитация по личен план за всяко дете</span>
+          <a href="/obuchenie-i-podkrepa" className="hp-blue">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6" /></svg></i>
+            <span><b>Какво предлагаме</b><span>Обучение, терапии и рехабилитация по личен план за всяко дете</span></span>
           </a>
-          <a href="/priem/proczedura">
-            <b>Как се записва дете</b>
-            <span>Насочване чрез РЦПППО – Варна. Ние подготвяме документите</span>
+          <a href="/priem/proczedura" className="hp-orange">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h6" /></svg></i>
+            <span><b>Как се записва дете</b><span>Насочване чрез РЦПППО – Варна. Ние подготвяме документите</span></span>
           </a>
-          <a href="/kontakti">
-            <b>Свържете се с нас</b>
-            <span>{info.contact.phone}, деловодство {info.hours.admin} ч.</span>
+          <a href="/kontakti" className="hp-lime">
+            <i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 7 7L16 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z" /></svg></i>
+            <span><b>Свържете се с нас</b><span>{info.contact.phone}, деловодство {info.hours.admin} ч.</span></span>
           </a>
         </nav>
       </section>

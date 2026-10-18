@@ -21,7 +21,7 @@
    Отдолу, още в първия екран: трите пътя за родителя.
    Ефекти: завъртане при зареждане, паралакс с мишката (--px/--py от HeroPointer), въртене при превъртане,
    а при посочване полумесеците обикалят около снимките. */
-.hx { --hx-disc: #E9F2F9; --hx-bg: var(--hx-disc); --hx-ink: var(--ink);
+.hx { --hx-disc: #E4F3FE; --hx-bg: var(--hx-disc); --hx-ink: var(--ink);
   position: relative; isolation: isolate; overflow: hidden; color: var(--hx-ink); background: var(--paper);
   display: flex; flex-direction: column; min-height: calc(100svh - var(--header-h) - var(--topbar-h));
   padding-block: clamp(32px, 4vw, 72px) clamp(36px, 4vw, 64px); }

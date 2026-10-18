@@ -45,7 +45,7 @@ export default function Header() {
 
   // само един раздел е „текущ“ — първият, в който е страницата (някои страници са в два раздела)
   const activeGroup = NAV.find((g) => pathname === g.href || g.links.some((l) => pathname === l.href || pathname.startsWith(l.href + '/')))?.href;
-  const isActive = (href: string, _links?: { href: string }[]) => href === activeGroup;
+  const isActive = (href: string) => href === activeGroup;
 
   return (
     <header className={`site-head${open ? ' is-open' : ''}${stuck ? ' is-stuck' : ''}${mobile ? ' is-mob' : ''}`}>
@@ -60,25 +60,28 @@ export default function Header() {
         </a>
 
         <nav className="sh-nav" aria-label="Основно меню">
+          <div className="sh-item"><a href="/" className={`sh-link solo${pathname === '/' ? ' current' : ''}`}>Начало</a></div>
           {NAV.map((g) => (
             <div
               key={g.href}
-              className={`sh-item tone-${g.tone}${open === g.href ? ' open' : ''}`}
+              className={`sh-item${open === g.href ? ' open' : ''}`}
               onMouseEnter={() => enter(g.href)}
               onMouseLeave={leave}
             >
+              {/* самото име води към страницата на раздела; стрелката (или посочване с мишката) отваря подменюто */}
+              <a href={g.href} className={`sh-link${isActive(g.href) ? ' current' : ''}`}>{g.label}</a>
               <button
                 type="button"
-                className={`sh-link${isActive(g.href, g.links) ? ' current' : ''}`}
+                className="sh-caret"
                 aria-expanded={open === g.href}
+                aria-label={`Подменю „${g.label}“`}
                 onClick={() => setOpen(open === g.href ? null : g.href)}
               >
-                {g.label}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
               <div className="sh-panel" hidden={open !== g.href}>
                 <ul>
-                  {g.links.map((l) => (
+                  {g.links.filter((l) => l.href !== g.href).map((l) => (
                     <li key={l.href}>
                       <a href={l.href} aria-current={pathname === l.href ? 'page' : undefined}>{l.label}</a>
                     </li>
@@ -91,7 +94,7 @@ export default function Header() {
         </nav>
 
         <ThemeToggle />
-        <a href="/daritelstvo" className="sh-donate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дарителство</a>
+        <a href="/daritelstvo" className="sh-donate"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дари</a>
         <button type="button" className="sh-menu" aria-expanded={mobile} aria-controls="mob-nav" onClick={() => setMobile(!mobile)}>
           {mobile ? 'Затвори' : 'Меню'}
         </button>
@@ -100,21 +103,24 @@ export default function Header() {
       {/* Мобилно меню */}
       <div id="mob-nav" className="sh-mob" hidden={!mobile}>
         <div className="wrap">
+          <a className="sh-mob-solo" href="/">Начало</a>
           {NAV.map((g) => (
-            <div key={g.href} className={`sh-mob-g tone-${g.tone}`}>
-              <button type="button" aria-expanded={mobGroup === g.href} onClick={() => setMobGroup(mobGroup === g.href ? null : g.href)}>
-                {g.label}
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
-              </button>
+            <div key={g.href} className="sh-mob-g">
+              <div className="sh-mob-row">
+                <a href={g.href}>{g.label}</a>
+                <button type="button" aria-expanded={mobGroup === g.href} aria-label={`Подменю „${g.label}“`} onClick={() => setMobGroup(mobGroup === g.href ? null : g.href)}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </button>
+              </div>
               <ul hidden={mobGroup !== g.href}>
-                {g.links.map((l) => (
+                {g.links.filter((l) => l.href !== g.href).map((l) => (
                   <li key={l.href}><a href={l.href}>{l.label}</a></li>
                 ))}
               </ul>
             </div>
           ))}
           <a className="sh-mob-solo" href="/kontakti">Контакти</a>
-          <a className="sh-donate sh-mob-donate" href="/daritelstvo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дарителство</a>
+          <a className="sh-donate sh-mob-donate" href="/daritelstvo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.6 4.5 7.1 4.5c2 0 3.6 1.1 4.9 2.9 1.3-1.8 2.9-2.9 4.9-2.9 3.5 0 5.6 3.5 4.4 6.8-1.8 4.6-9.3 9.2-9.3 9.2z" /></svg>Дари</a>
         </div>
       </div>
     </header>

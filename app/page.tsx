@@ -1,9 +1,9 @@
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, getPagePhotos, fmtDate, monthShort } from '../lib/data';
-import { flowerPolygon } from '../lib/flower';
+import { daisyPolygon } from '../lib/flower';
 
-// две цветя за снимките до „Над 150 деца…“: 7 и 8 листа, леко завъртени
-const FLOWER_7 = flowerPolygon(7, 0.17, -0.2);
-const FLOWER_8 = flowerPolygon(8, 0.15, 0.25);
+// две различни, неправилни маргаритки за снимките до „Над 150 деца…“ + цветната „сянка“ зад всяка (друго цвете)
+const DAISY_A = daisyPolygon(9, 7), DAISY_A_BACK = daisyPolygon(9, 1007);
+const DAISY_B = daisyPolygon(11, 21), DAISY_B_BACK = daisyPolygon(11, 1021);
 import { getSiteInfo } from '../lib/siteinfo';
 import PhotoBand from './components/PhotoBand';
 import HeroPointer from './components/HeroPointer';
@@ -128,8 +128,8 @@ export default async function Home() {
             <a className="more" href="/za-nas">Повече за центъра</a>
           </div>
           <div className="ab-photos" aria-hidden="true">
-            <div className="ab-fl ab-p1" style={{ ['--fl' as any]: FLOWER_7 }}><span /><img src={about[0]} alt="" loading="lazy" /></div>
-            <div className="ab-fl ab-p2" style={{ ['--fl' as any]: FLOWER_8 }}><span /><img src={about[1]} alt="" loading="lazy" /></div>
+            <div className="ab-fl ab-p1" style={{ ['--fl' as any]: DAISY_A, ['--fl2' as any]: DAISY_A_BACK }}><span /><img src={about[0]} alt="" loading="lazy" /></div>
+            <div className="ab-fl ab-p2" style={{ ['--fl' as any]: DAISY_B, ['--fl2' as any]: DAISY_B_BACK }}><span /><img src={about[1]} alt="" loading="lazy" /></div>
           </div>
         </div>
       </section>

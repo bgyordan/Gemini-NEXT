@@ -307,10 +307,10 @@ export default async function Home() {
         <Handprints slots={[{ top: '6%', right: '3%' }, { bottom: '2%', right: '18%' }, { top: '14%', left: '46%' }]} />
         <div className="wrap">
           <div className="hd-grid">
-            <h2 id="don-h">Помогнете ни да направим средата още по‑добра</h2>
+            <h2 id="don-h">Заедно правим средата още по‑добра</h2>
             <div>
-              <p>Всяко дарение отива за терапевтичната и учебната среда на децата.</p>
-              <a className="btn btn-primary" href="/daritelstvo">Как да дарите</a>
+              <p>Даренията и партньорствата обогатяват учебната и терапевтичната среда на децата.</p>
+              <a className="btn btn-primary" href="/daritelstvo">Дарения и партньорства</a>
             </div>
           </div>
         </div>

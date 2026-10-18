@@ -9,6 +9,8 @@ import SiteNotice from './components/SiteNotice';
 import ScrollTop from './components/ScrollTop';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import CookieBanner from './components/CookieBanner';
+import ChatWidget from './components/ChatWidget';
+import { getSiteInfo } from '../lib/siteinfo';
 import { getLang } from '../lib/lang-server';
 
 const SITE = 'https://csop-varna.bg';
@@ -45,6 +47,8 @@ const THEME_SCRIPT = `(function(){try{var s=localStorage.getItem('csop-theme');v
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = await getLang();
+  // чатботът се показва само когато на сървъра има ключ за Gemini
+  const chat = process.env.GEMINI_API_KEY ? (await getSiteInfo()).contact : null;
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -59,6 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ScrollTop />
         <AccessibilityWidget />
         <CookieBanner />
+        {chat && <ChatWidget phone={chat.phone} phoneHref={chat.phoneHref} />}
       </body>
     </html>
   );

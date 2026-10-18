@@ -126,3 +126,7 @@ a.tb-item:hover { color: #fff; text-decoration: underline; text-underline-offset
   .sh-link { padding: 10px 12px; font-size: calc(15px * var(--fs-ui, 1)); gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { .sh-panel, .sh-mob { animation: none; } .sh-bar, .sh-brand img { transition: none; } }
+
+/* БГ / EN в горната лента */
+.tb-lang { font-weight: 700; letter-spacing: .04em; padding: 5px 10px; margin-right: -10px; border-radius: var(--r-pill); border: 1px solid rgba(220, 231, 240, .35); }
+.tb-lang:hover { background: rgba(255, 255, 255, .1); text-decoration: none !important; }

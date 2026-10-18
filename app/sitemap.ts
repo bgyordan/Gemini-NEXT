@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getNews } from '../lib/data';
+import { PAIRS } from '../lib/lang';
 
 // Карта на сайта за търсачките: /sitemap.xml
 // Генерира се при всяка заявка, за да влизат веднага новите новини от EIS → „Сайт“.
@@ -47,8 +48,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const news = await getNews();
   const latest = news[0]?.published_at ? new Date(news[0].published_at) : undefined;
 
+  const full = (p: string) => `${SITE}${p === '/' ? '' : p}`;
+  // двойките БГ/EN се отбелязват като езикови версии една на друга (hreflang)
+  const langs = (path: string) => {
+    const pair = PAIRS.find((x) => x.bg === path || x.en === path);
+    return pair ? { alternates: { languages: { bg: full(pair.bg), en: full(pair.en) } } } : {};
+  };
   const pages: MetadataRoute.Sitemap = PAGES.map((p) => ({
-    url: `${SITE}${p.path === '/' ? '' : p.path}`,
+    url: full(p.path),
+    ...langs(p.path),
     changeFrequency: p.freq,
     priority: p.priority,
     // Началото и списъкът с новини се променят, когато излезе нова новина
@@ -62,5 +70,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...pages, ...articles];
+  const en: MetadataRoute.Sitemap = PAIRS.map((x) => ({
+    url: full(x.en),
+    changeFrequency: 'yearly',
+    priority: x.en === '/en' ? 0.6 : 0.5,
+    ...langs(x.en),
+  }));
+
+  return [...pages, ...en, ...articles];
 }

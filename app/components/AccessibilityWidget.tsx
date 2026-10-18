@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { isEnPath } from '../../lib/lang';
 
 type Settings = { font: number; contrast: boolean; links: boolean };
 const DEFAULTS: Settings = { font: 0, contrast: false, links: false };
@@ -19,6 +21,10 @@ export default function AccessibilityWidget() {
   const [open, setOpen] = useState(false);
   const [s, setS] = useState<Settings>(DEFAULTS);
   const [mounted, setMounted] = useState(false);
+  const en = isEnPath(usePathname() || '/');
+  const T = en
+    ? { panel: 'Accessibility settings', h: 'Accessibility', sub: 'Adjust the view to your needs.', size: 'Text size', lvl: 'Size level', contrast: 'High contrast', links: 'Underlined links', reset: 'Reset settings', more: 'Accessibility statement (in Bulgarian) →' }
+    : { panel: 'Настройки за достъпност', h: 'Достъпност', sub: 'Настройте изгледа според нуждите си.', size: 'Размер на текста', lvl: 'Размер ниво', contrast: 'Висок контраст', links: 'Подчертани връзки', reset: 'Нулирай настройките', more: 'Декларация за достъпност →' };
 
   useEffect(() => {
     setMounted(true);
@@ -90,39 +96,39 @@ export default function AccessibilityWidget() {
       `}</style>
 
       {open && mounted && (
-        <div className="a11y-panel" role="dialog" aria-label="Настройки за достъпност">
-          <h3>Достъпност</h3>
-          <p className="sub">Настройте изгледа според нуждите си.</p>
+        <div className="a11y-panel" role="dialog" aria-label={T.panel}>
+          <h3>{T.h}</h3>
+          <p className="sub">{T.sub}</p>
 
           <div className="a11y-row">
-            <span className="a11y-lbl">Размер на текста</span>
+            <span className="a11y-lbl">{T.size}</span>
             <div className="a11y-seg">
               {['A', 'A+', 'A++', 'A+++'].map((lbl, i) => (
                 <button key={i} className={s.font === i ? 'on' : ''} onClick={() => update({ font: i })}
-                  aria-label={`Размер ниво ${i + 1}`} style={{ fontSize: 12 + i * 1.5 }}>{lbl}</button>
+                  aria-label={`${T.lvl} ${i + 1}`} style={{ fontSize: 12 + i * 1.5 }}>{lbl}</button>
               ))}
             </div>
           </div>
 
           <div className="a11y-row">
             <button className="a11y-toggle" onClick={() => update({ contrast: !s.contrast })} aria-pressed={s.contrast}>
-              <span>Висок контраст</span><span className={`a11y-sw ${s.contrast ? 'on' : ''}`} />
+              <span>{T.contrast}</span><span className={`a11y-sw ${s.contrast ? 'on' : ''}`} />
             </button>
           </div>
 
           <div className="a11y-row">
             <button className="a11y-toggle" onClick={() => update({ links: !s.links })} aria-pressed={s.links}>
-              <span>Подчертани връзки</span><span className={`a11y-sw ${s.links ? 'on' : ''}`} />
+              <span>{T.links}</span><span className={`a11y-sw ${s.links ? 'on' : ''}`} />
             </button>
           </div>
 
-          <button className="a11y-reset" onClick={reset}>Нулирай настройките</button>
-          <a className="a11y-more" href="/dostapnost">Декларация за достъпност →</a>
+          <button className="a11y-reset" onClick={reset}>{T.reset}</button>
+          <a className="a11y-more" href="/dostapnost">{T.more}</a>
         </div>
       )}
 
       <button className={`a11y-fab ${active ? 'on' : ''}`} onClick={() => setOpen((v) => !v)}
-        aria-label="Достъпност" aria-expanded={open} title="Достъпност">
+        aria-label={T.h} aria-expanded={open} title={T.h}>
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <circle cx="12" cy="4" r="1.6" fill="currentColor" stroke="none" />
           <path d="M4 8h16M12 8v6M12 14l-3.5 6M12 14l3.5 6" />

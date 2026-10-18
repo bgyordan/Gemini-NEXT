@@ -14,6 +14,7 @@ export default async function PageHero({
   page,
   tone,
   kicker,
+  lang = 'bg',
 }: {
   title: string;
   intro?: string;
@@ -21,6 +22,7 @@ export default async function PageHero({
   page?: string;
   tone?: Tone | 'em' | 'bl';
   kicker?: string;
+  lang?: 'bg' | 'en';
   watermark?: string;
 }) {
   const group = path ? NAV.find((g) => g.href === path || g.links.some((l) => l.href === path)) : undefined;
@@ -49,7 +51,7 @@ export default async function PageHero({
               {group.href !== path ? <a href={group.href}>{group.label}</a> : <span>{group.label}</span>}
             </nav>
           ) : kicker ? (
-            <p className="ph-crumb"><a href="/">Начало</a><span aria-hidden="true">/</span><span>{kicker}</span></p>
+            <p className="ph-crumb"><a href={lang === 'en' ? '/en' : '/'}>{lang === 'en' ? 'Home' : 'Начало'}</a><span aria-hidden="true">/</span><span>{kicker}</span></p>
           ) : null}
           <h1>{title}</h1>
           {intro && <p className="ph-intro">{intro}</p>}

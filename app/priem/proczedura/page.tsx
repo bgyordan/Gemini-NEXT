@@ -4,7 +4,10 @@ import AdmissionWizard from '../AdmissionWizard';
 import { getDocuments } from '../../../lib/data';
 import { getSiteInfo } from '../../../lib/siteinfo';
 
+import { alternates } from '../../../lib/lang';
+
 export const metadata = {
+  alternates: alternates('/priem/proczedura'),
   title: 'Как се записва дете — ЦСОП Варна',
   description: 'Процедурата по прием в ЦСОП – Варна стъпка по стъпка: заявление, документи, становище на РЦПППО и записване.',
 };

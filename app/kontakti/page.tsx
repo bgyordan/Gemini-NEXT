@@ -2,7 +2,10 @@ import PageHero from '../components/PageHero';
 import MapEmbed from './MapEmbed';
 import { getSiteInfo } from '../../lib/siteinfo';
 
+import { alternates } from '../../lib/lang';
+
 export const metadata = {
+  alternates: alternates('/kontakti'),
   title: 'Контакти — ЦСОП Варна',
   description: 'Телефони, работно време, имейл и адрес на Център за специална образователна подкрепа – Варна, ул. „Петко Стайнов“ 7.',
 };

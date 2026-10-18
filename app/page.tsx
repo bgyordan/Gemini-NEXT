@@ -1,3 +1,4 @@
+import { alternates } from '../lib/lang';
 import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, getPagePhotos, fmtDate, monthShort } from '../lib/data';
 import { daisyPolygon } from '../lib/flower';
 
@@ -47,6 +48,9 @@ const DOCS = [
   { t: 'Защита на личните данни', d: 'Политика по GDPR', href: '/za-nas/zashtita-na-lichnite-danni', icon: 'M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z' },
   { t: 'Подаване на сигнали', d: 'Поверителен канал по ЗЗЛПСПОИН', href: '/podavane-na-signali', icon: 'M4 5h16v11H9l-5 4z' },
 ];
+
+// hreflang: английската версия на началото е /en
+export const metadata = { alternates: alternates('/') };
 
 export default async function Home() {
   const [hero, news, events, photos, info, chosenAbout] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8), getSiteInfo(), getPagePhotos('nachalna-pod')]);

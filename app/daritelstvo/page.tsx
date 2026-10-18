@@ -3,7 +3,10 @@ import PagePhotos from '../components/PagePhotos';
 import CopyText from './CopyText';
 import { getSiteInfo } from '../../lib/siteinfo';
 
+import { alternates } from '../../lib/lang';
+
 export const metadata = {
+  alternates: alternates('/daritelstvo'),
   title: 'Дарителство — ЦСОП Варна',
   description: 'Подкрепете децата и младежите в ЦСОП – Варна. Всяко дарение отива за учебната и терапевтичната среда.',
 };

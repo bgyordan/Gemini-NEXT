@@ -416,3 +416,13 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .pr-before li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 12px; height: 7px; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); rotate: -45deg; }
 .pr-before li a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .pr-before .pr-q { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-strong); font-weight: 600; }
+
+/* ===== 3D сфери — кръговете на фона (голям син диск, зелен, оранжев) =====
+   Всеки кръг задава --c (основен цвят), --hi (отблясък) и --lo (по-наситения ръб).
+   Светлината идва горе-вляво: отблясък там, ръбът долу-вдясно е малко по-тъмен, а под кръга има мека сянка. */
+.hx::before, .home-dots span, .ph-dots span {
+  background: radial-gradient(circle at 33% 27%, var(--hi) 0%, color-mix(in srgb, var(--hi) 45%, var(--c)) 15%, var(--c) 50%, var(--lo) 100%);
+  box-shadow: 0 1.3vw 2.4vw -.8vw var(--sh, color-mix(in srgb, var(--lo) 80%, transparent)); }
+:root[data-theme="dark"] .hx::before, .dark .hx::before,
+:root[data-theme="dark"] .home-dots span, .dark .home-dots span,
+:root[data-theme="dark"] .ph-dots span, .dark .ph-dots span { --sh: rgba(0, 0, 0, .5); }

@@ -10,9 +10,12 @@
 .ph-dots .pd-o { animation-delay: .24s; }
 @keyframes pd-in { from { opacity: 0; scale: .9; } }
 @media (prefers-reduced-motion: reduce) { .ph-dots span { animation: none; } }
-.pd-b { background: var(--pd-b); }
-.pd-g { background: var(--pd-g); }
-.pd-o { background: var(--pd-o); }
+.pd-b { --c: var(--pd-b); --hi: #FFFFFF; --lo: color-mix(in srgb, var(--brand-blue) 24%, var(--paper)); }
+.pd-g { --c: var(--pd-g); --hi: #FFFFFF; --lo: color-mix(in srgb, var(--brand-lime) 30%, var(--paper)); }
+.pd-o { --c: var(--pd-o); --hi: #FFFFFF; --lo: color-mix(in srgb, var(--brand-orange) 28%, var(--paper)); }
+:root[data-theme="dark"] .pd-b, .dark .pd-b { --hi: #1E4260; --lo: #0B1C2B; }
+:root[data-theme="dark"] .pd-g, .dark .pd-g { --hi: color-mix(in srgb, var(--brand-lime) 22%, var(--paper)); --lo: color-mix(in srgb, var(--brand-lime) 3%, #050C12); }
+:root[data-theme="dark"] .pd-o, .dark .pd-o { --hi: color-mix(in srgb, var(--brand-orange) 22%, var(--paper)); --lo: color-mix(in srgb, var(--brand-orange) 3%, #050C12); }
 
 /* Вторите кръгове стоят в дясната ~третина, за да не минават под текста.
    v0 — синият диск горе вдясно, зеленият диагонално надолу-наляво, оранжевото още по-наляво */

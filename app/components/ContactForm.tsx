@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import '@fontsource-variable/caveat';
 import './contactform.css';
 
 const T = {
@@ -11,6 +12,7 @@ const T = {
     consent: 'Съгласен/съгласна съм данните ми да се използват само за отговор на това запитване.',
     privacy: 'Лични данни', send: 'Изпрати', sending: 'Изпращане…',
     ok: 'Благодарим! Съобщението е изпратено — ще ви отговорим скоро.', again: 'Ново съобщение',
+    noteH: 'Благодарим ви!', noteP: 'Съобщението ви е при нас. Ще ви отговорим на посочения имейл, обикновено до два работни дни.', okBtn: 'ОК',
     err: 'Съобщението не беше изпратено. Опитайте отново или пишете на', rate: 'Изпратихте няколко съобщения за кратко време. Опитайте след малко.',
     invalid: 'Проверете името, имейла и съобщението.',
   },
@@ -21,6 +23,7 @@ const T = {
     consent: 'I agree that my data will be used only to reply to this enquiry.',
     privacy: 'Privacy', send: 'Send', sending: 'Sending…',
     ok: 'Thank you! Your message has been sent — we will reply soon.', again: 'New message',
+    noteH: 'Thank you!', noteP: 'We have your message. We will reply to the e-mail you gave, usually within two working days.', okBtn: 'OK',
     err: 'The message could not be sent. Please try again or write to', rate: 'You sent several messages in a short time. Please try again later.',
     invalid: 'Please check your name, e-mail and message.',
   },
@@ -32,11 +35,34 @@ export default function ContactForm({ lang = 'bg', email, topic = 'general' }: {
   const [t0, setT0] = useState(0);
   const [state, setState] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
   const [msg, setMsg] = useState('');
+  const [note, setNote] = useState<'open' | 'closing' | null>(null);
+  const okRef = useRef<HTMLButtonElement>(null);
   useEffect(() => { setT0(Date.now()); }, []);
+
+  // Бележката „лист от тетрадка“: изскача с уголемяване, сама изчезва след ~8 с (спира, докато мишката е върху нея),
+  // затваря се и с ОК или Esc. Не е модален прозорец — страницата отзад остава достъпна.
+  const [hold, setHold] = useState(false);
+  useEffect(() => {
+    if (note !== 'open') return;
+    okRef.current?.focus({ preventScroll: true });
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeNote(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [note]);
+  useEffect(() => {
+    if (note !== 'open' || hold) return;
+    const id = setTimeout(closeNote, 8000);
+    return () => clearTimeout(id);
+  }, [note, hold]);
+  function closeNote() {
+    setNote((n) => (n === 'open' ? 'closing' : n));
+    setTimeout(() => { setNote(null); setHold(false); setState('idle'); setT0(Date.now()); }, 380);
+  }
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const f = new FormData(form);
     setState('sending'); setMsg('');
     try {
       const res = await fetch('/api/kontakt', {
@@ -48,7 +74,7 @@ export default function ContactForm({ lang = 'bg', email, topic = 'general' }: {
         }),
       });
       const j = await res.json().catch(() => ({}));
-      if (j.ok) { setState('ok'); return; }
+      if (j.ok) { form.reset(); setState('ok'); setNote('open'); return; }
       setState('error');
       setMsg(j.error === 'rate' ? t.rate : j.error === 'invalid' ? t.invalid : '');
     } catch {
@@ -56,17 +82,8 @@ export default function ContactForm({ lang = 'bg', email, topic = 'general' }: {
     }
   }
 
-  if (state === 'ok') {
-    return (
-      <div className="cf cf-done" role="status">
-        <span className="cf-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg></span>
-        <p>{t.ok}</p>
-        <button type="button" className="btn btn-ghost" onClick={() => { setState('idle'); setT0(Date.now()); }}>{t.again}</button>
-      </div>
-    );
-  }
-
   return (
+    <>
     <form className="cf" onSubmit={submit} noValidate={false}>
       <div className="cf-head">
         <h2>{t.h}</h2>
@@ -109,5 +126,18 @@ export default function ContactForm({ lang = 'bg', email, topic = 'general' }: {
         {state === 'sending' ? t.sending : t.send}
       </button>
     </form>
+    {note && (
+      <div className={`cf-note${note === 'closing' ? ' is-out' : ''}${hold ? ' is-hold' : ''}`} role="status" aria-live="polite"
+        onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
+        <div className="cf-paper">
+          <span className="cf-holes" aria-hidden="true"><i /><i /><i /></span>
+          <p className="cf-note-h">{t.noteH}</p>
+          <p className="cf-note-p">{t.noteP}</p>
+          <button ref={okRef} type="button" className="cf-note-ok" onClick={closeNote}>{t.okBtn}</button>
+          <span className="cf-timer" aria-hidden="true" />
+        </div>
+      </div>
+    )}
+    </>
   );
 }

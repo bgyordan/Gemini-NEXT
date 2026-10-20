@@ -23,3 +23,47 @@
 .cf-tick svg { width: 26px; height: 26px; fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 640px) { .cf-grid { grid-template-columns: 1fr; } .cf-send { width: 100%; } }
 .cf-wrap { max-width: 920px; }
+
+/* ===== Бележка след изпращане — „лист от тетрадка“ =====
+   Изскача в средата на екрана с уголемяване и леко завъртане (като лист, оставен на масата), без затъмнен фон.
+   Редове като в тетрадка, червена полева линия, дупки от класьор, ръкописен шрифт (Caveat — същият като „Вярваме, че“).
+   Тънката линия долу показва колко време остава до изчезването. */
+.cf-note { position: fixed; z-index: 90; left: 50%; top: 50%; width: min(440px, calc(100vw - 32px)); translate: -50% -50%; pointer-events: none; }
+.cf-paper { --rule: 34px; --ruleC: color-mix(in srgb, var(--brand-blue) 22%, transparent); --marg: 58px;
+  position: relative; pointer-events: auto; rotate: -2deg; padding: 30px 28px 22px calc(var(--marg) + 22px);
+  border-radius: 6px 6px 10px 10px; color: #1F3A5A;
+  background:
+    linear-gradient(90deg, transparent calc(var(--marg) - 1px), rgba(229, 72, 77, .55) calc(var(--marg) - 1px), rgba(229, 72, 77, .55) calc(var(--marg) + 1px), transparent calc(var(--marg) + 1px)),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--rule) - 1px), var(--ruleC) calc(var(--rule) - 1px) var(--rule)),
+    #FFFEF8;
+  background-position: 0 0, 0 27px, 0 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 28px 50px -18px rgba(12, 38, 56, .38), 0 8px 18px -10px rgba(12, 38, 56, .22);
+  animation: cf-grow .55s cubic-bezier(.2, 1.45, .4, 1) both; transform-origin: 50% 60%; }
+/* леко подвит долен ъгъл */
+.cf-paper::after { content: ""; position: absolute; right: 0; bottom: 0; width: 34px; height: 34px; border-radius: 0 0 10px 0;
+  background: linear-gradient(315deg, var(--paper, #fff) 48%, #EDE9DA 50%, #FBF9F0 100%); box-shadow: -3px -3px 6px -4px rgba(0, 0, 0, .15); }
+.cf-holes { position: absolute; left: 20px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-evenly; }
+.cf-holes i { width: 16px; height: 16px; border-radius: 50%; background: var(--paper, #fff); box-shadow: inset 1px 2px 3px rgba(0, 0, 0, .18); }
+.cf-note-h, .cf-note-p { font-family: 'Caveat Variable', 'Caveat', cursive; line-height: var(--rule); margin: 0; }
+.cf-note-h { font-size: 36px; font-weight: 700; color: #1D6FB0; }
+.cf-note-p { font-size: 25px; font-weight: 500; text-wrap: pretty; }
+.cf-note-ok { margin-top: 12px; font: 700 24px/1 'Caveat Variable', 'Caveat', cursive; color: #1F3A5A; background: color-mix(in srgb, var(--brand-lime) 26%, transparent);
+  border: 2px solid #1F3A5A; border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; padding: 6px 26px 8px; cursor: pointer; transition: transform .15s, background .15s; }
+.cf-note-ok:hover { transform: rotate(-3deg) scale(1.05); background: color-mix(in srgb, var(--brand-lime) 42%, transparent); }
+.cf-note-ok:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
+.cf-timer { position: absolute; left: var(--marg); right: 18px; bottom: 8px; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--brand-orange) 60%, transparent);
+  transform-origin: left; animation: cf-time 8s linear .55s both; }
+.cf-note.is-hold .cf-timer { animation-play-state: paused; }
+.cf-note.is-out .cf-paper { animation: cf-out .38s cubic-bezier(.5, 0, .75, 0) both; }
+@keyframes cf-grow { from { opacity: 0; transform: scale(.15) rotate(-14deg); } 60% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes cf-out { to { opacity: 0; transform: scale(.6) rotate(6deg) translateY(30px); } }
+@keyframes cf-time { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .cf-paper, .cf-note.is-out .cf-paper { animation-name: cf-fade; animation-timing-function: ease; }
+  .cf-note.is-out .cf-paper { animation-direction: reverse; }
+}
+@keyframes cf-fade { from { opacity: 0; } }
+/* в тъмния режим листът остава светъл (като истински лист), само сянката е по-плътна */
+:root[data-theme="dark"] .cf-paper, .dark .cf-paper { box-shadow: 0 30px 60px -16px rgba(0, 0, 0, .7); }
+:root[data-theme="dark"] .cf-paper::after, .dark .cf-paper::after { background: linear-gradient(315deg, var(--paper) 48%, #D9D4C2 50%, #FBF9F0 100%); }
+@media (max-width: 480px) { .cf-paper { --marg: 44px; padding: 24px 20px 20px calc(var(--marg) + 16px); } .cf-holes { left: 13px; } .cf-holes i { width: 13px; height: 13px; } .cf-note-p { font-size: 22px; } }

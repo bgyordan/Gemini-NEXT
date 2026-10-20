@@ -336,9 +336,6 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 .page-hero + .section, .page-hero + section.section { padding-top: clamp(28px, 4vw, 52px); }
 
 /* Обява най-горе (от ЕИС → Сайт → Настройки) */
-.site-notice { background: var(--ink); color: var(--paper); font-weight: 600; font-size: calc(15px * var(--fs, 1)); line-height: 1.45; text-align: center; padding: 9px 0; }
-.site-notice a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.site-notice a:hover { text-decoration-thickness: 2px; }
 
 /* =====================================================================
    Широки вътрешни страници (2026-10)

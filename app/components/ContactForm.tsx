@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import '@fontsource-variable/caveat';
+import './notepaper.css';
 import './contactform.css';
 
 const T = {
@@ -129,12 +130,12 @@ export default function ContactForm({ lang = 'bg', email, topic = 'general' }: {
     {note && (
       <div className={`cf-note${note === 'closing' ? ' is-out' : ''}${hold ? ' is-hold' : ''}`} role="status" aria-live="polite"
         onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
-        <div className="cf-paper">
-          <span className="cf-holes" aria-hidden="true"><i /><i /><i /></span>
-          <p className="cf-note-h">{t.noteH}</p>
-          <p className="cf-note-p">{t.noteP}</p>
-          <button ref={okRef} type="button" className="cf-note-ok" onClick={closeNote}>{t.okBtn}</button>
-          <span className="cf-timer" aria-hidden="true" />
+        <div className="np-paper">
+          <span className="np-holes" aria-hidden="true"><i /><i /><i /></span>
+          <p className="np-h">{t.noteH}</p>
+          <p className="np-p">{t.noteP}</p>
+          <div className="np-acts"><button ref={okRef} type="button" className="np-btn" onClick={closeNote}>{t.okBtn}</button></div>
+          <span className="np-timer" aria-hidden="true" />
         </div>
       </div>
     )}

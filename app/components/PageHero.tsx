@@ -26,6 +26,8 @@ export default async function PageHero({
   watermark?: string;
 }) {
   const group = path ? NAV.find((g) => g.href === path || g.links.some((l) => l.href === path)) : undefined;
+  // текущата страница като последна стъпка в пътечката (на вътрешните страници от раздела)
+  const here = group && group.href !== path ? group.links.find((l) => l.href === path) : undefined;
   const t: Tone = group?.tone ?? (tone === 'em' ? 'lime' : tone === 'bl' ? 'blue' : (tone as Tone) ?? 'blue');
   const photos = page ? await getPagePhotos(page) : [];
   const photo = photos[0];
@@ -48,7 +50,13 @@ export default async function PageHero({
             <nav className="ph-crumb" aria-label="Пътечка">
               <a href="/">Начало</a>
               <span aria-hidden="true">/</span>
-              {group.href !== path ? <a href={group.href}>{group.label}</a> : <span>{group.label}</span>}
+              {group.href !== path ? <a href={group.href}>{group.label}</a> : <span aria-current="page">{group.label}</span>}
+              {here && (
+                <>
+                  <span aria-hidden="true">/</span>
+                  <span aria-current="page">{here.label}</span>
+                </>
+              )}
             </nav>
           ) : kicker ? (
             <p className="ph-crumb"><a href={lang === 'en' ? '/en' : '/'}>{lang === 'en' ? 'Home' : 'Начало'}</a><span aria-hidden="true">/</span><span>{kicker}</span></p>

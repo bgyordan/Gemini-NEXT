@@ -230,7 +230,8 @@
   .hx::before { width: min(110vw, 680px); right: -18vw; top: 0; translate: 0 -12%; }
   .hd-g { width: 46vw; left: 22vw; top: min(118vw, 760px); }
   .hd-o { width: 26vw; left: 8vw; top: min(170vw, 1100px); }
-  .hx-clover { position: relative; grid-row: 1; width: min(100%, 620px); aspect-ratio: 1.3; justify-self: center; margin-bottom: 24px; }
+  /* right: auto — иначе отстъпът от десктопа измества снимките наляво до ръба на екрана */
+  .hx-clover { position: relative; right: auto; grid-row: 1; width: min(100%, 620px); aspect-ratio: 1.3; justify-self: center; margin-bottom: 24px; }
   .hx-in { grid-row: 2; width: auto; }
   .hx-lead { max-width: 30em; }
   .pt-ko { display: none; }

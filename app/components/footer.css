@@ -14,6 +14,7 @@
 :root[data-theme="dark"] .sf-h { color: var(--ink); }
 
 .sf-col ul { list-style: none; display: grid; gap: 7px; }
+.sf-sub { margin-top: 28px; }
 .sf-contact address { font-style: normal; line-height: 1.55; margin-bottom: 10px; }
 .sf-contact p + p { margin-top: 4px; }
 .sf-contact a { overflow-wrap: anywhere; }

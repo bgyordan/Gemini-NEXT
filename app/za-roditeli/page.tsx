@@ -31,10 +31,10 @@ export default async function ParentsPage() {
             items={[
               { t: 'Как се записва дете', d: 'Стъпки, документи и бланки', href: '/priem/proczedura', icon: 'clipboard' },
               { t: 'Елате на посещение', d: 'Запознайте се с центъра', href: '/priem/poseshtenie', icon: 'calendar' },
+              { t: 'Дневен режим', d: 'Часове и организация на деня', href: '/za-roditeli/dneven-rezhim', icon: 'clock' },
               { t: 'Административни услуги', d: 'Бележки, удостоверения, заявления', href: '/za-roditeli/uslugi', icon: 'doc' },
               { t: 'Ресурси за родители', d: 'Материали и подкрепа за вкъщи', href: '/za-roditeli/resursi', icon: 'heart' },
               { t: 'Училищно настоятелство', d: 'Родителите като партньори', href: '/za-roditeli/nastoyatelstvo', icon: 'users' },
-              { t: 'Дневен режим', d: 'Часове и организация на деня', href: '/za-roditeli/dneven-rezhim', icon: 'clock' },
             ]}
           />
         </div>

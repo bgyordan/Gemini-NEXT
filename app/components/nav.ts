@@ -25,10 +25,10 @@ export const NAV: NavGroup[] = [
     tone: 'orange',
     intro: 'Как се записва дете, какъв е денят при нас и с какво можем да помогнем.',
     links: [
+      { label: 'За родители', desc: 'Всичко на едно място', href: '/za-roditeli' },
       { label: 'Обучение и подкрепа', desc: 'Терапии и специалисти', href: '/obuchenie-i-podkrepa' },
       { label: 'Как се записва дете', desc: 'Процедура и документи', href: '/priem/proczedura' },
       { label: 'Елате на посещение', desc: 'Запознайте се с центъра', href: '/priem/poseshtenie' },
-      { label: 'За родители', desc: 'Всичко на едно място', href: '/za-roditeli' },
       { label: 'Дневен режим', desc: 'Ритъмът на деня', href: '/za-roditeli/dneven-rezhim' },
       { label: 'Административни услуги', desc: 'Заявления и удостоверения', href: '/za-roditeli/uslugi' },
       { label: 'Ресурси за родители', desc: 'Материали за вкъщи', href: '/za-roditeli/resursi' },
@@ -52,7 +52,7 @@ export const NAV: NavGroup[] = [
     tone: 'blue',
     intro: 'Документите на центъра са публични и на едно място.',
     links: [
-      { label: 'Всички документи', href: '/prozrachnost' },
+      { label: 'Всички документи', desc: 'Всичко на едно място', href: '/prozrachnost' },
       { label: 'Бюджет и финанси', desc: 'Бюджет и отчети', href: '/za-nas/byudzhet-i-finansi' },
       { label: 'Документи в ЦСОП', desc: 'Правилници и политики', href: '/za-nas/dokumenti-v-tsop' },
       { label: 'Профил на купувача', desc: 'Обществени поръчки', href: '/za-nas/profil-na-kupuvacha' },

@@ -57,7 +57,9 @@ export default async function Footer({ lang = 'bg' }: { lang?: Lang }) {
       </footer>
     );
   }
-  const groups = NAV.filter((g) => g.label !== 'Новини');
+  // „Новини“ няма отделна колона — стои под „За нас“, за да останат пет колони и всички връзки да се виждат
+  const news = NAV.find((g) => g.href === '/novini');
+  const groups = NAV.filter((g) => g !== news);
   return (
     <footer className="site-foot">
       <div className="wrap">
@@ -69,13 +71,23 @@ export default async function Footer({ lang = 'bg' }: { lang?: Lang }) {
             <a className="sf-fb" href={CONTACT.facebook} target="_blank" rel="noopener noreferrer">Facebook страница</a>
           </div>
 
-          {groups.map((g) => (
-            <nav key={g.href} className={`sf-col tone-${g.tone}`} aria-label={g.label}>
-              <p className="sf-h">{g.label}</p>
-              <ul>
-                {g.links.slice(0, 6).map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
-              </ul>
-            </nav>
+          {groups.map((g, i) => (
+            <div key={g.href} className="sf-col">
+              <nav className={`tone-${g.tone}`} aria-label={g.label}>
+                <p className="sf-h">{g.label}</p>
+                <ul>
+                  {g.links.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
+                </ul>
+              </nav>
+              {i === 0 && news && (
+                <nav className={`sf-sub tone-${news.tone}`} aria-label={news.label}>
+                  <p className="sf-h">{news.label}</p>
+                  <ul>
+                    {news.links.map((l) => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
+                  </ul>
+                </nav>
+              )}
+            </div>
           ))}
 
           <div className="sf-col sf-contact">

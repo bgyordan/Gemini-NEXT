@@ -47,6 +47,7 @@ export default async function Footer({ lang = 'bg' }: { lang?: Lang }) {
           </div>
           <div className="sf-bot">
             <span>© {new Date().getFullYear()} CSOP – Varna</span>
+            <CloudflareBadge en />
             <span className="sf-legal">
               <a href="/dostapnost" hrefLang="bg">Accessibility</a>
               <a href="/za-nas/zashtita-na-lichnite-danni" hrefLang="bg">Privacy</a>
@@ -103,6 +104,7 @@ export default async function Footer({ lang = 'bg' }: { lang?: Lang }) {
 
         <div className="sf-bot">
           <span>© {new Date().getFullYear()} ЦСОП – Варна</span>
+          <CloudflareBadge />
           <LastUpdated />
           <span className="sf-legal">
             <a href="/dostapnost">Достъпност</a>
@@ -113,5 +115,18 @@ export default async function Footer({ lang = 'bg' }: { lang?: Lang }) {
         </div>
       </div>
     </footer>
+  );
+}
+
+// сайтът минава през тунел на Cloudflare — защита от атаки и сигурна връзка
+function CloudflareBadge({ en = false }: { en?: boolean }) {
+  return (
+    <a className="sf-cf" href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer"
+      title={en ? 'This site is served through the Cloudflare network – protection from attacks and a secure connection' : 'Сайтът минава през мрежата на Cloudflare – защита от атаки и сигурна връзка'}>
+      <svg viewBox="0 0 32 20" aria-hidden="true">
+        <path d="M8 18h17.5a5 5 0 0 0 .6-9.96A8 8 0 0 0 10.6 6.2 6 6 0 0 0 8 18z" />
+      </svg>
+      {en ? 'Protected by Cloudflare' : 'Защитено от Cloudflare'}
+    </a>
   );
 }

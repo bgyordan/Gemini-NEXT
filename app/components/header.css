@@ -107,6 +107,10 @@ a.tb-item:hover { color: #fff; text-decoration: underline; text-underline-offset
   .site-head > .wrap.sh-bar { width: calc(100% - 20px); }
   .sh-bar { height: 64px; }
   .site-head.is-stuck .sh-bar { height: 58px; }
+  /* на телефон текстът под лепнатата капсула се показваше над и около нея — мека завеса отзад */
+  .site-head::before { content: ""; position: absolute; inset: 0 0 -10px; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .3s;
+    background: linear-gradient(to bottom, var(--paper) 55%, color-mix(in srgb, var(--paper) 0%, transparent)); }
+  .site-head.is-stuck::before { opacity: 1; }
 }
 @media (max-width: 480px) {
   .sh-bar { gap: 10px; }

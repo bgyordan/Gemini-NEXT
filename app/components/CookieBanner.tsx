@@ -48,9 +48,13 @@ export default function CookieBanner() {
           transition: background .2s; flex: 0 0 auto;
         }
         .cookie-bar .ck-btn:hover { background: var(--ink); }
+        /* на телефон — по-ниска лента, за да не закрива половината екран */
         @media (max-width: 520px) {
-          .cookie-bar { flex-direction: column; align-items: stretch; text-align: left; }
-          .cookie-bar .ck-btn { width: 100%; }
+          .cookie-bar { left: 10px; right: 10px; bottom: 10px; padding: 14px 16px; gap: 10px 14px; border-radius: 16px; }
+          .cookie-bar .ck-ic { display: none; }
+          .cookie-bar .ck-txt { min-width: 0; flex-basis: 100%; }
+          .cookie-bar .ck-txt p { font-size: 13px; line-height: 1.5; }
+          .cookie-bar .ck-btn { margin-left: auto; padding: 10px 22px; }
         }
       `}</style>
       <div className="cookie-bar" role="dialog" aria-label={en ? 'Cookie notice' : 'Съобщение за бисквитки'}>

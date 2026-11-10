@@ -19,6 +19,7 @@ export default async function DonatePage() {
       <PageHero
         tone="orange"
         page="daritelstvo"
+        kicker="Дарителство"
         title="Подкрепа за центъра"
         intro="Даренията и партньорствата обогатяват учебната и терапевтичната среда на децата — оборудване, материали, сензорната зала и общите ни събития."
       />

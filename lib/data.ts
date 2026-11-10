@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { unstable_noStore as noStore } from 'next/cache';
 import { db } from './supabase';
 
@@ -133,16 +134,23 @@ export async function getLatestPhotos(limit = 8): Promise<{ id: string; photo_ur
      key 'hero_photos' → ["url", ...]               (началната страница)
      key 'page_photos' → { "za-nas": ["url", ...], "priem": [...], ... }
 */
-export async function getSetting<T = unknown>(key: string): Promise<T | null> {
+// Една заявка към базата за всеки ключ в рамките на едно зареждане на страница:
+// горната лента, менюто, обявата, долната част и самата страница четат site_info едновременно —
+// без това бяха по 4–6 еднакви заявки. Промените от ЕИС пак се виждат веднага при следващо зареждане.
+const readSetting = cache(async (key: string): Promise<unknown> => {
   noStore();
   const s = db();
   if (!s) return null;
   try {
     const { data } = await s.from('site_settings').select('value').eq('key', key).maybeSingle();
-    return (data?.value as T) ?? null;
+    return data?.value ?? null;
   } catch {
     return null;
   }
+});
+
+export async function getSetting<T = unknown>(key: string): Promise<T | null> {
+  return (await readSetting(key)) as T | null;
 }
 
 export async function getHeroPhotos(): Promise<string[]> {

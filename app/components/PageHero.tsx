@@ -60,6 +60,13 @@ export default async function PageHero({
             </nav>
           ) : kicker ? (
             <p className="ph-crumb"><a href={lang === 'en' ? '/en' : '/'}>{lang === 'en' ? 'Home' : 'Начало'}</a><span aria-hidden="true">/</span><span>{kicker}</span></p>
+          ) : lang === 'bg' ? (
+            // самостоятелни страници (Контакти, Дарителство…) — същата пътечка, за да не „подскача“ заглавието
+            <nav className="ph-crumb" aria-label="Пътечка">
+              <a href="/">Начало</a>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">{title}</span>
+            </nav>
           ) : null}
           <h1>{title}</h1>
           {intro && <p className="ph-intro">{intro}</p>}

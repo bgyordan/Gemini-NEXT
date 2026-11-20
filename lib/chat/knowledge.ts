@@ -1,5 +1,5 @@
 import { getSiteInfo } from '../siteinfo';
-import { getNews, getUpcomingEvents, fmtDate } from '../data';
+import { getNews, getUpcomingEvents, fmtDate, fmtEventDates, fmtEventTime } from '../data';
 
 // Знанията на чатбота идват от самия сайт: страниците се прочитат (като текст) и се режат на парчета
 // по заглавия. За всеки въпрос се избират най-подходящите парчета — така ботът отговаря по
@@ -107,7 +107,7 @@ export async function coreFacts(): Promise<string> {
     `Сигнали (ЗЗЛПСПОИН): отговорно лице ${info.signali.person}, ${info.signali.email}. Повече: /podavane-na-signali`,
     `Английска версия на сайта: /en`,
   ];
-  if (events.length) lines.push('Предстоящи събития: ' + events.map((e) => `${fmtDate(e.event_date)} – ${e.title}${e.event_time ? `, ${e.event_time} ч.` : ''}${e.location ? `, ${e.location}` : ''}`).join('; ') + '. Всички: /sabitiya');
+  if (events.length) lines.push('Предстоящи събития: ' + events.map((e) => `${fmtEventDates(e)} – ${e.title}${fmtEventTime(e) ? `, ${fmtEventTime(e)}` : ''}${e.location ? `, ${e.location}` : ''}`).join('; ') + '. Всички: /sabitiya');
   if (news.length) lines.push('Последни новини: ' + news.map((n) => `${fmtDate(n.published_at)} – „${n.title}“ (/novini/${n.slug})`).join('; ') + '. Всички: /novini');
   return lines.join('\n');
 }

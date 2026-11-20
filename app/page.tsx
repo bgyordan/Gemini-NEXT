@@ -1,5 +1,5 @@
 import { alternates } from '../lib/lang';
-import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, getPagePhotos, fmtDate, monthShort } from '../lib/data';
+import { getNews, getUpcomingEvents, getHeroPhotos, getLatestPhotos, getPagePhotos, fmtDate, eventDay, eventMonth, fmtEventDates, fmtEventTime, eventLive } from '../lib/data';
 import { daisyPolygon } from '../lib/flower';
 
 // две различни, неправилни маргаритки за снимките до „Над 150 деца…“ + цветната „сянка“ зад всяка (друго цвете)
@@ -61,6 +61,7 @@ export default async function Home() {
   const auto = [...photos.map((p) => p.photo_url).filter((u) => !h.includes(u) && !chosenAbout.includes(u)), ...FALLBACK_ABOUT];
   const about = [0, 1].map((i) => chosenAbout[i] || auto.shift()!);
   const [feat, ...rest] = news;
+  const next = events[0];   // най-близкото предстоящо (или течащо) събитие — лентата под херото
 
   return (
     <div className="home">
@@ -100,6 +101,18 @@ export default async function Home() {
             <div className="cl-core"><span /></div>
           </div>
         </div>
+
+        {/* лента с най-близкото събитие — вижда се веднага, без да се търси сред новините */}
+        {next && (
+          <div className="wrap hx-next">
+            <a href="/sabitiya" className="hp-orange">
+              <i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /></svg></i>
+              <span className="hxe-lbl">{eventLive(next) ? 'Днес' : 'Предстои'}</span>
+              <b>{next.title}</b>
+              <span className="hxe-when">{[fmtEventDates(next), fmtEventTime(next), next.location].filter(Boolean).join(' · ')}</span>
+            </a>
+          </div>
+        )}
 
         <nav className="wrap hx-paths" aria-label="За родители">
           <a href="/obuchenie-i-podkrepa" className="hp-blue">
@@ -195,11 +208,11 @@ export default async function Home() {
                   <ul>
                     {events.map((e) => (
                       <li key={e.id}>
-                        <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
+                        <span className={`ev-day${e.event_end_date ? ' ev-range' : ''}`}><b>{eventDay(e)}</b>{eventMonth(e)}</span>
                         <span>
                           <b>{e.title}</b>
                           {(e.event_time || e.location) && (
-                            <small>{[e.event_time && `${e.event_time} ч.`, e.location].filter(Boolean).join(', ')}</small>
+                            <small>{[fmtEventTime(e), e.location].filter(Boolean).join(', ')}</small>
                           )}
                         </span>
                       </li>

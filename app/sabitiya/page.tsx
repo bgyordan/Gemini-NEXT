@@ -1,5 +1,5 @@
 import PageHero from '../components/PageHero';
-import { getEvents, fmtDate, monthShort } from '../../lib/data';
+import { getEvents, eventLastDay, eventDay, eventMonth, fmtEventDates, fmtEventTime } from '../../lib/data';
 
 export const metadata = { title: 'Събития — ЦСОП Варна', description: 'Предстоящи и минали събития в ЦСОП – Варна.' };
 export const dynamic = 'force-dynamic';
@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic';
 export default async function EventsPage() {
   const all = await getEvents();
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = all.filter((e) => e.event_date >= today);
-  const past = all.filter((e) => e.event_date < today).reverse();
+  const upcoming = all.filter((e) => eventLastDay(e) >= today);   // с период — до последния ден
+  const past = all.filter((e) => eventLastDay(e) < today).reverse();
 
   return (
     <>
@@ -20,10 +20,10 @@ export default async function EventsPage() {
             <ul className="ev-list">
               {upcoming.map((e) => (
                 <li key={e.id}>
-                  <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
+                  <span className={`ev-day${e.event_end_date ? ' ev-range' : ''}`}><b>{eventDay(e)}</b>{eventMonth(e)}</span>
                   <div>
                     <h3>{e.title}</h3>
-                    <p className="muted">{[fmtDate(e.event_date), e.event_time && `${e.event_time} ч.`, e.location].filter(Boolean).join(', ')}</p>
+                    <p className="muted">{[fmtEventDates(e), fmtEventTime(e), e.location].filter(Boolean).join(', ')}</p>
                     {e.description && <p className="ev-desc">{e.description}</p>}
                   </div>
                 </li>
@@ -36,10 +36,10 @@ export default async function EventsPage() {
               <ul className="ev-list past">
                 {past.map((e) => (
                   <li key={e.id}>
-                    <span className="ev-day"><b>{new Date(e.event_date).getDate()}</b>{monthShort(e.event_date)}</span>
+                    <span className={`ev-day${e.event_end_date ? ' ev-range' : ''}`}><b>{eventDay(e)}</b>{eventMonth(e)}</span>
                     <div>
                       <h3>{e.title}</h3>
-                      <p className="muted">{[fmtDate(e.event_date), e.location].filter(Boolean).join(', ')}</p>
+                      <p className="muted">{[fmtEventDates(e), e.location].filter(Boolean).join(', ')}</p>
                     </div>
                   </li>
                 ))}

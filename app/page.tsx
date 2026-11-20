@@ -53,7 +53,7 @@ const DOCS = [
 export const metadata = { alternates: alternates('/') };
 
 export default async function Home() {
-  const [hero, news, events, photos, info, chosenAbout] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(3), getLatestPhotos(8), getSiteInfo(), getPagePhotos('nachalna-pod')]);
+  const [hero, news, events, photos, info, chosenAbout] = await Promise.all([getHeroPhotos(), getNews(4), getUpcomingEvents(12), getLatestPhotos(8), getSiteInfo(), getPagePhotos('nachalna-pod')]);
   // празно място ('') от ЕИС → стандартната снимка точно там
   const h = [0, 1, 2].map((i) => hero[i] || FALLBACK[i]);
   // за блока под херото: последните снимки от галерията, различни от трите в детелината
@@ -62,6 +62,7 @@ export default async function Home() {
   const about = [0, 1].map((i) => chosenAbout[i] || auto.shift()!);
   const [feat, ...rest] = news;
   const next = events[0];   // най-близкото предстоящо (или течащо) събитие — лентата под херото
+  const moreEvents = events.length - 1;   // „+N още“ в лентата (без движение — спокойно и се чете с един поглед)
 
   return (
     <div className="home">
@@ -110,6 +111,7 @@ export default async function Home() {
               <span className="hxe-lbl">{eventLive(next) ? 'Днес' : 'Предстои'}</span>
               <b>{next.title}</b>
               <span className="hxe-when">{[fmtEventDates(next), fmtEventTime(next), next.location].filter(Boolean).join(' · ')}</span>
+              {moreEvents > 0 && <span className="hxe-more">+{moreEvents} още</span>}
             </a>
           </div>
         )}
@@ -206,7 +208,7 @@ export default async function Home() {
                   <p className="muted">Няма обявени събития в момента.</p>
                 ) : (
                   <ul>
-                    {events.map((e) => (
+                    {events.slice(0, 3).map((e) => (
                       <li key={e.id}>
                         <span className={`ev-day${e.event_end_date ? ' ev-range' : ''}`}><b>{eventDay(e)}</b>{eventMonth(e)}</span>
                         <span>

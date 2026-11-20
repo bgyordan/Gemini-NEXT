@@ -72,11 +72,16 @@ export async function getArticle(id: string): Promise<Article | null> {
 export type EventItem = {
   id: string;
   title: string;
-  event_date: string;
-  event_time: string | null;
+  event_date: string;            // начало
+  event_end_date?: string | null; // край — само при събитие с период (напр. седмица)
+  event_time: string | null;      // час на начало
+  event_end_time?: string | null; // час на край (по избор)
   location: string | null;
   description: string | null;
 };
+
+/** Последният ден на събитието — с период остава „предстоящо“ до края си. */
+export const eventLastDay = (e: EventItem) => e.event_end_date || e.event_date;
 
 export async function getEvents(): Promise<EventItem[]> {
   noStore();
@@ -92,7 +97,7 @@ export async function getEvents(): Promise<EventItem[]> {
 
 export async function getUpcomingEvents(limit = 4): Promise<EventItem[]> {
   const today = new Date().toISOString().slice(0, 10);
-  return (await getEvents()).filter((e) => e.event_date >= today).slice(0, limit);
+  return (await getEvents()).filter((e) => eventLastDay(e) >= today).slice(0, limit);
 }
 
 /* ---------------- Галерия ---------------- */
@@ -176,6 +181,45 @@ export function fmtDate(iso: string | null | undefined): string {
 
 export function monthShort(iso: string): string {
   return MONTHS[new Date(iso).getMonth()].slice(0, 3);
+}
+
+/* ---------------- Събития: период и часове ---------------- */
+const ymd = (iso: string) => { const [y, m, d] = iso.slice(0, 10).split('-').map(Number); return { y, m: m - 1, d }; };
+const cleanTime = (t?: string | null) => (t || '').replace(/\s*ч\.?\s*$/, '').trim();
+
+/** Число(а) за квадратчето с датата: „14“ или „14–15“ (в един месец). */
+export function eventDay(e: EventItem): string {
+  const a = ymd(e.event_date);
+  if (!e.event_end_date) return String(a.d);
+  const b = ymd(e.event_end_date);
+  return a.m === b.m && a.y === b.y ? `${a.d}–${b.d}` : String(a.d);
+}
+
+/** Месецът под числото: „дек“, а при период през два месеца — „ное–дек“. */
+export function eventMonth(e: EventItem): string {
+  const a = ymd(e.event_date);
+  const b = e.event_end_date ? ymd(e.event_end_date) : null;
+  return b && b.m !== a.m ? `${MONTHS[a.m].slice(0, 3)}–${MONTHS[b.m].slice(0, 3)}` : MONTHS[a.m].slice(0, 3);
+}
+
+/** „14 декември 2026“, „14–15 декември 2026“, „30 ноември – 2 декември 2026“. */
+export function fmtEventDates(e: EventItem): string {
+  if (!e.event_end_date) return fmtDate(e.event_date);
+  const a = ymd(e.event_date), b = ymd(e.event_end_date);
+  if (a.y !== b.y) return `${fmtDate(e.event_date)} – ${fmtDate(e.event_end_date)}`;
+  if (a.m !== b.m) return `${a.d} ${MONTHS[a.m]} – ${b.d} ${MONTHS[b.m]} ${b.y}`;
+  return `${a.d}–${b.d} ${MONTHS[a.m]} ${a.y}`;
+}
+
+/** „08:30 ч.“ или „08:30–13:00 ч.“; празно, ако няма час. */
+export function fmtEventTime(e: EventItem): string {
+  const a = cleanTime(e.event_time), b = cleanTime(e.event_end_time);
+  return a ? `${a}${b ? `–${b}` : ''} ч.` : '';
+}
+
+/** Тече ли днес (между началото и края включително). */
+export function eventLive(e: EventItem, today = new Date().toISOString().slice(0, 10)): boolean {
+  return e.event_date <= today && eventLastDay(e) >= today;
 }
 
 /* ---------------- Документи (от ЕИС → „Сайт“) ---------------- */

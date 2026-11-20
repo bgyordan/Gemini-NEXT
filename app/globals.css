@@ -326,6 +326,7 @@ html.a11y-links a { text-decoration: underline !important; text-underline-offset
 /* събития */
 .ev-day { display: grid; place-items: center; width: 52px; height: 56px; border-radius: 12px; background: var(--paper); font-size: calc(13px * var(--fs, 1)); color: var(--lime-ink); line-height: 1.1; font-weight: 600; }
 .ev-day b { font: 600 calc(20px * var(--fs, 1)) var(--display); color: var(--ink); }
+.ev-day.ev-range b { font-size: calc(14px * var(--fs, 1)); letter-spacing: -.03em; white-space: nowrap; }   /* „14–15“ — събитие с период */
 .ev-list { list-style: none; border-top: 1px solid var(--line); }
 .ev-list li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .ev-list .ev-day { background: var(--lime-soft); }

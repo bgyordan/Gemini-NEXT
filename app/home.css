@@ -129,9 +129,12 @@
 .hx-next b { font: 500 calc(clamp(16px, 1.2vw, 20px) * var(--fs-ui, 1))/1.25 var(--display); letter-spacing: -.01em; }
 .hxe-when { font-size: calc(clamp(15px, 1vw, 17px) * var(--fs-ui, 1)); color: var(--ink-2); }
 .hx-next a:hover b { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.hxe-more { margin-left: 4px; padding: 4px 12px; border-radius: var(--r-pill); font-size: calc(14px * var(--fs-ui, 1)); font-weight: 600; white-space: nowrap;
+  background: color-mix(in srgb, var(--ic) 14%, var(--paper)); color: var(--ic-ink); }
 @media (max-width: 640px) {
   .hx-next a { border-radius: var(--r-lg); padding: 14px 18px 14px 14px; }
   .hxe-when { flex-basis: 100%; padding-left: 60px; }
+  .hxe-more { margin-left: 60px; }
 }
 :root[data-theme="dark"] .hx-next .hp-orange, .dark .hx-next .hp-orange { --ic-ink: var(--brand-orange); }
 

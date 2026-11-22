@@ -71,14 +71,14 @@ export const TEAM: Group[] = [
     ],
   },
   {
-    label: 'Възпитатели ЦОУД',
+    label: 'Учители ЦОУД',
     members: [
-      { name: 'Гинка Станчева', role: 'Възпитател', tone: 'admin' },
-      { name: 'Евгений Константинов', role: 'Възпитател', tone: 'admin' },
-      { name: 'Жана Генова', role: 'Възпитател', tone: 'admin' },
-      { name: 'Лидия Милкова', role: 'Възпитател', tone: 'admin' },
-      { name: 'Радина Чаталбашева', role: 'Възпитател', tone: 'admin' },
-      { name: 'Петя Пиперкова', role: 'Възпитател', tone: 'admin' },
+      { name: 'Гинка Станчева', role: 'Учител ЦОУД', tone: 'admin' },
+      { name: 'Евгений Константинов', role: 'Учител ЦОУД', tone: 'admin' },
+      { name: 'Жана Генова', role: 'Учител ЦОУД', tone: 'admin' },
+      { name: 'Лидия Милкова', role: 'Учител ЦОУД', tone: 'admin' },
+      { name: 'Радина Чаталбашева', role: 'Учител ЦОУД', tone: 'admin' },
+      { name: 'Петя Пиперкова', role: 'Учител ЦОУД', tone: 'admin' },
     ],
   },
   {

@@ -256,7 +256,7 @@ const TEAM_GROUPS: { key: string; label: string; compact?: boolean }[] = [
   { key: 'admin', label: 'Администрация' },
   { key: 'therapy', label: 'Терапевти и специалисти' },
   { key: 'teachers', label: 'Педагогически екип', compact: true },
-  { key: 'educators', label: 'Възпитатели ЦОУД' },
+  { key: 'educators', label: 'Учители ЦОУД' },
   { key: 'assistants', label: 'Помощник на учителя' },
   { key: 'other', label: 'Помощен персонал' },
 ];
